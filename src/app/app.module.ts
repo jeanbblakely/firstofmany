@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { CategoriesComponent } from './experiences/categories/categories.component';
@@ -8,6 +9,7 @@ import { AccountComponent } from './user/account/account.component';
 import { LoginComponent } from './user/login/login.component';
 import { HomeComponent } from './home/home.component';
 import { ExperiencesComponent } from './experiences/experiences/experiences.component';
+import { AppRoutesModule } from './app-routes.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { ExperiencesComponent } from './experiences/experiences/experiences.comp
     ExperiencesComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule,
+    AppRoutesModule
   ],
   providers: [],
   bootstrap: [AppComponent]
