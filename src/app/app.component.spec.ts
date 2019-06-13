@@ -12,7 +12,6 @@ describe('AppComponent', () => {
       imports: [
         RouterTestingModule
       ],
-      providers: [ { provide: Router, useClass: class { navigate = jasmine.createSpy("navigate"); } }]
     }).compileComponents();
   }));
 
