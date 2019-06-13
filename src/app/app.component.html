@@ -3,5 +3,17 @@
   <h1>
     Welcome to {{ title }}!
   </h1>
-<app-home></app-home>
+   
+  
+ <div class="links">
+    <span>
+       <a routerLink="/login" routerLinkActive="active">Login</a> | 
+    </span>
+    <span>
+       <a routerLink="/account" routerLinkActive="active">Registration</a> | 
+    </span>
+  </div>
+
+<router-outlet></router-outlet>   
+
 

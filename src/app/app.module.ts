@@ -8,6 +8,7 @@ import { AccountComponent } from './user/account/account.component';
 import { LoginComponent } from './user/login/login.component';
 import { HomeComponent } from './home/home.component';
 import { ExperiencesComponent } from './experiences/experiences/experiences.component';
+import { AppRoutesModule } from './app-routes.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ExperiencesComponent } from './experiences/experiences/experiences.comp
     ExperiencesComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutesModule
   ],
   providers: [],
   bootstrap: [AppComponent]
