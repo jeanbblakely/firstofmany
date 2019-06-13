@@ -18,7 +18,7 @@ export class LoginComponent {
     if (this.username == 'user' && this.password == 'password') {
       console.log('Successfully logged in');
       this.message = 'logged in';
-      this.router.navigate(['home']);
+      this.router.navigate(['dashboard']);
     } else {
       this.message = 'not logged in';
     }
