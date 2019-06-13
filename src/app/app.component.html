@@ -4,7 +4,7 @@
     Welcome to {{ title }}!
   </h1>
    
-  
+ <!--Prob belong in a nav bar across the top; login will eventually hide on successful login and Registration will shift to Account. app-routes sets home comonpent (the splash page) to come up first--> 
  <div class="links">
     <span>
        <a routerLink="/login" routerLinkActive="active">Login</a> | 
@@ -14,6 +14,7 @@
     </span>
   </div>
 
+<!--where the other pages (login, etc) go in the page; move it around and see-->
 <router-outlet></router-outlet>   
 
 
