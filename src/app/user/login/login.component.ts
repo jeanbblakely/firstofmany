@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,12 +12,13 @@ export class LoginComponent {
   public password: string = '';
 
   public message: string = '';
-  constructor() { }
+  constructor(private router: Router) { }
 
   login() {
     if (this.username == 'user' && this.password == 'password') {
       console.log('Successfully logged in');
       this.message = 'logged in';
+      this.router.navigate(['home']);
     } else {
       this.message = 'not logged in';
     }
