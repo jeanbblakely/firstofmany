@@ -2,6 +2,7 @@ var express = require('express');
 var cors = require('cors');
 var app = express();
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
 const port = 3000;
 
 var posts = [
@@ -27,5 +28,14 @@ app.post('/register', (req, res)=> {
   console.log(userData);
   res.sendStatus(200);
 });
+
+mongoose.connect('mongodb+srv://joeymarinelli:Katiemarie0629!@cluster0-yrzrs.mongodb.net/test?retryWrites=true&w=majority',
+                  { useNewUrlParser: true },
+                  (err)=> {
+                      if(!err) {
+                        console.log('Connected to First of Many Mongo DB!');
+                      }
+});
+
 
 app.listen(port);
