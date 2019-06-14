@@ -14,6 +14,7 @@
   "license": "ISC",
   "homepage": "https://bitbucket.org/cs6232g1/firstofmany#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "nodemon": "^1.19.1"
   }
