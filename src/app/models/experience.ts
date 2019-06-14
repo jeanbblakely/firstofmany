@@ -1,6 +1,8 @@
 export class Experience {
-  name: string;
-  note: string;
-  img: any;
-  datestamp: any; 
+  public note: string;
+  public img: any;
+  public datestamp: any;
+  public favorite: boolean = false; 
+   
+  constructor(public name: string) {}
 }

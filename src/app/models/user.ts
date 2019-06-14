@@ -3,12 +3,20 @@ import { Experience } from './experience';
 
 
 export class User {
-  username: string;
-  password: string;
-  email: string;
-  name: string;
-  birthdate: any;
-  gender: string;
-  tracked_categories: Array<Category>;
-  favorites: Array<Experience>;
+  tracked_info: Category[] = [];
+  
+  constructor(username: string,
+              password: string,
+              email: string,
+              name: string,
+              birthdate: any,
+              gender: string) {}
+              
+    /*
+  Adds Category to User object
+  */
+   //addCategory(category: Category[]): void {
+   //   this.tracked_info.push(category);
+   //}
+  
 }

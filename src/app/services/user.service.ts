@@ -9,7 +9,7 @@ export class UserService {
 
   constructor() { }
   
-  login(username: string, password: string) {
+  login(username: string, password: string): boolean {
     console.log('Inside the UserService');
     return username == 'user' && password == 'password';
   }
