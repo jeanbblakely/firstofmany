@@ -11,6 +11,7 @@ import { LoginComponent } from './user/login/login.component';
 import { HomeComponent } from './home/home.component';
 import { ExperiencesComponent } from './experiences/experiences/experiences.component';
 import { AppRoutesModule } from './app-routes.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { AppRoutesModule } from './app-routes.module';
     BrowserModule,
     FormsModule,
     AppRoutesModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
   providers: [ApiService],
   bootstrap: [AppComponent]
