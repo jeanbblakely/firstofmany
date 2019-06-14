@@ -7,23 +7,7 @@ describe('User', () => {
     expect(new User()).toBeTruthy();
   });
   
-  it('should return user name', () => {
-    var experience1: Experience = {
-      name: "Sky Diving",
-      note: "So fun",
-      img: "img.jpg",
-      datestamp: "1/1/2019",
-      favorite: false
-    };
-    var experience2: Experience = {
-      name: "Bungee Jumping",
-      note: "Disappointing",
-      img: "img.jpg",
-      datestamp: "1/10/2019",
-      favorite: false
-      
-    };
-    
+  it('should return user details with user', () => {  
     var user: User = {
       username: "User",
       password: "password",
@@ -32,18 +16,56 @@ describe('User', () => {
       birthdate: "1/1/1990",
       gender: "female",
       tracked_info: [
-        { name: "Thrills",
+        { 
+        name: "Thrills",
         experiences: [
-        experience1,
-        experience2 ]
+          { 
+            name: "Sky Diving",
+            note: "So fun",
+            img: "img.jpg",
+            datestamp: "1/1/2019",
+            favorite: false
+          },
+          {
+            name: "Bungee Jumping",
+            note: "Disappointing",
+            img: "img.jpg",
+            datestamp: "1/10/2019",
+            favorite: false
+      
+          }
+         ]
         },
-        { name: "Scary",
-        experiences: [
-        experience1,
-        experience2 ]
+        { 
+        name: "Vegetables",
+          experiences: [
+            {
+              name: "Eggplant",
+              note: "Yucky",
+              img: "img.jpg",
+              datestamp: "3/8/2019",
+              favorite: false
+            },
+            {
+              name: "Red Pepper",
+              note: "Yummy",
+              img: "img.jpg",
+              datestamp: "1/18/2019",
+              favorite: true
+      
+            }
+          ]  
         }
       ]
     };
+    expect(user.username).toEqual("User");
     expect(user.name).toEqual("Boo Berry");
+    expect(user.password).toEqual("password");
+    expect(user.email).toEqual("user@example.com");
+    expect(user.birthdate).toEqual("1/1/1990");
+    expect(user.gender).toEqual("female");
+    expect(user.tracked_info[0].name).toEqual("Thrills");
+    expect(user.tracked_info[0].experiences[1].name).toEqual("Bungee Jumping");
+    expect(user.tracked_info[1].experiences[1].name).toEqual("Red Pepper");
   });
 });
