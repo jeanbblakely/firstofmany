@@ -1,0 +1,22 @@
+{
+  "name": "firstofmanybackend",
+  "version": "1.0.0",
+  "description": "This is the backend of the first of many app",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://joeymarinelli@bitbucket.org/cs6232g1/firstofmany.git"
+  },
+  "author": "Joey Marinelli, Luke Johnson, Jeannie Blakely",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/cs6232g1/firstofmany#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.5.15",
+    "nodemon": "^1.19.1"
+  }
+}

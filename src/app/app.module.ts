@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
+import { HttpClientModule } from '@angular/common/http';
+import { ApiService } from './api.service'
 import { AppComponent } from './app.component';
 import { CategoriesComponent } from './experiences/categories/categories.component';
 import { DashboardComponent } from './user/dashboard/dashboard.component';
@@ -24,9 +25,10 @@ import { AppRoutesModule } from './app-routes.module';
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutesModule
+    AppRoutesModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [ApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
