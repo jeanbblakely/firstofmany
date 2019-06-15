@@ -2,6 +2,11 @@ import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MaterialModule } from './material.module';
+import { ApiService } from './api.service';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing'
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -10,7 +15,10 @@ describe('AppComponent', () => {
         AppComponent
       ],
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        BrowserAnimationsModule,
+        MaterialModule,
+        HttpClientTestingModule
       ],
     }).compileComponents();
   }));

@@ -1,3 +1,78 @@
-<p>
-  account works!
-</p>
+<p>Register for an account
+<h3>{{message}}</h3>
+<div class="form-group">
+  <form (ngSubmit)="register()">
+    <mat-form-field class="user-name">
+      <input matInput
+             type="text"
+             placeholder="Username"
+             required
+             name="username"
+             #usernameField="ngModel"
+             [(ngModel)]="username">
+    </mat-form-field>
+    <br/>
+
+    <mat-form-field class="password">
+      <input matInput
+             type="password"
+             placeholder="Password"
+             required
+             name="password"
+             #passwordField="ngModel"
+             [(ngModel)]="password">
+    </mat-form-field>
+
+    <br/>
+    
+    <mat-form-field class="email">
+      <input matInput
+             type="email"
+             placeholder="Email"
+             required
+             name="email"
+             #emailField="ngModel"
+             [(ngModel)]="email">
+    </mat-form-field>
+
+    <br/>
+    
+     <mat-form-field class="name">
+      <input matInput
+             type="name"
+             placeholder="Name"
+             required
+             name="name"
+             #nameField="ngModel"
+             [(ngModel)]="name">
+    </mat-form-field>
+
+    <br/>
+    
+    <mat-form-field class="birthdate">
+      <input matInput
+             type="birthdate"
+             placeholder="Birthdate"
+             required
+             name="birthdate"
+             #birthdateField="ngModel"
+             [(ngModel)]="birthdate">
+    </mat-form-field>
+
+    <br/>
+    
+    <mat-form-field class="gender">
+      <input matInput
+             type="gender"
+             placeholder="Gender"
+             required
+             name="gender"
+             #genderField="ngModel"
+             [(ngModel)]="gender">
+    </mat-form-field>
+
+    <br/>
+    <button mat-fab type="submit">Register</button>
+  </form>
+
+</div>
