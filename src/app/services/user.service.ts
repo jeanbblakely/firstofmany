@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of as ObservableOf, throwError } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { User } from '../models/user';
 import { USERS } from '../mock-users';
 
@@ -12,6 +12,9 @@ export class UserService {
 
   constructor() { }
   
+  /*
+	Searches users for username/password match.  Returns true and assigns user number if match found, false otherwise.  
+  */
   login(username: string, password: string): boolean {
     var i;
     console.log(USERS.length);
@@ -22,14 +25,16 @@ export class UserService {
         this.index = i;
         console.log(this.index);
         return true;
-      }
-    
+      } 
    }
    return false;
   }
   
-  getUser(): User {
-    return USERS[this.index];
+  /*
+	Gets user based on number assigned in login
+  */
+  getUser(): Observable<User> {
+    return of(USERS[this.index]);
   }
 
 }

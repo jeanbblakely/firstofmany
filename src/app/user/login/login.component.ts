@@ -13,9 +13,13 @@ export class LoginComponent {
   public password = '';
 
   public message: string = '';
+  
   constructor(private userService: UserService, 
     private router: Router) { }
 
+  /*
+	Tries to log user in and displays message.  If user successfully logs in, routes to user dashboard.
+  */
   login() {
     if (this.userService.login(this.username, this.password)) {
       console.log('Successfully logged in');

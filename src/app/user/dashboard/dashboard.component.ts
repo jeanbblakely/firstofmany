@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable, of, throwError } from 'rxjs';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
 
@@ -16,8 +17,12 @@ export class DashboardComponent implements OnInit {
     this.getUser();
   }
   
+  /*
+	Gets Observable User from service
+  */
   getUser(): void {
-    this.user = this.userService.getUser();
+    this.userService.getUser()
+      .subscribe(user => this.user = user);
   }
 
 }
