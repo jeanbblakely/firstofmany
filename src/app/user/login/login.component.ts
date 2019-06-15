@@ -17,7 +17,6 @@ export class LoginComponent {
     private router: Router) { }
 
   login() {
-    ;
     if (this.userService.login(this.username, this.password)) {
       console.log('Successfully logged in');
       this.message = 'logged in';
