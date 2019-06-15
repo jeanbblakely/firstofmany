@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { ApiService } from './api.service'
+import { ApiService } from './api.service';
 import { AppComponent } from './app.component';
 import { CategoriesComponent } from './experiences/categories/categories.component';
 import { DashboardComponent } from './user/dashboard/dashboard.component';

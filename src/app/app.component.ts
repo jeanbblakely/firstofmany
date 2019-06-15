@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ApiService } from './api.service'
+import { ApiService } from './api.service';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +10,7 @@ import { ApiService } from './api.service'
 export class AppComponent {
   title = 'the First of Many';
 
-  constructor(private apiService: ApiService){}
+  constructor(private apiService: ApiService) {}
 
   ngOnInit() {
     this.apiService.getMessage();
