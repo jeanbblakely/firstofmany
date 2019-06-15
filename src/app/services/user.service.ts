@@ -14,16 +14,18 @@ export class UserService {
   
   login(username: string, password: string): boolean {
     var i;
+    console.log(USERS.length);
     for (i = 0; i < USERS.length; i++) {
+      console.log(USERS[i].password);
+      console.log(USERS[i].username);
       if (USERS[i].username == username && USERS[i].password == password) {
         this.index = i;
         console.log(this.index);
         return true;
-      } else {
-        console.log("else statment");
       }
-    return false;
+    
    }
+   return false;
   }
   
   getUser(): User {
