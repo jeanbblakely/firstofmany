@@ -7,6 +7,6 @@ module.exports = mongoose.model('User', {
     name: String,
     birthdate: Date,
     gender: String,
-    tracked_categories: [],
-    favorites: []
+    tracked_categories: Array,
+    favorites: Array
 })
