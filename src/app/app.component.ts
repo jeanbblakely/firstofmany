@@ -8,7 +8,7 @@ import { ApiService } from './api.service'
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'firstofmany';
+  title = 'the First of Many';
 
   constructor(private apiService: ApiService){}
 
