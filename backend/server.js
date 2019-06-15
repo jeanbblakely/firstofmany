@@ -3,7 +3,10 @@ var cors = require('cors');
 var app = express();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+
 const port = 3000;
+
+var User = require('./models/user.js');
 
 var posts = [
   { message: "test" },
@@ -25,11 +28,19 @@ app.get('/posts', (req, res)=> {
 
 app.post('/register', (req, res)=> {
   let userData = req.body;
-  console.log(userData);
-  res.sendStatus(200);
+  let user = new User(userData);
+
+  user.save((err, result)=> {
+    if(err) {
+      console.log(err.errmsg);
+    } else {
+      console.log(user.favorites[0]);
+      res.sendStatus(200);
+    }
+  })
 });
 
-mongoose.connect('mongodb+srv://joeymarinelli:Katiemarie0629!@cluster0-yrzrs.mongodb.net/test?retryWrites=true&w=majority',
+mongoose.connect('mongodb+srv://joeymarinelli:Katiemarie0629!@cluster0-yrzrs.mongodb.net/FirstOfManyDB?retryWrites=true&w=majority',
                   { useNewUrlParser: true },
                   (err)=> {
                       if(!err) {
