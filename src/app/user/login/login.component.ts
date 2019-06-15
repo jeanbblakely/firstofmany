@@ -8,14 +8,14 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
 
-  public username: string = '';
-  public password: string = '';
+  public username = '';
+  public password = '';
 
-  public message: string = '';
+  public message = '';
   constructor(private router: Router) { }
 
   login() {
-    if (this.username == 'user' && this.password == 'password') {
+    if (this.username === 'user' && this.password === 'password') {
       console.log('Successfully logged in');
       this.message = 'logged in';
       this.router.navigate(['dashboard']);

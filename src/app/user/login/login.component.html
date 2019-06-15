@@ -2,25 +2,29 @@
 <h3>{{message}}</h3>
 <div class="form-group">
   <form (ngSubmit)="login()">
-    <div class="user-name">
-      <input type="text"
+    <mat-form-field class="user-name">
+      <input matInput
+             type="text"
              placeholder="Username"
              required
              name="username"
              #usernameField="ngModel"
              [(ngModel)]="username">
+    </mat-form-field>
+    <br/>
 
-    </div>
-    <div class="password">
-      <input type="password"
+    <mat-form-field class="password">
+      <input matInput
+             type="password"
              placeholder="Password"
              required
              name="password"
              #passwordField="ngModel"
              [(ngModel)]="password">
-      
-    </div>
-    <button type="submit">Login</button>
+    </mat-form-field>
+
+    <br/>
+    <button mat-fab type="submit">Login</button>
   </form>
 
 </div>
