@@ -3,6 +3,7 @@ import { User } from './models/user';
 
 export const USERS: User[] = [
      {
+      id: "5d045ecaece2003576f60b8e",
       username: "user",
       password: "password",
       email: "user@example.com",
@@ -54,6 +55,7 @@ export const USERS: User[] = [
     },
     
       {
+      id: "5d045f9465093635e061144d",
       username: "jblakely",
       password: "blackcat",
       email: "jeanbblakely@gmail.com",
@@ -105,6 +107,7 @@ export const USERS: User[] = [
     },
     
     {
+      id: "5d045f9465093635e034567e",
       username: "fancycat",
       password: "pickle",
       email: "daphne@gmail.com",

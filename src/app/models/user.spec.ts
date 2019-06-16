@@ -9,6 +9,7 @@ describe('User', () => {
   
   it('should return user details with user', () => {  
     var user: User = {
+      id: "5d045ecaece2003576f60b8e",
       username: "User",
       password: "password",
       email: "user@example.com",
@@ -58,6 +59,7 @@ describe('User', () => {
         }
       ]
     };
+    expect(user.id).toEqual("5d045ecaece2003576f60b8e");
     expect(user.username).toEqual("User");
     expect(user.name).toEqual("Boo Berry");
     expect(user.password).toEqual("password");
