@@ -8,7 +8,7 @@ import { USERS } from '../mock-users';
   providedIn: 'root'
 })
 export class UserService {
-  index: number;
+  id: number;
 
   constructor() { }
   
@@ -22,8 +22,8 @@ export class UserService {
       console.log(USERS[i].password);
       console.log(USERS[i].username);
       if (USERS[i].username == username && USERS[i].password == password) {
-        this.index = i;
-        console.log(this.index);
+        this.id = i;
+        console.log(this.id);
         return true;
       } 
    }
@@ -34,7 +34,7 @@ export class UserService {
 	Gets user based on number assigned in login
   */
   getUser(): Observable<User> {
-    return of(USERS[this.index]);
+    return of(USERS[this.id]);
   }
 
 }
