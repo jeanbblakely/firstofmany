@@ -36,5 +36,14 @@ export class UserService {
   getUser(): Observable<User> {
     return of(USERS[this.id]);
   }
+  
+  /*
+	Registers a new user
+  */
+  register(user: User): boolean {
+    console.log('user in service', user);
+    return true;
+  }
+
 
 }

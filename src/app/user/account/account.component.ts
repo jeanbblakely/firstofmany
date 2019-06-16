@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
+import { User } from './../../models/user';
 
 @Component({
   selector: 'app-account',
@@ -35,6 +36,15 @@ export class AccountComponent implements OnInit {
   
   register() {
     console.log('User Control Value', this.userForm.value);
+    const result: User = Object.assign({}, this.userForm.value);
+    console.log('after copy', result);
+    if (this.userService.register(result)) {
+      console.log('Successfully registered');
+      this.message = 'thanks for registering';
+      this.router.navigate(['login']);
+    } else {
+      this.message = 'error in registering';
+    }
   }
 
 }
