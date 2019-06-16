@@ -7,6 +7,8 @@ var mongoose = require('mongoose');
 const port = 3000;
 
 var User = require('./models/user.js');
+var Experience = require('./models/experience.js');
+var Category = require('./models/category.js');
 
 var posts = [
   { message: "test" },
@@ -34,11 +36,27 @@ app.post('/register', (req, res)=> {
     if(err) {
       console.log(err.errmsg);
     } else {
-      console.log(user.favorites[0]);
+      console.log(user.favorites);
       res.sendStatus(200);
     }
   })
 });
+
+app.post('/newcategory', (req, res)=> {
+  let categoryData = req.body;
+  let category = new Category(categoryData);
+
+  category.save((err, result)=> {
+    if(err) {
+      console.log(err.errmsg);
+    } else {
+      console.log(category.name);
+      res.sendStatus(200);
+    }
+  })
+});
+
+
 
 mongoose.connect('mongodb+srv://joeymarinelli:Katiemarie0629!@cluster0-yrzrs.mongodb.net/FirstOfManyDB?retryWrites=true&w=majority',
                   { useNewUrlParser: true },
