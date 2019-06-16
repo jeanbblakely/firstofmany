@@ -1,15 +1,14 @@
 <p>Register for an account
 <h3>{{message}}</h3>
 <div class="form-group">
-  <form (ngSubmit)="register()">
+  <form [formGroup]="userForm" (ngSubmit)="register()">
     <mat-form-field class="user-name">
       <input matInput
              type="text"
              placeholder="Username"
              required
              name="username"
-             #usernameField="ngModel"
-             [(ngModel)]="username">
+             formControlName="username">
     </mat-form-field>
     <br/>
 
@@ -19,8 +18,7 @@
              placeholder="Password"
              required
              name="password"
-             #passwordField="ngModel"
-             [(ngModel)]="password">
+             formControlName="password">
     </mat-form-field>
 
     <br/>
@@ -30,8 +28,7 @@
              placeholder="Email"
              required
              name="email"
-             #emailField="ngModel"
-             [(ngModel)]="email">
+             formControlName="email">
     </mat-form-field>
 
     <br/>
@@ -42,8 +39,7 @@
              placeholder="Name"
              required
              name="name"
-             #nameField="ngModel"
-             [(ngModel)]="name">
+             formControlName="name">
     </mat-form-field>
 
     <br/>
@@ -54,8 +50,7 @@
              placeholder="Birthdate"
              required
              name="birthdate"
-             #birthdateField="ngModel"
-             [(ngModel)]="birthdate">
+             formControlName="birthdate">
     </mat-form-field>
 
     <br/>
@@ -66,8 +61,7 @@
              placeholder="Gender"
              required
              name="gender"
-             #genderField="ngModel"
-             [(ngModel)]="gender">
+             formControlName="gender">
     </mat-form-field>
 
     <br/>
@@ -75,3 +69,6 @@
   </form>
 
 </div>
+
+<p>Form Control values: {{ userForm.value | json }}</p>
+<p>Form Control status: {{ userForm.status | json }}</p>
