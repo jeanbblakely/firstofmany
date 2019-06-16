@@ -11,6 +11,11 @@ describe('AccountComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [ 
+        FormsModule, 
+        BrowserAnimationsModule,
+        MaterialModule
+      ],
       declarations: [ AccountComponent ]
     })
     .compileComponents();
