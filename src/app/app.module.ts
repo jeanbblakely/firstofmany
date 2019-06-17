@@ -13,7 +13,11 @@ import { AppRoutesModule } from './app-routes.module';
 import { UserService } from './services/user.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MaterialModule } from './material.module';
+import { MaterialModule } from './material/material.module';
+import { LayoutComponent } from './layout/layout.component';
+import { HeaderComponent } from './navigation/header/header.component';
+import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -23,7 +27,10 @@ import { MaterialModule } from './material.module';
     AccountComponent,
     LoginComponent,
     HomeComponent,
-    ExperiencesComponent
+    ExperiencesComponent,
+    LayoutComponent,
+    HeaderComponent,
+    SidenavListComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +39,8 @@ import { MaterialModule } from './material.module';
     AppRoutesModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    FlexLayoutModule
   ],
   providers: [
     UserService,
