@@ -41,6 +41,7 @@ export class AccountComponent implements OnInit {
     console.log('User Control Value', this.userForm.value);
     const result: User = Object.assign({}, this.userForm.value);
     console.log('after copy', result);
+    this.apiService.sendUserRegistraion(result);
     if (this.userService.register(result)) {
       console.log('Successfully registered');
       this.message = 'thanks for registering';
@@ -51,7 +52,7 @@ export class AccountComponent implements OnInit {
   }
 
   Post() {
-    this.apiService.sendUserRegistraion(this.registerData);
+    this.apiService.sendUserRegistraion(this.userForm);
   }
 
 }
