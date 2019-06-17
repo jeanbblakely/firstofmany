@@ -1,8 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { RouterTestingModule } from '@angular/router/testing';
+import { Router } from '@angular/router';
 import { AccountComponent } from './account.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MaterialModule } from './../../material.module';
 
 describe('AccountComponent', () => {
@@ -11,6 +13,14 @@ describe('AccountComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [ 
+        FormsModule, 
+        BrowserAnimationsModule,
+        ReactiveFormsModule,
+        RouterTestingModule,
+        MaterialModule
+      ],
+      providers: [ { provide: Router, useClass: class { navigate = jasmine.createSpy("navigate"); } }],
       declarations: [ AccountComponent ]
     })
     .compileComponents();

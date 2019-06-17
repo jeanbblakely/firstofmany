@@ -9,4 +9,9 @@ describe('UserService', () => {
     const service: UserService = TestBed.get(UserService);
     expect(service).toBeTruthy();
   });
+  
+    it('should return true for successful user login', () => {
+    const service: UserService = TestBed.get(UserService);
+    expect(service.login("user", "password")).toEqual(true);
+  });
 });
