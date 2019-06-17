@@ -17,6 +17,12 @@ mat-toolbar {
   flex: 1 1 auto;
 }
 
+.navigation-items {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
 @media only screen and (max-width: 500px) {
   .logo-area {
     height: 150px;
