@@ -1,5 +1,6 @@
+
 <p>Login with username: user, password: password
-<h3>{{message}}</h3>
+
 <div class="form-group">
   <form (ngSubmit)="login()">
     <mat-form-field class="user-name">
@@ -11,7 +12,6 @@
              #usernameField="ngModel"
              [(ngModel)]="username">
     </mat-form-field>
-    <br/>
 
     <mat-form-field class="password">
       <input matInput
@@ -23,8 +23,7 @@
              [(ngModel)]="password">
     </mat-form-field>
 
-    <br/>
     <button mat-fab type="submit">Login</button>
   </form>
-
 </div>
+<h3>{{message}}</h3>

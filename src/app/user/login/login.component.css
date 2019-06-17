@@ -1,3 +1,6 @@
-.user-name, .password {
+.user-name, 
+.password {
   width: 200px;
+  display: block;
+  margin: 20px auto;
 }
