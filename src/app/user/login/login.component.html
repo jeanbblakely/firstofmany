@@ -1,31 +1,33 @@
-<p>Login with username: user, jblakely, or fancycat <br>
-password: password, blackcat, or pickle
-<h3>{{message}}</h3>
-<div class="form-group">
-  <form (ngSubmit)="login()">
-    <mat-form-field class="user-name">
-      <input matInput
-             type="text"
-             placeholder="Username"
-             required
-             name="username"
-             #usernameField="ngModel"
-             [(ngModel)]="username">
-    </mat-form-field>
-    <br/>
+<div fxLayout="column" fxLayoutAlign="space-around center">
+  <img src="/assets/logo/logo_circle_text.svg" class="logo">
+  <em>Login with username: user, jblakely, or fancycat <br>
+password: password, blackcat, or pickle</em>
 
-    <mat-form-field class="password">
-      <input matInput
-             type="password"
-             placeholder="Password"
-             required
-             name="password"
-             #passwordField="ngModel"
-             [(ngModel)]="password">
-    </mat-form-field>
 
-    <br/>
-    <button mat-fab type="submit">Login</button>
-  </form>
+  <div class="form-group">
+    <form (ngSubmit)="login()">
+      <mat-form-field class="user-name">
+        <input matInput
+              type="text"
+              placeholder="Username"
+              required
+              name="username"
+              #usernameField="ngModel"
+              [(ngModel)]="username">
+      </mat-form-field>
 
+      <mat-form-field class="password">
+        <input matInput
+              type="password"
+              placeholder="Password"
+              required
+              name="password"
+              #passwordField="ngModel"
+              [(ngModel)]="password">
+      </mat-form-field>
+
+      <button mat-fab type="submit">Login</button>
+    </form>
+  </div>
+  <h3>{{message}}</h3>
 </div>

@@ -1,0 +1,41 @@
+mat-toolbar {
+  height: 230px;
+}
+
+.logo-area {
+  padding: 0;
+  margin: 0;
+  width: 420px;
+  height: 230px;
+  background-color: #4fc3f7;
+  background-image: url("/assets/logo/logo_no_background.svg");
+  background-repeat: no-repeat;
+  background-position: right bottom;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.navigation-items {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+@media only screen and (max-width: 600px) {
+  .logo-area {
+    width: 350px;
+    background-image: url("/assets/logo/logo_semi_circle_border.svg");
+    background-size: 100%;
+    background-position: center bottom;
+  }
+
+  .nav-link {
+    display: none;
+  }
+
+  .spacer {
+    display: none;
+  }
+}
