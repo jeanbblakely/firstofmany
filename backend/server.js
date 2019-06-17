@@ -36,7 +36,7 @@ app.post('/register', (req, res)=> {
     if(err) {
       console.log(err.errmsg);
     } else {
-      console.log(user.favorites);
+      console.log(user);
       res.sendStatus(200);
     }
   })
