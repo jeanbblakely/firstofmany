@@ -1,6 +1,14 @@
 .user-name, 
 .password {
-  width: 200px;
   display: block;
-  margin: 20px auto;
+  width: 300px;
+}
+
+form {
+  text-align: center;
+}
+
+.logo {
+  max-width: 250px;
+  width: 30%;
 }

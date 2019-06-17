@@ -23,12 +23,12 @@ mat-toolbar {
   margin: 0;
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 600px) {
   .logo-area {
-    height: 150px;
+    width: 350px;
     background-image: url("/assets/logo/logo_semi_circle_border.svg");
-    background-position: 25% bottom;
-    background-size: 50% auto;
+    background-size: 100%;
+    background-position: center bottom;
   }
 
   .nav-link {
