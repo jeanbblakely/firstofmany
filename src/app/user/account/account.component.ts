@@ -3,6 +3,7 @@ import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 import { User } from './../../models/user';
+import { ApiService } from '../../api.service';
 
 @Component({
   selector: 'app-account',
@@ -15,14 +16,16 @@ export class AccountComponent implements OnInit {
   public message: string = '';
   public userForm: FormGroup;
 
-  constructor(private userService: UserService, 
-    private router: Router, private fb: FormBuilder) {
+  registerData = {}
+
+  constructor(private userService: UserService,
+    private router: Router, private fb: FormBuilder, private apiService: ApiService) {
       this.createForm();
     }
 
   ngOnInit() {
   }
-  
+
   createForm() {
     this.userForm = this.fb.group({
       username: [null, Validators.required],
@@ -33,7 +36,7 @@ export class AccountComponent implements OnInit {
       gender: [null, Validators.required]
     });
   }
-  
+
   register() {
     console.log('User Control Value', this.userForm.value);
     const result: User = Object.assign({}, this.userForm.value);
@@ -45,6 +48,10 @@ export class AccountComponent implements OnInit {
     } else {
       this.message = 'error in registering';
     }
+  }
+
+  Post() {
+    this.apiService.sendUserRegistraion(this.registerData);
   }
 
 }

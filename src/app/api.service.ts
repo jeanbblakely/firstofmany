@@ -12,4 +12,10 @@ export class ApiService {
     });
   }
 
+  sendUserRegistraion(regData) {
+  this.httpClient.post('http://localhost:3000/register', regData).subscribe(res =>{
+
+  });
+}
+
 }
