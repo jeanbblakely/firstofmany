@@ -1,9 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class ApiService {
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient,
+    private router: Router) {}
 
   messages = []
   getMessage() {
@@ -12,14 +14,16 @@ export class ApiService {
     });
   }
 
-  sendUserRegistraion(regData) {
+  sendUserRegistration(regData) {
     this.httpClient.post('http://localhost:3000/account', regData).subscribe(res =>{
         console.log(res);
     });
   }
 
   loginUser(loginData) {
-
+    this.httpClient.post('http://localhost:3000/login', loginData).subscribe(res =>{
+        console.log(res);
+    });
   }
 
 }

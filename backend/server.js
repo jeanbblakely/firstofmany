@@ -29,6 +29,16 @@ app.get('/posts', (req, res)=> {
   res.send(posts);
 });
 
+app.get('/user/:id', async(req, res)=> {
+  try {
+    let user = await User.findById(req.params.id, '-password -__v');
+    res.send(user);
+  } catch (error){
+    console.log(error);
+    res.sendStatus(500);
+  }
+});
+
 app.post('/account', (req, res)=> {
   let userData = req.body;
   let user = new User(userData);
@@ -48,16 +58,13 @@ app.post('/login', async (req, res)=> {
 
   if (!user) {
     return res.status(401).send({message:"Username or Password Invalid"});
-  }
-  if (userData.password != user.password) {
+  } else if (userData.password != user.password) {
     return res.status(401).send({message:"Username or Password Invalid"});
+  } else {
+    let payload = {};
+    let token = jwt.encode(payload, '123456');
+    res.status(200).send({token});
   }
-
-  let payload = {};
-
-  let token = jwt.encode(payload, '123456');
-
-  res.status(200).send({token});
 
 });
 

@@ -15,7 +15,7 @@ export class LoginComponent {
 
   public message: string = '';
 
-  loginData = {};
+  loginData = {}
 
   constructor(private userService: UserService,
     private router: Router, private apiService: ApiService) { }
@@ -33,7 +33,8 @@ export class LoginComponent {
     }
   }
 
-  Post() {
+// Log in from user in database
+  PostLogin() {
     this.apiService.loginUser(this.loginData);
   }
 
