@@ -4,7 +4,6 @@
   <form [formGroup]="userForm" (ngSubmit)="register()">
     <mat-form-field class="user-name">
       <input matInput
-             [(ngModel)]="registerData.username"
              type="text"
              placeholder="Username"
              required
@@ -15,7 +14,6 @@
 
     <mat-form-field class="password">
       <input matInput
-             [(ngModel)]="registerData.password"
              type="password"
              placeholder="Password"
              required
@@ -26,7 +24,6 @@
     <br/>
     <mat-form-field class="email">
       <input matInput
-             [(ngModel)]="registerData.email"
              type="email"
              placeholder="Email"
              required
@@ -38,7 +35,6 @@
 
      <mat-form-field class="name">
       <input matInput
-             [(ngModel)]="registerData.name"
              type="name"
              placeholder="Name"
              required
@@ -50,7 +46,6 @@
 
     <mat-form-field class="birthdate">
       <input matInput
-             [(ngModel)]="registerData.birthdate"
              type="birthdate"
              placeholder="Birthdate"
              required
@@ -62,7 +57,6 @@
 
     <mat-form-field class="gender">
       <input matInput
-             [(ngModel)]="registerData.gender"
              type="gender"
              placeholder="Gender"
              required
@@ -71,7 +65,7 @@
     </mat-form-field>
 
     <br/>
-    <button mat-fab type="submit" (click)="Post()">Register</button>
+    <button mat-fab type="submit">Register</button>
   </form>
 
 </div>

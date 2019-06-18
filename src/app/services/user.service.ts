@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { User } from '../models/user';
 import { USERS } from '../mock-users';
+import { ApiService } from '../api.service';
 
 
 @Injectable({
@@ -10,7 +11,7 @@ import { USERS } from '../mock-users';
 export class UserService {
   id: number;
 
-  constructor() { }
+  constructor(private apiService: ApiService) { }
   
   /*
 	Searches users for username/password match.  Returns true and assigns user number if match found, false otherwise.  
@@ -42,6 +43,7 @@ export class UserService {
   */
   register(user: User): boolean {
     console.log('user in service', user);
+    this.apiService.sendUserRegistraion(user);
     return true;
   }
 
