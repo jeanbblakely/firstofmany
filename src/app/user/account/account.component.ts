@@ -49,6 +49,4 @@ export class AccountComponent implements OnInit {
       this.message = 'error in registering';
     }
   }
-
-
 }
