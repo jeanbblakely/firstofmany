@@ -15,27 +15,18 @@ export class LoginComponent {
 
   public message: string = '';
 
-  loginData = {}
-
   constructor(private userService: UserService,
-    private router: Router, private apiService: ApiService) { }
+    private router: Router) { }
 
   /*
 	Tries to log user in and displays message.  If user successfully logs in, routes to user dashboard.
   */
   login() {
     if (this.userService.login(this.username, this.password)) {
-      console.log('Successfully logged in');
       this.message = 'logged in';
       this.router.navigate(['dashboard']);
     } else {
       this.message = 'not logged in';
     }
   }
-
-// Log in from user in database
-  PostLogin() {
-    this.apiService.loginUser(this.loginData);
-  }
-
 }

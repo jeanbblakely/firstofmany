@@ -24,6 +24,9 @@ export class AccountComponent implements OnInit {
   ngOnInit() {
   }
 
+    /*
+	Creates userForm based on input
+  */
   createForm() {
     this.userForm = this.fb.group({
       username: [null, Validators.required],
@@ -35,6 +38,9 @@ export class AccountComponent implements OnInit {
     });
   }
 
+  /*
+	Registers user in the system. Routes to Login page
+  */
   register() {
     console.log('User Control Value', this.userForm.value);
     const result: User = Object.assign({}, this.userForm.value);
