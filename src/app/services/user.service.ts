@@ -17,14 +17,12 @@ export class UserService {
 	Searches users for username/password match.  Returns true and assigns user number if match found, false otherwise.  
   */
   login(username: string, password: string): boolean {
+    var loginData = { username, password } 
+    this.apiService.loginUser(loginData);
     var i;
-    console.log(USERS.length);
     for (i = 0; i < USERS.length; i++) {
-      console.log(USERS[i].password);
-      console.log(USERS[i].username);
       if (USERS[i].username == username && USERS[i].password == password) {
         this.id = i;
-        console.log(this.id);
         return true;
       } 
    }
@@ -42,8 +40,7 @@ export class UserService {
 	Registers a new user
   */
   register(user: User): boolean {
-    console.log('user in service', user);
-    this.apiService.sendUserRegistraion(user);
+    this.apiService.sendUserRegistration(user);
     return true;
   }
 
