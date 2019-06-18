@@ -4,9 +4,11 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MaterialModule } from './material.module';
 import { ApiService } from './api.service';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing'
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { MaterialModule } from './material/material.module';
+import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -18,6 +20,7 @@ describe('AppComponent', () => {
         RouterTestingModule,
         BrowserAnimationsModule,
         MaterialModule,
+        FlexLayoutModule,
         HttpClientTestingModule
       ],
     }).compileComponents();
