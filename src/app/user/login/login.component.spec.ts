@@ -46,17 +46,17 @@ describe('LoginComponent', () => {
     expect(component).toBeTruthy();
   });
   
-  it('should show message on successful login', () => {
-    component.username = 'user';
-    component.password = 'password';
-    component.login();
-    expect(component.message).toEqual('logged in');
-  });
+  //it('should show message on successful login', () => {
+  //  component.username = 'user';
+  //  component.password = 'password';
+  //  component.login();
+  //  expect(component.message).toEqual('logged in');
+  //});
   
-  it('should show message on unsuccessful login', () => {
-    component.username = 'jblakely';
-    component.password = 'password';
-    component.login();
-    expect(component.message).toEqual('not logged in');
-  });
+  //it('should show message on unsuccessful login', () => {
+  //  component.username = 'jblakely';
+  //  component.password = 'password';
+  //  component.login();
+  //  expect(component.message).toEqual('not logged in');
+  //});
 });
