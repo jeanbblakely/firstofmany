@@ -6,12 +6,16 @@ import { Location } from '@angular/common';
 import { MaterialModule } from './../../material/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ApiService } from './../../api.service';
+import { UserService } from '../../services/user.service';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
   let router: Router;
   let location: Location;
+  let userService: UserService;
+  let apiServiceSpy: jasmine.SpyObj<UserService>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -21,7 +25,10 @@ describe('LoginComponent', () => {
         BrowserAnimationsModule,
         MaterialModule
       ],
-      providers: [ { provide: Router, useClass: class { navigate = jasmine.createSpy("navigate"); } }],
+      providers: [ { provide: Router, useClass: class { navigate = jasmine.createSpy("navigate"); } },
+      UserService,
+        { provide: UserService }
+      ],
       declarations: [ LoginComponent ]
     })
     .compileComponents();
