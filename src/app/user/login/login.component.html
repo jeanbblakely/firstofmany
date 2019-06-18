@@ -13,7 +13,7 @@ password: password, blackcat, or pickle</em>
               required
               name="username"
               #usernameField="ngModel"
-              [(ngModel)]="username">
+              [(ngModel)]="loginData.username || username">
       </mat-form-field>
 
       <mat-form-field class="password">
@@ -23,7 +23,7 @@ password: password, blackcat, or pickle</em>
               required
               name="password"
               #passwordField="ngModel"
-              [(ngModel)]="password">
+              [(ngModel)]="loginData.password || password">
       </mat-form-field>
 
       <button mat-fab type="submit">Login</button>
