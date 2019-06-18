@@ -7,14 +7,22 @@ import { UserService } from './user.service';
 describe('UserService', () => {
   let httpClient: HttpClient;
   let httpTestingController: HttpTestingController;
-  let apiService: ApiService;
+  let userService: UserService;
+  let apiServiceSpy: jasmine.SpyObj<UserService>;
   
   beforeEach(() => { 
+    const spy = jasmine.createSpyObj('UserService', ['getValue']);
     TestBed.configureTestingModule({
-      imports: [ HttpClientTestingModule ]
+      //imports: [ HttpClientTestingModule ]
+      providers: [
+        UserService,
+        { provide: UserService, useValue: spy }
+      ]
   });
-    httpClient = TestBed.get(HttpClient);
-    httpTestingController = TestBed.get(HttpTestingController);
+    //httpClient = TestBed.get(HttpClient);
+    //httpTestingController = TestBed.get(HttpTestingController);
+    userService = TestBed.get(UserService);
+    apiServiceSpy = TestBed.get(UserService);
   });
   it('should be created', () => {
     const service: UserService = TestBed.get(UserService);
