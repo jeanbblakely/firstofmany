@@ -50,8 +50,5 @@ export class AccountComponent implements OnInit {
     }
   }
 
-  Post() {
-    this.apiService.sendUserRegistration(this.registerData);
-  }
 
 }
