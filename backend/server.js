@@ -25,9 +25,35 @@ app.all('/', function(req, res, next) {
     next()
   });
 
-app.get('/posts', (req, res)=> {
-  res.send(posts);
-});
+  app.get('/users', async(req, res)=> {
+    try {
+      let users = await User.find({}, '-password -__v');
+      res.send(users);
+    } catch (error){
+      console.log(error);
+      res.sendStatus(500);
+    }
+  });
+
+  app.get('/categories', async(req, res)=> {
+    try {
+      let categories = await Category.find({});
+      res.send(categories);
+    } catch (error){
+      console.log(error);
+      res.sendStatus(500);
+    }
+  });
+
+  app.get('/experiences', async(req, res)=> {
+    try {
+      let experiences = await Experience.find({});
+      res.send(experiences);
+    } catch (error){
+      console.log(error);
+      res.sendStatus(500);
+    }
+  });
 
 app.get('/user/:id', async(req, res)=> {
   try {
