@@ -24,5 +24,16 @@ export class DashboardComponent implements OnInit {
     this.userService.getUser()
       .subscribe(user => this.user = user);
   }
+  
+    /*
+	Checks to see if User is signed in (ie instantiated)
+  */
+  isLoggedIn(): boolean {
+    if (this.user) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
 }
