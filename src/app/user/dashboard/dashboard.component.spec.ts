@@ -23,6 +23,7 @@ describe('DashboardComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(DashboardComponent);
+    userService.getUser.and.returnValue(Observable.of(new User());
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

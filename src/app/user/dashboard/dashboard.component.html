@@ -1,4 +1,6 @@
 <p>
   dashboard works!
 </p>
-<h2>Welcome {{user.name}}</h2>
+<div *ngIf="isLoggedIn()">
+  <h2>Welcome {{user.name}}</h2>
+</div>
