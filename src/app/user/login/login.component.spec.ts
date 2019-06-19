@@ -110,11 +110,16 @@ describe('LoginComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LoginComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
     router = TestBed.get(Router);
     location = TestBed.get(Location);
+    fixture = TestBed.createComponent(LoginComponent);
+    router.initialNavigation;
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+    //const routerSpy = fixture.debugElement.injector.get(Router);
+    //var navSpy = this.routerSpy.navigate as jasmine.Spy;
+    //router.initialNavigation();
+
   });
 
   it('should create', () => {
@@ -135,12 +140,10 @@ describe('LoginComponent', () => {
     expect(component.message).toEqual('not logged in');
   });
   
-  //it('should navigate to dashboard on successful login with mock UserService', () => {
-  //  const routerSpy = component.debugElement.injector.get(Router);
-  //  var navSpy = routerSpy.navigate as jasmine.Spy;
-  //  component.username = 'user';
-  //  component.password = 'password';
-  //  component.login();
-  //  expect(component.navSpy.calls.any()).toBe(true, 'navigation called');
-  //});
+  it('should navigate to dashboard on successful login with mock UserService', () => {
+    component.username = 'user';
+    component.password = 'password';
+    component.login();
+    //expect(this.location.path()).toBe("/dashboard");
+  });
 });
