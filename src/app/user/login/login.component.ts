@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
+import { ApiService } from '../../api.service';
 
 @Component({
   selector: 'app-login',
@@ -13,8 +14,8 @@ export class LoginComponent {
   public password = '';
 
   public message: string = '';
-  
-  constructor(private userService: UserService, 
+
+  constructor(private userService: UserService,
     private router: Router) { }
 
   /*
@@ -22,12 +23,10 @@ export class LoginComponent {
   */
   login() {
     if (this.userService.login(this.username, this.password)) {
-      console.log('Successfully logged in');
       this.message = 'logged in';
       this.router.navigate(['dashboard']);
     } else {
       this.message = 'not logged in';
     }
   }
-
 }

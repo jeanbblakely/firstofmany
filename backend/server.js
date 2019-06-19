@@ -3,6 +3,7 @@ var cors = require('cors');
 var app = express();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var jwt = require('jwt-simple');
 
 const port = 3000;
 
@@ -24,11 +25,47 @@ app.all('/', function(req, res, next) {
     next()
   });
 
-app.get('/posts', (req, res)=> {
-  res.send(posts);
+  app.get('/users', async(req, res)=> {
+    try {
+      let users = await User.find({}, '-password -__v');
+      res.send(users);
+    } catch (error){
+      console.log(error);
+      res.sendStatus(500);
+    }
+  });
+
+  app.get('/categories', async(req, res)=> {
+    try {
+      let categories = await Category.find({});
+      res.send(categories);
+    } catch (error){
+      console.log(error);
+      res.sendStatus(500);
+    }
+  });
+
+  app.get('/experiences', async(req, res)=> {
+    try {
+      let experiences = await Experience.find({});
+      res.send(experiences);
+    } catch (error){
+      console.log(error);
+      res.sendStatus(500);
+    }
+  });
+
+app.get('/user/:id', async(req, res)=> {
+  try {
+    let user = await User.findById(req.params.id, '-password -__v');
+    res.send(user);
+  } catch (error){
+    console.log(error);
+    res.sendStatus(500);
+  }
 });
 
-app.post('/register', (req, res)=> {
+app.post('/account', (req, res)=> {
   let userData = req.body;
   let user = new User(userData);
 
@@ -36,10 +73,25 @@ app.post('/register', (req, res)=> {
     if(err) {
       console.log(err.errmsg);
     } else {
-      console.log(user);
       res.sendStatus(200);
     }
   })
+});
+
+app.post('/login', async (req, res)=> {
+  let userData = req.body;
+  let user = await User.findOne({username:userData.username});
+
+  if (!user) {
+    return res.status(401).send({message:"Username or Password Invalid"});
+  } else if (userData.password != user.password) {
+    return res.status(401).send({message:"Username or Password Invalid"});
+  } else {
+    let payload = {};
+    let token = jwt.encode(payload, '123456');
+    res.status(200).send({token});
+  }
+
 });
 
 app.post('/newcategory', (req, res)=> {
