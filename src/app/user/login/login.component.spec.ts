@@ -73,6 +73,14 @@ describe('LoginComponent', () => {
       return of(this.user);
     }
   }
+  
+  class Page {
+    navSpy: jasmine.Spy;
+    constructor() {
+      const routerSpy = fixture.debugElement.injector.get(Router);
+      this.navSpy = routerSpy.navigate as jasmine.Spy;
+    }
+  }
 
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
@@ -84,6 +92,7 @@ describe('LoginComponent', () => {
 
   beforeEach(async(() => {
     mockUserService = new MockUserService();
+    const routerSpy = jasmine.createSpyObj('Router', ['navigate']);
     TestBed.configureTestingModule({
       imports: [ 
         FormsModule, 
@@ -91,8 +100,8 @@ describe('LoginComponent', () => {
         BrowserAnimationsModule,
         MaterialModule
       ],
-      providers: [ { provide: Router, useClass: class { navigate = jasmine.createSpy("navigate"); } },
-      UserService,
+      providers: [ 
+        { provide: Router, useValue: routerSpy },
         { provide: UserService, useValue: mockUserService }
       ],
       declarations: [ LoginComponent ]
@@ -112,17 +121,26 @@ describe('LoginComponent', () => {
     expect(component).toBeTruthy();
   });
   
-  it('should show message on successful login', () => {
+  it('should show message on successful login with mock UserService', () => {
     component.username = 'user';
     component.password = 'password';
     component.login();
     expect(component.message).toEqual('logged in');
   });
   
-  it('should show message on unsuccessful login', () => {
+  it('should show message on unsuccessful login with mock UserService', () => {
     component.username = 'jblakely';
     component.password = 'password';
     component.login();
     expect(component.message).toEqual('not logged in');
   });
+  
+  //it('should navigate to dashboard on successful login with mock UserService', () => {
+  //  const routerSpy = component.debugElement.injector.get(Router);
+  //  var navSpy = routerSpy.navigate as jasmine.Spy;
+  //  component.username = 'user';
+  //  component.password = 'password';
+  //  component.login();
+  //  expect(component.navSpy.calls.any()).toBe(true, 'navigation called');
+  //});
 });
