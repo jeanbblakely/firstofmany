@@ -10,7 +10,7 @@ describe('DashboardComponent', () => {
   class MockUserService {
     user: User = {
       id: "5d045ecaece2003576f60b8e",
-      username: "User",
+      username: "user",
       password: "password",
       email: "user@example.com",
       name: "Boo Berry",
