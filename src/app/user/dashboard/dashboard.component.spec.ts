@@ -17,10 +17,10 @@ describe('DashboardComponent', () => {
       birthdate: "1/1/1990",
       gender: "female",
       tracked_info: [
-        { 
+        {
         name: "Thrills",
         experiences: [
-          { 
+          {
             name: "Sky Diving",
             note: "So fun",
             img: "img.jpg",
@@ -33,11 +33,11 @@ describe('DashboardComponent', () => {
             img: "img.jpg",
             datestamp: "1/10/2019",
             favorite: false
-      
+
           }
          ]
         },
-        { 
+        {
         name: "Vegetables",
           experiences: [
             {
@@ -53,9 +53,9 @@ describe('DashboardComponent', () => {
               img: "img.jpg",
               datestamp: "1/18/2019",
               favorite: true
-      
+
             }
-          ]  
+          ]
         }
       ]
     };
@@ -73,7 +73,7 @@ describe('DashboardComponent', () => {
   beforeEach(async(() => {
     mockUserService = new MockUserService();
     TestBed.configureTestingModule({
-       providers: [ 
+       providers: [
       UserService,
         { provide: UserService, useValue: mockUserService }
       ],
