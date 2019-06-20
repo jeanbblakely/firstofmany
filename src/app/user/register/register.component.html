@@ -1,3 +1,74 @@
-<p>
-  register works!
-</p>
+<p>Register for an account
+<h3>{{message}}</h3>
+<div class="form-group">
+  <form [formGroup]="userForm" (ngSubmit)="register()">
+    <mat-form-field class="user-name">
+      <input matInput
+             type="text"
+             placeholder="Username"
+             required
+             name="username"
+             formControlName="username">
+    </mat-form-field>
+    <br/>
+
+    <mat-form-field class="password">
+      <input matInput
+             type="password"
+             placeholder="Password"
+             required
+             name="password"
+             formControlName="password">
+    </mat-form-field>
+
+    <br/>
+    <mat-form-field class="email">
+      <input matInput
+             type="email"
+             placeholder="Email"
+             required
+             name="email"
+             formControlName="email">
+    </mat-form-field>
+
+    <br/>
+
+     <mat-form-field class="name">
+      <input matInput
+             type="name"
+             placeholder="Name"
+             required
+             name="name"
+             formControlName="name">
+    </mat-form-field>
+
+    <br/>
+
+    <mat-form-field class="birthdate">
+      <input matInput
+             type="birthdate"
+             placeholder="Birthdate"
+             required
+             name="birthdate"
+             formControlName="birthdate">
+    </mat-form-field>
+
+    <br/>
+
+    <mat-form-field class="gender">
+      <input matInput
+             type="gender"
+             placeholder="Gender"
+             required
+             name="gender"
+             formControlName="gender">
+    </mat-form-field>
+
+    <br/>
+    <button mat-fab type="submit">Register</button>
+  </form>
+
+</div>
+
+<p>Form Control values: {{ userForm.value | json }}</p>
+<p>Form Control status: {{ userForm.status | json }}</p>
