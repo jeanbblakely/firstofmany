@@ -15,7 +15,11 @@ export class ApiService {
 
   loginUser(loginData) {
     this.httpClient.post('http://localhost:3000/login', loginData).subscribe(res =>{
-        console.log(res);
+        console.log(res.token);
+        if (res.token) {
+          console.log('Token exists');
+          this.router.navigate(['dashboard']);
+        }
     });
   }
 
