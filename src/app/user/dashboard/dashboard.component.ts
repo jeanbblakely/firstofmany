@@ -26,14 +26,10 @@ export class DashboardComponent implements OnInit {
   }
   
     /*
-	Checks to see if User is signed in (ie instantiated)
+	Checks to see if User is signed in (ie instantiated user.id)
   */
   isLoggedIn(): boolean {
-    if (this.user) {
-      return true;
-    } else {
-      return false;
-    }
+    return this.userService.isLoggedIn();
   }
 
 }

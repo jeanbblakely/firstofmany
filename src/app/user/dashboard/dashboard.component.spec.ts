@@ -62,6 +62,10 @@ describe('DashboardComponent', () => {
     getUser() {
       return of(this.user);
     }
+    
+    isLoggedIn() {
+      return true;
+    }
   }
   let component: DashboardComponent;
   let fixture: ComponentFixture<DashboardComponent>;
@@ -93,13 +97,13 @@ describe('DashboardComponent', () => {
     expect(component).toBeTruthy();
   });
   
-  it(`should have Welcome user`, () => {
+  it(`should have Welcome user with mock service`, () => {
     const fixture = TestBed.createComponent(DashboardComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('h2').textContent).toContain('Welcome Boo Berry');
   });
-  it(`should have user categories`, () => {
+  it(`should have user categories with mock service`, () => {
     const fixture = TestBed.createComponent(DashboardComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;

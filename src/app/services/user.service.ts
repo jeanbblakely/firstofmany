@@ -9,7 +9,7 @@ import { ApiService } from '../api.service';
   providedIn: 'root'
 })
 export class UserService {
-  id: number;
+  id: any;
 
   constructor(private apiService: ApiService) { }
   
@@ -37,12 +37,30 @@ export class UserService {
   }
   
   /*
-	Registers a new user
+	Registers a new user in db
   */
   register(user: User): boolean {
     this.apiService.sendUserRegistration(user);
     return true;
   }
+  
+  /*
+	Checks to see if user is logged in (ie has id)
+  */
+  isLoggedIn(): boolean {
+    console.log("hello from service");
+    console.log(this.id);
+    if (typeof this.id != 'undefined') {
+      console.log(true);
+      return true;
+    } else {
+      console.log(false);
+      return false;
+      
+    }
+  }
+  
+  
 
 
 }
