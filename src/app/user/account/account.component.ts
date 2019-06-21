@@ -12,6 +12,7 @@ import { User } from './../../models/user';
 export class AccountComponent implements OnInit {
   public message: string = '';
   public userForm: FormGroup;
+  user: User;
 
 
   constructor(private userService: UserService,
@@ -20,6 +21,22 @@ export class AccountComponent implements OnInit {
     }
 
   ngOnInit() {
+    this.getUser();
+  }
+  
+   /*
+	Gets Observable User from service
+  */
+  getUser(): void {
+    this.userService.getUser()
+      .subscribe(user => this.user = user);
+  }
+  
+    /*
+	Checks to see if User is signed in (ie instantiated user.id)
+  */
+  isLoggedIn(): boolean {
+    return this.userService.isLoggedIn();
   }
 
     /*
@@ -34,22 +51,6 @@ export class AccountComponent implements OnInit {
       birthdate: [null, Validators.required],
       gender: [null, Validators.required]
     });
-  }
-
-  /*
-	Registers user in the system. Routes to Login page
-  */
-  register() {
-    console.log('User Control Value', this.userForm.value);
-    const result: User = Object.assign({}, this.userForm.value);
-    console.log('after copy', result);
-    if (this.userService.register(result)) {
-      console.log('Successfully registered');
-      this.message = 'thanks for registering';
-      this.router.navigate(['login']);
-    } else {
-      this.message = 'error in registering';
-    }
   }
 
 }
