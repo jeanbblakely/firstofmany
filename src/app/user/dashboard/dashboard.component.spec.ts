@@ -10,7 +10,7 @@ describe('DashboardComponent', () => {
   class MockUserService {
     user: User = {
       id: "5d045ecaece2003576f60b8e",
-      username: "User",
+      username: "user",
       password: "password",
       email: "user@example.com",
       name: "Boo Berry",
@@ -62,6 +62,10 @@ describe('DashboardComponent', () => {
     getUser() {
       return of(this.user);
     }
+    
+    isLoggedIn() {
+      return true;
+    }
   }
   let component: DashboardComponent;
   let fixture: ComponentFixture<DashboardComponent>;
@@ -92,4 +96,18 @@ describe('DashboardComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  
+  it(`should have Welcome user with mock service`, () => {
+    const fixture = TestBed.createComponent(DashboardComponent);
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('h2').textContent).toContain('Welcome Boo Berry');
+  });
+  it(`should have user categories with mock service`, () => {
+    const fixture = TestBed.createComponent(DashboardComponent);
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('li').textContent).toContain('Thrills');
+  });
+  
 });

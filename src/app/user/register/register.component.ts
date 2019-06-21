@@ -5,41 +5,24 @@ import { Router } from '@angular/router';
 import { User } from './../../models/user';
 
 @Component({
-  selector: 'app-account',
-  templateUrl: './account.component.html',
-  styleUrls: ['./account.component.css']
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css']
 })
-export class AccountComponent implements OnInit {
+export class RegisterComponent implements OnInit {
   public message: string = '';
   public userForm: FormGroup;
-  user: User;
-
 
   constructor(private userService: UserService,
     private router: Router, private fb: FormBuilder) {
       this.createForm();
     }
 
-  ngOnInit() {
-    this.getUser();
-  }
-  
-   /*
-	Gets Observable User from service
-  */
-  getUser(): void {
-    this.userService.getUser()
-      .subscribe(user => this.user = user);
-  }
-  
-    /*
-	Checks to see if User is signed in (ie instantiated user.id)
-  */
-  isLoggedIn(): boolean {
-    return this.userService.isLoggedIn();
-  }
 
-    /*
+  ngOnInit() {
+  }
+  
+      /*
 	Creates userForm based on input
   */
   createForm() {
@@ -51,6 +34,22 @@ export class AccountComponent implements OnInit {
       birthdate: [null, Validators.required],
       gender: [null, Validators.required]
     });
+  }
+
+  /*
+	Registers user in the system. Routes to Login page
+  */
+  register() {
+    console.log('User Control Value', this.userForm.value);
+    const result: User = Object.assign({}, this.userForm.value);
+    console.log('after copy', result);
+    if (this.userService.register(result)) {
+      console.log('Successfully registered');
+      this.message = 'thanks for registering';
+      this.router.navigate(['login']);
+    } else {
+      this.message = 'error in registering';
+    }
   }
 
 }
