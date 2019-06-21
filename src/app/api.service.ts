@@ -19,6 +19,7 @@ export class ApiService {
         if (res['token']) {
           console.log('Token exists');
           this.router.navigate(['dashboard']);
+          console.log(loginData.username);
         }
     });
   }
