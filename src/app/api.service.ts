@@ -8,7 +8,7 @@ export class ApiService {
     private router: Router) {}
 
   sendUserRegistration(regData) {
-    this.httpClient.post('http://localhost:3000/account', regData).subscribe(res =>{
+    this.httpClient.post('http://localhost:3000/register', regData).subscribe(res =>{
         console.log(res);
     });
   }
