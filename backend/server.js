@@ -90,6 +90,7 @@ app.post('/login', async (req, res)=> {
     let payload = {};
     let token = jwt.encode(payload, '123456');
     res.status(200).send({token});
+    console.log("User ID: " + user._id + "\nUsername: " + user.username);
   }
 
 });
