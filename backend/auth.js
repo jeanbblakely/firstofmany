@@ -7,8 +7,9 @@ var User = require('./models/user.js');
 var Experience = require('./models/experience.js');
 var Category = require('./models/category.js');
 
-module.exports = {
-  register: (req, res)=> {
+var router = express.Router();
+
+router.post('/register', (req, res)=> {
     let userData = req.body;
     let user = new User(userData);
 
@@ -19,8 +20,9 @@ module.exports = {
         res.sendStatus(200);
       }
     })
-  },
-  login: async(req, res)=> {
+  });
+
+router.post('/login', async(req, res)=> {
     let userData = req.body;
     let user = await User.findOne({username:userData.username});
 
@@ -34,5 +36,6 @@ module.exports = {
       res.status(200).send({token});
       console.log("User ID: " + user._id + "\nUsername: " + user.username);
     }
-  }
-}
+  });
+
+  module.exports = router;

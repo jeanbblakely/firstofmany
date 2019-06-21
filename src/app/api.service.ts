@@ -7,14 +7,16 @@ export class ApiService {
   constructor(private httpClient: HttpClient,
     private router: Router) {}
 
+    path = 'http://localhost:3000/auth';
+
   sendUserRegistration(regData) {
-    this.httpClient.post('http://localhost:3000/register', regData).subscribe(res =>{
+    this.httpClient.post(this.path + '/register', regData).subscribe(res =>{
         console.log(res);
     });
   }
 
   loginUser(loginData) {
-    this.httpClient.post('http://localhost:3000/login', loginData).subscribe(res =>{
+    this.httpClient.post(this.path + '/login', loginData).subscribe(res =>{
         console.log(res['token']);
         if (res['token']) {
           console.log('Token exists');
