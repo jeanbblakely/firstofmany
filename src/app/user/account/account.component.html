@@ -1,11 +1,11 @@
-<p>My account
+<p>{{user.name}}'s account
 <h3>{{message}}</h3>
 <div class="form-group">
   <form [formGroup]="userForm" (ngSubmit)="register()">
     <mat-form-field class="user-name">
       <input matInput
              type="text"
-             placeholder="Username"
+             placeholder="{{user.username}}"
              required
              name="username"
              formControlName="username">
@@ -15,7 +15,7 @@
     <mat-form-field class="password">
       <input matInput
              type="password"
-             placeholder="Password"
+             placeholder="{{user.password}}"
              required
              name="password"
              formControlName="password">
@@ -25,7 +25,7 @@
     <mat-form-field class="email">
       <input matInput
              type="email"
-             placeholder="Email"
+             placeholder="{{user.email}}"
              required
              name="email"
              formControlName="email">
@@ -36,7 +36,7 @@
      <mat-form-field class="name">
       <input matInput
              type="name"
-             placeholder="Name"
+             placeholder="{{user.name}}"
              required
              name="name"
              formControlName="name">
@@ -47,7 +47,7 @@
     <mat-form-field class="birthdate">
       <input matInput
              type="birthdate"
-             placeholder="Birthdate"
+             placeholder="{{user.birthdate}}"
              required
              name="birthdate"
              formControlName="birthdate">
@@ -58,7 +58,7 @@
     <mat-form-field class="gender">
       <input matInput
              type="gender"
-             placeholder="Gender"
+             placeholder="{{user.gender}}"
              required
              name="gender"
              formControlName="gender">

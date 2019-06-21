@@ -33,6 +33,7 @@ export class UserService {
 	Gets user based on number assigned in login
   */
   getUser(): Observable<User> {
+    console.log(this.id, 'from getUser');
     return of(USERS[this.id]);
   }
   
