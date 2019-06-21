@@ -109,4 +109,11 @@ describe('AccountComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  
+  it(`should have user named account with mock service`, () => {
+    const fixture = TestBed.createComponent(AccountComponent);
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('h2').textContent).toContain("Boo Berry's Account");
+  });
 });
