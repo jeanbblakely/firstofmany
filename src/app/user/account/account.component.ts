@@ -44,7 +44,7 @@ export class AccountComponent implements OnInit {
   */
   createForm() {
     this.userForm = this.fb.group({
-      username: [null, Validators.required],
+      username: 'jblakely',
       password: [null, Validators.required],
       email: [null, Validators.required],
       name: [null, Validators.required],
