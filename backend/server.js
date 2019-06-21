@@ -5,7 +5,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var jwt = require('jwt-simple');
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 var User = require('./models/user.js');
 var Experience = require('./models/experience.js');
