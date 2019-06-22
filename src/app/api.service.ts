@@ -1,22 +1,24 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { environment } from '../environments/environment';
 
 @Injectable()
 export class ApiService {
   constructor(private httpClient: HttpClient,
     private router: Router) {}
 
-    path = 'http://localhost:3000/auth';
+    path = environment.path
+    authpath = environment.path + '/auth';
 
   sendUserRegistration(regData) {
-    this.httpClient.post(this.path + '/register', regData).subscribe(res =>{
+    this.httpClient.post(this.authpath + '/register', regData).subscribe(res =>{
         console.log(res);
     });
   }
 
   loginUser(loginData) {
-    this.httpClient.post(this.path + '/login', loginData).subscribe(res =>{
+    this.httpClient.post(this.authpath + '/login', loginData).subscribe(res =>{
         console.log(res['token']);
         if (res['token']) {
           console.log('Token exists');
