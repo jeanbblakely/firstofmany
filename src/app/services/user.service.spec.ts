@@ -28,9 +28,14 @@ describe('UserService', () => {
   });
   
   it('should be created', () => {
-    //const service: UserService = TestBed.get(UserService);
     expect(userService).toBeTruthy();
   });
+  
+  xit('#isAuthenticated should return true if there is a token', () => {
+    localStorage.setItem('token', '1234');
+    expect(userService.isAuthenticated()).toBeTruthy();
+  });
+   
   
    //it('#getUser should return observable user', 
    // (done: DoneFn) => {
