@@ -54,5 +54,20 @@ export class AccountComponent implements OnInit {
       gender: [null, Validators.required]
     });
   }
+  
+   /*
+	Updates user based on input
+  */
+  update() {
+  console.log('User Control Value', this.userForm.value);
+    if (this.userForm.valid) {
+      const result: User = Object.assign({}, this.userForm.value);
+      console.log('after copy', result);
+      //todo write update method in userservice
+      this.message = 'successfully updated';
+    } else {
+      this.message = 'your form has errors';
+    }
+  }
 
 }
