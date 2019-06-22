@@ -65,6 +65,7 @@ export class AccountComponent implements OnInit {
       console.log('after copy', result);
       //todo write update method in userservice
       this.message = 'successfully updated';
+      this.router.navigate(['dashboard']);
     } else {
       this.message = 'your form has errors';
     }

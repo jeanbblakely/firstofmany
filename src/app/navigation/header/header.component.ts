@@ -1,4 +1,6 @@
 import { Component, Output, EventEmitter } from '@angular/core';
+import { UserService } from './../../services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -7,8 +9,25 @@ import { Component, Output, EventEmitter } from '@angular/core';
 })
 export class HeaderComponent {
   @Output() public sidenavToggle = new EventEmitter();
+  
+  constructor(private userService: UserService, private router: Router) {}
 
   public onToggleSidenav = () => {
     this.sidenavToggle.emit();
+  }
+  
+  /*
+	Checks to see if User is signed in (ie instantiated user.id)
+  */
+  isLoggedIn(): boolean {
+    return this.userService.isLoggedIn();
+  }
+  
+  /*
+	Logs user out, routes to homepage
+  */
+  logout(): void {
+    this.userService.logout();
+    this.router.navigate(['home']);
   }
 }

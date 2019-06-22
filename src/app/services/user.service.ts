@@ -49,18 +49,27 @@ export class UserService {
 	Checks to see if user is logged in (ie has id)
   */
   isLoggedIn(): boolean {
-    console.log("hello from service");
-    console.log(this.id);
-    if (typeof this.id != 'undefined') {
-      console.log(true);
+    if (typeof this.id != 'undefined' && this.id != null) {
       return true;
     } else {
-      console.log(false);
-      return false;
-      
+      return false;   
     }
   }
   
+   /*
+	Logs user out; resets id for, sets token to null
+  */
+  logout(): void {
+    this.id = null;
+    localStorage.setItem('token', null);
+  }
+  
+   /*
+	Checks to see if user has token from server (ie is logged in)
+  */ 
+  isAuthenticated(): boolean {
+    return !!localStorage.getItem('token');
+  }
   
 
 

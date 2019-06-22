@@ -4,15 +4,29 @@
       <mat-icon>menu</mat-icon>
     </button>
   </div>
-
+  
   <div fxFlex fxLayout="row" fxLayoutAlign="end end" fxHide.xs>
     <ul fxLayout fxLayoutGap="15px" class="navigation-items">
+      <div *ngIf="!isLoggedIn()">
       <li>
         <a mat-button class="nav-link" routerLink="/login">Login</a>
       </li>
+      </div>
+       <div *ngIf="!isLoggedIn()">
       <li>
         <a mat-button class="nav-link" routerLink="/register">Sign Up</a>
       </li>
+      </div>
+       <div *ngIf="isLoggedIn()">
+       <li>
+        <a mat-button class="nav-link" (click)="logout()">Logout</a>
+      </li>
+      </div>
+       <div *ngIf="isLoggedIn()">
+      <li>
+        <a mat-button class="nav-link" routerLink="/account">My Account</a>
+      </li>
+      </div>
     </ul>
   </div>
   <a routerLink="/home">
