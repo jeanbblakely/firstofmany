@@ -28,7 +28,7 @@ export class RegisterComponent implements OnInit {
   createForm() {
     this.userForm = this.fb.group({
       username: [null, Validators.required],
-      password: [null, Validators.required],
+      password: [null, [Validators.required, Validators.minLength(8)]],
       email: [null, Validators.required],
       name: [null, Validators.required],
       birthdate: [null, Validators.required],
@@ -41,15 +41,20 @@ export class RegisterComponent implements OnInit {
   */
   register() {
     console.log('User Control Value', this.userForm.value);
-    const result: User = Object.assign({}, this.userForm.value);
-    console.log('after copy', result);
-    if (this.userService.register(result)) {
-      console.log('Successfully registered');
-      this.message = 'thanks for registering';
-      this.router.navigate(['login']);
+    if (this.userForm.valid) {
+      const result: User = Object.assign({}, this.userForm.value);
+      console.log('after copy', result);
+      if (this.userService.register(result)) {
+        console.log('Successfully registered');
+        this.message = 'thanks for registering';
+        this.router.navigate(['login']);
+      } else {
+        this.message = 'error in registering';
+      }
     } else {
-      this.message = 'error in registering';
+      this.message = 'your form has errors';
     }
+    
   }
 
 }

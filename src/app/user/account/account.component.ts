@@ -17,11 +17,13 @@ export class AccountComponent implements OnInit {
 
   constructor(private userService: UserService,
     private router: Router, private fb: FormBuilder) {
-      this.createForm();
+      //this.createForm();
+      
     }
 
   ngOnInit() {
     this.getUser();
+    this.userForm = this.fb.group(this.user);
   }
   
    /*
@@ -44,13 +46,28 @@ export class AccountComponent implements OnInit {
   */
   createForm() {
     this.userForm = this.fb.group({
-      username: [null, Validators.required],
+      username: 'jblakely',
       password: [null, Validators.required],
       email: [null, Validators.required],
       name: [null, Validators.required],
       birthdate: [null, Validators.required],
       gender: [null, Validators.required]
     });
+  }
+  
+   /*
+	Updates user based on input
+  */
+  update() {
+  console.log('User Control Value', this.userForm.value);
+    if (this.userForm.valid) {
+      const result: User = Object.assign({}, this.userForm.value);
+      console.log('after copy', result);
+      //todo write update method in userservice
+      this.message = 'successfully updated';
+    } else {
+      this.message = 'your form has errors';
+    }
   }
 
 }

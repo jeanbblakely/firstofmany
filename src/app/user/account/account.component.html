@@ -1,11 +1,11 @@
-<p>My account
+<h2>{{user.name}}'s Account</h2>
 <h3>{{message}}</h3>
 <div class="form-group">
-  <form [formGroup]="userForm" (ngSubmit)="register()">
+  <form [formGroup]="userForm" (ngSubmit)="update()">
     <mat-form-field class="user-name">
       <input matInput
              type="text"
-             placeholder="Username"
+             placeholder="{{user.username}}"
              required
              name="username"
              formControlName="username">
@@ -15,20 +15,28 @@
     <mat-form-field class="password">
       <input matInput
              type="password"
-             placeholder="Password"
+             placeholder="{{user.password}}"
              required
              name="password"
              formControlName="password">
+       <div class="alert" *ngIf="userForm.get('password').invalid &&
+        (userForm.get('password').dirty || userForm.get('password').touched )">
+        Password is required & must be 8+ characters
+      </div>
     </mat-form-field>
 
     <br/>
     <mat-form-field class="email">
       <input matInput
              type="email"
-             placeholder="Email"
+             placeholder="{{user.email}}"
              required
              name="email"
              formControlName="email">
+       <div class="alert" *ngIf="userForm.get('email').invalid &&
+          (userForm.get('email').dirty || userForm.get('email').touched )">
+          Email is required
+      </div>
     </mat-form-field>
 
     <br/>
@@ -36,10 +44,14 @@
      <mat-form-field class="name">
       <input matInput
              type="name"
-             placeholder="Name"
+             placeholder="{{user.name}}"
              required
              name="name"
              formControlName="name">
+       <div class="alert" *ngIf="userForm.get('name').invalid &&
+          (userForm.get('name').dirty || userForm.get('name').touched )">
+          Name is required
+      </div>
     </mat-form-field>
 
     <br/>
@@ -47,10 +59,14 @@
     <mat-form-field class="birthdate">
       <input matInput
              type="birthdate"
-             placeholder="Birthdate"
+             placeholder="{{user.birthdate}}"
              required
              name="birthdate"
              formControlName="birthdate">
+        <div class="alert" *ngIf="userForm.get('birthdate').invalid &&
+          (userForm.get('birthdate').dirty || userForm.get('birthdate').touched )">
+          Birthdate is required
+      </div>
     </mat-form-field>
 
     <br/>
@@ -58,14 +74,18 @@
     <mat-form-field class="gender">
       <input matInput
              type="gender"
-             placeholder="Gender"
+             placeholder="{{user.gender}}"
              required
              name="gender"
              formControlName="gender">
+       <div class="alert" *ngIf="userForm.get('gender').invalid &&
+          (userForm.get('gender').dirty || userForm.get('gender').touched )">
+          Gender is required
+      </div>
     </mat-form-field>
 
     <br/>
-    <button mat-fab type="submit">Register</button>
+    <button mat-fab type="submit">Update</button>
   </form>
 
 </div>
