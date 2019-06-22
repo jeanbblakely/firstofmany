@@ -12,9 +12,9 @@ export class UserService {
   id: any;
 
   constructor(private apiService: ApiService) { }
-  
+
   /*
-	Searches users for username/password match.  Returns true and assigns user number if match found, false otherwise.  
+	Searches users for username/password match.  Returns true and assigns user number if match found, false otherwise.
   */
   login(username: string, password: string): boolean {
     var loginData = { username, password } 
@@ -24,11 +24,11 @@ export class UserService {
       if (USERS[i].username == username && USERS[i].password == password) {
         this.id = i;
         return true;
-      } 
+      }
    }
    return false;
   }
-  
+
   /*
 	Gets user based on number assigned in login
   */
@@ -36,7 +36,7 @@ export class UserService {
     console.log(this.id, 'from getUser');
     return of(USERS[this.id]);
   }
-  
+
   /*
 	Registers a new user in db
   */
