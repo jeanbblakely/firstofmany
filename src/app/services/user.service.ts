@@ -51,16 +51,21 @@ export class UserService {
   isLoggedIn(): boolean {
     console.log("hello from service");
     console.log(this.id);
-    if (typeof this.id != 'undefined') {
+    if (typeof this.id != 'undefined' && this.id != null) {
       console.log(true);
       return true;
     } else {
       console.log(false);
-      return false;
-      
+      return false;   
     }
   }
   
+   /*
+	Logs user out; resets id
+  */
+  logout(): void {
+    this.id = null;
+  }
   
 
 
