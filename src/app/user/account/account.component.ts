@@ -17,11 +17,13 @@ export class AccountComponent implements OnInit {
 
   constructor(private userService: UserService,
     private router: Router, private fb: FormBuilder) {
-      this.createForm();
+      //this.createForm();
+      
     }
 
   ngOnInit() {
     this.getUser();
+    this.userForm = this.fb.group(this.user);
   }
   
    /*
