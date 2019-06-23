@@ -4,7 +4,8 @@
   "description": "This is the backend of the first of many app",
   "main": "index.js",
   "scripts": {
-    "test": "npm test"
+    "test": "npm test",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -19,6 +20,7 @@
     "express": "^4.17.1",
     "jwt-simple": "^0.5.6",
     "mongoose": "^5.6.0",
-    "nodemon": "^1.19.1"
+    "nodemon": "^1.19.1",
+    "npm": "^6.9.0"
   }
 }
