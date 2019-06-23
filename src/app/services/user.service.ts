@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { User } from '../models/user';
 import { USERS } from '../mock-users';
-import { ApiService } from '../api.service';
+import { HttpClient } from '@angular/common/http';
+import { environment } from './../../environments/environment';
 
 
 @Injectable({
@@ -10,15 +11,17 @@ import { ApiService } from '../api.service';
 })
 export class UserService {
   id: any;
+  path = environment.path
+  authpath = environment.path + '/auth';
 
-  constructor(private apiService: ApiService) { }
+  constructor(private httpClient: HttpClient) { }
 
   /*
 	Searches users for username/password match.  Returns true and assigns user number if match found, false otherwise.
   */
   login(username: string, password: string): boolean {
     var loginData = { username, password } 
-    this.apiService.loginUser(loginData);
+    this.loginUser(loginData);
     var i;
     for (i = 0; i < USERS.length; i++) {
       if (USERS[i].username == username && USERS[i].password == password) {
@@ -27,6 +30,22 @@ export class UserService {
       }
    }
    return false;
+  }
+  
+  sendUserRegistration(regData) {
+    this.httpClient.post(this.authpath + '/register', regData).subscribe(res =>{
+        console.log(res);
+    });
+  }
+
+  loginUser(loginData) {
+    this.httpClient.post(this.authpath + '/login', loginData).subscribe(res =>{
+        console.log(res['token']);
+        if (res['token']) {
+          console.log('Token exists');
+          console.log(loginData.username);
+        }
+    });
   }
 
   /*
@@ -41,7 +60,7 @@ export class UserService {
 	Registers a new user in db
   */
   register(user: User): boolean {
-    this.apiService.sendUserRegistration(user);
+    this.sendUserRegistration(user);
     return true;
   }
   

@@ -7,7 +7,6 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ApiService } from './api.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { MaterialModule } from './material/material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -15,7 +14,6 @@ import { MatSidenavModule } from '@angular/material';
 import { UserService } from './services/user.service';
 
 describe('AppComponent', () => {
-  let apiServiceSpy: jasmine.SpyObj<ApiService>;
   
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -33,10 +31,7 @@ describe('AppComponent', () => {
         FlexLayoutModule,
         HttpClientTestingModule
       ],
-      providers: [ 
-      ApiService,
-        { provide: ApiService, apiServiceSpy }
-      ],
+
     }).compileComponents();
   }));
 
