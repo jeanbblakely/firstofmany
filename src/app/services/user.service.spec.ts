@@ -1,5 +1,4 @@
-import { TestBed } from '@angular/core/testing';
-import { ApiService } from './../api.service';
+import { TestBed, inject } from '@angular/core/testing';
 import { Observable, of, throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
@@ -10,31 +9,32 @@ describe('UserService', () => {
   let httpClient: HttpClient;
   let httpTestingController: HttpTestingController;
   let userService: UserService;
-  let apiServiceSpy: jasmine.SpyObj<UserService>;
   
   beforeEach(() => { 
     const spy = jasmine.createSpyObj('UserService', ['getValue']);
     TestBed.configureTestingModule({
-      //imports: [ HttpClientTestingModule ]
-      providers: [
-        UserService,
-        { provide: UserService, useValue: spy }
-      ]
+      imports: [ HttpClientTestingModule ],
+      providers: [UserService]
   });
-    //httpClient = TestBed.get(HttpClient);
-    //httpTestingController = TestBed.get(HttpTestingController);
+    httpClient = TestBed.get(HttpClient);
+    httpTestingController = TestBed.get(HttpTestingController);
     userService = TestBed.get(UserService);
-    apiServiceSpy = TestBed.get(UserService);
   });
   
-  it('should be created', () => {
-    expect(userService).toBeTruthy();
+  it('should be created', inject([UserService], (service: UserService) => {
+    expect(service).toBeTruthy();
+  }));
+  
+    it('#isAuthenticated should return false if there is not a token', () => {
+    expect(userService.isAuthenticated()).toBeFalsy();
   });
   
-  xit('#isAuthenticated should return true if there is a token', () => {
+  it('#isAuthenticated should return true if there is a token', () => {
     localStorage.setItem('token', '1234');
     expect(userService.isAuthenticated()).toBeTruthy();
   });
+  
+
    
   
    //it('#getUser should return observable user', 
@@ -45,8 +45,17 @@ describe('UserService', () => {
     //  });     
    //});
    
-    //it('should return true for successful user login', () => {
+  it('should return true for successful mockuser login', () => {
     //const service: UserService = TestBed.get(UserService);
-    //expect(service.login("user", "password")).toEqual(true);
-  //});
+    expect(userService.login("user", "password")).toEqual(true);
+    expect(userService.login("jblakely", "blackcat")).toEqual(true);
+    expect(userService.login("fancycat", "pickle")).toEqual(true);
+  });
+  
+  it('should return false for unsuccessful mockuser login', () => {
+    //const service: UserService = TestBed.get(UserService);
+    expect(userService.login("user", "password1")).toEqual(false);
+    expect(userService.login("jblakely", "blackcat1")).toEqual(false);
+    expect(userService.login("fancycat", "pickle1")).toEqual(false);
+  });
 });
