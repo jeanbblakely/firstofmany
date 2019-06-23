@@ -21,12 +21,6 @@ var posts = [
 
 app.use(cors());
 app.use(bodyParser.json());
-//app.use(express.static(__dirname + '/dist/firstofmany'));
-
-//app.get('*', function(req,res) {
-  // Replace the '/dist/<to_your_project_name>/index.html'
-//  res.sendFile(path.join(__dirname + '/dist/firstofmany/index.html'));
-//});
 
 app.all('/', function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
