@@ -1,0 +1,16 @@
+.sidenav {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.spacer {
+  flex: 1 1 auto;
+}
+
+footer {
+  text-align: center;
+}
+
+.active-link {
+  background-color: #fdd835;
+}
