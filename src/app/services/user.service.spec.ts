@@ -75,4 +75,41 @@ describe('UserService', () => {
     expect(userService.isLoggedIn()).toBeFalsy();
   });
   
+  it('#getUser should return defined for logged in mockuser', () => {
+    userService.login("user", "password");
+    expect(userService.getUser()).toBeTruthy();
+  });
+  
+  
+  xit('#register returned observable should match the right data', () => {
+    const mockUser = {
+      id: "5d045ecaece2003576f60b8e",
+      username: "user",
+      password: "password",
+      email: "user@example.com",
+      name: "Boo Berry",
+      birthdate: "1/1/1990",
+      gender: "female",
+      tracked_info: []
+      };
+    userService.sendUserRegistration({ id: "5d045ecaece2003576f60b8e",
+      username: 'user',
+      password: "password",
+      email: "user@example.com",
+      name: "Boo Berry",
+      birthdate: "1/1/1990",
+      gender: "female",
+      tracked_info: [] })
+      .subscribe(regData => {
+        expect(regData.name).toEqual('Boo Berry');
+      });
+
+    const req = httpTestingController.expectOne('/register');
+
+    expect(req.request.method).toEqual('POST');
+
+    req.flush(mockUser);
+    });
+  
 });
+
