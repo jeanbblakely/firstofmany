@@ -5,26 +5,26 @@
     </button>
   </div>
   
-  <div fxFlex fxLayout="row" fxLayoutAlign="end end" fxHide.xs>
+  <div fxFlex fxLayout="row" fxLayoutAlign="end end" fxHide.xs class="nav-links">
     <ul fxLayout fxLayoutGap="15px" class="navigation-items">
       <div *ngIf="!isLoggedIn()">
       <li>
-        <a mat-button class="nav-link" routerLink="/login">Login</a>
+        <a mat-raised-button color="accent" class="nav-link" routerLink="/login">Login</a>
       </li>
       </div>
        <div *ngIf="!isLoggedIn()">
       <li>
-        <a mat-button class="nav-link" routerLink="/register">Sign Up</a>
+        <a mat-raised-button color="accent" class="nav-link" routerLink="/register">Sign Up</a>
       </li>
       </div>
        <div *ngIf="isLoggedIn()">
        <li>
-        <a mat-button class="nav-link" (click)="logout()">Logout</a>
+        <a mat-raised-button color="accent" class="nav-link" (click)="logout()">Logout</a>
       </li>
       </div>
        <div *ngIf="isLoggedIn()">
       <li>
-        <a mat-button class="nav-link" routerLink="/account">My Account</a>
+        <a mat-raised-button color="accent" class="nav-link" routerLink="/account">My Account</a>
       </li>
       </div>
     </ul>

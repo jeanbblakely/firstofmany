@@ -4,11 +4,12 @@
   width: 300px;
 }
 
-form {
+.container {
   text-align: center;
+  width: 100%;
 }
 
 .logo {
-  max-width: 250px;
-  width: 30%;
+  max-width: 200px;
+  width: 20%;
 }
