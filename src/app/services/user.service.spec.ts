@@ -34,9 +34,6 @@ describe('UserService', () => {
     expect(userService.isAuthenticated()).toBeTruthy();
   });
   
-
-   
-  
    //it('#getUser should return observable user', 
    // (done: DoneFn) => {
     //  userService.getUser().subscribe(user => {
@@ -45,17 +42,37 @@ describe('UserService', () => {
     //  });     
    //});
    
-  it('should return true for successful mockuser login', () => {
+  it('#login should return true for successful mockuser login', () => {
     //const service: UserService = TestBed.get(UserService);
     expect(userService.login("user", "password")).toEqual(true);
     expect(userService.login("jblakely", "blackcat")).toEqual(true);
     expect(userService.login("fancycat", "pickle")).toEqual(true);
   });
   
-  it('should return false for unsuccessful mockuser login', () => {
+  it('#login should return false for unsuccessful mockuser login', () => {
     //const service: UserService = TestBed.get(UserService);
     expect(userService.login("user", "password1")).toEqual(false);
     expect(userService.login("jblakely", "blackcat1")).toEqual(false);
     expect(userService.login("fancycat", "pickle1")).toEqual(false);
   });
+  
+   it('#isLoggedIn should return true if there is a token and user id', () => {
+    localStorage.setItem('token', '1234');
+    userService.login("user", "password");
+    expect(userService.isLoggedIn()).toBeTruthy();
+  });
+  
+  it('#isLoggedIn should return false if there is not a token and user id', () => {
+    localStorage.setItem('token', null);
+    expect(userService.isLoggedIn()).toBeFalsy();
+  });
+  
+  it('#logout should reset token and user id', () => {
+    localStorage.setItem('token', '1234');
+    userService.login("user", "password");
+    expect(userService.isLoggedIn()).toBeTruthy();
+    userService.logout();
+    expect(userService.isLoggedIn()).toBeFalsy();
+  });
+  
 });

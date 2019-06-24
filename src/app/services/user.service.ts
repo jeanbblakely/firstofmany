@@ -32,12 +32,18 @@ export class UserService {
    return false;
   }
   
+  /*
+	Database call for registration
+  */
   sendUserRegistration(regData) {
     this.httpClient.post(this.authpath + '/register', regData).subscribe(res =>{
         console.log(res);
     });
   }
 
+  /*
+	Database call for login
+  */
   loginUser(loginData) {
     this.httpClient.post(this.authpath + '/login', loginData).subscribe(res =>{
         console.log(res['token']);
@@ -57,7 +63,7 @@ export class UserService {
   }
 
   /*
-	Registers a new user in db
+	Registers a new user
   */
   register(user: User): boolean {
     this.sendUserRegistration(user);
@@ -76,7 +82,7 @@ export class UserService {
   }
   
    /*
-	Logs user out; resets id for, sets token to null
+	Logs user out; resets, sets token to null
   */
   logout(): void {
     this.id = null;
