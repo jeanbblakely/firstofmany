@@ -10,3 +10,7 @@
 footer {
   text-align: center;
 }
+
+.active-link {
+  background-color: #fdd835;
+}

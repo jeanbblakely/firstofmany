@@ -1,5 +1,6 @@
 mat-toolbar {
   height: 230px;
+  padding: 0;
 }
 
 .logo-area {
@@ -28,11 +29,12 @@ mat-toolbar {
 }
 
 @media only screen and (max-width: 600px) {
+  mat-toolbar {
+    height: 100px;
+  }
   .logo-area {
-    width: 350px;
-    background-image: url("/assets/logo/logo_semi_circle_border.svg");
-    background-size: 100%;
-    background-position: center bottom;
+    max-height: 100px;
+    background-size: contain;
   }
 
   .nav-link {
