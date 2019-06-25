@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ApiService } from './api.service';
 import { UserService } from './services/user.service';
 
 @Component({
@@ -11,16 +10,10 @@ import { UserService } from './services/user.service';
 export class AppComponent {
   title = 'the First of Many';
 
-  constructor(private apiService: ApiService, private userService: UserService) {}
+  constructor(private userService: UserService) {}
 
   ngOnInit() {
     
   }
-  
-     /*
-	Checks to see if User is signed in (ie instantiated user.id)
-  */
-  isLoggedIn(): boolean {
-    return this.userService.isLoggedIn();
-  }
+
 }

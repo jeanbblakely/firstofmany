@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { ApiService } from './../../api.service';
 import { UserService } from '../../services/user.service';
 import { Observable, of, throwError } from 'rxjs';
 import { User } from '../../models/user';
@@ -70,7 +69,6 @@ describe('DashboardComponent', () => {
   let component: DashboardComponent;
   let fixture: ComponentFixture<DashboardComponent>;
   let userService: UserService;
-  let apiServiceSpy: jasmine.SpyObj<UserService>;
   let user: User;
   let mockUserService: MockUserService;
 

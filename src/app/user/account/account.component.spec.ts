@@ -1,7 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
-import { ApiService } from './../../api.service';
 import { AccountComponent } from './account.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './../../material/material.module';
@@ -78,7 +77,6 @@ describe('AccountComponent', () => {
   let component: AccountComponent;
   let fixture: ComponentFixture<AccountComponent>;
   let userService: UserService;
-  let apiServiceSpy: jasmine.SpyObj<UserService>;
   let mockUserService: MockUserService;
 
   beforeEach(async(() => {

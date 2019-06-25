@@ -6,7 +6,6 @@ import { Location } from '@angular/common';
 import { MaterialModule } from './../../material/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ApiService } from './../../api.service';
 import { UserService } from '../../services/user.service';
 import { Observable, of, throwError } from 'rxjs';
 import { User } from '../../models/user';

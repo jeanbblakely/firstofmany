@@ -110,10 +110,10 @@ describe('HeaderComponent', () => {
   }));
 
   beforeEach(() => {
-    router = TestBed.get(Router);
+    //router = TestBed.get(Router);
     location = TestBed.get(Location);
     fixture = TestBed.createComponent(HeaderComponent);
-    router.initialNavigation;
+    //router.initialNavigation;
     component = fixture.componentInstance;
     fixture.detectChanges();
     //const routerSpy = fixture.debugElement.injector.get(Router);
