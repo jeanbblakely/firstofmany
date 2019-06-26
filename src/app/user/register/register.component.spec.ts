@@ -137,18 +137,42 @@ describe('RegisterComponent', () => {
     expect(errors['required']).toBeTruthy();
   });
   
-  it('password field validity', () => {
+  it('password field required validity', () => {
     let errors = {};
     let password = component.userForm.controls['password'];
     errors = password.errors || {};
     expect(errors['required']).toBeTruthy();
   });
   
-  it('email field validity', () => {
+  it('password field length validity error', () => {
+    let errors = {};
+    component.userForm.controls['password'].setValue('abc');
+    let password = component.userForm.controls['password'];
+    errors = password.errors || {};
+    expect(errors['minlength']).toBeTruthy();
+  });
+  
+  it('password field length validity no error', () => {
+    let errors = {};
+    component.userForm.controls['password'].setValue('abcdefgh');
+    let password = component.userForm.controls['password'];
+    errors = password.errors || {};
+    expect(errors['minlength']).toBeFalsy();
+  });
+  
+  it('email field required validity', () => {
     let errors = {};
     let email = component.userForm.controls['email'];
     errors = email.errors || {};
     expect(errors['required']).toBeTruthy();
+  });
+  
+  it('email field email validity', () => {
+    let errors = {};
+    component.userForm.controls['email'].setValue('jblakely#gmail.com');
+    let email = component.userForm.controls['email'];
+    errors = email.errors || {};
+    expect(errors['email']).toBeTruthy();
   });
   
   it('name field validity', () => {
