@@ -21,6 +21,8 @@ export class UserService {
 	Searches users for username/password match.  Returns true and assigns user number if match found, false otherwise.
   */
   login(username: string, password: string): boolean {
+    console.log(username);
+    console.log(password);
     var loginData = { username, password } 
     this.loginUser(loginData);
     var i;
