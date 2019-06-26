@@ -19,7 +19,7 @@ describe('AccountComponent', () => {
       password: "password",
       email: "user@example.com",
       name: "Boo Berry",
-      birthdate: "1/1/1990",
+      birthdate: "1990-01-01",
       gender: "Female",
       tracked_info: [
         { 

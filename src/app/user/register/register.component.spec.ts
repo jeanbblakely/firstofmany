@@ -19,8 +19,8 @@ describe('RegisterComponent', () => {
       password: "password",
       email: "user@example.com",
       name: "Boo Berry",
-      birthdate: "1/1/1990",
-      gender: "female",
+      birthdate: "1990-01-01",
+      gender: "Female",
       tracked_info: [
         { 
         name: "Thrills",
@@ -158,8 +158,9 @@ describe('RegisterComponent', () => {
     expect(errors['required']).toBeTruthy();
   });
   
-  xit('birthdate field validity', () => {
+  it('birthdate field validity', () => {
     let errors = {};
+    component.userForm.controls['birthdate'].setValue('');
     let birthdate = component.userForm.controls['birthdate'];
     errors = birthdate.errors || {};
     expect(errors['required']).toBeTruthy();

@@ -12,6 +12,9 @@ import { User } from './../../models/user';
 export class AccountComponent implements OnInit {
   public message: string = '';
   public userForm: FormGroup;
+  genders = ['--', 'Female', 'Male', 'Non-binary/third gender', 'Prefer not to say'];
+  minDate = new Date(1900,0,1);
+  maxDate = new Date(Date.now() + 24 * 60 * 60 * 1000);
   user: User;
 
 
@@ -63,7 +66,6 @@ export class AccountComponent implements OnInit {
 	Updates user based on input
   */
   update() {
-  console.log('User Control Value', this.userForm.value);
     if (this.userForm.valid) {
       const result: User = Object.assign({}, this.userForm.value);
       console.log('after copy', result);
