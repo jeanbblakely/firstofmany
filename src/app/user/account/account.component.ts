@@ -34,6 +34,10 @@ export class AccountComponent implements OnInit {
       .subscribe(user => this.user = user);
   }
   
+  hasError = (controlName: string, errorName: string) => {
+    return this.userForm.controls[controlName].hasError(errorName);
+  }
+  
     /*
 	Checks to see if User is signed in (ie instantiated user.id)
   */

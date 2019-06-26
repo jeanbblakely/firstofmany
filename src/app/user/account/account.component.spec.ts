@@ -20,7 +20,7 @@ describe('AccountComponent', () => {
       email: "user@example.com",
       name: "Boo Berry",
       birthdate: "1/1/1990",
-      gender: "female",
+      gender: "Female",
       tracked_info: [
         { 
         name: "Thrills",
@@ -116,6 +116,7 @@ describe('AccountComponent', () => {
   });
   
   it('form should be valid when submitted with prefilled user info', () => {
+    console.log(component.userForm, 'userform in prefil');
     expect(component.userForm.valid).toBeTruthy();
   });
   

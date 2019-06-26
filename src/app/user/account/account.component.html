@@ -1,94 +1,62 @@
-<h2>{{user.name}}'s Account</h2>
-<h3>{{message}}</h3>
-<div class="form-group">
-  <form [formGroup]="userForm" (ngSubmit)="update()">
-    <mat-form-field class="user-name">
-      <input matInput
-             type="text"
-             placeholder="{{user.username}}"
-             required
-             name="username"
-             formControlName="username">
-    </mat-form-field>
-    <br/>
+<section>
+  <mat-card> 
+    <mat-card-header>
+        <mat-card-title><h2>{{user.name}}'s Account</h2></mat-card-title>
+    </mat-card-header>
+    <form [formGroup]="userForm" (ngSubmit)="update()" autocomplete="off" novalidate>
+      <mat-card-content>
+        <mat-form-field>
+          <input matInput type="text" placeholder="Username" id="username" formControlName="username" required>
+          <mat-error *ngIf="hasError('username', 'required')">Please enter your desired username</mat-error>
+        </mat-form-field>
 
-    <mat-form-field class="password">
-      <input matInput
-             type="password"
-             placeholder="{{user.password}}"
-             required
-             name="password"
-             formControlName="password">
-       <div class="alert" *ngIf="userForm.get('password').invalid &&
-        (userForm.get('password').dirty || userForm.get('password').touched )">
-        Password is required & must be 8+ characters
-      </div>
-    </mat-form-field>
+        <mat-form-field>
+          <input matInput type="password" placeholder="Password" id="password" formControlName="password" required minlength="8">
+          <mat-hint align="end">Must be 8+ characters</mat-hint>
+          <mat-error *ngIf="hasError('password', 'required')">Please enter your password</mat-error>
+          <mat-error *ngIf="hasError('password', 'minlength')">Password must be at least 8 characters</mat-error>
+        </mat-form-field>
 
-    <br/>
-    <mat-form-field class="email">
-      <input matInput
-             type="email"
-             placeholder="{{user.email}}"
-             required
-             name="email"
-             formControlName="email">
-       <div class="alert" *ngIf="userForm.get('email').invalid &&
-          (userForm.get('email').dirty || userForm.get('email').touched )">
-          Email is required
-      </div>
-    </mat-form-field>
+        <mat-form-field>
+          <input matInput type="text" placeholder="Name" id="name" formControlName="name" required>
+          <mat-error *ngIf="hasError('name', 'required')">Please enter your name</mat-error>
+        </mat-form-field>
 
-    <br/>
+        <mat-form-field>
+          <input matInput type="email" placeholder="Email" id="email" formControlName="email" required>
+          <mat-error *ngIf="hasError('email', 'email')">Please enter a valid email address</mat-error>
+          <mat-error *ngIf="hasError('email', 'required')">Please enter your email address</mat-error>
+        </mat-form-field>
+        <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px" fxLayout.xs="column">
+          <mat-form-field>
+            <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" placeholder="{{user.birthdate}}" id="birthdate" formControlName="birthdate" required>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="hasError('birthdate', 'required')">Please enter your birthdate</mat-error>
+          </mat-form-field>
 
-     <mat-form-field class="name">
-      <input matInput
-             type="name"
-             placeholder="{{user.name}}"
-             required
-             name="name"
-             formControlName="name">
-       <div class="alert" *ngIf="userForm.get('name').invalid &&
-          (userForm.get('name').dirty || userForm.get('name').touched )">
-          Name is required
-      </div>
-    </mat-form-field>
+          <mat-form-field>
+            <mat-label>Gender</mat-label>
+            <mat-select name="genderSelect"  formControlName="gender" required>
+              <mat-option *ngFor="let gender of genders" [value]='gender'>{{ gender }}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="hasError('gender', 'required')">You must make a selection</mat-error>
+            <mat-error *ngIf="hasError('gender', 'pattern')">That's not a valid selection</mat-error>
+          </mat-form-field>
+        </div>
+      </mat-card-content>
 
-    <br/>
+      <mat-card-actions>
+        <button mat-fab type="submit" [disabled]="!userForm.valid">Update</button>
+      </mat-card-actions>
 
-    <mat-form-field class="birthdate">
-      <input matInput
-             type="birthdate"
-             placeholder="{{user.birthdate}}"
-             required
-             name="birthdate"
-             formControlName="birthdate">
-        <div class="alert" *ngIf="userForm.get('birthdate').invalid &&
-          (userForm.get('birthdate').dirty || userForm.get('birthdate').touched )">
-          Birthdate is required
-      </div>
-    </mat-form-field>
+    </form>
 
-    <br/>
+    <mat-card-footer>
+      <h3>{{message}}</h3>
+    </mat-card-footer>
+  </mat-card>
 
-    <mat-form-field class="gender">
-      <input matInput
-             type="gender"
-             placeholder="{{user.gender}}"
-             required
-             name="gender"
-             formControlName="gender">
-       <div class="alert" *ngIf="userForm.get('gender').invalid &&
-          (userForm.get('gender').dirty || userForm.get('gender').touched )">
-          Gender is required
-      </div>
-    </mat-form-field>
-
-    <br/>
-    <button mat-fab type="submit">Update</button>
-  </form>
-
-</div>
-
-<p>Form Control values: {{ userForm.value | json }}</p>
-<p>Form Control status: {{ userForm.status | json }}</p>
+  <p>Form Control values: {{ userForm.value | json }}</p>
+  <p>Form Control status: {{ userForm.status | json }}</p>
+</section>
