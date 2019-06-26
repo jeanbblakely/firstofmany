@@ -9,7 +9,7 @@ export const USERS: User[] = [
       email: "user@example.com",
       name: "Boo Berry",
       birthdate: "1/1/1990",
-      gender: "female",
+      gender: "Female",
       tracked_info: [
         { 
         name: "Thrills",
@@ -61,7 +61,7 @@ export const USERS: User[] = [
       email: "jeanbblakely@gmail.com",
       name: "Jeannie Blakely",
       birthdate: "4/28/1969",
-      gender: "female",
+      gender: "Female",
       tracked_info: [
         { 
         name: "Concerts",
@@ -113,7 +113,7 @@ export const USERS: User[] = [
       email: "daphne@gmail.com",
       name: "Daphne Cat",
       birthdate: "4/29/2015",
-      gender: "female",
+      gender: "Female",
       tracked_info: [
         { 
         name: "Cat Treats",
