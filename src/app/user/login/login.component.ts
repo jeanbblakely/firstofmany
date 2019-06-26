@@ -25,14 +25,20 @@ export class LoginComponent {
 	Tries to log user in and displays message.  If user successfully logs in, routes to user dashboard.
   */
   login() {
-    console.log(this.loginData.get('username').value);
-    console.log(this.loginData.get('password').value);
-    if (this.userService.login(this.loginData.get('username').value, this.loginData.get('password').value)) {
-      this.message = 'logged in';
-      this.router.navigate(['dashboard']);
+    if (this.loginData.valid) {
+      console.log(this.loginData.get('username').value);
+      console.log(this.loginData.get('password').value);
+      if (this.userService.login(this.loginData.get('username').value, this.loginData.get('password').value)) {
+        this.message = 'logged in';
+        this.router.navigate(['dashboard']);
+      } else {
+        this.message = 'not logged in';
+      }
     } else {
-      this.message = 'not logged in';
+      this.message = 'the form has errors';
+      
     }
+    
   }
   
   public hasError = (controlName: string, errorName: string) => {

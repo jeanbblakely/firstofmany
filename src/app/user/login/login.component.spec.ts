@@ -147,4 +147,34 @@ describe('LoginComponent', () => {
     component.login();
     //expect(this.location.path()).toBe("/dashboard");
   });
+  
+  it('username field validity', () => {
+    let errors = {};
+    let username = component.loginData.controls['username'];
+    errors = username.errors || {};
+    expect(errors['required']).toBeTruthy();
+  });
+  
+  it('password field required validity', () => {
+    let errors = {};
+    let password = component.loginData.controls['password'];
+    errors = password.errors || {};
+    expect(errors['required']).toBeTruthy();
+  });
+  
+  it('password field length validity error', () => {
+    let errors = {};
+    component.loginData.controls['password'].setValue('abc');
+    let password = component.loginData.controls['password'];
+    errors = password.errors || {};
+    expect(errors['minlength']).toBeTruthy();
+  });
+  
+  it('password field length validity no error', () => {
+    let errors = {};
+    component.loginData.controls['password'].setValue('abcdefgh');
+    let password = component.loginData.controls['password'];
+    errors = password.errors || {};
+    expect(errors['minlength']).toBeFalsy();
+  });
 });
