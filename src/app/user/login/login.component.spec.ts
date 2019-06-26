@@ -6,6 +6,7 @@ import { Location } from '@angular/common';
 import { MaterialModule } from './../../material/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { Observable, of, throwError } from 'rxjs';
 import { User } from '../../models/user';
@@ -97,6 +98,7 @@ describe('LoginComponent', () => {
         FormsModule, 
         RouterTestingModule,
         BrowserAnimationsModule,
+        ReactiveFormsModule,
         MaterialModule
       ],
       providers: [ 
@@ -126,22 +128,22 @@ describe('LoginComponent', () => {
   });
   
   it('should show message on successful login with mock UserService', () => {
-    component.username = 'user';
-    component.password = 'password';
+    component.loginData.controls['username'].setValue('user');
+    component.loginData.controls['password'].setValue('password');
     component.login();
     expect(component.message).toEqual('logged in');
   });
   
   it('should show message on unsuccessful login with mock UserService', () => {
-    component.username = 'jblakely';
-    component.password = 'password';
+    component.loginData.controls['username'].setValue('jblakey');
+    component.loginData.controls['password'].setValue('blackcat');
     component.login();
     expect(component.message).toEqual('not logged in');
   });
   
   it('should navigate to dashboard on successful login with mock UserService', () => {
-    component.username = 'user';
-    component.password = 'password';
+    component.loginData.controls['username'].setValue('user');
+    component.loginData.controls['password'].setValue('password');
     component.login();
     //expect(this.location.path()).toBe("/dashboard");
   });
