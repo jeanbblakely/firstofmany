@@ -19,6 +19,7 @@ import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.com
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { RegisterComponent } from './user/register/register.component';
 import { MatFormFieldModule, MatInputModule } from '@angular/material';
+import { FooterComponent } from './navigation/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { MatFormFieldModule, MatInputModule } from '@angular/material';
     LayoutComponent,
     HeaderComponent,
     SidenavListComponent,
-    RegisterComponent
+    RegisterComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

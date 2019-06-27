@@ -9,6 +9,7 @@
 
 footer {
   text-align: center;
+  background-color: var(--p-light, #8bf6ff);
 }
 
 .active-link {
