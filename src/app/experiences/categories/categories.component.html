@@ -1,3 +1,9 @@
-<p>
-  categories works!
-</p>
+<p class="mat-display-1">Categories</p>
+
+<div class="categories" fxLayout="row wrap" fxflexfill fxLayoutGap="3%" >
+  <mat-card *ngFor="let c of mockCategories" fxFlex="30" fxFlex.xs="45" [ngStyle]="{'background-color': c.color}">
+    <mat-card-content fxflexfill >
+      <h1>{{ c.name }}</h1>
+    </mat-card-content>
+  </mat-card>
+</div>
