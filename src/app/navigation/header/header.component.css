@@ -14,18 +14,8 @@ mat-toolbar {
   background-position: right bottom;
 }
 
-.spacer {
-  flex: 1 1 auto;
-}
-
-.nav-links {
-  height: 100%;
-}
-
 .navigation-items {
-  list-style-type: none;
   padding: 10px;
-  margin: 0;
 }
 
 @media only screen and (max-width: 600px) {
@@ -35,13 +25,5 @@ mat-toolbar {
   .logo-area {
     max-height: 100px;
     background-size: contain;
-  }
-
-  .nav-link {
-    display: none;
-  }
-
-  .spacer {
-    display: none;
   }
 }

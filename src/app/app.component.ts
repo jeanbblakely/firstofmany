@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { UserService } from './services/user.service';
 
 @Component({
@@ -13,7 +12,6 @@ export class AppComponent {
   constructor(private userService: UserService) {}
 
   ngOnInit() {
-    
   }
 
 }
