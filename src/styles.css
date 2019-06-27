@@ -1,5 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 
+:root {
+  --first-of-many-yellow: #fdd835;
+  --first-of-many-blue: #4fc3f7;
+}
+
 html, 
 body { 
   height: 100%;

@@ -16,3 +16,7 @@ main {
   padding: 10px;
   flex: 1;
 }
+
+app-footer {
+  background-color: var(--first-of-many-yellow, #fdd835);
+}
