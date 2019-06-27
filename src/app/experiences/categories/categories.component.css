@@ -1,0 +1,16 @@
+.categories {
+  width: 90%;
+  margin: auto;
+}
+
+.mat-card {
+  margin-bottom: 20px;
+  height: 200px;
+  padding: 0;
+}
+
+.mat-card-content h1 {
+  text-align: center;
+  height: 100%;
+  line-height: 200px;
+}
