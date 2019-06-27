@@ -1,6 +1,8 @@
 var mongoose = require('mongoose');
 
-module.exports = mongoose.model('Category', {
+var categorySchema = new mongoose.Schema({
     name: String,
-    experiences: Array
+    experiences: { type: [mongoose.Schema.Types.ObjectId], ref: 'Experience'}
 })
+
+module.exports = mongoose.model('Category', categorySchema);
