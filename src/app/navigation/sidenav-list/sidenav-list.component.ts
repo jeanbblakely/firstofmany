@@ -1,6 +1,5 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidenav-list',
@@ -10,7 +9,7 @@ import { Router } from '@angular/router';
 export class SidenavListComponent {
   @Output() sidenavClose = new EventEmitter();
 
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(private userService: UserService) {}
 
   public onSidenavClose = () => {
     this.sidenavClose.emit();
@@ -28,6 +27,5 @@ export class SidenavListComponent {
   */
   logout(): void {
     this.userService.logout();
-    this.router.navigate(['home']);
   }
 }

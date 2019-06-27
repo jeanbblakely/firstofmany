@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { UserService } from './services/user.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-root',
@@ -10,10 +10,14 @@ import { UserService } from './services/user.service';
 export class AppComponent {
   title = 'the First of Many';
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private snackBar: MatSnackBar) {
+    userService.logout$.subscribe(() => {
+        this.snackBar.open('You are logged out', 'Okay', {duration: 2000});
+      }
+    )
+  }
 
   ngOnInit() {
-    
   }
 
 }

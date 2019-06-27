@@ -1,6 +1,5 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { UserService } from './../../services/user.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -10,7 +9,7 @@ import { Router } from '@angular/router';
 export class HeaderComponent {
   @Output() public sidenavToggle = new EventEmitter();
   
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(private userService: UserService) {}
 
   public onToggleSidenav = () => {
     this.sidenavToggle.emit();
@@ -28,6 +27,5 @@ export class HeaderComponent {
   */
   logout(): void {
     this.userService.logout();
-    this.router.navigate(['home']);
   }
 }

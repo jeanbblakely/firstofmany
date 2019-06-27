@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, throwError } from 'rxjs';
+import { Observable, of, throwError, Subject } from 'rxjs';
 import { User } from '../models/user';
 import { USERS } from '../mock-users';
 import { HttpClient } from '@angular/common/http';
@@ -14,6 +14,9 @@ export class UserService {
   id: any;
   path = environment.path
   authpath = environment.path + '/auth';
+
+  private logoutSource = new Subject<string>();
+  logout$ = this.logoutSource.asObservable();
 
   constructor(private httpClient: HttpClient, private router: Router) { }
 
@@ -97,6 +100,7 @@ export class UserService {
   logout(): void {
     this.id = null;
     localStorage.setItem('token', null);
+    this.logoutSource.next();
   }
 
    /*
