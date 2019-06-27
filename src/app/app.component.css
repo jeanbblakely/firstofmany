@@ -2,6 +2,10 @@ mat-sidenav-container,
 mat-sidenav-content,
 mat-sidenav {
   height: 100%;
+  
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
 }
 
 mat-sidenav {
@@ -10,4 +14,5 @@ mat-sidenav {
 
 main {
   padding: 10px;
+  flex: 1;
 }
