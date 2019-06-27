@@ -20,7 +20,7 @@ export class AccountComponent implements OnInit {
 
   constructor(private userService: UserService,
     private router: Router, private fb: FormBuilder) {
-      
+
     }
 
   ngOnInit() {
@@ -28,7 +28,7 @@ export class AccountComponent implements OnInit {
     //this.userForm = this.fb.group(this.user);
     this.updateForm();
   }
-  
+
    /*
 	Gets Observable User from service
   */
@@ -36,14 +36,14 @@ export class AccountComponent implements OnInit {
     this.userService.getUser()
       .subscribe(user => this.user = user);
   }
-  
+
   /*
 	Checks form for errors
   */
   hasError = (controlName: string, errorName: string) => {
     return this.userForm.controls[controlName].hasError(errorName);
   }
-  
+
     /*
 	Checks to see if User is signed in (ie instantiated user.id)
   */
@@ -65,7 +65,7 @@ export class AccountComponent implements OnInit {
       gender: [this.user.gender, [Validators.required, Validators.pattern('((?!--).)*')]],
     });
   }
-  
+
    /*
 	Updates user based on input
   */
@@ -73,7 +73,7 @@ export class AccountComponent implements OnInit {
     if (this.userForm.valid) {
       const result: User = Object.assign({}, this.userForm.value);
       console.log('after copy', result);
-      this.userService.updateUser(result);
+      this.userService.updateUser(result.id, result);
       this.message = 'successfully updated';
       this.router.navigate(['dashboard']);
     } else {
