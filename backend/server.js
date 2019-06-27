@@ -68,9 +68,12 @@ app.get('/user/:id', async(req, res)=> {
   }
 });
 
-//app.post('/register', auth.register);
-
-//app.post('/login', auth.login);
+app.post('/user/:id/update', async(req, res)=> {
+    User.findByIdAndUpdate(req.params.id, {$set: req.body}, function (err, product) {
+        if (err) return next(err);
+        res.send('Product udpated.');
+    });
+});
 
 app.post('/newcategory', (req, res)=> {
   let categoryData = req.body;
@@ -86,8 +89,8 @@ app.post('/newcategory', (req, res)=> {
   })
 });
 
-
-
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
 mongoose.connect('mongodb+srv://joeymarinelli:Katiemarie0629!@cluster0-yrzrs.mongodb.net/FirstOfManyDB?retryWrites=true&w=majority',
                   { useNewUrlParser: true },
                   (err)=> {
