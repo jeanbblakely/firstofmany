@@ -5,6 +5,7 @@ import { LoginComponent } from './user/login/login.component';
 import { AccountComponent } from './user/account/account.component';
 import { DashboardComponent } from './user/dashboard/dashboard.component';
 import { RegisterComponent } from './user/register/register.component';
+import { CategoriesComponent } from './experiences/categories/categories.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -13,6 +14,7 @@ const appRoutes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'account', component: AccountComponent },
   { path: 'dashboard', component: DashboardComponent },
+  { path: 'categories', component: CategoriesComponent },
   { path: '**', redirectTo: 'home' }
 ];
 
