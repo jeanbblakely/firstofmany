@@ -55,6 +55,7 @@ export class UserService {
   loginUser(loginData) {
     this.httpClient.post(this.authpath + '/login', loginData).subscribe(res =>{
         console.log(res['token']);
+        console.log(res['userID']);
         if (res['token']) {
           console.log('Token exists');
           this.router.navigate(['dashboard']);
