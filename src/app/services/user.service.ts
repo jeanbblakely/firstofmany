@@ -20,7 +20,7 @@ export class UserService {
 	Searches users for username/password match.  Returns true and assigns user number if match found, false otherwise.
   */
   login(username: string, password: string): boolean {
-    var loginData = { username, password } 
+    var loginData = { username, password }
     this.loginUser(loginData);
     var i;
     for (i = 0; i < USERS.length; i++) {
@@ -31,13 +31,20 @@ export class UserService {
    }
    return false;
   }
-  
+
   /*
 	Database call for registration
   */
   sendUserRegistration(regData) {
     this.httpClient.post(this.authpath + '/register', regData).subscribe(res =>{
         console.log(res);
+    });
+  }
+
+  //Database call to update user profile
+  updateUser(profileData) {
+    this.httpClient.post('/user/:id/update', profileData).subscribe(res => {
+      console.log(res);
     });
   }
 
@@ -69,7 +76,7 @@ export class UserService {
     this.sendUserRegistration(user);
     return true;
   }
-  
+
   /*
 	Checks to see if user is logged in (ie has id)
   */
@@ -77,10 +84,10 @@ export class UserService {
     if (typeof this.id != 'undefined' && this.id != null) {
       return true;
     } else {
-      return false;   
+      return false;
     }
   }
-  
+
    /*
 	Logs user out; resets, sets token to null
   */
@@ -88,14 +95,14 @@ export class UserService {
     this.id = null;
     localStorage.setItem('token', null);
   }
-  
+
    /*
 	Checks to see if user has token from server (ie is logged in)
-  */ 
+  */
   isAuthenticated(): boolean {
     return !!localStorage.getItem('token');
   }
-  
+
 
 
 }

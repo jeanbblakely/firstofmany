@@ -68,6 +68,12 @@ app.get('/user/:id', async(req, res)=> {
   }
 });
 
+app.post('/user/:id/update', async(req, res)=> {
+    User.findByIdAndUpdate(req.params.id, {$set: req.body}, function (err, product) {
+        if (err) return next(err);
+        res.send('Product udpated.');
+    });
+});
 
 app.post('/newcategory', (req, res)=> {
   let categoryData = req.body;
