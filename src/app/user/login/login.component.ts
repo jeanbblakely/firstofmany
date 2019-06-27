@@ -41,6 +41,9 @@ export class LoginComponent {
     
   }
   
+   /*
+	Checks form for errors
+  */
   public hasError = (controlName: string, errorName: string) => {
     return this.loginData.controls[controlName].hasError(errorName);
   }
@@ -50,7 +53,7 @@ export class LoginComponent {
   */
   private createForm() {
     this.loginData = this.fb.group({
-      username: ['', [Validators.required]],
+      username: [null, [Validators.required]],
       password: [null, [Validators.required]],
     });
   }
