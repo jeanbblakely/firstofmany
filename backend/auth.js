@@ -14,7 +14,8 @@ router.post('/register', (req, res, next)=> {
     var user = new User(userData);
     user.save((err, doc)=> {
       if(!err) {
-        res.send(doc);
+        let userID = user._id;
+        res.status(200).send({userID});
       } else {
           console.log(err.errmsg);
           if (err.code == 11000) {
@@ -37,7 +38,9 @@ router.post('/login', async(req, res)=> {
     } else {
       let payload = {};
       let token = jwt.encode(payload, '123456');
-      res.status(200).send({token});
+      let userID = user._id;
+
+      res.status(200).send({token, userID});
       console.log("User ID: " + user._id + "\nUsername: " + user.username);
     }
   });
