@@ -9,15 +9,17 @@ var Category = require('./models/category.js');
 
 var router = express.Router();
 
-router.post('/register', (req, res)=> {
+router.post('/register', (req, res, next)=> {
     let userData = req.body;
-    let user = new User(userData);
-
-    user.save((err, result)=> {
-      if(err) {
-        console.log(err.errmsg);
+    var user = new User(userData);
+    user.save((err, doc)=> {
+      if(!err) {
+        res.send(doc);
       } else {
-        res.sendStatus(200);
+          console.log(err.errmsg);
+          if (err.code == 11000) {
+            res.status(422).send(['Duplicate username or email']);
+          }
       }
     })
   });

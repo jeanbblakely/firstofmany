@@ -68,9 +68,6 @@ app.get('/user/:id', async(req, res)=> {
   }
 });
 
-//app.post('/register', auth.register);
-
-//app.post('/login', auth.login);
 
 app.post('/newcategory', (req, res)=> {
   let categoryData = req.body;
@@ -87,7 +84,7 @@ app.post('/newcategory', (req, res)=> {
 });
 
 
-
+mongoose.set('useCreateIndex', true);
 mongoose.connect('mongodb+srv://joeymarinelli:Katiemarie0629!@cluster0-yrzrs.mongodb.net/FirstOfManyDB?retryWrites=true&w=majority',
                   { useNewUrlParser: true },
                   (err)=> {
