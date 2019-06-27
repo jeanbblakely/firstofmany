@@ -9,7 +9,7 @@ export const USERS: User[] = [
       email: "user@example.com",
       name: "Boo Berry",
       birthdate: "1/1/1990",
-      gender: "female",
+      gender: "Female",
       tracked_info: [
         { 
         name: "Thrills",
@@ -60,8 +60,8 @@ export const USERS: User[] = [
       password: "blackcat",
       email: "jeanbblakely@gmail.com",
       name: "Jeannie Blakely",
-      birthdate: "4/28/1969",
-      gender: "female",
+      birthdate: "1969-04-28",
+      gender: "Female",
       tracked_info: [
         { 
         name: "Concerts",
@@ -112,8 +112,8 @@ export const USERS: User[] = [
       password: "pickle",
       email: "daphne@gmail.com",
       name: "Daphne Cat",
-      birthdate: "4/29/2015",
-      gender: "female",
+      birthdate: "2015-04-29",
+      gender: "Female",
       tracked_info: [
         { 
         name: "Cat Treats",
@@ -122,14 +122,14 @@ export const USERS: User[] = [
             name: "Friskies Liver",
             note: "Amazing",
             img: "img.jpg",
-            datestamp: "5/8/2019",
+            datestamp: "2019-05-18",
             favorite: true
           },
           {
             name: "9 Lives Salmon",
             note: "Fishy",
             img: "img.jpg",
-            datestamp: "2/10/2019",
+            datestamp: "2019-06-08",
             favorite: false
       
           }
@@ -142,14 +142,14 @@ export const USERS: User[] = [
               name: "Ground Squirrel",
               note: "So fun",
               img: "img.jpg",
-              datestamp: "3/8/2019",
+              datestamp: "2019-03-08",
               favorite: false
             },
             {
               name: "Red Mousie",
               note: "Perfect",
               img: "img.jpg",
-              datestamp: "1/18/2019",
+              datestamp: "2019-01-19",
               favorite: true
       
             }

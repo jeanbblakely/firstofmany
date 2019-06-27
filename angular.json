@@ -27,7 +27,8 @@
               "src/styles.css"
             ],
             "scripts": [],
-            "es5BrowserSupport": true
+            "es5BrowserSupport": true,
+            "progress": false
           },
           "configurations": {
             "production": {
@@ -87,7 +88,8 @@
             "assets": [
               "src/assets/icon/favicon.ico",
               "src/assets"
-            ]
+            ],
+            "progress": false
           }
         },
         "lint": {
