@@ -14,7 +14,8 @@ router.post('/register', (req, res, next)=> {
     var user = new User(userData);
     user.save((err, doc)=> {
       if(!err) {
-        res.send(doc);
+        let userID = user._id;
+        res.status(200).send({userID});
       } else {
           console.log(err.errmsg);
           if (err.code == 11000) {

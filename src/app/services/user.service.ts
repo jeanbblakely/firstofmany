@@ -38,7 +38,7 @@ export class UserService {
   */
   sendUserRegistration(regData) {
     this.httpClient.post(this.authpath + '/register', regData).subscribe(res =>{
-        console.log(res);
+        console.log(res['userID']);
     });
   }
 
