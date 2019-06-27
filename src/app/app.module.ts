@@ -18,6 +18,8 @@ import { HeaderComponent } from './navigation/header/header.component';
 import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { RegisterComponent } from './user/register/register.component';
+import { MatFormFieldModule, MatInputModule } from '@angular/material';
+import { FooterComponent } from './navigation/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import { RegisterComponent } from './user/register/register.component';
     LayoutComponent,
     HeaderComponent,
     SidenavListComponent,
-    RegisterComponent
+    RegisterComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -41,6 +44,8 @@ import { RegisterComponent } from './user/register/register.component';
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,
+    MatFormFieldModule,
+    MatInputModule,
     FlexLayoutModule
   ],
   providers: [

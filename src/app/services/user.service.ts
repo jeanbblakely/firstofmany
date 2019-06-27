@@ -4,6 +4,7 @@ import { User } from '../models/user';
 import { USERS } from '../mock-users';
 import { HttpClient } from '@angular/common/http';
 import { environment } from './../../environments/environment';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -14,7 +15,7 @@ export class UserService {
   path = environment.path
   authpath = environment.path + '/auth';
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private router: Router) { }
 
   /*
 	Searches users for username/password match.  Returns true and assigns user number if match found, false otherwise.
@@ -56,6 +57,7 @@ export class UserService {
         console.log(res['token']);
         if (res['token']) {
           console.log('Token exists');
+          this.router.navigate(['dashboard']);
           console.log(loginData.username);
         }
     });

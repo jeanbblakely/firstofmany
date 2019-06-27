@@ -3,6 +3,8 @@ import { Observable, of, throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { UserService } from './user.service';
+import { RouterTestingModule } from '@angular/router/testing';
+import { Router } from '@angular/router';
 import { User } from './../models/user';
 
 describe('UserService', () => {
@@ -14,7 +16,10 @@ describe('UserService', () => {
     const spy = jasmine.createSpyObj('UserService', ['getValue']);
     TestBed.configureTestingModule({
       imports: [ HttpClientTestingModule ],
-      providers: [UserService]
+      providers: [
+        UserService,
+        { provide: Router, useClass: class { navigate = jasmine.createSpy("navigate"); } }
+      ]
   });
     httpClient = TestBed.get(HttpClient);
     httpTestingController = TestBed.get(HttpTestingController);

@@ -72,7 +72,6 @@ export class RegisterComponent implements OnInit {
 	Registers user in the system. Routes to Login page
   */
   register() {
-    console.log('User Control Value', this.userForm.value);
     if (this.userForm.valid) {
       const result: User = Object.assign({}, this.userForm.value);
       console.log('after copy', result);

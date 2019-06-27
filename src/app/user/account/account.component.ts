@@ -12,18 +12,21 @@ import { User } from './../../models/user';
 export class AccountComponent implements OnInit {
   public message: string = '';
   public userForm: FormGroup;
+  genders = ['--', 'Female', 'Male', 'Non-binary/third gender', 'Prefer not to say'];
+  minDate = new Date(1900,0,1);
+  maxDate = new Date(Date.now() + 24 * 60 * 60 * 1000);
   user: User;
 
 
   constructor(private userService: UserService,
     private router: Router, private fb: FormBuilder) {
-      //this.createForm();
       
     }
 
   ngOnInit() {
     this.getUser();
-    this.userForm = this.fb.group(this.user);
+    //this.userForm = this.fb.group(this.user);
+    this.updateForm();
   }
   
    /*
@@ -32,6 +35,13 @@ export class AccountComponent implements OnInit {
   getUser(): void {
     this.userService.getUser()
       .subscribe(user => this.user = user);
+  }
+  
+  /*
+	Checks form for errors
+  */
+  hasError = (controlName: string, errorName: string) => {
+    return this.userForm.controls[controlName].hasError(errorName);
   }
   
     /*
@@ -44,14 +54,14 @@ export class AccountComponent implements OnInit {
     /*
 	Creates userForm based on input
   */
-  createForm() {
+  updateForm() {
     this.userForm = this.fb.group({
-      username: 'jblakely',
-      password: [null, Validators.required],
-      email: [null, Validators.required],
-      name: [null, Validators.required],
-      birthdate: [null, Validators.required],
-      gender: [null, Validators.required]
+      username: [this.user.username, [Validators.required]],
+      password: [this.user.password, [Validators.required, Validators.minLength(8)]],
+      name: [this.user.name, [Validators.required]],
+      email: [this.user.email, [Validators.required, Validators.email]],
+      birthdate: [this.user.birthdate, [Validators.required]],
+      gender: [this.user.gender, [Validators.required, Validators.pattern('((?!--).)*')]],
     });
   }
   
@@ -59,7 +69,6 @@ export class AccountComponent implements OnInit {
 	Updates user based on input
   */
   update() {
-  console.log('User Control Value', this.userForm.value);
     if (this.userForm.valid) {
       const result: User = Object.assign({}, this.userForm.value);
       console.log('after copy', result);
