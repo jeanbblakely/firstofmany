@@ -7,8 +7,8 @@ export const USERS: User[] = [
       username: "user",
       password: "password",
       email: "user@example.com",
-      name: "Boo Berry",
-      birthdate: "1/1/1990",
+      name: "Beth Berry",
+      birthdate: "1990-01-01",
       gender: "Female",
       tracked_info: [
         { 
@@ -109,7 +109,7 @@ export const USERS: User[] = [
     {
       id: "5d14308b50579b979ea25b24",
       username: "fancycat",
-      password: "pickle",
+      password: "pickle12",
       email: "daphne@gmail.com",
       name: "Daphne Cat",
       birthdate: "2015-04-29",

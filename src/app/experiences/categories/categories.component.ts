@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Category } from '../../models/category';
+import { CATEGORIES } from '../../mock-categories';
+
 
 @Component({
   selector: 'app-categories',
@@ -6,7 +9,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./categories.component.css']
 })
 export class CategoriesComponent implements OnInit {
-  mockCategories = [
+  mockCategories = CATEGORIES;
+  mockCategories1 = [
     {name: 'Vegetables'},
     {name: 'Fruit'}, 
     {name: 'Countries'},
