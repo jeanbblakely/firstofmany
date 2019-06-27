@@ -4,7 +4,7 @@ import { CategoriesComponent } from './categories.component';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
-describe('CategoriesComponent', () => {
+fdescribe('CategoriesComponent', () => {
   let component: CategoriesComponent;
   let fixture: ComponentFixture<CategoriesComponent>;
 
