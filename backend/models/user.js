@@ -8,7 +8,7 @@ var userSchema = new mongoose.Schema({
   name: String,
   birthdate: Date,
   gender: String,
-  tracked_categories: [{mongoose.Schema.Types.ObjectId, ref: 'Category'}],
+  tracked_categories: { type: [mongoose.Schema.Types.ObjectId], ref: 'Category'},
   favorites: Array
 })
 
