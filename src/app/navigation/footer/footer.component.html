@@ -1,4 +1,15 @@
-<footer>
-  <p>Copyright © 2019 First of Many</p>
-  <p>Created for CS6920</p>
+<footer fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="20px">
+  <small class="copyright" fxFlex.xs="25">Copyright © 2019 First of Many</small>
+  <small fxFlex.xs="40">Created for CS6920</small>
+  <div class="footer-links" fxLayout="row" fxLayout.xs="column">
+      <a mat-button routerLink="/home" routerLinkActive="active-link">
+        <mat-icon>home</mat-icon> <span class="nav-caption">Home</span>
+      </a>
+      <a mat-button routerLink="/login" routerLinkActive="active-link">
+        <mat-icon>account_circle</mat-icon> <span class="nav-caption">Log in</span>
+      </a>
+      <a mat-button routerLink="/register" routerLinkActive="active-link">
+        <mat-icon>person_add</mat-icon> <span class="nav-caption">Sign up</span>
+      </a>
+  </div>
 </footer>
