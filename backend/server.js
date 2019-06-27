@@ -89,7 +89,7 @@ app.post('/newcategory', (req, res)=> {
   })
 });
 
-
+mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 mongoose.connect('mongodb+srv://joeymarinelli:Katiemarie0629!@cluster0-yrzrs.mongodb.net/FirstOfManyDB?retryWrites=true&w=majority',
                   { useNewUrlParser: true },
