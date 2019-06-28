@@ -69,10 +69,14 @@ export class UserService {
     });
   }
 
+  getUserID() {
+    return this.id;
+  }
+
   /*
 	Gets user based on number assigned in login
   */
-  getUser(): Observable<User> {
+  getMockUser(): Observable<User> {
     console.log(this.id, 'from getUser');
     return of(USERS[this.id]);
   }

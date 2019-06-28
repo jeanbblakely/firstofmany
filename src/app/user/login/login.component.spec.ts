@@ -21,11 +21,11 @@ describe('LoginComponent', () => {
       name: "Boo Berry",
       birthdate: "1/1/1990",
       gender: "female",
-      tracked_info: [
-        { 
+      tracked_categories: [
+        {
         name: "Thrills",
         experiences: [
-          { 
+          {
             name: "Sky Diving",
             note: "So fun",
             img: "img.jpg",
@@ -38,11 +38,11 @@ describe('LoginComponent', () => {
             img: "img.jpg",
             datestamp: "1/10/2019",
             favorite: false
-      
+
           }
          ]
         },
-        { 
+        {
         name: "Vegetables",
           experiences: [
             {
@@ -58,22 +58,22 @@ describe('LoginComponent', () => {
               img: "img.jpg",
               datestamp: "1/18/2019",
               favorite: true
-      
+
             }
-          ]  
+          ]
         }
       ]
     };
-    
+
   login(username: string, password: string): boolean {
      return username == this.user.username && password == this.user.password;
   }
-    
+
     getUser() {
       return of(this.user);
     }
   }
-  
+
   class Page {
     navSpy: jasmine.Spy;
     constructor() {
@@ -94,14 +94,14 @@ describe('LoginComponent', () => {
     mockUserService = new MockUserService();
     const routerSpy = jasmine.createSpyObj('Router', ['navigate']);
     TestBed.configureTestingModule({
-      imports: [ 
-        FormsModule, 
+      imports: [
+        FormsModule,
         RouterTestingModule,
         BrowserAnimationsModule,
         ReactiveFormsModule,
         MaterialModule
       ],
-      providers: [ 
+      providers: [
         { provide: Router, useValue: routerSpy },
         { provide: UserService, useValue: mockUserService }
       ],
@@ -126,42 +126,42 @@ describe('LoginComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  
+
   it('should show message on successful login with mock UserService', () => {
     component.loginData.controls['username'].setValue('user');
     component.loginData.controls['password'].setValue('password');
     component.login();
     expect(component.message).toEqual('logged in');
   });
-  
+
   it('should show message on unsuccessful login with mock UserService', () => {
     component.loginData.controls['username'].setValue('jblakey');
     component.loginData.controls['password'].setValue('blackcat');
     component.login();
     expect(component.message).toEqual('not logged in');
   });
-  
+
   it('should navigate to dashboard on successful login with mock UserService', () => {
     component.loginData.controls['username'].setValue('user');
     component.loginData.controls['password'].setValue('password');
     component.login();
     //expect(this.location.path()).toBe("/dashboard");
   });
-  
+
   it('username field validity', () => {
     let errors = {};
     let username = component.loginData.controls['username'];
     errors = username.errors || {};
     expect(errors['required']).toBeTruthy();
   });
-  
+
   it('password field required validity', () => {
     let errors = {};
     let password = component.loginData.controls['password'];
     errors = password.errors || {};
     expect(errors['required']).toBeTruthy();
   });
-  
+
   it('password field length validity error', () => {
     let errors = {};
     component.loginData.controls['password'].setValue('abc');
@@ -169,7 +169,7 @@ describe('LoginComponent', () => {
     errors = password.errors || {};
     expect(errors['minlength']).toBeTruthy();
   });
-  
+
   it('password field length validity no error', () => {
     let errors = {};
     component.loginData.controls['password'].setValue('abcdefgh');

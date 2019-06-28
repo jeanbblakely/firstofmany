@@ -21,11 +21,11 @@ describe('AccountComponent', () => {
       name: "Boo Berry",
       birthdate: "1990-01-01",
       gender: "Female",
-      tracked_info: [
-        { 
+      tracked_categories: [
+        {
         name: "Thrills",
         experiences: [
-          { 
+          {
             name: "Sky Diving",
             note: "So fun",
             img: "img.jpg",
@@ -38,11 +38,11 @@ describe('AccountComponent', () => {
             img: "img.jpg",
             datestamp: "1/10/2019",
             favorite: false
-      
+
           }
          ]
         },
-        { 
+        {
         name: "Vegetables",
           experiences: [
             {
@@ -58,22 +58,22 @@ describe('AccountComponent', () => {
               img: "img.jpg",
               datestamp: "1/18/2019",
               favorite: true
-      
+
             }
-          ]  
+          ]
         }
       ]
     };
-    
+
   login(username: string, password: string): boolean {
      return username == this.user.username && password == this.user.password;
   }
-    
-    getUser() {
+
+    getMockUser() {
       return of(this.user);
     }
   }
-  
+
   let component: AccountComponent;
   let fixture: ComponentFixture<AccountComponent>;
   let userService: UserService;
@@ -82,14 +82,14 @@ describe('AccountComponent', () => {
   beforeEach(async(() => {
     mockUserService = new MockUserService();
     TestBed.configureTestingModule({
-      imports: [ 
-        FormsModule, 
+      imports: [
+        FormsModule,
         BrowserAnimationsModule,
         ReactiveFormsModule,
         RouterTestingModule,
         MaterialModule
       ],
-      providers: [ 
+      providers: [
         { provide: Router, useClass: class { navigate = jasmine.createSpy("navigate"); } },
         { provide: UserService, useValue: mockUserService }
       ],
@@ -107,19 +107,19 @@ describe('AccountComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  
+
   it(`should have user named account with mock service`, () => {
     const fixture = TestBed.createComponent(AccountComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('h2').textContent).toContain("Boo Berry's Account");
   });
-  
+
   it('form should be valid when submitted with prefilled user info', () => {
     console.log(component.userForm, 'userform in prefil');
     expect(component.userForm.valid).toBeTruthy();
   });
-  
+
   it('error message should show when invalid form is submitted', () => {
     component.userForm.controls['username'].setValue('jblakely');
     component.userForm.controls['password'].setValue('');
@@ -130,14 +130,14 @@ describe('AccountComponent', () => {
     component.update();
     expect(component.message).toEqual('your form has errors');
   });
-  
+
   it('success message should show when valid form is submitted', () => {
     component.userForm.controls['password'].setValue('bumblepuppy');
     component.userForm.controls['email'].setValue('bumble@gmail.com');
     component.update();
     expect(component.message).toEqual('successfully updated');
   });
-  
+
     it('username field validity', () => {
     let errors = {};
     component.userForm.controls['username'].setValue('');
@@ -145,7 +145,7 @@ describe('AccountComponent', () => {
     errors = username.errors || {};
     expect(errors['required']).toBeTruthy();
   });
-  
+
    it('password field validity', () => {
     let errors = {};
     component.userForm.controls['password'].setValue('');
@@ -154,7 +154,7 @@ describe('AccountComponent', () => {
     errors = password.errors || {};
     expect(errors['required']).toBeTruthy();
   });
-  
+
   it('password field length validity error', () => {
     let errors = {};
     component.userForm.controls['password'].setValue('abc');
@@ -162,7 +162,7 @@ describe('AccountComponent', () => {
     errors = password.errors || {};
     expect(errors['minlength']).toBeTruthy();
   });
-  
+
   it('password field length validity no error', () => {
     let errors = {};
     component.userForm.controls['password'].setValue('abcdefgh');
@@ -170,7 +170,7 @@ describe('AccountComponent', () => {
     errors = password.errors || {};
     expect(errors['minlength']).toBeFalsy();
   });
-  
+
    it('email field validity required', () => {
     let errors = {};
     component.userForm.controls['email'].setValue('');
@@ -178,7 +178,7 @@ describe('AccountComponent', () => {
     errors = email.errors || {};
     expect(errors['required']).toBeTruthy();
   });
-  
+
   it('email field email validity not formatted', () => {
     let errors = {};
     component.userForm.controls['email'].setValue('jblakely#gmail.com');
@@ -186,7 +186,7 @@ describe('AccountComponent', () => {
     errors = email.errors || {};
     expect(errors['email']).toBeTruthy();
   });
-  
+
   it('email field email validity formatted', () => {
     let errors = {};
     component.userForm.controls['email'].setValue('jblakely@gmail.com');
@@ -194,7 +194,7 @@ describe('AccountComponent', () => {
     errors = email.errors || {};
     expect(errors['email']).toBeFalsy();
   });
-  
+
    it('name field validity', () => {
     let errors = {};
     component.userForm.controls['name'].setValue('');
@@ -202,7 +202,7 @@ describe('AccountComponent', () => {
     errors = name.errors || {};
     expect(errors['required']).toBeTruthy();
   });
-  
+
    it('birthdate field validity', () => {
     let errors = {};
     component.userForm.controls['birthdate'].setValue('');
@@ -210,7 +210,7 @@ describe('AccountComponent', () => {
     errors = birthdate.errors || {};
     expect(errors['required']).toBeTruthy();
   });
-  
+
    it('gender field validity', () => {
     let errors = {};
     component.userForm.controls['gender'].setValue('');
@@ -218,7 +218,7 @@ describe('AccountComponent', () => {
     errors = gender.errors || {};
     expect(errors['required']).toBeTruthy();
   });
-  
+
    it('gender field validity pattern', () => {
     let errors = {};
     component.userForm.controls['gender'].setValue('--');

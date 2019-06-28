@@ -11,8 +11,8 @@ describe('UserService', () => {
   let httpClient: HttpClient;
   let httpTestingController: HttpTestingController;
   let userService: UserService;
-  
-  beforeEach(() => { 
+
+  beforeEach(() => {
     const spy = jasmine.createSpyObj('UserService', ['getValue']);
     TestBed.configureTestingModule({
       imports: [ HttpClientTestingModule ],
@@ -25,53 +25,53 @@ describe('UserService', () => {
     httpTestingController = TestBed.get(HttpTestingController);
     userService = TestBed.get(UserService);
   });
-  
+
   it('should be created', inject([UserService], (service: UserService) => {
     expect(service).toBeTruthy();
   }));
-  
+
     it('#isAuthenticated should return false if there is not a token', () => {
     expect(userService.isAuthenticated()).toBeFalsy();
   });
-  
+
   it('#isAuthenticated should return true if there is a token', () => {
     localStorage.setItem('token', '1234');
     expect(userService.isAuthenticated()).toBeTruthy();
   });
-  
-   //it('#getUser should return observable user', 
+
+   //it('#getUser should return observable user',
    // (done: DoneFn) => {
     //  userService.getUser().subscribe(user => {
     //    expect(user).toBe('observable value');
     //    done();
-    //  });     
+    //  });
    //});
-   
+
   it('#login should return true for successful mockuser login', () => {
     //const service: UserService = TestBed.get(UserService);
     expect(userService.login("user", "password")).toEqual(true);
     expect(userService.login("jblakely", "blackcat")).toEqual(true);
     expect(userService.login("fancycat", "pickle")).toEqual(true);
   });
-  
+
   it('#login should return false for unsuccessful mockuser login', () => {
     //const service: UserService = TestBed.get(UserService);
     expect(userService.login("user", "password1")).toEqual(false);
     expect(userService.login("jblakely", "blackcat1")).toEqual(false);
     expect(userService.login("fancycat", "pickle1")).toEqual(false);
   });
-  
+
    it('#isLoggedIn should return true if there is a token and user id', () => {
     localStorage.setItem('token', '1234');
     userService.login("user", "password");
     expect(userService.isLoggedIn()).toBeTruthy();
   });
-  
+
   it('#isLoggedIn should return false if there is not a token and user id', () => {
     localStorage.setItem('token', null);
     expect(userService.isLoggedIn()).toBeFalsy();
   });
-  
+
   it('#logout should reset token and user id', () => {
     localStorage.setItem('token', '1234');
     userService.login("user", "password");
@@ -79,13 +79,13 @@ describe('UserService', () => {
     userService.logout();
     expect(userService.isLoggedIn()).toBeFalsy();
   });
-  
+
   it('#getUser should return defined for logged in mockuser', () => {
     userService.login("user", "password");
-    expect(userService.getUser()).toBeTruthy();
+    expect(userService.getMockUser()).toBeTruthy();
   });
-  
-  
+
+
   //it('#register returned observable should match the right data', () => {
     //const mockUser = {
     //  id: "5d045ecaece2003576f60b8e",
@@ -115,6 +115,5 @@ describe('UserService', () => {
 
     //req.flush(mockUser);
     //});
-  
-});
 
+});

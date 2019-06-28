@@ -15,7 +15,7 @@ export class AccountComponent implements OnInit {
   genders = ['--', 'Female', 'Male', 'Non-binary/third gender', 'Prefer not to say'];
   minDate = new Date(1900,0,1);
   maxDate = new Date(Date.now() + 24 * 60 * 60 * 1000);
-  user: User;
+  user: any;
 
 
   constructor(private userService: UserService,
@@ -32,9 +32,12 @@ export class AccountComponent implements OnInit {
    /*
 	Gets Observable User from service
   */
-  getUser(): void {
-    this.userService.getUser()
-      .subscribe(user => this.user = user);
+  getUser() {
+    let id = this.userService.getUserID();
+    this.userService.getUser(id).subscribe(data => {
+      this.user = data;
+      console.log(this.user);
+    });
   }
 
   /*
@@ -56,7 +59,7 @@ export class AccountComponent implements OnInit {
   */
   updateForm() {
     this.userForm = this.fb.group({
-      id: [this.user.id],
+      id: [this.user._id],
       username: [this.user.username, [Validators.required]],
       password: [this.user.password, [Validators.required, Validators.minLength(8)]],
       name: [this.user.name, [Validators.required]],

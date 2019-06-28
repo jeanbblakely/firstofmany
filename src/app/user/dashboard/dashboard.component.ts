@@ -10,7 +10,7 @@ import { User } from '../../models/user';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  user: User;
+  user: any;
   constructor(private userService: UserService, private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -20,7 +20,7 @@ export class DashboardComponent implements OnInit {
   /*
 	Gets Observable User from service
   */
-  getUser(): void {
+  getUser() {
     let id = this.route.snapshot.params.id;
     this.userService.getUser(id).subscribe(data => {
       this.user = data

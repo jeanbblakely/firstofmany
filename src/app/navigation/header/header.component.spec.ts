@@ -21,11 +21,11 @@ describe('HeaderComponent', () => {
       name: "Boo Berry",
       birthdate: "1/1/1990",
       gender: "female",
-      tracked_info: [
-        { 
+      tracked_categories: [
+        {
         name: "Thrills",
         experiences: [
-          { 
+          {
             name: "Sky Diving",
             note: "So fun",
             img: "img.jpg",
@@ -38,11 +38,11 @@ describe('HeaderComponent', () => {
             img: "img.jpg",
             datestamp: "1/10/2019",
             favorite: false
-      
+
           }
          ]
         },
-        { 
+        {
         name: "Vegetables",
           experiences: [
             {
@@ -58,22 +58,22 @@ describe('HeaderComponent', () => {
               img: "img.jpg",
               datestamp: "1/18/2019",
               favorite: true
-      
+
             }
-          ]  
+          ]
         }
       ]
     };
-    
+
   login(username: string, password: string): boolean {
      return username == this.user.username && password == this.user.password;
   }
-    
+
     getUser() {
       return of(this.user);
     }
   }
-  
+
   class Page {
     navSpy: jasmine.Spy;
     constructor() {
@@ -94,13 +94,13 @@ describe('HeaderComponent', () => {
     mockUserService = new MockUserService();
     const routerSpy = jasmine.createSpyObj('Router', ['navigate']);
     TestBed.configureTestingModule({
-      imports: [ 
-        FormsModule, 
+      imports: [
+        FormsModule,
         RouterTestingModule,
         BrowserAnimationsModule,
         MaterialModule
       ],
-      providers: [ 
+      providers: [
         { provide: Router, useValue: routerSpy },
         { provide: UserService, useValue: mockUserService }
       ],
@@ -125,6 +125,6 @@ describe('HeaderComponent', () => {
   xit('should create', () => {
     expect(component).toBeTruthy();
   });
-  
+
 
 });
