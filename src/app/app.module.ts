@@ -20,6 +20,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { RegisterComponent } from './user/register/register.component';
 import { MatFormFieldModule, MatInputModule } from '@angular/material';
 import { FooterComponent } from './navigation/footer/footer.component';
+import { CategoryDetailComponent } from './experiences/category-detail/category-detail.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { FooterComponent } from './navigation/footer/footer.component';
     HeaderComponent,
     SidenavListComponent,
     RegisterComponent,
-    FooterComponent
+    FooterComponent,
+    CategoryDetailComponent
   ],
   imports: [
     BrowserModule,

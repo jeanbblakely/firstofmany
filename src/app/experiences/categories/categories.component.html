@@ -8,11 +8,14 @@
   </mat-card>
 </div>
 
+<app-category-detail [category]="selectedCategory"></app-category-detail>
 <div *ngIf="selectedCategory">
 <h2>{{ selectedCategory.name }}</h2>
 <div *ngFor="let experience of selectedCategory.experiences; let i=index">
   <li>{{selectedCategory.experiences[i].name}}</li>
 </div>
 </div>
+
+
 
 
