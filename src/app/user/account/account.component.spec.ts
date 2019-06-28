@@ -72,6 +72,10 @@ describe('AccountComponent', () => {
     getMockUser() {
       return of(this.user);
     }
+    
+    updateUser(id: string, data: any): boolean {
+       return true; 
+    }
   }
 
   let component: AccountComponent;
@@ -116,7 +120,6 @@ describe('AccountComponent', () => {
   });
 
   it('form should be valid when submitted with prefilled user info', () => {
-    console.log(component.userForm, 'userform in prefil');
     expect(component.userForm.valid).toBeTruthy();
   });
 

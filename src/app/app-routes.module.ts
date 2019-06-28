@@ -5,12 +5,16 @@ import { LoginComponent } from './user/login/login.component';
 import { AccountComponent } from './user/account/account.component';
 import { DashboardComponent } from './user/dashboard/dashboard.component';
 import { RegisterComponent } from './user/register/register.component';
+import { CategoriesComponent } from './experiences/categories/categories.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'account', component: AccountComponent },
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'categories', component: CategoriesComponent },
   { path: 'account/:id', component: AccountComponent },
   { path: 'dashboard/:id', component: DashboardComponent },
   { path: '**', redirectTo: 'home' }

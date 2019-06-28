@@ -158,5 +158,63 @@ export const CATEGORIES: Category[] = [
       
             }
         ]  
+     },
+     
+     { 
+        name: "Travel",
+          experiences: [
+            {
+              name: "Paris",
+              note: "",
+              img: "",
+              datestamp: "",
+              favorite: false
+            },
+            {
+              name: "Venice",
+              note: "",
+              img: "",
+              datestamp: "",
+              favorite: true
+      
+            },
+            {
+              name: "Spain",
+              note: "",
+              img: "",
+              datestamp: "",
+              favorite: true
+      
+            }
+        ]  
+     },
+     
+     { 
+        name: "Fruits",
+          experiences: [
+            {
+              name: "Apple",
+              note: "",
+              img: "",
+              datestamp: "",
+              favorite: false
+            },
+            {
+              name: "Pear",
+              note: "",
+              img: "",
+              datestamp: "",
+              favorite: true
+      
+            },
+            {
+              name: "Bananna",
+              note: "",
+              img: "",
+              datestamp: "",
+              favorite: true
+      
+            }
+        ]  
      }
 ];

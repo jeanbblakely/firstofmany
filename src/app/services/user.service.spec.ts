@@ -51,7 +51,7 @@ describe('UserService', () => {
     //const service: UserService = TestBed.get(UserService);
     expect(userService.login("user", "password")).toEqual(true);
     expect(userService.login("jblakely", "blackcat")).toEqual(true);
-    expect(userService.login("fancycat", "pickle")).toEqual(true);
+    expect(userService.login("fancycat", "pickle12")).toEqual(true);
   });
 
   it('#login should return false for unsuccessful mockuser login', () => {

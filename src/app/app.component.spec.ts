@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { FooterComponent } from './navigation/footer/footer.component';
 import { MaterialModule } from './material/material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatSidenavModule } from '@angular/material';
@@ -21,7 +22,8 @@ describe('AppComponent', () => {
         AppComponent,
         LayoutComponent,
         HeaderComponent,
-        SidenavListComponent
+        SidenavListComponent,
+        FooterComponent
         
       ],
       imports: [

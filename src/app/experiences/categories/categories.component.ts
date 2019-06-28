@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Category } from '../../models/category';
+import { CATEGORIES } from '../../mock-categories';
+import { CategoryService } from '../../services/category.service';
+
 
 @Component({
   selector: 'app-categories',
@@ -6,6 +10,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./categories.component.css']
 })
 export class CategoriesComponent implements OnInit {
+  categories: Category[];
+  selectedCategory: Category;
   mockCategories = [
     {name: 'Vegetables'},
     {name: 'Fruit'}, 
@@ -25,15 +31,32 @@ export class CategoriesComponent implements OnInit {
     '#f74fc2', // cat-pink: #f74fc2;
   ]
 
-  constructor() { }
+  constructor(private categoryService: CategoryService) { }
 
   ngOnInit() {
+    this.getCategories();
     this.getRandomColors();
+    
+  }
+  
+   /*
+	Gets Observable Categories array from service
+  */
+  getCategories(): void {
+    this.categoryService.getCategories()
+      .subscribe(categories => this.categories = categories);
   }
 
   getRandomColors() {
-    for (let i = 0; i < this.mockCategories.length; i++) {
-      this.mockCategories[i]['color'] = this.colors[Math.floor(Math.random() * this.colors.length)];
+    for (let i = 0; i < this.categories.length; i++) {
+      this.categories[i]['color'] = this.colors[Math.floor(Math.random() * this.colors.length)];
     }
   }
+  
+  /*
+	Select click method for singl Category objects
+  */
+  onSelect(category: Category): void {
+    this.selectedCategory = category;   
+  } 
 }

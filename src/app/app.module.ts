@@ -18,10 +18,13 @@ import { HeaderComponent } from './navigation/header/header.component';
 import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { RegisterComponent } from './user/register/register.component';
-import { MatFormFieldModule, MatInputModule, MatListModule } from '@angular/material';
+import { MatFormFieldModule, MatInputModule, MatIconModule, MatCardModule, MatListModule } from '@angular/material';
 import { FooterComponent } from './navigation/footer/footer.component';
+import { CategoryDetailComponent } from './experiences/category-detail/category-detail.component';
+import { CategoryService } from './services/category.service';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+
 
 @NgModule({
   declarations: [
@@ -36,7 +39,8 @@ import { environment } from '../environments/environment';
     HeaderComponent,
     SidenavListComponent,
     RegisterComponent,
-    FooterComponent
+    FooterComponent,
+    CategoryDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -48,12 +52,15 @@ import { environment } from '../environments/environment';
     MaterialModule,
     MatFormFieldModule,
     MatInputModule,
+    MatIconModule,
+    MatCardModule,
     MatListModule,
     FlexLayoutModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
-    UserService
+    UserService,
+    CategoryService
   ],
 
   bootstrap: [AppComponent]
