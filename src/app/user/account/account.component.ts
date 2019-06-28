@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { User } from './../../models/user';
 
 @Component({
@@ -19,14 +20,14 @@ export class AccountComponent implements OnInit {
 
 
   constructor(private userService: UserService,
-    private router: Router, private fb: FormBuilder) {
+    private router: Router, private fb: FormBuilder, private activatedRoute: ActivatedRoute) {
 
     }
 
   ngOnInit() {
     this.getUser();
     //this.userForm = this.fb.group(this.user);
-    this.updateForm();
+
   }
 
    /*
@@ -37,7 +38,9 @@ export class AccountComponent implements OnInit {
     this.userService.getUser(id).subscribe(data => {
       this.user = data;
       console.log(this.user);
+      this.updateForm();
     });
+
   }
 
   /*
@@ -59,7 +62,7 @@ export class AccountComponent implements OnInit {
   */
   updateForm() {
     this.userForm = this.fb.group({
-      id: [this.user.id],
+      id: [this.user._id],
       username: [this.user.username, [Validators.required]],
       password: [this.user.password, [Validators.required, Validators.minLength(8)]],
       name: [this.user.name, [Validators.required]],
