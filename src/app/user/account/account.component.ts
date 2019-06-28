@@ -26,18 +26,15 @@ export class AccountComponent implements OnInit {
 
   ngOnInit() {
     this.getUser();
-    //this.userForm = this.fb.group(this.user);
-
   }
 
    /*
-	Gets Observable User from service
+	Gets Observable User from service and fills in form
   */
   getUser() {
     let id = this.userService.getUserID();
     this.userService.getUser(id).subscribe(data => {
       this.user = data;
-      console.log(this.user);
       this.updateForm();
     });
 

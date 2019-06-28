@@ -24,7 +24,6 @@ export class DashboardComponent implements OnInit {
     let id = this.route.snapshot.params.id;
     this.userService.getUser(id).subscribe(data => {
       this.user = data
-      console.log(this.user)
     });
   }
 
