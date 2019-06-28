@@ -17,7 +17,7 @@ export class LoginComponent {
   public message: string = '';
 
   constructor(private userService: UserService,
-    private router: Router, private fb: FormBuilder) { 
+    private router: Router, private fb: FormBuilder) {
       this.createForm();
     }
 
@@ -26,28 +26,28 @@ export class LoginComponent {
   */
   login() {
     if (this.loginData.valid) {
-      console.log(this.loginData.get('username').value);
-      console.log(this.loginData.get('password').value);
+  //    console.log(this.loginData.get('username').value);
+  //    console.log(this.loginData.get('password').value);
       if (this.userService.login(this.loginData.get('username').value, this.loginData.get('password').value)) {
         this.message = 'logged in';
-        this.router.navigate(['dashboard']);
+  //      this.router.navigate(['dashboard/' + this.loginData.get('_id')]);
       } else {
         this.message = 'not logged in';
       }
     } else {
       this.message = 'the form has errors';
-      
+
     }
-    
+
   }
-  
+
    /*
 	Checks form for errors
   */
   public hasError = (controlName: string, errorName: string) => {
     return this.loginData.controls[controlName].hasError(errorName);
   }
-  
+
    /*
 	Creates loginData based on input
   */

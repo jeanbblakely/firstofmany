@@ -1,9 +1,9 @@
 <section>
-  <mat-card> 
+  <mat-card>
     <mat-card-header>
-        <mat-card-title><h2>{{user.name}}'s Account</h2></mat-card-title>
+        <mat-card-title><h2>{{user?.name}}'s Account</h2></mat-card-title>
     </mat-card-header>
-    <form [formGroup]="userForm" (ngSubmit)="update()" autocomplete="off" novalidate>
+    <form *ngIf="user" [formGroup]="userForm" (ngSubmit)="update()" autocomplete="off" novalidate>
       <mat-card-content>
         <mat-form-field>
           <input matInput type="text" placeholder="Username" id="username" formControlName="username" required>
@@ -57,6 +57,6 @@
     </mat-card-footer>
   </mat-card>
 
-  <p>Form Control values: {{ userForm.value | json }}</p>
-  <p>Form Control status: {{ userForm.status | json }}</p>
+  <p>Form Control values: {{ userForm?.value | json }}</p>
+  <p>Form Control status: {{ userForm?.status | json }}</p>
 </section>

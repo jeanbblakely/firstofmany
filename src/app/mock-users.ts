@@ -10,11 +10,11 @@ export const USERS: User[] = [
       name: "Beth Berry",
       birthdate: "1990-01-01",
       gender: "Female",
-      tracked_info: [
-        { 
+      tracked_categories: [
+        {
         name: "Thrills",
         experiences: [
-          { 
+          {
             name: "Sky Diving",
             note: "So fun",
             img: "img.jpg",
@@ -27,11 +27,11 @@ export const USERS: User[] = [
             img: "img.jpg",
             datestamp: "1/10/2019",
             favorite: false
-      
+
           }
          ]
         },
-        { 
+        {
         name: "Vegetables",
           experiences: [
             {
@@ -47,13 +47,13 @@ export const USERS: User[] = [
               img: "img.jpg",
               datestamp: "1/18/2019",
               favorite: true
-      
+
             }
-          ]  
+          ]
         }
       ]
     },
-    
+
       {
       id: "5d14301350579b979ea25b23",
       username: "jblakely",
@@ -62,11 +62,11 @@ export const USERS: User[] = [
       name: "Jeannie Blakely",
       birthdate: "1969-04-28",
       gender: "Female",
-      tracked_info: [
-        { 
+      tracked_categories: [
+        {
         name: "Concerts",
         experiences: [
-          { 
+          {
             name: "Kraftwerk",
             note: "Amazing",
             img: "img.jpg",
@@ -79,11 +79,11 @@ export const USERS: User[] = [
             img: "img.jpg",
             datestamp: "1/10/2019",
             favorite: false
-      
+
           }
          ]
         },
-        { 
+        {
         name: "Vegetables",
           experiences: [
             {
@@ -99,13 +99,13 @@ export const USERS: User[] = [
               img: "img.jpg",
               datestamp: "1/18/2019",
               favorite: true
-      
+
             }
-          ]  
+          ]
         }
       ]
     },
-    
+
     {
       id: "5d14308b50579b979ea25b24",
       username: "fancycat",
@@ -114,11 +114,11 @@ export const USERS: User[] = [
       name: "Daphne Cat",
       birthdate: "2015-04-29",
       gender: "Female",
-      tracked_info: [
-        { 
+      tracked_categories: [
+        {
         name: "Cat Treats",
         experiences: [
-          { 
+          {
             name: "Friskies Liver",
             note: "Amazing",
             img: "img.jpg",
@@ -131,11 +131,11 @@ export const USERS: User[] = [
             img: "img.jpg",
             datestamp: "2019-06-08",
             favorite: false
-      
+
           }
          ]
         },
-        { 
+        {
         name: "Cat Toys",
           experiences: [
             {
@@ -151,9 +151,9 @@ export const USERS: User[] = [
               img: "img.jpg",
               datestamp: "2019-01-19",
               favorite: true
-      
+
             }
-          ]  
+          ]
         }
       ]
     }

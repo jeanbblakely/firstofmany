@@ -19,7 +19,7 @@ describe('DashboardComponent', () => {
       name: "Boo Berry",
       birthdate: "1/1/1990",
       gender: "female",
-      tracked_info: [
+      tracked_categories: [
         {
         name: "Thrills",
         experiences: [
@@ -65,7 +65,7 @@ describe('DashboardComponent', () => {
     getUser() {
       return of(this.user);
     }
-    
+
     isLoggedIn() {
       return true;
     }
@@ -101,7 +101,7 @@ describe('DashboardComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  
+
   it(`should have Welcome user with mock service`, () => {
     const fixture = TestBed.createComponent(DashboardComponent);
     fixture.detectChanges();
@@ -114,5 +114,5 @@ describe('DashboardComponent', () => {
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('li').textContent).toContain('Thrills');
   });
-  
+
 });

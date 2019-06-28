@@ -4,11 +4,11 @@
       <mat-icon>menu</mat-icon>
     </button>
   </div>
-  
+
   <div fxLayoutGap="15px" fxLayout="row" fxHide.xs class="navigation-items">
     <div *ngIf="isLoggedIn(); else newSession" fxLayoutGap="15px" fxLayout="row" fxHide.xs >
       <a mat-raised-button color="accent" class="nav-link" routerLink="/home" (click)="logout()">Logout</a>
-      <a mat-raised-button color="accent" class="nav-link" routerLink="/account">My Account</a>
+      <a mat-raised-button color="accent" class="nav-link" routerLink="/account/{{userService.getUserID()}}">My Account</a>
     </div>
     <ng-template #newSession>
       <a mat-raised-button color="accent" class="nav-link" routerLink="/login">Login</a>
