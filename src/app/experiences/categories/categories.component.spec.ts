@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { MaterialModule } from '../../material/material.module';
 import { CategoriesComponent } from './categories.component';
+import { CategoryDetailComponent } from '../category-detail/category-detail.component';
+import { Category } from '../../models/category';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
@@ -11,7 +13,7 @@ fdescribe('CategoriesComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [MaterialModule],
-      declarations: [ CategoriesComponent ]
+      declarations: [ CategoriesComponent, CategoryDetailComponent ]
     })
     .compileComponents();
   }));
@@ -27,15 +29,15 @@ fdescribe('CategoriesComponent', () => {
   });
 
   it('should get random color for a category', () => {
-    let fruit = component.mockCategories[1];
-    expect(fruit.name).toBe('Fruit');
-    expect(component.colors.includes(fruit['color'])).toBeTruthy();
+    let vegetables = component.mockCategories[1];
+    expect(vegetables.name).toBe('Vegetables');
+    expect(component.colors.includes(vegetables['color'])).toBeTruthy();
   });
 
   it('should display a mat-card for each category', () => {
     const categoryDe: DebugElement = fixture.debugElement;
     const cardDe = categoryDe.query(By.css('mat-card'));
     const card: HTMLElement = cardDe.nativeElement;
-    expect(card.textContent).toContain('Vegetables');
+    expect(card.textContent).toContain('Thrills');
   });
 });
