@@ -1,11 +1,9 @@
-<p>
-  Dashboard works!
-</p>
 <div *ngIf="isLoggedIn()">
-  <h2>Welcome {{user.name}}</h2>
+  <h2>Welcome {{ user?.name }}</h2>
   <h4>Here's your Categories</h4>
-  <div class="user-categories" *ngFor="let name of user.tracked_info; let i=index">
-    <li>{{ user.tracked_info[i].name }}</li>
+  <div class="user-categories" *ngFor="let name of user?.tracked_categories; let i=index">
+     {{ user?.tracked_categories[i].name }}
   </div>
+
 </div>
 <app-categories></app-categories>

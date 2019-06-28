@@ -8,20 +8,20 @@ import { UserService } from './../../services/user.service';
 })
 export class HeaderComponent {
   @Output() public sidenavToggle = new EventEmitter();
-  
+
   constructor(private userService: UserService) {}
 
   public onToggleSidenav = () => {
     this.sidenavToggle.emit();
   }
-  
+
   /*
 	Checks to see if User is signed in (ie instantiated user.id)
   */
   isLoggedIn(): boolean {
     return this.userService.isLoggedIn();
   }
-  
+
   /*
 	Logs user out, routes to homepage
   */

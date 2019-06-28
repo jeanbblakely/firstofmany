@@ -21,11 +21,11 @@ describe('RegisterComponent', () => {
       name: "Boo Berry",
       birthdate: "1990-01-01",
       gender: "Female",
-      tracked_info: [
-        { 
+      tracked_categories: [
+        {
         name: "Thrills",
         experiences: [
-          { 
+          {
             name: "Sky Diving",
             note: "So fun",
             img: "img.jpg",
@@ -38,11 +38,11 @@ describe('RegisterComponent', () => {
             img: "img.jpg",
             datestamp: "1/10/2019",
             favorite: false
-      
+
           }
          ]
         },
-        { 
+        {
         name: "Vegetables",
           experiences: [
             {
@@ -58,21 +58,21 @@ describe('RegisterComponent', () => {
               img: "img.jpg",
               datestamp: "1/18/2019",
               favorite: true
-      
+
             }
-          ]  
+          ]
         }
       ]
     };
-    
+
   login(username: string, password: string): boolean {
      return username == this.user.username && password == this.user.password;
   }
-    
+
     getUser() {
       return of(this.user);
     }
-    
+
     register() {
       return true;
     }
@@ -83,14 +83,14 @@ describe('RegisterComponent', () => {
   beforeEach(async(() => {
     var mockUserService = new MockUserService();
     TestBed.configureTestingModule({
-      imports: [ 
-        FormsModule, 
+      imports: [
+        FormsModule,
         BrowserAnimationsModule,
         ReactiveFormsModule,
         RouterTestingModule,
         MaterialModule
       ],
-      providers: [ 
+      providers: [
         { provide: Router, useClass: class { navigate = jasmine.createSpy("navigate"); } },
         UserService,
         { provide: UserService, useValue: mockUserService }
@@ -109,16 +109,16 @@ describe('RegisterComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  
+
    it('form should be invalid when empty', () => {
     expect(component.userForm.valid).toBeFalsy();
   });
-  
+
    it('error message should show when invalid form is submitted', () => {
     component.register();
     expect(component.message).toEqual('your form has errors');
   });
-  
+
   it('success message should show when valid form is submitted', () => {
     component.userForm.controls['username'].setValue('jblakely');
     component.userForm.controls['password'].setValue('password');
@@ -129,21 +129,21 @@ describe('RegisterComponent', () => {
     component.register();
     expect(component.message).toEqual('thanks for registering');
   });
-  
+
   it('username field validity', () => {
     let errors = {};
     let username = component.userForm.controls['username'];
     errors = username.errors || {};
     expect(errors['required']).toBeTruthy();
   });
-  
+
   it('password field required validity', () => {
     let errors = {};
     let password = component.userForm.controls['password'];
     errors = password.errors || {};
     expect(errors['required']).toBeTruthy();
   });
-  
+
   it('password field length validity error', () => {
     let errors = {};
     component.userForm.controls['password'].setValue('abc');
@@ -151,7 +151,7 @@ describe('RegisterComponent', () => {
     errors = password.errors || {};
     expect(errors['minlength']).toBeTruthy();
   });
-  
+
   it('password field length validity no error', () => {
     let errors = {};
     component.userForm.controls['password'].setValue('abcdefgh');
@@ -159,14 +159,14 @@ describe('RegisterComponent', () => {
     errors = password.errors || {};
     expect(errors['minlength']).toBeFalsy();
   });
-  
+
   it('email field required validity', () => {
     let errors = {};
     let email = component.userForm.controls['email'];
     errors = email.errors || {};
     expect(errors['required']).toBeTruthy();
   });
-  
+
   it('email field email validity not formatted', () => {
     let errors = {};
     component.userForm.controls['email'].setValue('jblakely#gmail.com');
@@ -174,7 +174,7 @@ describe('RegisterComponent', () => {
     errors = email.errors || {};
     expect(errors['email']).toBeTruthy();
   });
-  
+
   it('email field email validity formatted', () => {
     let errors = {};
     component.userForm.controls['email'].setValue('jblakely@gmail.com');
@@ -182,14 +182,14 @@ describe('RegisterComponent', () => {
     errors = email.errors || {};
     expect(errors['email']).toBeFalsy();
   });
-  
+
   it('name field validity required', () => {
     let errors = {};
     let name = component.userForm.controls['name'];
     errors = name.errors || {};
     expect(errors['required']).toBeTruthy();
   });
-  
+
   it('birthdate field validity required', () => {
     let errors = {};
     component.userForm.controls['birthdate'].setValue('');
@@ -197,12 +197,12 @@ describe('RegisterComponent', () => {
     errors = birthdate.errors || {};
     expect(errors['required']).toBeTruthy();
   });
-  
+
   it('gender field validity pattern', () => {
     let errors = {};
     let gender = component.userForm.controls['gender'];
     errors = gender.errors || {};
     expect(errors['pattern']).toBeTruthy();
   });
-  
+
 });

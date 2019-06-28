@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { UserService } from '../../services/user.service';
+import { ActivatedRoute } from '@angular/router';
 import { User } from '../../models/user';
 
 @Component({
@@ -9,22 +10,23 @@ import { User } from '../../models/user';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  user: User;
-
-  constructor(private userService: UserService) { }
+  user: any;
+  constructor(private userService: UserService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.getUser();
   }
-  
+
   /*
 	Gets Observable User from service
   */
-  getUser(): void {
-    this.userService.getUser()
-      .subscribe(user => this.user = user);
+  getUser() {
+    let id = this.route.snapshot.params.id;
+    this.userService.getUser(id).subscribe(data => {
+      this.user = data
+    });
   }
-  
+
     /*
 	Checks to see if User is signed in (ie instantiated user.id)
   */

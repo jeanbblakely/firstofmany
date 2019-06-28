@@ -60,19 +60,29 @@ export class UserService {
         console.log(res['token']);
         console.log(res['userID']);
         if (res['token']) {
+          this.id = res['userID'];
           console.log('Token exists');
-          this.router.navigate(['dashboard']);
+      //    this.isLoggedIn();
+          this.router.navigate(['dashboard/' + res['userID']]);
           console.log(loginData.username);
         }
     });
   }
 
+  getUserID() {
+    return this.id;
+  }
+
   /*
 	Gets user based on number assigned in login
   */
-  getUser(): Observable<User> {
+  getMockUser(): Observable<User> {
     console.log(this.id, 'from getUser');
     return of(USERS[this.id]);
+  }
+
+  getUser(id) {
+    return this.httpClient.get(this.path + '/user/' + id);
   }
 
   /*
