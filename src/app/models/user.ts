@@ -10,5 +10,5 @@ export class User {
   name: string;
   birthdate: any;
   gender: string;
-  tracked_info: Category[];
+  tracked_categories: Category[];
 }

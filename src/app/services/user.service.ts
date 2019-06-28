@@ -60,8 +60,10 @@ export class UserService {
         console.log(res['token']);
         console.log(res['userID']);
         if (res['token']) {
+          this.id = res['userID'];
           console.log('Token exists');
-          this.router.navigate(['dashboard']);
+      //    this.isLoggedIn();
+          this.router.navigate(['dashboard/' + res['userID']]);
           console.log(loginData.username);
         }
     });
@@ -73,6 +75,10 @@ export class UserService {
   getUser(): Observable<User> {
     console.log(this.id, 'from getUser');
     return of(USERS[this.id]);
+  }
+
+  getUser(id) {
+    return this.httpClient.get(this.path + '/user/' + id);
   }
 
   /*

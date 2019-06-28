@@ -18,7 +18,7 @@ import { HeaderComponent } from './navigation/header/header.component';
 import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { RegisterComponent } from './user/register/register.component';
-import { MatFormFieldModule, MatInputModule } from '@angular/material';
+import { MatFormFieldModule, MatInputModule, MatListModule } from '@angular/material';
 import { FooterComponent } from './navigation/footer/footer.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
@@ -48,6 +48,7 @@ import { environment } from '../environments/environment';
     MaterialModule,
     MatFormFieldModule,
     MatInputModule,
+    MatListModule,
     FlexLayoutModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
