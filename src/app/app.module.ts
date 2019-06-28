@@ -21,6 +21,9 @@ import { RegisterComponent } from './user/register/register.component';
 import { MatFormFieldModule, MatInputModule } from '@angular/material';
 import { FooterComponent } from './navigation/footer/footer.component';
 import { CategoryDetailComponent } from './experiences/category-detail/category-detail.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
+
 
 @NgModule({
   declarations: [
@@ -48,7 +51,8 @@ import { CategoryDetailComponent } from './experiences/category-detail/category-
     MaterialModule,
     MatFormFieldModule,
     MatInputModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     UserService
