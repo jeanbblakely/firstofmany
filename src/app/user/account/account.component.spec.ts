@@ -116,7 +116,6 @@ describe('AccountComponent', () => {
   });
   
   it('form should be valid when submitted with prefilled user info', () => {
-    console.log(component.userForm, 'userform in prefil');
     expect(component.userForm.valid).toBeTruthy();
   });
   

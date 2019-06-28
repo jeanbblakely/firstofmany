@@ -11,9 +11,8 @@ import { CategoryService } from '../../services/category.service';
 })
 export class CategoriesComponent implements OnInit {
   categories: Category[];
-  categories1 = CATEGORIES;
   selectedCategory: Category;
-  mockCategories1 = [
+  mockCategories = [
     {name: 'Vegetables'},
     {name: 'Fruit'}, 
     {name: 'Countries'},
