@@ -1,4 +1,5 @@
 <p class="mat-display-1">Categories</p>
+<app-category-detail [category]="selectedCategory"></app-category-detail>
 
 <div class="categories" fxLayout="row wrap" fxflexfill fxLayoutGap="3%" >
   <mat-card *ngFor="let c of mockCategories"  (click)="onSelect(c)" fxFlex="30" fxFlex.xs="45" [ngStyle]="{'background-color': c.color}">
@@ -8,13 +9,8 @@
   </mat-card>
 </div>
 
-<app-category-detail [category]="selectedCategory"></app-category-detail>
-<div *ngIf="selectedCategory">
-<h2>{{ selectedCategory.name }}</h2>
-<div *ngFor="let experience of selectedCategory.experiences; let i=index">
-  <li>{{selectedCategory.experiences[i].name}}</li>
-</div>
-</div>
+
+
 
 
 
