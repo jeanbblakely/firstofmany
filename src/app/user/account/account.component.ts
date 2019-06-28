@@ -59,7 +59,7 @@ export class AccountComponent implements OnInit {
   */
   updateForm() {
     this.userForm = this.fb.group({
-      id: [this.user._id],
+      id: [this.user.id],
       username: [this.user.username, [Validators.required]],
       password: [this.user.password, [Validators.required, Validators.minLength(8)]],
       name: [this.user.name, [Validators.required]],
