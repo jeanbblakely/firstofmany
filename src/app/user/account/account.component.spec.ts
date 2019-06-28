@@ -72,6 +72,10 @@ describe('AccountComponent', () => {
     getUser() {
       return of(this.user);
     }
+    
+    updateUser(id: string, data: any): boolean {
+       return true; 
+    }
   }
   
   let component: AccountComponent;

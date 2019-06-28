@@ -9,7 +9,7 @@ import { CategoryService } from '../../services/category.service';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
-fdescribe('CategoriesComponent', () => {
+describe('CategoriesComponent', () => {
   class MockCategoryService {
      categories = CATEGORIES;
      getCategories(): Observable<Category[]> {
