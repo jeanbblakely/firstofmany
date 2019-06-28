@@ -10,6 +10,7 @@ import { CATEGORIES } from '../../mock-categories';
 })
 export class CategoriesComponent implements OnInit {
   mockCategories = CATEGORIES;
+  selectedCategory: Category;
   mockCategories1 = [
     {name: 'Vegetables'},
     {name: 'Fruit'}, 
@@ -40,4 +41,8 @@ export class CategoriesComponent implements OnInit {
       this.mockCategories[i]['color'] = this.colors[Math.floor(Math.random() * this.colors.length)];
     }
   }
+  
+  onSelect(category: Category): void {
+    this.selectedCategory = category;   
+  } 
 }
