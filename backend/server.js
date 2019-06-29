@@ -69,9 +69,9 @@ app.get('/user/:id', async(req, res)=> {
 });
 
 app.post('/user/:id/update', async(req, res)=> {
-    User.findByIdAndUpdate(req.params.id, {$set: req.body}, function (err, product) {
+    User.findByIdAndUpdate(req.params.id, {$set: req.body}, function (err, user) {
         if (err) return next(err);
-        res.send('Product udpated.');
+        res.send('User updated.');
     });
 });
 
