@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, throwError, Subject } from 'rxjs';
 import { User } from '../models/user';
+import { Category } from '../models/category';
 import { USERS } from '../mock-users';
 import { HttpClient } from '@angular/common/http';
 import { environment } from './../../environments/environment';
@@ -81,12 +82,23 @@ export class UserService {
     return of(USERS[this.id]);
   }
 
+   /*
+	Gets user based on id instantiated at login
+  */
   getUser(): Observable<User> {
     return this.httpClient.get<User>(this.path + '/user/' + this.id);
   }
+  
+  /*
+	Gets user Categories
+  */
+  getUserCategories(): Observable<Category[]> {
+    //return this.httpClient.get<Category[]>(this.path + '/user/' + this.id);
+    return of(USERS[1].tracked_categories);
+  }
 
   /*
-	Registers a new user
+	Registers a new user in the database
   */
   register(user: User): boolean {
     this.sendUserRegistration(user);
