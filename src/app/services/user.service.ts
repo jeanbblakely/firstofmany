@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 })
 export class UserService {
   id: any;
+  index: number;
   path = environment.path
   authpath = environment.path + '/auth';
 
@@ -25,12 +26,15 @@ export class UserService {
 	Searches users for username/password match.  Returns true and assigns user number if match found, false otherwise.
   */
   login(username: string, password: string): boolean {
+    console.log('in login');
     var loginData = { username, password }
     this.loginUser(loginData);
+    console.log('after database');
     var i;
     for (i = 0; i < USERS.length; i++) {
       if (USERS[i].username == username && USERS[i].password == password) {
-        this.id = i;
+        console.log('in mock loop');
+        this.index = i;
         return true;
       }
    }
@@ -94,7 +98,7 @@ export class UserService {
   */
   getUserCategories(): Observable<Category[]> {
     //return this.httpClient.get<Category[]>(this.path + '/user/' + this.id);
-    return of(USERS[1].tracked_categories);
+    return of(USERS[this.index].tracked_categories);
   }
 
   /*

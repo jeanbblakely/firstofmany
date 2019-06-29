@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Category } from '../../models/category';
 import { CATEGORIES } from '../../mock-categories';
 import { CategoryService } from '../../services/category.service';
@@ -11,6 +11,7 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./categories.component.css']
 })
 export class CategoriesComponent implements OnInit {
+  @Input() isDashBoard = false;
   categories: Category[];
   selectedCategory: Category;
   mockCategories = [
@@ -35,8 +36,12 @@ export class CategoriesComponent implements OnInit {
   constructor(private categoryService: CategoryService, private userService: UserService) { }
 
   ngOnInit() {
-    //this.getCategories();
-    this.getUserCategories();
+    console.log(this.isDashBoard, 'isDashBoard');
+    if (!this.isDashBoard) {
+      this.getCategories();
+    } else {
+      this.getUserCategories();
+    }
     this.getRandomColors();
     
   }
