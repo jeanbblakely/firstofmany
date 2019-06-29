@@ -81,7 +81,7 @@ export class UserService {
     return of(USERS[this.id]);
   }
 
-  getUser(id): Observable<User> {
+  getUser(): Observable<User> {
     return this.httpClient.get<User>(this.path + '/user/' + this.id);
   }
 

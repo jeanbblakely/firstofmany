@@ -16,7 +16,7 @@ export class AccountComponent implements OnInit {
   genders = ['--', 'Female', 'Male', 'Non-binary/third gender', 'Prefer not to say'];
   minDate = new Date(1900,0,1);
   maxDate = new Date(Date.now() + 24 * 60 * 60 * 1000);
-  user: any;
+  user: User;
 
 
   constructor(private userService: UserService,
@@ -32,8 +32,8 @@ export class AccountComponent implements OnInit {
 	Gets Observable User from service and fills in form
   */
   getUser() {
-    let id = this.userService.getUserID();
-    this.userService.getUser(id).subscribe(data => {
+    //let id = this.userService.getUserID();
+    this.userService.getUser().subscribe(data => {
       this.user = data;
       this.updateForm();
     });
