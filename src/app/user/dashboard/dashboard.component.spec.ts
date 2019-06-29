@@ -69,6 +69,10 @@ describe('DashboardComponent', () => {
     isLoggedIn() {
       return true;
     }
+    
+    getUserCategories(): Observable<Category[]> {
+      return of(this.user.tracked_categories);
+    }
   }
   let component: DashboardComponent;
   let fixture: ComponentFixture<DashboardComponent>;

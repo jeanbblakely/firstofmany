@@ -35,6 +35,7 @@ export class UserService {
       if (USERS[i].username == username && USERS[i].password == password) {
         console.log('in mock loop');
         this.index = i;
+        this.id = i;
         return true;
       }
    }
