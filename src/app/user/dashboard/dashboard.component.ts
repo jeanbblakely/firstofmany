@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { UserService } from '../../services/user.service';
-import { ActivatedRoute } from '@angular/router';
 import { User } from '../../models/user';
 
 @Component({
@@ -11,7 +10,7 @@ import { User } from '../../models/user';
 })
 export class DashboardComponent implements OnInit {
   user: User;
-  constructor(private userService: UserService, private route: ActivatedRoute) { }
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
     this.getUser();

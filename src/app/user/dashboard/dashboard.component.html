@@ -2,7 +2,7 @@
   <h2>Welcome {{ user?.name }}</h2>
   <h4>Here's your Categories</h4>
   <div class="user-categories" *ngFor="let name of user?.tracked_categories; let i=index">
-     {{ user?.tracked_categories[i].name }}
+     <li>{{ user?.tracked_categories[i].name }}</li>
   </div>
 
 </div>
