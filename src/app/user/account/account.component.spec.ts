@@ -69,7 +69,7 @@ describe('AccountComponent', () => {
      return username == this.user.username && password == this.user.password;
   }
 
-    getMockUser() {
+    getUser() {
       return of(this.user);
     }
     
