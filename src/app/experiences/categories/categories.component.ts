@@ -39,7 +39,6 @@ export class CategoriesComponent implements OnInit {
     console.log(this.isDashBoard, 'isDashBoard');
     if (!this.isDashBoard) {
       this.getCategories();
-      this.getRandomColors();
     } else {
       this.getUserCategories();
     }
@@ -51,7 +50,10 @@ export class CategoriesComponent implements OnInit {
   */
   getCategories(): void {
     this.categoryService.getCategories()
-      .subscribe(categories => this.categories = categories);
+      .subscribe(categories => {
+        this.categories = categories;
+        this.getRandomColors();
+       });
   }
 
    /*
