@@ -76,7 +76,8 @@ export class AccountComponent implements OnInit {
       console.log('after copy', result);
       this.userService.updateUser(result);
       this.message = 'successfully updated';
-      this.router.navigate(['dashboard/' + this.userService.getUserID()]);
+      //this.router.navigate(['dashboard/' + this.userService.getUserID()]);
+      this.router.navigate(['dashboard']);
     } else {
       this.message = 'your form has errors';
     }

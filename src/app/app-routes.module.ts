@@ -17,8 +17,8 @@ const appRoutes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'categories', component: CategoriesComponent },
   { path: 'category-create', component: CategoryCreateComponent },
-  { path: 'account/:id', component: AccountComponent },
-  { path: 'dashboard/:id', component: DashboardComponent },
+  { path: 'account', component: AccountComponent },
+  { path: 'dashboard', component: DashboardComponent },
   { path: '**', redirectTo: 'home' }
 ];
 
