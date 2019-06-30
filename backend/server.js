@@ -68,10 +68,20 @@ app.get('/user/:id', async(req, res)=> {
   }
 });
 
+app.get('/usercategories/:id', async(req, res)=> {
+  try {
+    let user = await User.findById(req.params.id, '-password -__v');
+    res.send(user.tracked_categories);
+  } catch (error){
+    console.log(error);
+    res.sendStatus(500);
+  }
+});
+
 app.post('/user/:id/update', async(req, res)=> {
-    User.findByIdAndUpdate(req.params.id, {$set: req.body}, function (err, product) {
+    User.findByIdAndUpdate(req.params.id, {$set: req.body}, function (err, user) {
         if (err) return next(err);
-        res.send('Product udpated.');
+        res.send('User updated.');
     });
 });
 
