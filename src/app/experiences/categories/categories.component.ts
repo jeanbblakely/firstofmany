@@ -16,7 +16,7 @@ export class CategoriesComponent implements OnInit {
   selectedCategory: Category;
   mockCategories = [
     {name: 'Vegetables'},
-    {name: 'Fruit'}, 
+    {name: 'Fruit'},
     {name: 'Countries'},
     {name: 'Movies'},
     {name: 'Thrills'},
@@ -43,9 +43,9 @@ export class CategoriesComponent implements OnInit {
       this.getUserCategories();
     }
     this.getRandomColors();
-    
+
   }
-  
+
    /*
 	Gets Observable Categories array from service
   */
@@ -53,7 +53,7 @@ export class CategoriesComponent implements OnInit {
     this.categoryService.getCategories()
       .subscribe(categories => this.categories = categories);
   }
-  
+
    /*
 	Gets Observable User Categories array from service
   */
@@ -67,11 +67,11 @@ export class CategoriesComponent implements OnInit {
       this.categories[i]['color'] = this.colors[Math.floor(Math.random() * this.colors.length)];
     }
   }
-  
+
   /*
 	Select click method for singl Category objects
   */
   onSelect(category: Category): void {
-    this.selectedCategory = category;   
-  } 
+    this.selectedCategory = category;
+  }
 }

@@ -93,13 +93,13 @@ export class UserService {
   getUser(): Observable<User> {
     return this.httpClient.get<User>(this.path + '/user/' + this.id);
   }
-  
+
   /*
 	Gets user Categories
   */
   getUserCategories(): Observable<Category[]> {
-    //return this.httpClient.get<Category[]>(this.path + '/user/' + this.id);
-    return of(USERS[this.index].tracked_categories);
+    return this.httpClient.get<Category[]>(this.path + '/usercategories/' + this.id);
+    //return of(USERS[this.index].tracked_categories);
   }
 
   /*

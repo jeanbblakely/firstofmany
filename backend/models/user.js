@@ -9,8 +9,11 @@ var userSchema = new mongoose.Schema({
   name: String,
   birthdate: Date,
   gender: String,
-  tracked_categories: [{ type: Schema.Types.ObjectId, ref: 'Category' }] ,
+  tracked_categories: [categorySchema['Category'], {_id : false }],
   favorites: Array
 })
 
 module.exports = mongoose.model('User', userSchema)
+
+
+//[{ type: Schema.Types.ObjectId, ref: 'Category' }]
