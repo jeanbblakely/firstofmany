@@ -1,4 +1,5 @@
-var mongoose = require('mongoose');
+var mongoose = require('mongoose'), Schema = mongoose.Schema;
+var categorySchema = require('./category.js');
 
 var userSchema = new mongoose.Schema({
   email: { type: String, unique: true, required: 'email is required' },
@@ -8,8 +9,11 @@ var userSchema = new mongoose.Schema({
   name: String,
   birthdate: Date,
   gender: String,
-  tracked_categories: Array,
+  tracked_categories: [categorySchema['Category'], {_id : false }],
   favorites: Array
 })
 
 module.exports = mongoose.model('User', userSchema)
+
+
+//[{ type: Schema.Types.ObjectId, ref: 'Category' }]
