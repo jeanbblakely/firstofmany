@@ -7,6 +7,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { FooterComponent } from './navigation/footer/footer.component';
 import { MaterialModule } from './material/material.module';
@@ -31,7 +32,8 @@ describe('AppComponent', () => {
         BrowserAnimationsModule,
         MaterialModule,
         FlexLayoutModule,
-        HttpClientTestingModule
+        HttpClientTestingModule,
+        HttpClientModule
       ],
 
     }).compileComponents();

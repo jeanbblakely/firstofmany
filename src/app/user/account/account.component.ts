@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
-import { ActivatedRoute } from '@angular/router';
 import { User } from './../../models/user';
 
 @Component({
@@ -16,11 +15,11 @@ export class AccountComponent implements OnInit {
   genders = ['--', 'Female', 'Male', 'Non-binary/third gender', 'Prefer not to say'];
   minDate = new Date(1900,0,1);
   maxDate = new Date(Date.now() + 24 * 60 * 60 * 1000);
-  user: any;
+  user: User;
 
 
   constructor(private userService: UserService,
-    private router: Router, private fb: FormBuilder, private activatedRoute: ActivatedRoute) {
+    private router: Router, private fb: FormBuilder) {
 
     }
 
@@ -32,8 +31,8 @@ export class AccountComponent implements OnInit {
 	Gets Observable User from service and fills in form
   */
   getUser() {
-    let id = this.userService.getUserID();
-    this.userService.getUser(id).subscribe(data => {
+    //let id = this.userService.getUserID();
+    this.userService.getUser().subscribe(data => {
       this.user = data;
       this.updateForm();
     });
@@ -59,7 +58,6 @@ export class AccountComponent implements OnInit {
   */
   updateForm() {
     this.userForm = this.fb.group({
-      id: [this.user._id],
       username: [this.user.username, [Validators.required]],
       password: [this.user.password, [Validators.required, Validators.minLength(8)]],
       name: [this.user.name, [Validators.required]],

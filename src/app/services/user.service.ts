@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, throwError, Subject } from 'rxjs';
 import { User } from '../models/user';
+import { Category } from '../models/category';
 import { USERS } from '../mock-users';
 import { HttpClient } from '@angular/common/http';
 import { environment } from './../../environments/environment';
@@ -12,6 +13,7 @@ import { Router } from '@angular/router';
 })
 export class UserService {
   id: any;
+  index: number;
   path = environment.path
   authpath = environment.path + '/auth';
 
@@ -24,11 +26,15 @@ export class UserService {
 	Searches users for username/password match.  Returns true and assigns user number if match found, false otherwise.
   */
   login(username: string, password: string): boolean {
+    console.log('in login');
     var loginData = { username, password }
     this.loginUser(loginData);
+    console.log('after database');
     var i;
     for (i = 0; i < USERS.length; i++) {
       if (USERS[i].username == username && USERS[i].password == password) {
+        console.log('in mock loop');
+        this.index = i;
         this.id = i;
         return true;
       }
@@ -81,12 +87,23 @@ export class UserService {
     return of(USERS[this.id]);
   }
 
-  getUser(id) {
-    return this.httpClient.get(this.path + '/user/' + id);
+   /*
+	Gets user based on id instantiated at login
+  */
+  getUser(): Observable<User> {
+    return this.httpClient.get<User>(this.path + '/user/' + this.id);
+  }
+  
+  /*
+	Gets user Categories
+  */
+  getUserCategories(): Observable<Category[]> {
+    //return this.httpClient.get<Category[]>(this.path + '/user/' + this.id);
+    return of(USERS[this.index].tracked_categories);
   }
 
   /*
-	Registers a new user
+	Registers a new user in the database
   */
   register(user: User): boolean {
     this.sendUserRegistration(user);

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Category } from '../../models/category';
 import { CATEGORIES } from '../../mock-categories';
 import { CategoryService } from '../../services/category.service';
+import { UserService } from '../../services/user.service';
 
 
 @Component({
@@ -10,6 +11,7 @@ import { CategoryService } from '../../services/category.service';
   styleUrls: ['./categories.component.css']
 })
 export class CategoriesComponent implements OnInit {
+  @Input() isDashBoard = false;
   categories: Category[];
   selectedCategory: Category;
   mockCategories = [
@@ -31,10 +33,15 @@ export class CategoriesComponent implements OnInit {
     '#f74fc2', // cat-pink: #f74fc2;
   ]
 
-  constructor(private categoryService: CategoryService) { }
+  constructor(private categoryService: CategoryService, private userService: UserService) { }
 
   ngOnInit() {
-    this.getCategories();
+    console.log(this.isDashBoard, 'isDashBoard');
+    if (!this.isDashBoard) {
+      this.getCategories();
+    } else {
+      this.getUserCategories();
+    }
     this.getRandomColors();
     
   }
@@ -44,6 +51,14 @@ export class CategoriesComponent implements OnInit {
   */
   getCategories(): void {
     this.categoryService.getCategories()
+      .subscribe(categories => this.categories = categories);
+  }
+  
+   /*
+	Gets Observable User Categories array from service
+  */
+  getUserCategories(): void {
+    this.userService.getUserCategories()
       .subscribe(categories => this.categories = categories);
   }
 
