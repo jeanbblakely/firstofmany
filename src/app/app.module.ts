@@ -24,6 +24,7 @@ import { CategoryDetailComponent } from './experiences/category-detail/category-
 import { CategoryService } from './services/category.service';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { CategoryCreateComponent } from './experiences/category-create/category-create.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { environment } from '../environments/environment';
     SidenavListComponent,
     RegisterComponent,
     FooterComponent,
-    CategoryDetailComponent
+    CategoryDetailComponent,
+    CategoryCreateComponent
   ],
   imports: [
     BrowserModule,
