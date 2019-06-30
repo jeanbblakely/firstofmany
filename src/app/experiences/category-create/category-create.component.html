@@ -1,0 +1,29 @@
+<section>
+  <mat-card> 
+    <mat-card-header>
+        <mat-card-title>Add a New Category</mat-card-title>
+    </mat-card-header>
+    <form [formGroup]="categoryForm" (ngSubmit)="addCategory()" autocomplete="off" novalidate>
+      <mat-card-content>
+
+        <mat-form-field>
+          <input matInput type="text" placeholder="Name" id="name" formControlName="name" required>
+          <mat-error *ngIf="hasError('name', 'required')">Please enter a category name</mat-error>
+        </mat-form-field>
+
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button mat-fab type="submit" [disabled]="!categoryForm.valid">Add</button>
+      </mat-card-actions>
+
+    </form>
+
+    <mat-card-footer>
+      <h3>{{message}}</h3>
+    </mat-card-footer>
+  </mat-card>
+
+  <p>Form Control values: {{ categoryForm.value | json }}</p>
+  <p>Form Control status: {{ categoryForm.status | json }}</p>
+</section>

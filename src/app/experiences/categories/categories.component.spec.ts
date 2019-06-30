@@ -68,4 +68,28 @@ describe('CategoriesComponent', () => {
     const card: HTMLElement = cardDe.nativeElement;
     expect(card.textContent).toContain('Thrills');
   });
+  
+   it('should call getCategories but not getUserCategories on default if isDashboard is false', () => {
+    spyOn(component, 'getCategories');
+    spyOn(component, 'getUserCategories');
+    component.ngOnInit();
+    expect(component.getCategories).toHaveBeenCalled();
+    expect(component.getCategories).toHaveBeenCalledTimes(1);
+    expect(component.getUserCategories).not.toHaveBeenCalled();
+  });
+  
+   it('should call getUserCategories but not getCategories if isDashboard is true', () => {
+    spyOn(component, 'getUserCategories');
+    spyOn(component, 'getCategories');
+    component.isDashBoard = true;
+    component.ngOnInit();
+    expect(component.getUserCategories).toHaveBeenCalled();
+    expect(component.getUserCategories).toHaveBeenCalledTimes(1);
+    expect(component.getCategories).not.toHaveBeenCalled();
+  });
+  
+   it('should set selectedCategory to Category passed in onSelect', () => {
+    component.onSelect(CATEGORIES[0]);
+    expect(component.selectedCategory).toBe(CATEGORIES[0]);
+  });
 });

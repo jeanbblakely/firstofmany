@@ -30,7 +30,7 @@ export class LoginComponent {
   //    console.log(this.loginData.get('password').value);
       if (this.userService.login(this.loginData.get('username').value, this.loginData.get('password').value)) {
         this.message = 'logged in';
-  //      this.router.navigate(['dashboard/' + this.loginData.get('_id')]);
+  //      this.router.navigate(['dashboard']);
       } else {
         this.message = 'not logged in';
       }

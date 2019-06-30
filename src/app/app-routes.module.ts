@@ -6,6 +6,7 @@ import { AccountComponent } from './user/account/account.component';
 import { DashboardComponent } from './user/dashboard/dashboard.component';
 import { RegisterComponent } from './user/register/register.component';
 import { CategoriesComponent } from './experiences/categories/categories.component';
+import { CategoryCreateComponent } from './experiences/category-create/category-create.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -15,8 +16,9 @@ const appRoutes: Routes = [
   { path: 'account', component: AccountComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'categories', component: CategoriesComponent },
-  { path: 'account/:id', component: AccountComponent },
-  { path: 'dashboard/:id', component: DashboardComponent },
+  { path: 'category-create', component: CategoryCreateComponent },
+  { path: 'account', component: AccountComponent },
+  { path: 'dashboard', component: DashboardComponent },
   { path: '**', redirectTo: 'home' }
 ];
 

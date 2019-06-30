@@ -1,0 +1,25 @@
+/* .alert {
+  color: red;
+  font-style: italic;
+  font-size: .8em;
+}
+
+.container {
+  text-align: center;
+  width: 100%;
+}
+*/
+mat-card {
+  margin: 0 auto;
+  max-width: 500px;
+  text-align: center;
+}
+mat-form-field {
+  max-width: 100%;
+  width: 500px;
+  display: block;
+} 
+
+mat-card-actions {
+  text-align: center;
+}

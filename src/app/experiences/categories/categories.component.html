@@ -1,4 +1,8 @@
 <p class="mat-display-1">Categories</p>
+<div *ngIf="!isDashBoard">
+  <p>Don't see what you're looking for?
+  <button routerLink="/category-create">Add New Categories</button> to track</p>
+</div>
 <app-category-detail [category]="selectedCategory"></app-category-detail>
 
 <div class="categories" fxLayout="row wrap" fxflexfill fxLayoutGap="3%" >
