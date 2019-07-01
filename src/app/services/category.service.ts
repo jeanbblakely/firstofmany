@@ -26,10 +26,18 @@ export class CategoryService {
   searchCategories(name: string): Observable<Category> {
     var i;
     for (i = 0; i < CATEGORIES.length; i++) {
-      if (CATEGORIES[i].name == name) {
+      if (CATEGORIES[i].name.toUpperCase() === name.toUpperCase()) {
         return of(CATEGORIES[i]);
       }
    }
     return null;
+  }
+  
+   /*
+	Creates new Category in db
+  */
+  createCategory(category: Category): Observable<Category> {
+    //todo Add Category object to db 
+    return of(CATEGORIES[0]);
   }
 }
