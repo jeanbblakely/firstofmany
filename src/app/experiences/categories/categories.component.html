@@ -1,9 +1,9 @@
 <p class="mat-display-1">Categories</p>
 <div *ngIf="!isDashBoard">
   <p>Don't see what you're looking for?
-  <button routerLink="/category-create">Add New Categories</button> to track</p>
+    <button mat-raised-button color="primary" routerLink="/category-create">Add New Category</button>
+  </p>
 </div>
-<app-category-detail [category]="selectedCategory"></app-category-detail>
 
 <div class="categories" fxLayout="row wrap" fxflexfill fxLayoutGap="3%" >
   <mat-card *ngFor="let c of categories"  (click)="onSelect(c)" fxFlex="30" fxFlex.xs="45" [ngStyle]="{'background-color': c.color}">
@@ -12,10 +12,3 @@
     </mat-card-content>
   </mat-card>
 </div>
-
-
-
-
-
-
-
