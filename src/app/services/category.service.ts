@@ -19,4 +19,17 @@ export class CategoryService {
   getCategories(): Observable<Category[]> {
     return of(CATEGORIES);
   }
+  
+  /*
+	Searches Categories table for matching name
+  */
+  searchCategories(name: string): Observable<Category> {
+    var i;
+    for (i = 0; i < CATEGORIES.length; i++) {
+      if (CATEGORIES[i].name == name) {
+        return of(CATEGORIES[i]);
+      }
+   }
+    return null;
+  }
 }

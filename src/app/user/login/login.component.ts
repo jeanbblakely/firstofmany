@@ -26,11 +26,9 @@ export class LoginComponent {
   */
   login() {
     if (this.loginData.valid) {
-  //    console.log(this.loginData.get('username').value);
-  //    console.log(this.loginData.get('password').value);
       if (this.userService.login(this.loginData.get('username').value, this.loginData.get('password').value)) {
         this.message = 'logged in';
-  //      this.router.navigate(['dashboard']);
+        //this.router.navigate(['dashboard']);
       } else {
         this.message = 'not logged in';
       }

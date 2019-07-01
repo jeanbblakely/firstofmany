@@ -26,14 +26,11 @@ export class UserService {
 	Searches users for username/password match.  Returns true and assigns user number if match found, false otherwise.
   */
   login(username: string, password: string): boolean {
-    console.log('in login');
     var loginData = { username, password }
     this.loginUser(loginData);
-    console.log('after database');
     var i;
     for (i = 0; i < USERS.length; i++) {
       if (USERS[i].username == username && USERS[i].password == password) {
-        console.log('in mock loop');
         this.index = i;
         this.id = i;
         return true;
@@ -69,7 +66,7 @@ export class UserService {
           this.id = res['userID'];
           console.log('Token exists');
       //    this.isLoggedIn();
-          this.router.navigate(['dashboard/' + res['userID']]);
+          this.router.navigate(['dashboard']);
           console.log(loginData.username);
         }
     });
