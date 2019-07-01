@@ -3,6 +3,8 @@ import { Category } from '../../models/category';
 import { CATEGORIES } from '../../mock-categories';
 import { CategoryService } from '../../services/category.service';
 import { UserService } from '../../services/user.service';
+import { MatDialog, MatDialogConfig } from '@angular/material';
+import { CategoryDetailComponent } from '../category-detail/category-detail.component';
 
 
 @Component({
@@ -33,7 +35,7 @@ export class CategoriesComponent implements OnInit {
     '#f74fc2', // cat-pink: #f74fc2;
   ]
 
-  constructor(private categoryService: CategoryService, private userService: UserService) { }
+  constructor(private categoryService: CategoryService, private userService: UserService, private dialog: MatDialog) { }
 
   ngOnInit() {
     console.log(this.isDashBoard, 'isDashBoard');
@@ -80,5 +82,21 @@ export class CategoriesComponent implements OnInit {
   */
   onSelect(category: Category): void {
     this.selectedCategory = category;
+    this.openDialog();
+  }
+
+  openDialog(): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    dialogConfig.height = '50%';
+    dialogConfig.width = '70%';
+    dialogConfig.minWidth = 250;
+    dialogConfig.minHeight = 300;
+    dialogConfig.maxWidth = 500;
+    dialogConfig.maxHeight = 500;
+    dialogConfig.restoreFocus = true;
+    dialogConfig.data = this.selectedCategory;
+    this.dialog.open(CategoryDetailComponent, dialogConfig);
   }
 }

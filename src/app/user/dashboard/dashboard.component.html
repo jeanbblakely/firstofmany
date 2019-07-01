@@ -1,8 +1,8 @@
 <div *ngIf="isLoggedIn()">
   <h2>Welcome {{ user?.name }}</h2>
   <h4>Here's your Categories</h4>
-  <div class="user-categories" *ngFor="let name of user?.tracked_categories; let i=index">
-     <li>{{ user?.tracked_categories[i].name }}</li>
+  <div class="user-categories" *ngFor="let category of user?.tracked_categories">
+     <li>{{ category.name }}</li>
   </div>
 
 </div>
