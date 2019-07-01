@@ -65,6 +65,7 @@ import { CategoryCreateComponent } from './experiences/category-create/category-
     CategoryService
   ],
 
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [CategoryDetailComponent]
 })
 export class AppModule { }

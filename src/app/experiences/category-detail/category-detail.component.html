@@ -1,7 +1,9 @@
-<div *ngIf="category">
-<h2>{{ category.name }}</h2>
-<div *ngFor="let experience of category.experiences; let i=index">
-  <li>{{category.experiences[i].name}}</li>
-</div>
-</div>
-
+<mat-dialog-actions fxLayout="row" fxLayoutAlign="start end">
+  <h2 mat-dialog-title fxFlex>{{ category.name }}</h2>
+  <button mat-raised-button color="accent">Add a first</button>
+</mat-dialog-actions>
+<mat-dialog-content>
+  <mat-list>
+    <mat-list-item *ngFor="let experience of category.experiences">{{ experience.name }}</mat-list-item>
+  </mat-list>
+</mat-dialog-content>
