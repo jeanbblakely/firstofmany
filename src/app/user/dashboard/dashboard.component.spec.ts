@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { UserService } from '../../services/user.service';
 import { CategoriesComponent } from '../../experiences/categories/categories.component';
 import { CategoryDetailComponent } from '../../experiences/category-detail/category-detail.component';
-import { MatFormFieldModule, MatInputModule, MatIconModule, MatCardModule } from '@angular/material';
+import { MatFormFieldModule, MatInputModule, MatIconModule, MatCardModule, MatDialogModule, MatListModule } from '@angular/material';
 import { Category } from '../../models/category';
 import { Observable, of, throwError } from 'rxjs';
 import { User } from '../../models/user';
@@ -88,7 +88,9 @@ describe('DashboardComponent', () => {
         { provide: UserService, useValue: mockUserService }
       ],
       imports: [
-        MatCardModule
+        MatCardModule,
+        MatDialogModule,
+        MatListModule
       ],
       declarations: [ DashboardComponent, CategoriesComponent, CategoryDetailComponent ]
     })
