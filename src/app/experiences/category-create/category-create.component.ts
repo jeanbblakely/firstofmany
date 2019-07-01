@@ -48,7 +48,9 @@ export class CategoryCreateComponent implements OnInit {
       } else {
         var currentCategory = this.searchCategory(this.categoryForm.get('name').value);
         console.log(currentCategory, 'current category');
-        var currentUser = this.userService.getUser();
+        var currentUser;
+        this.userService.getUser()
+          .subscribe(currentUser => currentUser);
         console.log(currentUser, 'current user');
         //todo updateUser with Category in UserService
       }

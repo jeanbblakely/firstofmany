@@ -88,6 +88,7 @@ export class UserService {
 	Gets user based on id instantiated at login
   */
   getUser(): Observable<User> {
+  
     return this.httpClient.get<User>(this.path + '/user/' + this.id);
   }
 

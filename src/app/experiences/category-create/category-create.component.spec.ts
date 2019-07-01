@@ -6,6 +6,8 @@ import { MaterialModule } from './../../material/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { CategoryCreateComponent } from './category-create.component';
 
 describe('CategoryCreateComponent', () => {
@@ -21,7 +23,8 @@ describe('CategoryCreateComponent', () => {
         RouterTestingModule,
         MatIconModule,
         MatCardModule,
-        MaterialModule
+        MaterialModule,
+        HttpClientTestingModule
       ],
       providers: [
         { provide: Router, useClass: class { navigate = jasmine.createSpy("navigate"); } }
