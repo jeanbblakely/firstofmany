@@ -5,7 +5,7 @@ export const CATEGORIES: Category[] = [
      {
         name: "Thrills",
         experiences: [
-          { 
+          {
             name: "Sky Diving",
             note: "",
             img: "",
@@ -19,7 +19,7 @@ export const CATEGORIES: Category[] = [
             datestamp: "",
             favorite: false
           },
-          
+
             {
             name: "Spelunking",
             note: "",
@@ -43,8 +43,8 @@ export const CATEGORIES: Category[] = [
           }
          ]
         },
-        { 
-        name: "Vegetables",
+        {
+          name: "Vegetables",
           experiences: [
             {
               name: "Eggplant",
@@ -59,7 +59,7 @@ export const CATEGORIES: Category[] = [
               img: "",
               datestamp: "",
               favorite: false
-      
+
             },
              {
               name: "Radishes",
@@ -67,23 +67,23 @@ export const CATEGORIES: Category[] = [
               img: "",
               datestamp: "",
               favorite: false
-      
+
             },
-            
+
             {
               name: "Green Beans",
               note: "",
               img: "",
               datestamp: "",
               favorite: false
-      
+
             }
-          ]  
+          ]
         },
-        { 
+        {
         name: "Concerts",
         experiences: [
-          { 
+          {
             name: "Kraftwerk",
             note: "",
             img: "",
@@ -96,16 +96,16 @@ export const CATEGORIES: Category[] = [
             img: "",
             datestamp: "",
             favorite: false
-      
+
           },
-          
+
           {
             name: "Led Zepplin",
             note: "",
             img: "",
             datestamp: "",
             favorite: false
-      
+
           },
           {
             name: "The Who",
@@ -113,14 +113,14 @@ export const CATEGORIES: Category[] = [
             img: "",
             datestamp: "",
             favorite: false
-      
+
           }
          ]
         },
-        { 
+        {
         name: "Cat Treats",
         experiences: [
-          { 
+          {
             name: "Friskies Liver",
             note: "",
             img: "",
@@ -133,13 +133,13 @@ export const CATEGORIES: Category[] = [
             img: "",
             datestamp: "",
             favorite: false
-      
+
           }
-        
+
       ]
     },
-    
-     { 
+
+     {
         name: "Cat Toys",
           experiences: [
             {
@@ -155,12 +155,12 @@ export const CATEGORIES: Category[] = [
               img: "",
               datestamp: "",
               favorite: true
-      
+
             }
-        ]  
+        ]
      },
-     
-     { 
+
+     {
         name: "Travel",
           experiences: [
             {
@@ -176,7 +176,7 @@ export const CATEGORIES: Category[] = [
               img: "",
               datestamp: "",
               favorite: true
-      
+
             },
             {
               name: "Spain",
@@ -184,12 +184,12 @@ export const CATEGORIES: Category[] = [
               img: "",
               datestamp: "",
               favorite: true
-      
+
             }
-        ]  
+        ]
      },
-     
-     { 
+
+     {
         name: "Fruits",
           experiences: [
             {
@@ -205,7 +205,7 @@ export const CATEGORIES: Category[] = [
               img: "",
               datestamp: "",
               favorite: true
-      
+
             },
             {
               name: "Bananna",
@@ -213,8 +213,8 @@ export const CATEGORIES: Category[] = [
               img: "",
               datestamp: "",
               favorite: true
-      
+
             }
-        ]  
+        ]
      }
 ];
