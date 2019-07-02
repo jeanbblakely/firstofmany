@@ -12,10 +12,13 @@ var router = express.Router();
 router.post('/register', (req, res, next)=> {
     let userData = req.body;
     var user = new User(userData);
-    user.save((err, doc)=> {
+    user.save((err, newUser)=> {
       if(!err) {
-        let userID = user._id;
-        res.status(200).send({userID});
+        let userID = newUser._id;
+        let payload = { sub: newUser._id};
+        let token = jwt.encode(payload, '123');
+
+        res.status(200).send({token, userID});
       } else {
           console.log(err.errmsg);
           if (err.code == 11000) {

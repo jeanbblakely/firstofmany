@@ -47,8 +47,9 @@ export class UserService {
 	Database call for registration
   */
   sendUserRegistration(regData) {
-    this.httpClient.post(this.authpath + '/register', regData).subscribe(res =>{
-        console.log(res['userID']);
+    this.httpClient.post<any>(this.authpath + '/register', regData).subscribe(res =>{
+        localStorage.setItem(this.TOKEN_KEY, res.token);
+        console.log(res);
     });
   }
 
