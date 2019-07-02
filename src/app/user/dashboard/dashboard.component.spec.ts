@@ -70,6 +70,10 @@ describe('DashboardComponent', () => {
       return true;
     }
     
+    isAuthenticated() {
+      return true;
+    }
+    
     getUserCategories(): Observable<Category[]> {
       return of(this.user.tracked_categories);
     }
