@@ -20,18 +20,6 @@ export class CategoryService {
     return of(CATEGORIES);
   }
   
-  /*
-	Searches Categories table for matching name
-  */
-  searchCategories(name: string): Observable<Category> {
-    var i;
-    for (i = 0; i < CATEGORIES.length; i++) {
-      if (CATEGORIES[i].name.toUpperCase() === name.toUpperCase()) {
-        return of(CATEGORIES[i]);
-      }
-   }
-    return null;
-  }
   
    /*
 	Creates new Category in db
