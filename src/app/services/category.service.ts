@@ -9,14 +9,15 @@ import { environment } from './../../environments/environment';
   providedIn: 'root'
 })
 export class CategoryService {
+  path = environment.path
+  constructor(private httpClient: HttpClient) { }
 
-  constructor() { }
-  
-  
+
   /*
 	Gets array of Categories
   */
   getCategories(): Observable<Category[]> {
-    return of(CATEGORIES);
+    //return of(CATEGORIES);
+    return this.httpClient.get<Category[]>(this.path + '/categories');
   }
 }
