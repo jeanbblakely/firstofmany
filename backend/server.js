@@ -104,6 +104,14 @@ app.post('/addcategory', (req, res)=> {
   })
 });
 
+app.post('/addusercategory/:id', async(req, res)=> {
+  let category = {'name': req.body.name, 'experiences': req.body.experiences}
+  User.findByIdAndUpdate(req.params.id, {$push: {tracked_categories: category}}, function (err, user) {
+      if (err) return next(err);
+      res.send(req.params);
+  });
+});
+
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 mongoose.connect('mongodb+srv://joeymarinelli:Katiemarie0629!@cluster0-yrzrs.mongodb.net/FirstOfManyDB?retryWrites=true&w=majority',
