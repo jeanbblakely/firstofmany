@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { CategoriesComponent } from './experiences/categories/categories.component';
 import { DashboardComponent } from './user/dashboard/dashboard.component';
@@ -25,7 +25,7 @@ import { CategoryService } from './services/category.service';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { CategoryCreateComponent } from './experiences/category-create/category-create.component';
-
+import { AuthInterceptorService } from './services/authinterceptor.service';
 
 @NgModule({
   declarations: [
@@ -62,7 +62,12 @@ import { CategoryCreateComponent } from './experiences/category-create/category-
   ],
   providers: [
     UserService,
-    CategoryService
+    CategoryService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+    }
   ],
 
   bootstrap: [AppComponent],

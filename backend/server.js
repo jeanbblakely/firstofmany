@@ -85,18 +85,31 @@ app.post('/user/:id/update', async(req, res)=> {
     });
 });
 
-app.post('/newcategory', (req, res)=> {
+app.post('/addcategory', (req, res)=> {
   let categoryData = req.body;
   let category = new Category(categoryData);
 
   category.save((err, result)=> {
-    if(err) {
-      console.log(err.errmsg);
-    } else {
+    if(!err) {
       console.log(category.name);
-      res.sendStatus(200);
-    }
+      res.status(200).send({'name': category.name, 'experiences': category.experiences});
+
+    } else {
+      console.log(err.errmsg);
+      if (err.code == 11000) {
+        res.status(422).send(['That category already exists']);
+      } else {
+        return next(err);
+      }    }
   })
+});
+
+app.post('/addusercategory/:id', async(req, res)=> {
+  let category = {'name': req.body.name, 'experiences': req.body.experiences}
+  User.findByIdAndUpdate(req.params.id, {$push: {tracked_categories: category}}, function (err, user) {
+      if (err) return next(err);
+      res.send(req.params);
+  });
 });
 
 mongoose.set('useFindAndModify', false);

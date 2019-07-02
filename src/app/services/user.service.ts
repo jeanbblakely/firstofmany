@@ -22,6 +22,7 @@ export class UserService {
 
   constructor(private httpClient: HttpClient, private router: Router) { }
 
+  TOKEN_KEY = 'token';
   /*
 	Searches users for username/password match.  Returns true and assigns user number if match found, false otherwise.
   */
@@ -59,11 +60,13 @@ export class UserService {
 	Database call for login
   */
   loginUser(loginData) {
-    this.httpClient.post(this.authpath + '/login', loginData).subscribe(res =>{
+    return this.httpClient.post<any>(this.authpath + '/login', loginData).subscribe(res =>{
+        localStorage.setItem('token', res.token);
         console.log(res['token']);
         console.log(res['userID']);
-        if (res['token']) {
+        if (this.isAuthenticated()) {
           this.id = res['userID'];
+          localStorage.setItem('userID', this.id);
           console.log('Token exists');
       //    this.isLoggedIn();
           this.router.navigate(['dashboard']);
@@ -88,15 +91,14 @@ export class UserService {
 	Gets user based on id instantiated at login
   */
   getUser(): Observable<User> {
-  
-    return this.httpClient.get<User>(this.path + '/user/' + this.id);
+    return this.httpClient.get<User>(this.path + '/user/' + localStorage.getItem('userID'));
   }
 
   /*
 	Gets user Categories
   */
   getUserCategories(): Observable<Category[]> {
-    return this.httpClient.get<Category[]>(this.path + '/usercategories/' + this.id);
+    return this.httpClient.get<Category[]>(this.path + '/usercategories/' + localStorage.getItem('userID'));
     //return of(USERS[this.index].tracked_categories);
   }
 
@@ -124,7 +126,8 @@ export class UserService {
   */
   logout(): void {
     this.id = null;
-    localStorage.setItem('token', null);
+    localStorage.removeItem('token');
+    localStorage.removeItem('userID');
     this.logoutSource.next();
   }
 
@@ -132,9 +135,11 @@ export class UserService {
 	Checks to see if user has token from server (ie is logged in)
   */
   isAuthenticated(): boolean {
-    return !!localStorage.getItem('token');
+    return !!localStorage.getItem(this.TOKEN_KEY);
   }
 
-
+  getToken() {
+    return localStorage.getItem(this.TOKEN_KEY);
+  }
 
 }
