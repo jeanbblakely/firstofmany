@@ -18,6 +18,7 @@ export class CategoryCreateComponent implements OnInit {
   currentCategory: Category;
   categories: Category[];
   user: User;
+  favorite = ['false', 'true'];
 
   constructor(private categoryService: CategoryService, private userService: UserService, private fb: FormBuilder,
     private router: Router) { }
@@ -45,8 +46,10 @@ export class CategoryCreateComponent implements OnInit {
   private addExperience() {
     this.experiences.push(this.fb.group({
       name: ['', [Validators.required]],
-      note: ['', [Validators.required]],
-      favorite: false
+      note: [null],
+      img: [null],
+      datestamp: [null],
+      favorite: ['false']
     }))
   }
   
@@ -76,7 +79,7 @@ export class CategoryCreateComponent implements OnInit {
   }
   
   /*
-	Adds new Category; copies to User
+	Adds new Category
   */
   addCategory(): void {
     if (this.categoryForm.valid) {
@@ -84,6 +87,7 @@ export class CategoryCreateComponent implements OnInit {
       if (!this.searchCategory(this.categoryForm.get('name').value)) {
         console.log('no match');
         this.currentCategory = Object.assign({}, this.categoryForm.value);
+        console.log(this.currentCategory);
         this.executeCategoryCreation();
         console.log('create complete');
         //todo on successful save in Category table updateUser with Category in UserService 
