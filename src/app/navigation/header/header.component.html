@@ -17,7 +17,6 @@
     </ng-template>
   </div>
 
-  <a routerLink="/home">
-    <div class="logo-area"> </div>
-  </a>
+  <a *ngIf="isLoggedIn()" routerLink="/dashboard" class="logo-area"></a>
+  <a *ngIf="!isLoggedIn()" routerLink="/home" class="logo-area"></a>
 </mat-toolbar>
