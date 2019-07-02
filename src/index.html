@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>First Of Many</title>
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-title" content="First of Many">
+  <meta name="application-name" content="First of Many">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <style>
+    @keyframes popup {
+      from {
+        transform: translateY(100px);
+      }
+      to {
+        transform: translateY(0px);
+      }
+    }
+    @keyframes zoom {
+      from {
+        transform: scale(0,0);
+      }
+      to {
+        transform: scale(1,1);
+      }
+    }
+    @keyframes dash {
+      from {
+        stroke-dashoffset: 320;
+      }
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+    html, body {
+      height: 100%;
+    }
+    #logo {
+      margin: 0 auto;
+      display: block;
+    }
+    .loading {
+      display: flex;
+      align-items: center;
+      height: 100%;
+    }
+    .logo-sky {
+      -webkit-animation: zoom 0.5s linear both;
+	            animation: zoom 0.5s linear both;
+    }
+    .logo-mountain {
+              animation: popup 0.5s linear both;
+      -webkit-animation: popup 0.5s linear both;
+    }
+    .logo-check {
+      stroke-dasharray: 200;
+      stroke-dashoffset: 0;
+      animation: dash .5s linear 0.7s both;
+    }
+  </style>
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/icon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/icon/favicon-16x16.png">
+  <link rel="manifest" href="assets/icon/site.webmanifest">
+  <link rel="mask-icon" href="assets/icon/safari-pinned-tab.svg" color="#5bbad5">
+  <link rel="icon" type="image/x-icon" href="assets/icon/favicon.ico">
+  <link href="https://fonts.googleapis.com/css?family=Quicksand:400,500&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#1976d2">
+</head>
+<body class="mat-app-background mat-typography">
+  <app-root>
+    <div class="loading">
+        <svg xmlns="http://www.w3.org/2000/svg" id="logo" width="30%" height="30%" viewBox="0 0 100 100">
+          <g id="layer1" transform="translate(50 50)">
+            <circle id="circle830" r="50" fill="#4fc3f7" stroke-width="9" class="logo-sky"/>
+            <path id="path832" fill="#fdd835" stroke-width="9" d="M48.48-12.234L27.537-33.178-1.2-4.44l-7.934-7.934-35.33 35.243c8.565 16.66 25.729 27.126 44.461 27.13C27.61 50 50.001 27.653 50.001.04c-.007-4.136-.49-8.263-1.521-12.273z" class="logo-mountain"/>
+            <path fill="none" stroke="#fff" stroke-width="9" d="M-12.256-9.343L-1.517 1.395l31.803-31.803" class="logo-check"/>
+          </g>
+        </svg>
+    </div>
+  </app-root>
+  <noscript>Please enable JavaScript to continue using this application.</noscript>
+</body>
+</html>
