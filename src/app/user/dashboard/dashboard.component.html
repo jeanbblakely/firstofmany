@@ -1,10 +1,6 @@
 <div *ngIf="isLoggedIn()">
   <h2>Welcome {{ user?.name }}</h2>
-  <h4>Here's your Categories</h4>
-  <div class="user-categories" *ngFor="let category of user?.tracked_categories">
-     <li>{{ category.name }}</li>
-  </div>
-
+  <app-categories [isDashBoard]=true></app-categories>
+  <button  mat-raised-button color="primary" routerLink="/categories">Track another category</button>
+  
 </div>
-<button routerLink="/categories">Explore More Experiences</button>
-<app-categories [isDashBoard]=true></app-categories>
