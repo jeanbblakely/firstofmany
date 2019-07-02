@@ -15,6 +15,8 @@ import { User } from './../../models/user';
 export class CategoryCreateComponent implements OnInit {
   message = '';
   categoryForm: FormGroup;
+  currentCategory: Category;
+  categories: Category[];
   user: User;
 
   constructor(private categoryService: CategoryService, private userService: UserService, private fb: FormBuilder,
@@ -22,6 +24,7 @@ export class CategoryCreateComponent implements OnInit {
 
   ngOnInit() {
     this.getUser();
+    this.getCategories();
     this.createForm();
   }
   
@@ -35,11 +38,11 @@ export class CategoryCreateComponent implements OnInit {
     });
   }
   
-  get experiences(): FormArray {
+  private get experiences(): FormArray {
     return this.categoryForm.get('experiences') as FormArray;
   }
   
-  addExperience() {
+  private addExperience() {
     this.experiences.push(this.fb.group({
       name: ['', [Validators.required]],
       note: ['', [Validators.required]],
@@ -48,13 +51,23 @@ export class CategoryCreateComponent implements OnInit {
   }
   
   /*
-	Gets Observable User from service and fills in form
+	Gets Observable User from service
   */
   getUser() {
     this.userService.getUser().subscribe(data => {
       this.user = data;
     });
 
+  }
+  
+  /*
+	Gets Observable Categories array from service
+  */
+  getCategories(): void {
+    this.categoryService.getCategories()
+      .subscribe(categories => {
+        this.categories = categories;
+       });
   }
 
   
@@ -70,9 +83,12 @@ export class CategoryCreateComponent implements OnInit {
       console.log(this.categoryForm.get('name').value);
       if (!this.searchCategory(this.categoryForm.get('name').value)) {
         console.log('no match');
+        this.currentCategory = Object.assign({}, this.categoryForm.value);
         this.executeCategoryCreation();
-        //todo updateUser with Category in UserService 
+        console.log('create complete');
+        //todo on successful save in Category table updateUser with Category in UserService 
       } else {
+        console.log('match');
         var currentCategory = this.searchCategory(this.categoryForm.get('name').value);
         console.log(currentCategory, 'current category');
         //todo updateUser with Category in UserService
@@ -87,15 +103,17 @@ export class CategoryCreateComponent implements OnInit {
 	Searches and returns existing Category
   */
   searchCategory(name: string): Observable<Category> {
-    return this.categoryService.searchCategories(name);
+    var i;
+    for (i = 0; i < this.categories.length; i++) {
+      if (this.categories[i].name.toUpperCase() === name.toUpperCase()) {
+        return of(this.categories[i]);
+      }
+   }
+    return null;
   }
   
   private executeCategoryCreation(): void {
-    let category: Category = {
-      name: this.categoryForm.get('name').value,
-      experiences: []
-    }
-    this.categoryService.createCategory(category)
+    this.categoryService.createCategory(this.currentCategory)
       .subscribe(res => {
         console.log('successfully created');
        },
