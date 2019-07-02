@@ -49,8 +49,12 @@ export class UserService {
   sendUserRegistration(regData) {
     this.httpClient.post<any>(this.authpath + '/register', regData).subscribe(res =>{
         localStorage.setItem(this.TOKEN_KEY, res.token);
+        localStorage.setItem('userID', res.userID);
         console.log(res);
     });
+    if (this.isAuthenticated()) {
+      this.router.navigate(['dashboard/' + localStorage.getItem('userID')]);
+    }
   }
 
   //Database call to update user profile
