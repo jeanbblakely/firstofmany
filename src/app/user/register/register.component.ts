@@ -23,7 +23,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
     this.createForm();
   }
-  
+
   /*
 	Creates userForm based on input
   */
@@ -74,7 +74,7 @@ export class RegisterComponent implements OnInit {
   register() {
     if (this.userForm.valid) {
       const result: User = Object.assign({}, this.userForm.value);
-      console.log('after copy', result);
+  //    console.log('after copy', result);
       if (this.userService.register(result)) {
         console.log('Successfully registered');
         this.message = 'thanks for registering';
@@ -85,7 +85,7 @@ export class RegisterComponent implements OnInit {
     } else {
       this.message = 'your form has errors';
     }
-    
+
   }
 
 }
