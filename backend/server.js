@@ -91,13 +91,14 @@ app.post('/addcategory', (req, res)=> {
 
   category.save((err, result)=> {
     if(!err) {
-      console.log(category.name);
+      console.log(category);
       res.status(200).send({'name': category.name, 'experiences': category.experiences});
 
     } else {
       console.log(err.errmsg);
       if (err.code == 11000) {
         res.status(422).send(['That category already exists']);
+        console.log('Category exists');
       } else {
         return next(err);
       }    }
