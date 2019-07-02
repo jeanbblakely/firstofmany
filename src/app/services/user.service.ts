@@ -129,7 +129,7 @@ export class UserService {
   */
   logout(): void {
     this.id = null;
-    localStorage.setItem('token', null);
+    localStorage.removeItem('token');
     localStorage.removeItem('userID');
     this.logoutSource.next();
   }
