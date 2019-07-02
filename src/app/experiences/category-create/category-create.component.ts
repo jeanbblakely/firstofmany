@@ -90,7 +90,10 @@ export class CategoryCreateComponent implements OnInit {
         console.log(this.currentCategory);
         this.executeCategoryCreation();
         console.log('create complete');
-        //todo on successful save in Category table updateUser with Category in UserService 
+        //todo on successful save in Category table updateUser with Category in UserService
+        this.copyCategoryToUser();
+        this.userService.updateUser(this.user);
+        this.router.navigate(['dashboard']);
       } else {
         console.log('match');
         var currentCategory = this.searchCategory(this.categoryForm.get('name').value);
@@ -118,6 +121,13 @@ export class CategoryCreateComponent implements OnInit {
   
   private executeCategoryCreation(): void {
     this.categoryService.createCategory(this.currentCategory);
+  }
+  
+  
+  private copyCategoryToUser(): void {
+    this.user.tracked_categories.push(this.currentCategory);
+    console.log(this.user, 'user');
+  
   }
 
 }
