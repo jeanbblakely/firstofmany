@@ -25,8 +25,7 @@ export class CategoryService {
    /*
 	Creates new Category in db
   */
-  createCategory(category: Category): Observable<Category> {
+  createCategory(category: Category): void {
     //todo Add Category object to db 
-    return of(CATEGORIES[0]);
   }
 }
