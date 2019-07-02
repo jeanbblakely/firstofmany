@@ -5,7 +5,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var jwt = require('jwt-simple');
 var auth = require('./auth.js');
-
+var bcrypt = require('bcrypt-nodejs');
 const path = require('path');
 
 const port = process.env.PORT || 3000;
@@ -78,11 +78,26 @@ app.get('/usercategories/:id', async(req, res)=> {
   }
 });
 
+/*
 app.post('/user/:id/update', async(req, res)=> {
-    User.findByIdAndUpdate(req.params.id, {$set: req.body}, function (err, user) {
-        if (err) return next(err);
-        res.send('User updated.');
-    });
+  User.findByIdAndUpdate(req.params.id, {$set: req.body}, function (err, user) {
+      if (err) return next(err);
+      res.send('User updated.');
+  });
+});
+*/
+
+app.post('/user/:id/update', async(req, res)=> {
+  User.findById(req.params.id, function (err, user) {
+      user.username = req.body.username;
+      user.password = req.body.password;
+      user.email = req.body.email;
+      user.name = req.body.name;
+      user.birthdate = req.body.birthdate;
+      user.gender = req.body.gender;
+      user.save();
+      res.send('User updated.');
+  });
 });
 
 app.post('/addcategory', (req, res)=> {

@@ -47,7 +47,7 @@ router.post('/login', async(req, res)=> {
       let token = jwt.encode(payload, '123');
       let userID = user._id;
 
-      res.status(200).send({token, userID});
+      res.status(200).send({token, userID });
       console.log("User ID: " + user._id + "\nUsername: " + user.username);
     })
 
