@@ -7,10 +7,40 @@
       <mat-card-content>
 
         <mat-form-field>
-          <input matInput type="text" placeholder="Name" id="name" formControlName="name" required>
+          <input matInput type="text" placeholder="Category Name" id="category-name" formControlName="name" required>
           <mat-error *ngIf="hasError('name', 'required')">Please enter a category name</mat-error>
         </mat-form-field>
-
+        <div formArrayName="experiences">
+          <div *ngFor="let experience of experiences.controls; let i = index"
+            [formGroupName]="i"
+            class="experiences">
+            <div>
+              Experience {{i +1}}
+            </div>
+            <div>
+              <input type="text"
+                     placeholder="Experience Name"
+                     formControlName="name">
+            </div>
+            <div>
+              <input type="text"
+                     placeholder="Note"
+                     formControlName="note">
+            </div>
+             <div>
+              <input type="text"
+                     placeholder="Favorite"
+                     formControlName="favorite">
+            </div>
+          </div>
+            <button type="button" (click)="addExperience()">
+              Add Experience
+             </button>
+            
+            
+            
+          
+        </div>
       </mat-card-content>
 
       <mat-card-actions>
