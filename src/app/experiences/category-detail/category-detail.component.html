@@ -5,14 +5,16 @@
 <mat-dialog-content>
   <mat-list>
     <mat-list-item *ngFor="let experience of category.experiences">
-      <button mat-icon-button color="primary">
-        <span *ngIf="experience['favorite'] else emptyHeart">
+      <span *ngIf="experience['favorite'] else emptyHeart">
+        <button mat-icon-button color="primary">
           <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
-        </span>
-        <ng-template #emptyHeart>
+        </button>
+      </span>
+      <ng-template #emptyHeart>
+        <button mat-icon-button color="primary">
           <mat-icon aria-label="Example icon-button with a heart icon">favorite_border</mat-icon>
-        </ng-template>
-      </button>
+        </button>
+      </ng-template>
       {{ experience.name }}
     </mat-list-item>
   </mat-list>
