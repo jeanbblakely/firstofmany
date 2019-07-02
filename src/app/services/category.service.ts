@@ -27,7 +27,7 @@ export class CategoryService {
   */
   createCategory(category: Category): void {
     //todo Add Category object to db
-    this.httpClient.post<any>(this.path + '/addcategory', category).subscribe(res =>{
+    this.httpClient.post<Category>(this.path + '/addcategory', category).subscribe(res =>{
         console.log(res);
     });
   }
