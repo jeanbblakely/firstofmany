@@ -36,8 +36,8 @@ router.post('/login', async(req, res)=> {
     } else if (userData.password != user.password) {
       return res.status(401).send({message:"Username or Password Invalid"});
     } else {
-      let payload = {};
-      let token = jwt.encode(payload, '123456');
+      let payload = { sub: user._id};
+      let token = jwt.encode(payload, '123');
       let userID = user._id;
 
       res.status(200).send({token, userID});
