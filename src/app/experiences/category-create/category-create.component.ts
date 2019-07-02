@@ -117,13 +117,7 @@ export class CategoryCreateComponent implements OnInit {
   }
   
   private executeCategoryCreation(): void {
-    this.categoryService.createCategory(this.currentCategory)
-      .subscribe(res => {
-        console.log('successfully created');
-       },
-       (error => {
-          this.message = 'error creating experience'; 
-       }))
+    this.categoryService.createCategory(this.currentCategory);
   }
 
 }
