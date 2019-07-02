@@ -3,8 +3,7 @@
 <div class="categories" fxLayout="row wrap" fxflexfill fxLayoutGap="3%" >
   <mat-card *ngFor="let c of categories"  (click)="onSelect(c)" fxFlex="30" fxFlex.xs="45" [ngStyle]="{'background-color': c.color}">
     <mat-card-content fxflexfill>
-      <h1 fittext [maxFontSize]=70>{{ c.name | spacebreak }}
-      </h1>
+      <h1 fittext [maxFontSize]=70>{{ c.name | spacebreak }}</h1>
     </mat-card-content>
   </mat-card>
 </div>
