@@ -1,4 +1,5 @@
 var mongoose = require('mongoose'), Schema = mongoose.Schema;
+var bcrypt = require('bcrypt-nodejs');
 var categorySchema = require('./category.js');
 
 var userSchema = new mongoose.Schema({
@@ -11,6 +12,20 @@ var userSchema = new mongoose.Schema({
   gender: String,
   tracked_categories: ['Category'],
   favorites: Array
+})
+
+userSchema.pre('save', function(next){
+  var user = this
+
+  if(!user.isModified('password'))
+    return next()
+
+    bcrypt.hash(user.password, null, null, (err, hash)=> {
+      if(err) return next(err)
+
+      user.password = hash
+      next()
+    })
 })
 
 module.exports = mongoose.model('User', userSchema)
