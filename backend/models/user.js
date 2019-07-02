@@ -9,7 +9,7 @@ var userSchema = new mongoose.Schema({
   name: String,
   birthdate: Date,
   gender: String,
-  tracked_categories: [categorySchema['Category'], {_id : false }],
+  tracked_categories: ['Category'],
   favorites: Array
 })
 
