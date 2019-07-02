@@ -2,7 +2,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { UserService } from '../../services/user.service';
 import { CategoriesComponent } from '../../experiences/categories/categories.component';
 import { CategoryDetailComponent } from '../../experiences/category-detail/category-detail.component';
-import { MatFormFieldModule, MatInputModule, MatIconModule, MatCardModule } from '@angular/material';
+import { MatFormFieldModule, MatInputModule, MatIconModule, MatCardModule, MatDialogModule, MatListModule } from '@angular/material';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { Category } from '../../models/category';
 import { Observable, of, throwError } from 'rxjs';
 import { User } from '../../models/user';
@@ -70,6 +71,10 @@ describe('DashboardComponent', () => {
       return true;
     }
     
+    isAuthenticated() {
+      return true;
+    }
+    
     getUserCategories(): Observable<Category[]> {
       return of(this.user.tracked_categories);
     }
@@ -88,7 +93,10 @@ describe('DashboardComponent', () => {
         { provide: UserService, useValue: mockUserService }
       ],
       imports: [
-        MatCardModule
+        HttpClientTestingModule,
+        MatCardModule,
+        MatDialogModule,
+        MatListModule
       ],
       declarations: [ DashboardComponent, CategoriesComponent, CategoryDetailComponent ]
     })

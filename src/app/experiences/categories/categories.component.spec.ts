@@ -6,6 +6,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { Category } from '../../models/category';
 import { CATEGORIES } from '../../mock-categories';
 import { USERS } from '../../mock-users';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { Observable, of, throwError, Subject } from 'rxjs';
 import { CategoryService } from '../../services/category.service';
 import { DebugElement } from '@angular/core';
@@ -36,13 +38,18 @@ describe('CategoriesComponent', () => {
     mockCategoryService = new MockCategoryService();
     mockUserService = new MockUserService();
     TestBed.configureTestingModule({
-      imports: [MaterialModule, HttpClientModule],
+      imports: [
+        MaterialModule, 
+        HttpClientModule, 
+        BrowserAnimationsModule 
+       ],
        providers: [ 
         { provide: CategoryService, useValue: mockCategoryService },
         { provide: UserService, useValue: mockUserService }
       ],
-      declarations: [ CategoriesComponent, CategoryDetailComponent ]
+      declarations: [ CategoriesComponent, CategoryDetailComponent ],
     })
+    .overrideModule(BrowserDynamicTestingModule, { set: { entryComponents: [CategoryDetailComponent] } })
     .compileComponents();
   }));
 

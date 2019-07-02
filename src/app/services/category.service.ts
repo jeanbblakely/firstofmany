@@ -20,4 +20,12 @@ export class CategoryService {
     //return of(CATEGORIES);
     return this.httpClient.get<Category[]>(this.path + '/categories');
   }
+  
+  
+   /*
+	Creates new Category in db
+  */
+  createCategory(category: Category): void {
+    //todo Add Category object to db 
+  }
 }
