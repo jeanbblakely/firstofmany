@@ -74,4 +74,8 @@ describe('CategoryCreateComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  
+  it('#searchCategory should return existing Category object on match', () => {
+    expect(component.searchCategory(vegetables)).toBeTruthy();
+  });
 });
