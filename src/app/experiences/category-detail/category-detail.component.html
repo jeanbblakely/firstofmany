@@ -1,6 +1,9 @@
 <mat-dialog-actions fxLayout="row" fxLayoutAlign="start end">
   <h2 class="mat-display-1" mat-dialog-title fxFlex>{{ category.name }}</h2>
-  <button mat-raised-button color="accent">Add a first</button>
+  <button mat-raised-button color="accent" matBadge="{{category.experiences.length}}" matBadgeColor="primary"
+          matBadgeHidden="{{category.experiences.length < 1}}">
+    Add a first
+  </button>
 </mat-dialog-actions>
 <mat-dialog-content>
   <mat-action-list>

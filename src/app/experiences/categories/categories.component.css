@@ -10,6 +10,11 @@
   cursor: pointer;
 }
 
+.mat-card-content {
+  width: 80%;
+  margin: 0 auto;
+}
+
 .mat-card-content h1 {
   position: absolute;
   top: 50%;
@@ -27,7 +32,4 @@
      1px 1px 0 #000;
 }
 
-.mat-card-content {
-  width: 80%;
-  margin: 0 auto;
-}
+
