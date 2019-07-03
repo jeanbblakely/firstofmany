@@ -53,6 +53,10 @@ export class CategoryCreateComponent implements OnInit {
     }))
   }
   
+  public hasError = (controlName: string, errorName: string) => {
+    return this.categoryForm.controls[controlName].hasError(errorName);
+  }
+  
   /*
 	Gets Observable User from service
   */
@@ -74,10 +78,6 @@ export class CategoryCreateComponent implements OnInit {
   }
 
   
-  public hasError = (controlName: string, errorName: string) => {
-    return this.categoryForm.controls[controlName].hasError(errorName);
-  }
-  
   /*
 	Adds new Category
   */
@@ -92,7 +92,7 @@ export class CategoryCreateComponent implements OnInit {
         console.log('create complete');
         //todo on successful save in Category table updateUser with Category in UserService
         this.copyCategoryToUser();
-        this.userService.updateUser(this.user);
+        //this.userService.updateUser(this.user);
         this.router.navigate(['dashboard']);
       } else {
         console.log('match');
