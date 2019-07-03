@@ -1,10 +1,10 @@
 <mat-dialog-actions fxLayout="row" fxLayoutAlign="start end">
-  <h2 mat-dialog-title fxFlex>{{ category.name }}</h2>
+  <h2 class="mat-display-1" mat-dialog-title fxFlex>{{ category.name }}</h2>
   <button mat-raised-button color="accent">Add a first</button>
 </mat-dialog-actions>
 <mat-dialog-content>
   <mat-list>
-    <mat-list-item *ngFor="let experience of category.experiences">
+    <mat-list-item class="mat-body-strong" *ngFor="let experience of category.experiences">
       <span *ngIf="experience['favorite'] else emptyHeart">
         <button mat-icon-button color="primary">
           <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
