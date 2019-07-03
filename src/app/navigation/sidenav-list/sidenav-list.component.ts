@@ -19,7 +19,7 @@ export class SidenavListComponent {
 	Checks to see if User is signed in (ie instantiated user.id)
   */
   isLoggedIn(): boolean {
-    return this.userService.isLoggedIn();
+    return this.userService.isAuthenticated();
   }
   
   /*

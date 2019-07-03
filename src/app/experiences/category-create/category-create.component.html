@@ -1,7 +1,7 @@
 <section>
-  <mat-card> 
+  <mat-card>
     <mat-card-header>
-        <mat-card-title>Add a New Category</mat-card-title>
+      <mat-card-title>Add a New Category</mat-card-title>
     </mat-card-header>
     <form [formGroup]="categoryForm" (ngSubmit)="addCategory()" autocomplete="off" novalidate>
       <mat-card-content>
@@ -11,31 +11,24 @@
           <mat-error *ngIf="hasError('name', 'required')">Please enter a category name</mat-error>
         </mat-form-field>
         <div formArrayName="experiences">
-          <div *ngFor="let experience of experiences.controls; let i = index"
-            [formGroupName]="i"
-            class="experiences">
+          <div *ngFor="let experience of experiences.controls; let i = index" [formGroupName]="i" class="experiences">
             <div>
-              Experience {{i +1}}
+              Experience {{i + 1}}
             </div>
             <div>
-              <input type="text"
-                     placeholder="Experience Name"
-                     formControlName="name">
+              <input type="text" placeholder="Experience Name" formControlName="name">
             </div>
-
           </div>
-            <button type="button" (click)="addExperience()">
-              Add Experience to Track
-             </button>
-            
-            
-            
-          
+          <button mat-flat-button color="accent" type="button" (click)="addExperience()"[disabled]="!categoryForm.valid">
+            Add Experience
+          </button>
         </div>
       </mat-card-content>
 
       <mat-card-actions>
-        <button mat-fab type="submit" [disabled]="!categoryForm.valid">Add</button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="!categoryForm.valid">
+          Add Category
+        </button>
       </mat-card-actions>
 
     </form>

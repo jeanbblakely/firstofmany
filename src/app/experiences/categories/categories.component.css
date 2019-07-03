@@ -1,16 +1,35 @@
 .categories {
   width: 90%;
-  margin: auto;
+  margin: 0 auto;
 }
 
 .mat-card {
   margin-bottom: 20px;
   height: 200px;
   padding: 0;
+  cursor: pointer;
+}
+
+.mat-card-content {
+  width: 80%;
+  margin: 0 auto;
 }
 
 .mat-card-content h1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  line-height: 100%;
   text-align: center;
-  height: 100%;
-  line-height: 200px;
+  white-space: pre-line;
+  user-select: none;
+  color: white;
+  text-shadow:
+   -1px -1px 0 #000,  
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+     1px 1px 0 #000;
 }
+
+

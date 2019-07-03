@@ -1,9 +1,17 @@
 <mat-dialog-actions fxLayout="row" fxLayoutAlign="start end">
-  <h2 mat-dialog-title fxFlex>{{ category.name }}</h2>
-  <button mat-raised-button color="accent">Add a first</button>
+  <h2 class="mat-display-1" mat-dialog-title fxFlex>{{ category.name }}</h2>
+  <button mat-raised-button color="accent" matBadge="{{category.experiences.length}}" matBadgeColor="primary"
+          matBadgeHidden="{{category.experiences.length < 1}}">
+    Add a first
+  </button>
 </mat-dialog-actions>
 <mat-dialog-content>
-  <mat-list>
-    <mat-list-item *ngFor="let experience of category.experiences">{{ experience.name }}</mat-list-item>
-  </mat-list>
+  <mat-action-list>
+    <button mat-list-item class="mat-body-strong" *ngFor="let experience of category.experiences" (click)="favoriteThis(experience)">
+      <mat-icon matListIcon color="primary" aria-label="favorite icon">
+        {{getFavoriteIcon(experience['favorite'])}}
+      </mat-icon>
+      {{ experience.name }}
+    </button>
+  </mat-action-list>
 </mat-dialog-content>
