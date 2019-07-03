@@ -1,14 +1,19 @@
-<p class="mat-display-1">Categories</p>
+<h1 class="mat-display-1">Categories</h1>
+
+<div class="categories" fxLayout="row wrap" fxflexfill fxLayoutGap="3%" >
+  <mat-card *ngFor="let category of categories"  
+            (click)="onSelect(category)" 
+            fxFlex="30" fxFlex.xs="45" 
+            [ngStyle]="{'background-color': category.color}">
+    <mat-card-content fxflexfill>
+      <h1 fittext [maxFontSize]=70 [minFontSize]=20>
+        {{ category.name | spacebreak:11 }}
+      </h1>
+    </mat-card-content>
+  </mat-card>
+</div>
 <div *ngIf="!isDashBoard">
   <p>Don't see what you're looking for?
     <button mat-raised-button color="primary" routerLink="/category-create">Add New Category</button>
   </p>
-</div>
-
-<div class="categories" fxLayout="row wrap" fxflexfill fxLayoutGap="3%" >
-  <mat-card *ngFor="let c of categories"  (click)="onSelect(c)" fxFlex="30" fxFlex.xs="45" [ngStyle]="{'background-color': c.color}">
-    <mat-card-content fxflexfill >
-      <h1>{{ c.name }}</h1>
-    </mat-card-content>
-  </mat-card>
 </div>

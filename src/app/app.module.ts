@@ -26,6 +26,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { CategoryCreateComponent } from './experiences/category-create/category-create.component';
 import { AuthInterceptorService } from './services/authinterceptor.service';
+import { AngularFittextModule } from 'angular-fittext';
+import { SpacebreakPipe } from './_pipes/spacebreak.pipe';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,8 @@ import { AuthInterceptorService } from './services/authinterceptor.service';
     RegisterComponent,
     FooterComponent,
     CategoryDetailComponent,
-    CategoryCreateComponent
+    CategoryCreateComponent,
+    SpacebreakPipe
   ],
   imports: [
     BrowserModule,
@@ -58,7 +61,8 @@ import { AuthInterceptorService } from './services/authinterceptor.service';
     MatCardModule,
     MatListModule,
     FlexLayoutModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    AngularFittextModule
   ],
   providers: [
     UserService,

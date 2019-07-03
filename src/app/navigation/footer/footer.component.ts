@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UserService } from './../../services/user.service';
 
 @Component({
@@ -6,18 +6,15 @@ import { UserService } from './../../services/user.service';
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.css']
 })
-export class FooterComponent implements OnInit {
+export class FooterComponent {
 
   constructor(private userService: UserService) { }
-
-  ngOnInit() {
-  }
 
   /*
 	Checks to see if User is signed in (ie instantiated user.id)
   */
   isLoggedIn(): boolean {
-    return this.userService.isLoggedIn();
+    return this.userService.isAuthenticated();
   }
 
   /*

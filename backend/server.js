@@ -121,10 +121,10 @@ app.post('/addcategory', (req, res)=> {
 });
 
 app.post('/addusercategory/:id', async(req, res)=> {
-  let category = {'name': req.body.name, 'experiences': req.body.experiences}
-  User.findByIdAndUpdate(req.params.id, {$push: {tracked_categories: category}}, function (err, user) {
+  let categoryData = {'name': req.body.name, 'experiences': req.body.experiences}
+  User.findByIdAndUpdate(req.params.id, {$push: {tracked_categories: categoryData}}, function (err, user) {
       if (err) return next(err);
-      res.send(req.params);
+      res.send(req.body);
   });
 });
 

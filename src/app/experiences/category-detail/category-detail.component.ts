@@ -12,5 +12,18 @@ export class CategoryDetailComponent {
 
   constructor(private dialogRef: MatDialogRef<CategoryDetailComponent>, @Inject(MAT_DIALOG_DATA) data) {
     this.category = data;
-   }
+  }
+
+  favoriteThis(experience: {}) {
+    if (experience['favorite']) {
+      experience['favorite'] = !experience['favorite'];
+    } else {
+      experience['favorite'] = true;
+    };
+    // Joey, could you offer some guidance here about updating the database?
+  }
+
+  getFavoriteIcon(favorited: boolean): String {
+    return favorited ? 'favorite' : 'favorite_border';
+  }
 }

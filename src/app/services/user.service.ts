@@ -105,6 +105,12 @@ export class UserService {
     //return of(USERS[this.index].tracked_categories);
   }
 
+  addUserCategory(categoryData) {
+    this.httpClient.post<any>(this.path + '/addusercategory/' + localStorage.getItem('userID'), categoryData).subscribe(res => {
+      console.log(res);
+    });
+  }
+
   /*
 	Registers a new user in the database
   */

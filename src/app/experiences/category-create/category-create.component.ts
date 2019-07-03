@@ -28,7 +28,7 @@ export class CategoryCreateComponent implements OnInit {
     this.getCategories();
     this.createForm();
   }
-  
+
   /*
 	Creates categoryForm based on input
   */
@@ -38,11 +38,11 @@ export class CategoryCreateComponent implements OnInit {
       experiences: this.fb.array([])
     });
   }
-  
+
   private get experiences(): FormArray {
     return this.categoryForm.get('experiences') as FormArray;
   }
-  
+
   private addExperience() {
     this.experiences.push(this.fb.group({
       name: ['', [Validators.required]],
@@ -66,7 +66,7 @@ export class CategoryCreateComponent implements OnInit {
     });
 
   }
-  
+
   /*
 	Gets Observable Categories array from service
   */
@@ -77,7 +77,6 @@ export class CategoryCreateComponent implements OnInit {
        });
   }
 
-  
   /*
 	Adds new Category
   */
@@ -89,6 +88,7 @@ export class CategoryCreateComponent implements OnInit {
         this.currentCategory = Object.assign({}, this.categoryForm.value);
         console.log(this.currentCategory);
         this.executeCategoryCreation();
+        this.userService.addUserCategory(this.currentCategory);
         console.log('create complete');
         //todo on successful save in Category table updateUser with Category in UserService
         this.copyCategoryToUser();
@@ -104,9 +104,9 @@ export class CategoryCreateComponent implements OnInit {
     } else {
       this.message = 'the form has errors';
     }
-    
+
   }
-  
+
   /*
 	Searches and returns existing Category
   */
@@ -120,7 +120,7 @@ export class CategoryCreateComponent implements OnInit {
    }
     return null;
   }
-  
+
   private executeCategoryCreation(): void {
     this.categoryService.createCategory(this.currentCategory);
   }
