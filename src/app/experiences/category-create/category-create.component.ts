@@ -93,7 +93,7 @@ export class CategoryCreateComponent implements OnInit {
         //todo on successful save in Category table updateUser with Category in UserService
         this.copyCategoryToUser();
         console.log(this.user, 'user before upDate');
-        this.userService.updateUser(this.user);
+        this.userService.addUserCategory(this.user);
         this.router.navigate(['dashboard']);
       } else {
         console.log('match');
