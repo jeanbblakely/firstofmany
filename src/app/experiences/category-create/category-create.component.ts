@@ -52,7 +52,11 @@ export class CategoryCreateComponent implements OnInit {
       favorite: ['false']
     }))
   }
-
+  
+  public hasError = (controlName: string, errorName: string) => {
+    return this.categoryForm.controls[controlName].hasError(errorName);
+  }
+  
   /*
 	Gets Observable User from service
   */
@@ -73,11 +77,6 @@ export class CategoryCreateComponent implements OnInit {
        });
   }
 
-
-  public hasError = (controlName: string, errorName: string) => {
-    return this.categoryForm.controls[controlName].hasError(errorName);
-  }
-
   /*
 	Adds new Category
   */
@@ -92,6 +91,10 @@ export class CategoryCreateComponent implements OnInit {
         this.userService.addUserCategory(this.currentCategory);
         console.log('create complete');
         //todo on successful save in Category table updateUser with Category in UserService
+        this.copyCategoryToUser();
+        console.log(this.user, 'user before upDate');
+        this.userService.addUserCategory(this.user);
+        this.router.navigate(['dashboard']);
       } else {
         console.log('match');
         var currentCategory = this.searchCategory(this.categoryForm.get('name').value);
@@ -108,9 +111,10 @@ export class CategoryCreateComponent implements OnInit {
 	Searches and returns existing Category
   */
   searchCategory(name: string): Observable<Category> {
+    var trimName = name.trim();
     var i;
     for (i = 0; i < this.categories.length; i++) {
-      if (this.categories[i].name.toUpperCase() === name.toUpperCase()) {
+      if (this.categories[i].name.toUpperCase() === trimName.toUpperCase()) {
         return of(this.categories[i]);
       }
    }
@@ -119,6 +123,13 @@ export class CategoryCreateComponent implements OnInit {
 
   private executeCategoryCreation(): void {
     this.categoryService.createCategory(this.currentCategory);
+  }
+  
+  
+  private copyCategoryToUser(): void {
+    this.user.tracked_categories.push(this.currentCategory);
+    console.log(this.user, 'user in copy');
+  
   }
 
 }

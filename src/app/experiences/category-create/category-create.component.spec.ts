@@ -9,12 +9,41 @@ import { Router } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { CategoryCreateComponent } from './category-create.component';
+import { UserService } from '../../services/user.service';
+import { User } from '../../models/user';
+import { Category } from '../../models/category';
+import { CATEGORIES } from '../../mock-categories';
+import { USERS } from '../../mock-users';
+import { Observable, of, throwError, Subject } from 'rxjs';
+import { CategoryService } from '../../services/category.service';
 
 describe('CategoryCreateComponent', () => {
+  class MockCategoryService {
+     categories = CATEGORIES;
+     getCategories(): Observable<Category[]> {
+        return of(this.categories);
+     }
+  };
+  
+  class MockUserService {
+     user = USERS[0];
+     getUserCategories(): Observable<Category[]> {
+        return of(this.user.tracked_categories);
+     }
+     
+     getUser(): Observable<User> {
+        return of(this.user);
+     }
+  };
+  
   let component: CategoryCreateComponent;
   let fixture: ComponentFixture<CategoryCreateComponent>;
+  let mockCategoryService: MockCategoryService;
+  let mockUserService: MockUserService;
 
   beforeEach(async(() => {
+    mockCategoryService = new MockCategoryService();
+    mockUserService = new MockUserService();
     TestBed.configureTestingModule({
       imports: [
         FormsModule,
@@ -27,6 +56,8 @@ describe('CategoryCreateComponent', () => {
         HttpClientTestingModule
       ],
       providers: [
+        { provide: CategoryService, useValue: mockCategoryService },
+        { provide: UserService, useValue: mockUserService },
         { provide: Router, useClass: class { navigate = jasmine.createSpy("navigate"); } }
       ],
       declarations: [ CategoryCreateComponent ]
@@ -42,5 +73,14 @@ describe('CategoryCreateComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+  
+  it('#searchCategory should be truthy on match from mock independent of case and whitespace', () => {
+    expect(component.searchCategory('vegetables')).toBeTruthy();
+    expect(component.searchCategory('THRILLS')).toBeTruthy();
+    expect(component.searchCategory('TrAvEl')).toBeTruthy();
+    expect(component.searchCategory('TrAvEl ')).toBeTruthy();
+    expect(component.searchCategory('  vegetables ')).toBeTruthy();
+    expect(component.searchCategory(' THRILLS      ')).toBeTruthy();
   });
 });

@@ -38,7 +38,6 @@ export class CategoriesComponent implements OnInit {
   constructor(private categoryService: CategoryService, private userService: UserService, private dialog: MatDialog) { }
 
   ngOnInit() {
-    console.log(this.isDashBoard, 'isDashBoard');
     if (!this.isDashBoard) {
       this.getCategories();
     } else {
@@ -65,7 +64,6 @@ export class CategoriesComponent implements OnInit {
     this.userService.getUserCategories()
       .subscribe(categories => {
         this.categories = categories;
-        console.log(this.categories);
         this.getRandomColors();
       });
 
