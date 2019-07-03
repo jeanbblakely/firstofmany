@@ -75,7 +75,12 @@ describe('CategoryCreateComponent', () => {
     expect(component).toBeTruthy();
   });
   
-  it('#searchCategory should return existing Category object on match', () => {
-    expect(component.searchCategory(vegetables)).toBeTruthy();
+  it('#searchCategory should be truthy on match from mock independent of case and whitespace', () => {
+    expect(component.searchCategory('vegetables')).toBeTruthy();
+    expect(component.searchCategory('THRILLS')).toBeTruthy();
+    expect(component.searchCategory('TrAvEl')).toBeTruthy();
+    expect(component.searchCategory('TrAvEl ')).toBeTruthy();
+    expect(component.searchCategory('  vegetables ')).toBeTruthy();
+    expect(component.searchCategory(' THRILLS      ')).toBeTruthy();
   });
 });

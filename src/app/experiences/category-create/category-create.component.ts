@@ -110,9 +110,10 @@ export class CategoryCreateComponent implements OnInit {
 	Searches and returns existing Category
   */
   searchCategory(name: string): Observable<Category> {
+    var trimName = name.trim();
     var i;
     for (i = 0; i < this.categories.length; i++) {
-      if (this.categories[i].name.toUpperCase() === name.toUpperCase()) {
+      if (this.categories[i].name.toUpperCase() === trimName.toUpperCase()) {
         return of(this.categories[i]);
       }
    }
