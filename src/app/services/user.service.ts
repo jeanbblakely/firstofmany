@@ -56,8 +56,10 @@ export class UserService {
 
   //Database call to update user profile
   updateUser(profileData) {
+    console.log(profileData, 'profileData inside update');
     this.httpClient.post(this.path + '/user/' + localStorage.getItem('userID') + '/update', profileData).subscribe(res => {
       console.log(res);
+      console.log('after http call');
     });
   }
 
