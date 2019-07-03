@@ -19,6 +19,12 @@
   text-align: center;
   white-space: pre-line;
   user-select: none;
+  color: white;
+  text-shadow:
+   -1px -1px 0 #000,  
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+     1px 1px 0 #000;
 }
 
 .mat-card-content {
