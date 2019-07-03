@@ -56,7 +56,7 @@ export class UserService {
 
   //Database call to update user profile
   updateUser(profileData) {
-    this.httpClient.post(this.path + '/user/' + this.id + '/update', profileData).subscribe(res => {
+    this.httpClient.post(this.path + '/user/' + localStorage.getItem('userID') + '/update', profileData).subscribe(res => {
       console.log(res);
     });
   }
@@ -67,15 +67,11 @@ export class UserService {
   loginUser(loginData) {
     return this.httpClient.post<any>(this.authpath + '/login', loginData).subscribe(res =>{
         localStorage.setItem('token', res.token);
-        console.log(res['token']);
-        console.log(res['userID']);
         if (this.isAuthenticated()) {
           this.id = res['userID'];
           localStorage.setItem('userID', this.id);
-          console.log('Token exists');
       //    this.isLoggedIn();
           this.router.navigate(['dashboard']);
-          console.log(loginData.username);
         }
     });
   }
