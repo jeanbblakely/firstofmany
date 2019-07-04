@@ -49,7 +49,7 @@ export class CategoryCreateComponent implements OnInit {
       note: [null],
       img: [null],
       datestamp: [null],
-      favorite: ['false']
+      favorite: [false]
     }))
   }
   
