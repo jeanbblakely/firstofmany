@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl, FormArray } from '@angular/forms';
 import { CategoryService } from '../../services/category.service';
 import { UserService } from '../../services/user.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, of, throwError, Subject } from 'rxjs';
 import { Category } from './../../models/category';
 import { User } from './../../models/user';
@@ -13,6 +13,7 @@ import { User } from './../../models/user';
   styleUrls: ['./category-create.component.css']
 })
 export class CategoryCreateComponent implements OnInit {
+  selectedCategoryName: string;
   message = '';
   categoryForm: FormGroup;
   currentCategory: Category;
@@ -21,12 +22,15 @@ export class CategoryCreateComponent implements OnInit {
   favorite = ['false', 'true'];
 
   constructor(private categoryService: CategoryService, private userService: UserService, private fb: FormBuilder,
-    private router: Router) { }
+    private router: Router, private _route: ActivatedRoute) { }
 
   ngOnInit() {
     this.getUser();
     this.getCategories();
     this.createForm();
+    this.selectedCategoryName = this._route.snapshot.paramMap.get('name');
+    this.categoryForm.controls['name'].setValue(this.selectedCategoryName, {onlySelf: true});
+    
   }
 
   /*

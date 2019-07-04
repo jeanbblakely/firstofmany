@@ -13,7 +13,7 @@
             fxFlex="30" fxFlex.xs="45" 
             [ngStyle]="{'background-color': category.color}">
     <div *ngIf="!isDashBoard">
-      <button mat-raised-button color="primary" routerLink="/category-create">Track Category</button>
+      <button mat-raised-button color="primary" [routerLink]="['/category-create', {name:category.name}]">Track Category</button>
     </div>
     <mat-card-content fxflexfill>
       <h1 fittext [maxFontSize]=70 [minFontSize]=20>
