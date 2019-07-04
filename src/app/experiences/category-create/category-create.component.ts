@@ -89,11 +89,6 @@ export class CategoryCreateComponent implements OnInit {
         console.log(this.currentCategory);
         this.executeCategoryCreation();
         this.userService.addUserCategory(this.currentCategory);
-        console.log('create complete');
-        //todo on successful save in Category table updateUser with Category in UserService
-        this.copyCategoryToUser();
-        console.log(this.user, 'user before upDate');
-        this.userService.addUserCategory(this.user);
         this.router.navigate(['dashboard']);
       } else {
         console.log('match');
