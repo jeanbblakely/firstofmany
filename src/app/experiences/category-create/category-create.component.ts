@@ -47,7 +47,7 @@ export class CategoryCreateComponent implements OnInit {
     return this.categoryForm.get('experiences') as FormArray;
   }
 
-  private addExperience() {
+  public addExperience() {
     this.experiences.push(this.fb.group({
       name: ['', [Validators.required]],
       note: [null],
@@ -91,11 +91,18 @@ export class CategoryCreateComponent implements OnInit {
         console.log('no match');
         this.currentCategory = Object.assign({}, this.categoryForm.value);
         console.log(this.currentCategory);
-        this.executeCategoryCreation();
+        this.categoryService.createCategory(this.currentCategory);
         this.userService.addUserCategory(this.currentCategory);
         this.router.navigate(['dashboard']);
       } else {
-        console.log('match');
+        console.log('match in Categories');
+        if (!this.searchUserCategory(this.categoryForm.get('name').value)) {
+          console.log('no tracked_categories match');
+          this.currentCategory = Object.assign({}, this.categoryForm.value);
+          console.log(this.currentCategory);
+          this.userService.addUserCategory(this.currentCategory);
+          this.router.navigate(['dashboard']);
+        }
         var currentCategory = this.searchCategory(this.categoryForm.get('name').value);
         console.log(currentCategory, 'current category');
         //todo updateUser with Category in UserService
@@ -119,9 +126,21 @@ export class CategoryCreateComponent implements OnInit {
    }
     return null;
   }
-
-  private executeCategoryCreation(): void {
-    this.categoryService.createCategory(this.currentCategory);
+  
+  /*
+	Searches and returns existing Category
+  */
+  searchUserCategory(name: string): Observable<Category> {
+    var trimName = name.trim();
+    var i;
+    console.log(this.user.tracked_categories.length, 'tracked_categories length');
+    for (i = 0; i < this.user.tracked_categories.length; i++) {
+      if (this.user.tracked_categories[i].name.toUpperCase() === trimName.toUpperCase()) {
+        console.log(this.user.tracked_categories[i].name, 'categories array');
+        return of(this.user.tracked_categories[i]);
+      }
+   }
+    return null;
   }
   
   
