@@ -102,6 +102,8 @@ export class CategoryCreateComponent implements OnInit {
           console.log(this.currentCategory);
           this.userService.addUserCategory(this.currentCategory);
           this.router.navigate(['dashboard']);
+        } else {
+          this.message = 'you are already tracking this category';
         }
         var currentCategory = this.searchCategory(this.categoryForm.get('name').value);
         console.log(currentCategory, 'current category');
