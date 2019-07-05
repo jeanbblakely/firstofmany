@@ -47,7 +47,7 @@ export class CategoryCreateComponent implements OnInit {
     return this.categoryForm.get('experiences') as FormArray;
   }
 
-  private addExperience() {
+  public addExperience() {
     this.experiences.push(this.fb.group({
       name: ['', [Validators.required]],
       note: [null],
