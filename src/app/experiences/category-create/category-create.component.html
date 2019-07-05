@@ -10,18 +10,7 @@
           <input matInput type="text" placeholder="Category Name" id="category-name" formControlName="name" required>
           <mat-error *ngIf="hasError('name', 'required')">Please enter a category name</mat-error>
         </mat-form-field>
-        <div *ngIf="selectedCategoryName">
-        <h4>Choose an Existing Category to Track</h4>
-        <div>
-          
-          <select name="name" formControlName="name">
-          
-          <option *ngFor="let category of categories" [ngValue]="selectedCategoryName">
-            {{ category.name }}
-          </option>
-          </select>
-        </div>
-        </div>
+       
         <div formArrayName="experiences">
           <div *ngFor="let experience of experiences.controls; let i = index" [formGroupName]="i" class="experiences">
             <div>
