@@ -16,6 +16,7 @@ export class CategoriesComponent implements OnInit {
   @Input() isDashBoard = false;
   categories: Category[];
   selectedCategory: Category;
+  userCategories: Category[];
   mockCategories = [
     {name: 'Vegetables'},
     {name: 'Fruit'},
@@ -39,6 +40,7 @@ export class CategoriesComponent implements OnInit {
 
   ngOnInit() {
     if (!this.isDashBoard) {
+      this.getUserCategoriesDeDup();
       this.getCategories();
     } else {
       this.getUserCategories();
@@ -57,6 +59,7 @@ export class CategoriesComponent implements OnInit {
        });
   }
 
+
    /*
 	Gets Observable User Categories array from service
   */
@@ -69,6 +72,14 @@ export class CategoriesComponent implements OnInit {
 
   }
 
+  getUserCategoriesDeDup(): void {
+    this.userService.getUserCategories()
+      .subscribe(categories => {
+        this.userCategories = categories;
+      });
+
+  }
+  
   getRandomColors() {
     for (let i = 0; i < this.categories.length; i++) {
       this.categories[i]['color'] = this.colors[Math.floor(Math.random() * this.colors.length)];

@@ -17,6 +17,7 @@ export class CategoryCreateComponent implements OnInit {
   message = '';
   categoryForm: FormGroup;
   currentCategory: Category;
+  currentUserCategory: Category;
   categories: Category[];
   user: User;
   favorite = ['false', 'true'];
@@ -36,6 +37,7 @@ export class CategoryCreateComponent implements OnInit {
   /*
 	Creates categoryForm based on input
   */
+  
   private createForm() {
     this.categoryForm = this.fb.group({
       name: ['', [Validators.required]],
@@ -55,6 +57,10 @@ export class CategoryCreateComponent implements OnInit {
       datestamp: [null],
       favorite: [false]
     }))
+  }
+  
+  public removeExperience() {
+    this.experiences.removeAt(this.experiences.length - 1);
   }
   
   public hasError = (controlName: string, errorName: string) => {
@@ -86,26 +92,26 @@ export class CategoryCreateComponent implements OnInit {
   */
   addCategory(): void {
     if (this.categoryForm.valid) {
-      console.log(this.categoryForm.get('name').value);
-      if (!this.searchCategory(this.categoryForm.get('name').value)) {
+      if (!this.searchCategory(this.categoryForm.get('name').value) && !this.searchUserCategory(this.categoryForm.get('name').value)) {
         console.log('no match');
-        this.currentCategory = Object.assign({}, this.categoryForm.value);
-        console.log(this.currentCategory);
+        this.currentUserCategory = Object.assign({}, this.categoryForm.value);
+        console.log(this.currentUserCategory);
+        this.stripExperiences();
         this.categoryService.createCategory(this.currentCategory);
-        this.userService.addUserCategory(this.currentCategory);
+        this.userService.addUserCategory(this.currentUserCategory);
         this.router.navigate(['dashboard']);
       } else {
         console.log('match in Categories');
         if (!this.searchUserCategory(this.categoryForm.get('name').value)) {
           console.log('no tracked_categories match');
-          this.currentCategory = Object.assign({}, this.categoryForm.value);
-          console.log(this.currentCategory);
-          this.userService.addUserCategory(this.currentCategory);
+          this.currentUserCategory = Object.assign({}, this.categoryForm.value);
+          this.userService.addUserCategory(this.currentUserCategory);
           this.router.navigate(['dashboard']);
+        } else {
+          this.message = 'you are already tracking this category - update not yet implemented';
+          //todo update User with extra Category info in UserService
         }
-        var currentCategory = this.searchCategory(this.categoryForm.get('name').value);
-        console.log(currentCategory, 'current category');
-        //todo updateUser with Category in UserService
+        
       }
     } else {
       this.message = 'the form has errors';
@@ -133,10 +139,8 @@ export class CategoryCreateComponent implements OnInit {
   searchUserCategory(name: string): Observable<Category> {
     var trimName = name.trim();
     var i;
-    console.log(this.user.tracked_categories.length, 'tracked_categories length');
     for (i = 0; i < this.user.tracked_categories.length; i++) {
       if (this.user.tracked_categories[i].name.toUpperCase() === trimName.toUpperCase()) {
-        console.log(this.user.tracked_categories[i].name, 'categories array');
         return of(this.user.tracked_categories[i]);
       }
    }
@@ -149,5 +153,13 @@ export class CategoryCreateComponent implements OnInit {
     console.log(this.user, 'user in copy');
   
   }
-
+  
+   private stripExperiences(): void {
+    this.currentCategory = {
+      name: this.currentUserCategory.name,
+      experiences: []
+    };
+    console.log(this.currentCategory, 'currentCategory stripped');
+  
+  }
 }

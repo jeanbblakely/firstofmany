@@ -1,7 +1,7 @@
 <mat-dialog-actions fxLayout="row" fxLayoutAlign="start end">
   <h2 class="mat-display-1" mat-dialog-title fxFlex>{{ category.name }}</h2>
   <button mat-raised-button color="accent" matBadge="{{category.experiences.length}}" matBadgeColor="primary"
-          matBadgeHidden="{{category.experiences.length < 1}}">
+          matBadgeHidden="{{category.experiences.length < 1}}" [routerLink]="['/category-create', {name:category.name}]">
     Add a first
   </button>
 </mat-dialog-actions>
