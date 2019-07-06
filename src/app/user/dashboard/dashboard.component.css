@@ -1,0 +1,30 @@
+.add-categories-button {
+  position: fixed;
+  bottom: 5%;
+  right: 10%;
+  z-index: 999;
+}
+
+
+.add-categories-button-text {
+  display: none;
+}
+
+@media only screen and (min-width: 601px) {
+  .add-categories-button {
+    width: unset;
+    padding: 0 26px;
+    border-radius: 29px;
+  }
+  
+  mat-icon {
+    margin-right: 10px;
+  }
+  
+  .add-categories-button-text {
+    display: inline;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+}
