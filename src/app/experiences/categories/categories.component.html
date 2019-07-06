@@ -6,15 +6,12 @@
       All 
     </div>
     Categories</h1>
-
+<div *ngIf="!isDashBoard">
 <div class="categories" fxLayout="row wrap" fxflexfill fxLayoutGap="3%" >
-  <mat-card *ngFor="let category of categories"  
-            (click)="onSelect(category)" 
+  <mat-card *ngFor="let category of categories"   
             fxFlex="30" fxFlex.xs="45" 
             [ngStyle]="{'background-color': category.color}">
-    <div *ngIf="!isDashBoard">
       <button mat-raised-button color="primary" [routerLink]="['/category-create', {name:category.name}]">Track Category</button>
-    </div>
     <mat-card-content fxflexfill>
       <h1 fittext [maxFontSize]=70 [minFontSize]=20>
         {{ category.name | spacebreak:11 }}
@@ -22,6 +19,22 @@
     </mat-card-content>
   </mat-card>
 </div>
+</div>
+<div *ngIf="isDashBoard">
+<div class="categories" fxLayout="row wrap" fxflexfill fxLayoutGap="3%" >
+  <mat-card *ngFor="let category of categories"  
+            (click)="onSelect(category)" 
+            fxFlex="30" fxFlex.xs="45" 
+            [ngStyle]="{'background-color': category.color}">
+    <mat-card-content fxflexfill>
+      <h1 fittext [maxFontSize]=70 [minFontSize]=20>
+        {{ category.name | spacebreak:11 }}
+      </h1>
+    </mat-card-content>
+  </mat-card>
+</div>
+</div>
+
 <div *ngIf="!isDashBoard">
   <p>Don't see what you're looking for?
     <button mat-raised-button color="primary" routerLink="/category-create">Add New Category</button>
