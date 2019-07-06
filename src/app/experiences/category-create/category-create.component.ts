@@ -31,7 +31,7 @@ export class CategoryCreateComponent implements OnInit {
     this.createForm();
     this.selectedCategoryName = this._route.snapshot.paramMap.get('name');
     this.categoryForm.controls['name'].setValue(this.selectedCategoryName, {onlySelf: true});
-    
+
   }
 
   /*
@@ -45,7 +45,7 @@ export class CategoryCreateComponent implements OnInit {
     });
   }
 
-  private get experiences(): FormArray {
+  public get experiences(): FormArray {
     return this.categoryForm.get('experiences') as FormArray;
   }
 
@@ -58,15 +58,19 @@ export class CategoryCreateComponent implements OnInit {
       favorite: [false]
     }))
   }
+<<<<<<< HEAD
+
+=======
   
   public removeExperience() {
     this.experiences.removeAt(this.experiences.length - 1);
   }
   
+>>>>>>> 968a5529b12623a1406bbd3780faa480aa9cfcbe
   public hasError = (controlName: string, errorName: string) => {
     return this.categoryForm.controls[controlName].hasError(errorName);
   }
-  
+
   /*
 	Gets Observable User from service
   */
@@ -132,7 +136,7 @@ export class CategoryCreateComponent implements OnInit {
    }
     return null;
   }
-  
+
   /*
 	Searches and returns existing Category
   */
@@ -146,12 +150,12 @@ export class CategoryCreateComponent implements OnInit {
    }
     return null;
   }
-  
-  
+
+
   private copyCategoryToUser(): void {
     this.user.tracked_categories.push(this.currentCategory);
     console.log(this.user, 'user in copy');
-  
+
   }
   
    private stripExperiences(): void {
