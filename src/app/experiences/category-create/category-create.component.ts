@@ -37,7 +37,7 @@ export class CategoryCreateComponent implements OnInit {
   /*
 	Creates categoryForm based on input
   */
-  
+
   private createForm() {
     this.categoryForm = this.fb.group({
       name: ['', [Validators.required]],
@@ -58,15 +58,11 @@ export class CategoryCreateComponent implements OnInit {
       favorite: [false]
     }))
   }
-<<<<<<< HEAD
 
-=======
-  
   public removeExperience() {
     this.experiences.removeAt(this.experiences.length - 1);
   }
-  
->>>>>>> 968a5529b12623a1406bbd3780faa480aa9cfcbe
+
   public hasError = (controlName: string, errorName: string) => {
     return this.categoryForm.controls[controlName].hasError(errorName);
   }
@@ -115,7 +111,7 @@ export class CategoryCreateComponent implements OnInit {
           this.message = 'you are already tracking this category - update not yet implemented';
           //todo update User with extra Category info in UserService
         }
-        
+
       }
     } else {
       this.message = 'the form has errors';
@@ -157,13 +153,13 @@ export class CategoryCreateComponent implements OnInit {
     console.log(this.user, 'user in copy');
 
   }
-  
+
    private stripExperiences(): void {
     this.currentCategory = {
       name: this.currentUserCategory.name,
       experiences: []
     };
     console.log(this.currentCategory, 'currentCategory stripped');
-  
+
   }
 }
