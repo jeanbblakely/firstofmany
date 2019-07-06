@@ -58,15 +58,11 @@ export class CategoryCreateComponent implements OnInit {
       favorite: [false]
     }))
   }
-<<<<<<< HEAD
-
-=======
   
   public removeExperience() {
     this.experiences.removeAt(this.experiences.length - 1);
   }
   
->>>>>>> 968a5529b12623a1406bbd3780faa480aa9cfcbe
   public hasError = (controlName: string, errorName: string) => {
     return this.categoryForm.controls[controlName].hasError(errorName);
   }
