@@ -10,6 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { Observable, of, throwError, Subject } from 'rxjs';
 import { CategoryService } from '../../services/category.service';
+import { RouterTestingModule } from '@angular/router/testing';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { UserService } from '../../services/user.service';
@@ -39,6 +40,7 @@ describe('CategoriesComponent', () => {
     mockUserService = new MockUserService();
     TestBed.configureTestingModule({
       imports: [
+        RouterTestingModule,
         MaterialModule, 
         HttpClientModule, 
         BrowserAnimationsModule 
