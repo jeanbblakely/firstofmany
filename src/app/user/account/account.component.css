@@ -1,14 +1,3 @@
-/* .alert {
-  color: red;
-  font-style: italic;
-  font-size: .8em;
-}
-
-.container {
-  text-align: center;
-  width: 100%;
-}
-*/
 mat-card {
   margin: 0 auto;
   max-width: 500px;
@@ -22,4 +11,9 @@ mat-form-field {
 
 mat-card-actions {
   text-align: center;
+}
+
+.mat-icon {
+  cursor: pointer;
+  user-select: none;
 }
