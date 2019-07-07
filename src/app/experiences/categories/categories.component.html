@@ -8,9 +8,10 @@
     Categories</h1>
 <div *ngIf="!isDashBoard">
 <div class="categories" fxLayout="row wrap" fxflexfill fxLayoutGap="3%" >
-  <mat-card *ngFor="let category of categories"   
+  <mat-card *ngFor="let category of categories" 
+            (click)="selectCategory(category)"  
             fxFlex="30" fxFlex.xs="45" 
-            [ngStyle]="{'background-color': category.color}">
+            [ngStyle]="{'background-color': category.color, 'display': category.display }">
       <button mat-raised-button color="primary" [routerLink]="['/category-create', {name:category.name}]">Track Category</button>
     <mat-card-content fxflexfill>
       <h1 fittext [maxFontSize]=70 [minFontSize]=20>
@@ -20,7 +21,7 @@
   </mat-card>
 </div>
 </div>
-<div *ngIf="isDashBoard">
+<!-- <div *ngIf="isDashBoard">
 <div class="categories" fxLayout="row wrap" fxflexfill fxLayoutGap="3%" >
   <mat-card *ngFor="let category of categories"  
             (click)="onSelect(category)" 
@@ -33,7 +34,7 @@
     </mat-card-content>
   </mat-card>
 </div>
-</div>
+</div> -->
 
 <div *ngIf="!isDashBoard">
   <p>Don't see what you're looking for?

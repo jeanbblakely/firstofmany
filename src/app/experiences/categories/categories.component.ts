@@ -17,14 +17,6 @@ export class CategoriesComponent implements OnInit {
   categories: Category[];
   selectedCategory: Category;
   userCategories: Category[];
-  mockCategories = [
-    {name: 'Vegetables'},
-    {name: 'Fruit'},
-    {name: 'Countries'},
-    {name: 'Movies'},
-    {name: 'Thrills'},
-    {name: 'Cuisines'}
-  ];
   colors = [
     '#f24236', // cat-red: #f24236;
     '#f7844f', // cat-orange: #f7844f;
@@ -45,24 +37,23 @@ export class CategoriesComponent implements OnInit {
     } else {
       this.getUserCategories();
     }
-
   }
 
-   /*
-	Gets Observable Categories array from service
-  */
+  /*
+ Gets Observable Categories array from service
+ */
   getCategories(): void {
     this.categoryService.getCategories()
       .subscribe(categories => {
         this.categories = categories;
         this.getRandomColors();
-       });
+      });
   }
 
 
-   /*
-	Gets Observable User Categories array from service
-  */
+  /*
+ Gets Observable User Categories array from service
+ */
   getUserCategories(): void {
     this.userService.getUserCategories()
       .subscribe(categories => {
@@ -79,19 +70,29 @@ export class CategoriesComponent implements OnInit {
       });
 
   }
-  
+
   getRandomColors() {
     for (let i = 0; i < this.categories.length; i++) {
-      this.categories[i]['color'] = this.colors[Math.floor(Math.random() * this.colors.length)];
+      if (!this.isDashBoard && this.userCategories.find(c => c.name == this.categories[i].name)) {
+        this.categories[i]['display'] = 'none';
+      } else {
+        this.categories[i]['color'] = this.colors[Math.floor(Math.random() * this.colors.length)];
+      }
     }
   }
 
   /*
-	Select click method for singl Category objects
+	Select click method for single Category objects
   */
-  onSelect(category: Category): void {
-    this.selectedCategory = category;
-    this.openDialog();
+  selectCategory(category: Category): void {
+    if (this.userCategories.find(c => c.name == category.name)) {
+      console.error(category.name + ' is already tracked.');
+      category.name += ' Added!';
+      category['display'] = 'none';
+    } else {
+      this.selectedCategory = category;
+      this.openDialog();
+    }
   }
 
   openDialog(): void {
