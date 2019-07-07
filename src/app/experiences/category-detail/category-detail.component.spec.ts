@@ -1,11 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { MaterialModule } from '../../material/material.module';
-import { MatFormFieldModule, MatInputModule, MatIconModule, MatCardModule, MatListModule } from '@angular/material';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CategoryDetailComponent } from './category-detail.component';
 import { Category } from '../../models/category';
+import { RouterTestingModule } from '@angular/router/testing';
 
-describe('CategoryDetailComponent', () => {
+fdescribe('CategoryDetailComponent', () => {
   let component: CategoryDetailComponent;
   let fixture: ComponentFixture<CategoryDetailComponent>;
 
@@ -17,9 +17,7 @@ describe('CategoryDetailComponent', () => {
       ],
       imports: [
         MaterialModule,
-        MatCardModule,
-        MatDialogModule,
-        MatListModule
+        RouterTestingModule
       ],
       
       declarations: [ CategoryDetailComponent ]

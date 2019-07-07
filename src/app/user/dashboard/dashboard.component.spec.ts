@@ -2,13 +2,19 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { UserService } from '../../services/user.service';
 import { CategoriesComponent } from '../../experiences/categories/categories.component';
 import { CategoryDetailComponent } from '../../experiences/category-detail/category-detail.component';
-import { MatFormFieldModule, MatInputModule, MatIconModule, MatCardModule, MatDialogModule, MatListModule } from '@angular/material';
+import { MaterialModule } from '../../material/material.module';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { Category } from '../../models/category';
 import { Observable, of, throwError } from 'rxjs';
 import { User } from '../../models/user';
+import { AngularFittextModule } from 'angular-fittext';
+import { SpacebreakPipe } from '../../_pipes/spacebreak.pipe';
 
 import { DashboardComponent } from './dashboard.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DebugElement } from '@angular/core';
+import { By } from '@angular/platform-browser';
 
 describe('DashboardComponent', () => {
   class MockUserService {
@@ -94,11 +100,17 @@ describe('DashboardComponent', () => {
       ],
       imports: [
         HttpClientTestingModule,
-        MatCardModule,
-        MatDialogModule,
-        MatListModule
+        BrowserAnimationsModule,
+        MaterialModule,
+        AngularFittextModule,
+        RouterTestingModule
       ],
-      declarations: [ DashboardComponent, CategoriesComponent, CategoryDetailComponent ]
+      declarations: [ 
+        DashboardComponent, 
+        CategoriesComponent, 
+        CategoryDetailComponent, 
+        SpacebreakPipe
+      ]
     })
     .compileComponents();
   }));
@@ -120,11 +132,13 @@ describe('DashboardComponent', () => {
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('h2').textContent).toContain('Welcome Boo Berry');
   });
+
   it(`should have user categories with mock service`, () => {
     const fixture = TestBed.createComponent(DashboardComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('li').textContent).toContain('Thrills');
+    expect(compiled.querySelectorAll('mat-card').length).toBe(2);
+    expect(compiled.querySelector('mat-card').innerText).toContain('Thrills');
   });
 
 });
