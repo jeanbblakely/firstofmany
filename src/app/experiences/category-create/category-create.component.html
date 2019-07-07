@@ -7,7 +7,10 @@
       <mat-card-content>
 
         <mat-form-field>
-          <input matInput type="text" placeholder="Category Name" id="category-name" formControlName="name" required>
+          <input matInput type="text" placeholder="Category Name" id="category-name" formControlName="name" required [appDisableControl]="disabled">
+          <button mat-icon-button matSuffix (click)="disabled = false">
+            <mat-icon>edit</mat-icon>
+          </button>
           <mat-error *ngIf="hasError('name', 'required')">Please enter a category name</mat-error>
         </mat-form-field>
 

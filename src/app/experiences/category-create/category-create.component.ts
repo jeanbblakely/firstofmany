@@ -21,6 +21,7 @@ export class CategoryCreateComponent implements OnInit {
   categories: Category[];
   user: User;
   favorite = ['false', 'true'];
+  disabled = true;
 
   constructor(private categoryService: CategoryService, private userService: UserService, private fb: FormBuilder,
     private router: Router, private _route: ActivatedRoute) { }
@@ -38,7 +39,7 @@ export class CategoryCreateComponent implements OnInit {
   */
   private createForm() {
     this.categoryForm = this.fb.group({
-      name: [{value:'', disabled: true}, [Validators.required]],
+      name: ['', [Validators.required]],
       experiences: this.fb.array([])
     });
   }
@@ -102,7 +103,7 @@ export class CategoryCreateComponent implements OnInit {
         console.log('match in Categories');
         if (!this.searchUserCategory(this.categoryForm.get('name').value)) {
           console.log('no tracked_categories match');
-          this.currentUserCategory = Object.assign({}, this.categoryForm.value);
+          this.currentUserCategory = Object.assign({}, this.categoryForm.value);  // NOTE: Might need to change to .getRawValue() if the field is disabled
           this.userService.addUserCategory(this.currentUserCategory);
           this.router.navigate(['dashboard']);
         } else {
