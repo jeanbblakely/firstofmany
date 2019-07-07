@@ -1,40 +1,24 @@
 <h1 class="mat-display-1">
-    <div *ngIf="isDashBoard">
-      My 
-    </div>
-    <div *ngIf="!isDashBoard">
-      All 
-    </div>
+    <span *ngIf="isDashBoard">My </span>
+    <span *ngIf="!isDashBoard">All </span>
     Categories</h1>
-<div *ngIf="!isDashBoard">
 <div class="categories" fxLayout="row wrap" fxflexfill fxLayoutGap="3%" >
   <mat-card *ngFor="let category of categories" 
             (click)="selectCategory(category)"  
             fxFlex="30" fxFlex.xs="45" 
-            [ngStyle]="{'background-color': category.color, 'display': category.display }">
-      <button mat-raised-button color="primary" [routerLink]="['/category-create', {name:category.name}]">Track Category</button>
+            [ngStyle]="{'background-color': category.color, 'display': category.display }"
+            [@flipCard]=category.flippedState>
+      <!-- <button mat-raised-button color="primary" [routerLink]="['/category-create', {name:category.name}]">Track Category</button> -->
     <mat-card-content fxflexfill>
-      <h1 fittext [maxFontSize]=70 [minFontSize]=20>
+      <h2 fittext [maxFontSize]=70 [minFontSize]=20 class="card-face-front">
         {{ category.name | spacebreak:11 }}
-      </h1>
+      </h2>
+      <h2 fittext [maxFontSize]=70 [minFontSize]=20 class="card-face-back">
+        {{ category.name + ' Added!' | spacebreak:11 }}
+      </h2>
     </mat-card-content>
   </mat-card>
 </div>
-</div>
-<!-- <div *ngIf="isDashBoard">
-<div class="categories" fxLayout="row wrap" fxflexfill fxLayoutGap="3%" >
-  <mat-card *ngFor="let category of categories"  
-            (click)="onSelect(category)" 
-            fxFlex="30" fxFlex.xs="45" 
-            [ngStyle]="{'background-color': category.color}">
-    <mat-card-content fxflexfill>
-      <h1 fittext [maxFontSize]=70 [minFontSize]=20>
-        {{ category.name | spacebreak:11 }}
-      </h1>
-    </mat-card-content>
-  </mat-card>
-</div>
-</div> -->
 
 <div *ngIf="!isDashBoard">
   <p>Don't see what you're looking for?

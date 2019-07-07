@@ -1,16 +1,28 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Category } from '../../models/category';
-import { CATEGORIES } from '../../mock-categories';
 import { CategoryService } from '../../services/category.service';
 import { UserService } from '../../services/user.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { CategoryDetailComponent } from '../category-detail/category-detail.component';
+import { trigger, state, transition, style, animate } from '@angular/animations';
 
 
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.component.html',
-  styleUrls: ['./categories.component.css']
+  styleUrls: ['./categories.component.css'],
+  animations: [
+    trigger('flipCard', [
+      state('initial', style({
+      })),
+      state('final', style({
+        transformStyle: 'preserve-3d',
+        transform: 'rotateY(180deg)',
+        pointerEvents: 'none'
+      })),
+      transition('initial=>final', animate('500ms'))
+    ]),
+  ]
 })
 export class CategoriesComponent implements OnInit {
   @Input() isDashBoard = false;
@@ -46,55 +58,63 @@ export class CategoriesComponent implements OnInit {
     this.categoryService.getCategories()
       .subscribe(categories => {
         this.categories = categories;
-        this.getRandomColors();
+        this.setCardStyle();
       });
   }
 
 
-  /*
- Gets Observable User Categories array from service
+  /**
+  *  Gets Observable User Categories array from service
  */
   getUserCategories(): void {
     this.userService.getUserCategories()
       .subscribe(categories => {
         this.categories = categories;
-        this.getRandomColors();
+        this.setCardStyle();
       });
-
   }
 
+  /**
+   * Gets the user's categories to compare against
+   */
   getUserCategoriesDeDup(): void {
     this.userService.getUserCategories()
       .subscribe(categories => {
         this.userCategories = categories;
       });
-
   }
 
-  getRandomColors() {
+  /**
+   * Sets the background color of each card to a random from colors. Styles cards in userCategories.
+   */
+  setCardStyle() {
     for (let i = 0; i < this.categories.length; i++) {
-      if (!this.isDashBoard && this.userCategories.find(c => c.name == this.categories[i].name)) {
-        this.categories[i]['display'] = 'none';
-      } else {
-        this.categories[i]['color'] = this.colors[Math.floor(Math.random() * this.colors.length)];
+      this.categories[i]['color'] = this.colors[Math.floor(Math.random() * this.colors.length)];
+      if (!this.isDashBoard) {
+        if (this.userCategories.find(c => c.name == this.categories[i].name)) {
+          this.categories[i]['display'] = 'none';
+        } else {
+          this.categories[i]['flippedState'] = 'initial';
+        }
       }
     }
   }
 
-  /*
-	Select click method for single Category objects
+  /**
+   * 	Select click method for single Category objects
   */
   selectCategory(category: Category): void {
-    if (this.userCategories.find(c => c.name == category.name)) {
-      console.error(category.name + ' is already tracked.');
-      category.name += ' Added!';
-      category['display'] = 'none';
-    } else {
+    if (this.isDashBoard) {
       this.selectedCategory = category;
       this.openDialog();
+    } else {
+      category['flippedState'] = category['flippedState'] === 'initial' ? 'final' : 'initial';
     }
   }
 
+  /***
+   * Opens a dialog showing the category's experiences
+   */
   openDialog(): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
