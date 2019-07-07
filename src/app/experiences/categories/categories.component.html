@@ -8,7 +8,7 @@
             fxFlex="30" fxFlex.xs="45" 
             [ngStyle]="{'background-color': category.color, 'display': category.display }"
             [@flipCard]=category.flippedState>
-      <!-- <button mat-raised-button color="primary" [routerLink]="['/category-create', {name:category.name}]">Track Category</button> -->
+      <!-- <a mat-raised-button color="primary" [routerLink]="['/category-create', {name:category.name}]">Track Category</a> -->
     <mat-card-content fxflexfill>
       <h2 fittext [maxFontSize]=70 [minFontSize]=20 class="card-face-front">
         {{ category.name | spacebreak:11 }}
@@ -22,6 +22,6 @@
 
 <div *ngIf="!isDashBoard">
   <p>Don't see what you're looking for?
-    <button mat-raised-button color="primary" routerLink="/category-create">Add New Category</button>
+    <a mat-raised-button color="primary" routerLink="/category-create">Add New Category</a>
   </p>
 </div>
