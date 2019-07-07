@@ -13,3 +13,9 @@
   bottom: 0;
   right: 0;
 }
+
+.no-experiences {
+  text-align: center;
+  /* line-height: 120%; */
+  padding: 20% 0;
+}
