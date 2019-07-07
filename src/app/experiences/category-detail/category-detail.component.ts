@@ -33,4 +33,8 @@ export class CategoryDetailComponent {
   getFavoriteIcon(favorited: boolean): String {
     return favorited ? 'favorite' : 'favorite_border';
   }
+
+  close() {
+    this.dialogRef.close();
+  }
 }

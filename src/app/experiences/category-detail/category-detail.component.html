@@ -14,7 +14,8 @@
   </mat-dialog-content>
   <mat-dialog-actions>
     <a mat-mini-fab color="accent" class="new-experience-button" 
-        [routerLink]="['/category-create']" [queryParams]="{name:category.name}">
+        [routerLink]="['/category-create']" [queryParams]="{name:category.name}"
+        (click)="close()">
       <mat-icon>add</mat-icon>
     </a>
   </mat-dialog-actions>
