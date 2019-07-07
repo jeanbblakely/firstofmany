@@ -10,12 +10,8 @@
             [@flipCard]=category.flippedState>
       <!-- <a mat-raised-button color="primary" [routerLink]="['/category-create', {name:category.name}]">Track Category</a> -->
     <mat-card-content fxflexfill>
-      <h2 fittext [maxFontSize]=70 [minFontSize]=20 class="card-face-front">
-        {{ category.name | spacebreak:11 }}
-      </h2>
-      <h2 fittext [maxFontSize]=70 [minFontSize]=20 class="card-face-back">
-        {{ category.name + ' Added!' | spacebreak:11 }}
-      </h2>
+      <h2 fittext [maxFontSize]=70 [minFontSize]=20 class="card-face-front" [innerHTML]="category.name | spacebreak:11 "></h2>
+      <h2 fittext [maxFontSize]=70 [minFontSize]=20 class="card-face-back" [innerHTML]="category.name + ' Added!' | spacebreak:11 "></h2>
     </mat-card-content>
   </mat-card>
 </div>
