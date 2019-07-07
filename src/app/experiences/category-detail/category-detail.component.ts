@@ -14,16 +14,27 @@ export class CategoryDetailComponent {
     this.category = data;
   }
 
+  /**
+   * Favorites an experiences
+   */
   favoriteThis(experience: {}) {
-    if (experience['favorite']) {
+    if (experience.hasOwnProperty('favorite')) {
       experience['favorite'] = !experience['favorite'];
     } else {
-      experience['favorite'] = true;
+      experience['favorite'] = false;
     };
     // Joey, could you offer some guidance here about updating the database?
   }
 
+  /**
+   * Gets the appropriate favorite icon
+   * @param favorited if experience has been favorited
+   */
   getFavoriteIcon(favorited: boolean): String {
     return favorited ? 'favorite' : 'favorite_border';
+  }
+
+  close() {
+    this.dialogRef.close();
   }
 }

@@ -16,6 +16,7 @@ export class AccountComponent implements OnInit {
   minDate = new Date(1900,0,1);
   maxDate = new Date(Date.now() + 24 * 60 * 60 * 1000);
   user: User;
+  hide = true;
 
 
   constructor(private userService: UserService,

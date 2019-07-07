@@ -1,7 +1,9 @@
 <section>
   <mat-card>
     <mat-card-header>
-        <mat-card-title><h2>{{user?.name}}'s Account</h2></mat-card-title>
+      <mat-card-title>
+        <h2>{{user?.name}}'s Account</h2>
+      </mat-card-title>
     </mat-card-header>
     <form *ngIf="user" [formGroup]="userForm" (ngSubmit)="update()" autocomplete="off" novalidate>
       <mat-card-content>
@@ -11,7 +13,11 @@
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput type="password" placeholder="Password" id="password" formControlName="password" required minlength="8">
+          <input matInput type="password" placeholder="Password" id="password" formControlName="password" required
+            minlength="8" [type]="hide ? 'password' : 'text'">
+          <mat-icon matSuffix (click)="hide = !hide">
+            {{hide ? 'visibility_off' : 'visibility'}}
+          </mat-icon>
           <mat-hint align="end">Must be 8+ characters</mat-hint>
           <mat-error *ngIf="hasError('password', 'required')">Please enter your password</mat-error>
           <mat-error *ngIf="hasError('password', 'minlength')">Password must be at least 8 characters</mat-error>
@@ -29,7 +35,8 @@
         </mat-form-field>
         <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px" fxLayout.xs="column">
           <mat-form-field>
-            <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" placeholder="{{user.birthdate}}" id="birthdate" formControlName="birthdate" required>
+            <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" placeholder="{{user.birthdate}}"
+              id="birthdate" formControlName="birthdate" required>
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
             <mat-error *ngIf="hasError('birthdate', 'required')">Please enter your birthdate</mat-error>
@@ -37,7 +44,7 @@
 
           <mat-form-field>
             <mat-label>Gender</mat-label>
-            <mat-select name="genderSelect"  formControlName="gender" required>
+            <mat-select name="genderSelect" formControlName="gender" required>
               <mat-option *ngFor="let gender of genders" [value]='gender'>{{ gender }}</mat-option>
             </mat-select>
             <mat-error *ngIf="hasError('gender', 'required')">You must make a selection</mat-error>

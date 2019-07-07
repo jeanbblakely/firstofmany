@@ -5,7 +5,7 @@ import { CategoryDetailComponent } from './category-detail.component';
 import { Category } from '../../models/category';
 import { RouterTestingModule } from '@angular/router/testing';
 
-fdescribe('CategoryDetailComponent', () => {
+describe('CategoryDetailComponent', () => {
   let component: CategoryDetailComponent;
   let fixture: ComponentFixture<CategoryDetailComponent>;
 

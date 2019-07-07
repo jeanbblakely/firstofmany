@@ -1,7 +1,21 @@
+.dialog-box {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
 .mat-dialog-title {
   margin: 0;
 }
 
-.mat-dialog-actions {
-  padding-bottom: 30px;
+.new-experience-button {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.no-experiences {
+  text-align: center;
+  /* line-height: 120%; */
+  padding: 20% 0;
 }
