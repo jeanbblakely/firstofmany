@@ -1,6 +1,8 @@
 <div *ngIf="isLoggedIn()">
   <h2>Welcome {{ user?.name }}</h2>
   <app-categories [isDashBoard]=true></app-categories>
-  <button  mat-raised-button color="primary" routerLink="/categories">Add Categories to Track</button>
-  
+  <a mat-mini-fab class="add-categories-button" color="primary" routerLink="/categories">
+    <mat-icon>add</mat-icon>
+    <span class="add-categories-button-text">Add Categories to Track</span>
+  </a>
 </div>

@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatFormFieldModule, MatInputModule, MatIconModule, MatCardModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MaterialModule } from './../../material/material.module';
@@ -50,8 +49,6 @@ describe('CategoryCreateComponent', () => {
         ReactiveFormsModule,
         BrowserAnimationsModule,
         RouterTestingModule,
-        MatIconModule,
-        MatCardModule,
         MaterialModule,
         HttpClientTestingModule
       ],

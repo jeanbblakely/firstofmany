@@ -6,16 +6,34 @@ mat-toolbar {
 .logo-area {
   padding: 0;
   margin: 0;
-  width: 420px;
+  width: 430px;
   height: 230px;
   background-color: #4fc3f7;
   background-image: url("/assets/logo/logo_no_background.svg");
   background-repeat: no-repeat;
   background-position: right bottom;
+  background-size: contain;
 }
 
 .navigation-items {
   padding: 10px;
+}
+
+.sidenav-toggle {
+  position: absolute;
+  top: 50px;
+  left: 10px;
+  display: none;
+}
+
+@media only screen and (max-width: 900px) {
+  mat-toolbar {
+    height: 150px;
+  }
+  .logo-area {
+    width: 300px;
+    max-height: 150px;
+  }
 }
 
 @media only screen and (max-width: 600px) {
@@ -24,6 +42,8 @@ mat-toolbar {
   }
   .logo-area {
     max-height: 100px;
-    background-size: contain;
+  }
+  .sidenav-toggle {
+    display: inline;
   }
 }
