@@ -29,7 +29,7 @@ export class CategoryCreateComponent implements OnInit {
     this.getUser();
     this.getCategories();
     this.createForm();
-    this.selectedCategoryName = this._route.snapshot.paramMap.get('name');
+    this._route.queryParams.subscribe(params => { this.selectedCategoryName = params['name']; });
     this.categoryForm.controls['name'].setValue(this.selectedCategoryName, {onlySelf: true});
 
   }
@@ -37,7 +37,6 @@ export class CategoryCreateComponent implements OnInit {
   /*
 	Creates categoryForm based on input
   */
-  
   private createForm() {
     this.categoryForm = this.fb.group({
       name: ['', [Validators.required]],
