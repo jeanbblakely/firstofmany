@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormControl, FormArray } from '@ang
 import { CategoryService } from '../../services/category.service';
 import { UserService } from '../../services/user.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Observable, of, throwError, Subject } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Category } from './../../models/category';
 import { User } from './../../models/user';
 
@@ -31,7 +31,6 @@ export class CategoryCreateComponent implements OnInit {
     this.createForm();
     this._route.queryParams.subscribe(params => { this.selectedCategoryName = params['name']; });
     this.categoryForm.controls['name'].setValue(this.selectedCategoryName, {onlySelf: true});
-
   }
 
   /*
@@ -39,7 +38,7 @@ export class CategoryCreateComponent implements OnInit {
   */
   private createForm() {
     this.categoryForm = this.fb.group({
-      name: ['', [Validators.required]],
+      name: [{value:'', disabled: true}, [Validators.required]],
       experiences: this.fb.array([])
     });
   }
@@ -55,11 +54,11 @@ export class CategoryCreateComponent implements OnInit {
       img: [null],
       datestamp: [null],
       favorite: [false]
-    }))
+    }));
   }
   
-  public removeExperience() {
-    this.experiences.removeAt(this.experiences.length - 1);
+  public removeExperience(index: number) {
+    this.experiences.removeAt(index);
   }
   
   public hasError = (controlName: string, errorName: string) => {
