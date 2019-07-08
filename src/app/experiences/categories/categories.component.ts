@@ -109,6 +109,7 @@ export class CategoriesComponent implements OnInit {
       this.openDialog();
     } else {
       category['flippedState'] = category['flippedState'] === 'initial' ? 'final' : 'initial';
+      this.userService.addUserCategory(category);
     }
   }
 
