@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormControl, FormArray } from '@ang
 import { CategoryService } from '../../services/category.service';
 import { UserService } from '../../services/user.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Observable, of, throwError, Subject } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Category } from './../../models/category';
 import { User } from './../../models/user';
 
@@ -21,6 +21,7 @@ export class CategoryCreateComponent implements OnInit {
   categories: Category[];
   user: User;
   favorite = ['false', 'true'];
+  disabled = true;
 
   constructor(private categoryService: CategoryService, private userService: UserService, private fb: FormBuilder,
     private router: Router, private _route: ActivatedRoute) { }
@@ -29,15 +30,17 @@ export class CategoryCreateComponent implements OnInit {
     this.getUser();
     this.getCategories();
     this.createForm();
-    this.selectedCategoryName = this._route.snapshot.paramMap.get('name');
+    this._route.queryParams.subscribe(params => { this.selectedCategoryName = params['name']; });
     this.categoryForm.controls['name'].setValue(this.selectedCategoryName, {onlySelf: true});
-
   }
 
   /*
 	Creates categoryForm based on input
   */
+<<<<<<< HEAD
 
+=======
+>>>>>>> f61f54f23b208ad06e8ea3d2d3506ed9396f6f6f
   private createForm() {
     this.categoryForm = this.fb.group({
       name: ['', [Validators.required]],
@@ -56,11 +59,11 @@ export class CategoryCreateComponent implements OnInit {
       img: [null],
       datestamp: [null],
       favorite: [false]
-    }))
+    }));
   }
 
-  public removeExperience() {
-    this.experiences.removeAt(this.experiences.length - 1);
+  public removeExperience(index: number) {
+    this.experiences.removeAt(index);
   }
 
   public hasError = (controlName: string, errorName: string) => {
@@ -104,7 +107,7 @@ export class CategoryCreateComponent implements OnInit {
         console.log('match in Categories');
         if (!this.searchUserCategory(this.categoryForm.get('name').value)) {
           console.log('no tracked_categories match');
-          this.currentUserCategory = Object.assign({}, this.categoryForm.value);
+          this.currentUserCategory = Object.assign({}, this.categoryForm.value);  // NOTE: Might need to change to .getRawValue() if the field is disabled
           this.userService.addUserCategory(this.currentUserCategory);
           this.router.navigate(['dashboard']);
         } else {

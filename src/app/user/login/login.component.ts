@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-
+  hide = true;
   public username = '';
   public password = '';
   public loginData: FormGroup;

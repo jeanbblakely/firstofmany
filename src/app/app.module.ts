@@ -28,6 +28,7 @@ import { CategoryCreateComponent } from './experiences/category-create/category-
 import { AuthInterceptorService } from './services/authinterceptor.service';
 import { AngularFittextModule } from 'angular-fittext';
 import { SpacebreakPipe } from './_pipes/spacebreak.pipe';
+import { DisableControlDirective } from './_directives/disable-control.directive';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { SpacebreakPipe } from './_pipes/spacebreak.pipe';
     FooterComponent,
     CategoryDetailComponent,
     CategoryCreateComponent,
-    SpacebreakPipe
+    SpacebreakPipe,
+    DisableControlDirective
   ],
   imports: [
     BrowserModule,

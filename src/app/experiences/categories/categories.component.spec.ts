@@ -18,7 +18,7 @@ import { AngularFittextModule } from 'angular-fittext';
 import { SpacebreakPipe } from '../../_pipes/spacebreak.pipe';
 import { RouterTestingModule } from '@angular/router/testing';
 
-fdescribe('CategoriesComponent', () => {
+describe('CategoriesComponent', () => {
   class MockCategoryService {
      categories = CATEGORIES;
      getCategories(): Observable<Category[]> {

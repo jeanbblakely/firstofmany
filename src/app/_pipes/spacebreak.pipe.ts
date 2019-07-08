@@ -15,7 +15,8 @@ export class SpacebreakPipe implements PipeTransform {
         words.splice(i + 1, 0, temp.substring(maxChars));
       }
     }
-    return words.join('\n');
+    let brokenText = words.join('\n');
+    return brokenText;
   }
 
 }

@@ -1,22 +1,24 @@
-<mat-dialog-actions fxLayout="row" fxLayoutAlign="start end">
-  <h2 class="mat-display-1" mat-dialog-title fxFlex>{{ category.name }}</h2>
-  <a mat-raised-button 
-      color="accent" 
-      matBadge="{{category.experiences.length}}" 
-      matBadgeColor="primary"
-      matBadgeHidden="{{category.experiences.length < 1}}" 
-      [routerLink]="['/category-create']" 
-      [queryParams]="{name:category.name}">
-    Add a first
-</a>
-</mat-dialog-actions>
-<mat-dialog-content>
-  <mat-action-list>
-    <button mat-list-item class="mat-body-strong" *ngFor="let experience of category.experiences" (click)="favoriteThis(experience)">
-      <mat-icon matListIcon color="primary" aria-label="favorite icon">
-        {{getFavoriteIcon(experience['favorite'])}}
-      </mat-icon>
-      {{ experience.name }}
-    </button>
-  </mat-action-list>
-</mat-dialog-content>
+<div class="dialog-box">
+  <h2 mat-dialog-title class="mat-display-1">{{ category.name }}</h2>
+  <mat-dialog-content>
+    <mat-action-list>
+      <button mat-list-item class="mat-body-strong" 
+        *ngFor="let experience of category.experiences"
+        (click)="favoriteThis(experience)">
+        <mat-icon matListIcon color="primary" aria-label="favorite icon">
+          {{getFavoriteIcon(experience['favorite'])}}
+        </mat-icon>
+        {{ experience.name }}
+      </button>
+    </mat-action-list>
+    <div *ngIf="category.experiences.length == 0" class="no-experiences mat-h2">
+      You haven't added any {{ category.name | lowercase }} yet. <br> Add your first now!
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <a mat-mini-fab color="accent" class="new-experience-button" 
+        [routerLink]="['/category-create']" [queryParams]="{name:category.name}"
+        (click)="close()">
+      <mat-icon>add</mat-icon>
+    </a>
+  </mat-dialog-actions>

@@ -15,6 +15,7 @@ export class RegisterComponent implements OnInit {
   genders = ['--', 'Female', 'Male', 'Non-binary/third gender', 'Prefer not to say'];
   minDate = new Date(1900,0,1);
   maxDate = new Date(Date.now() + 24 * 60 * 60 * 1000);
+  hide = true;
 
   constructor(private userService: UserService, private fb: FormBuilder,
     private router: Router) {

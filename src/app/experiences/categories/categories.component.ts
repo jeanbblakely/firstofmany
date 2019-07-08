@@ -127,6 +127,7 @@ export class CategoriesComponent implements OnInit {
     dialogConfig.maxWidth = 500;
     dialogConfig.maxHeight = 500;
     dialogConfig.restoreFocus = true;
+    dialogConfig.panelClass = 'experiences-dialog';
     dialogConfig.data = this.selectedCategory;
     this.dialog.open(CategoryDetailComponent, dialogConfig);
   }
