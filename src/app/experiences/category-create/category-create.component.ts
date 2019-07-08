@@ -37,10 +37,6 @@ export class CategoryCreateComponent implements OnInit {
   /*
 	Creates categoryForm based on input
   */
-<<<<<<< HEAD
-
-=======
->>>>>>> f61f54f23b208ad06e8ea3d2d3506ed9396f6f6f
   private createForm() {
     this.categoryForm = this.fb.group({
       name: ['', [Validators.required]],
