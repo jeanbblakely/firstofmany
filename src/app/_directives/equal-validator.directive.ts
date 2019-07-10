@@ -13,15 +13,15 @@ import { Validator, AbstractControl, NG_VALIDATORS } from '@angular/forms';
 })
 export class EqualValidatorDirective implements Validator {
   @Input() appEqualValidator: string;
-  validate(c: AbstractControl): {[key: string]: any; } {
-    const controlToCompare = c.parent.get(this.appEqualValidator)
-    if (controlToCompare && controlToCompare.value == c.value) return {"equal": true};
-    return { "notEqual": true }
+  validate(control: AbstractControl): {[key: string]: any} | null {
+    const controlToCompare = control.parent.get(this.appEqualValidator);
+    if (controlToCompare && controlToCompare.value !== control.value) {
+      return { 'notEqual': true };
+    } 
+    
+    return null;
+    
   }
-  registerOnValidatorChange?(fn: () => void): void {
-    throw new Error("Method not implemented");
-  }
-
-  constructor() { }
+  
 
 }

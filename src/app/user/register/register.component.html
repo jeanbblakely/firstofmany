@@ -28,7 +28,8 @@
             {{hide ? 'visibility_off' : 'visibility'}}
           </mat-icon>
           <mat-hint align="end">Must be 8+ characters</mat-hint>
-          <mat-error *ngIf="hasError('password', 'required')">Please re-enter your password</mat-error>
+          <mat-error *ngIf="hasError('confirmPassword', 'required')">Please re-enter your password</mat-error>
+          <mat-error *ngIf="hasError('confirmPassword', 'notEqual')">Passwords do not match</mat-error>
 
         </mat-form-field>
 
