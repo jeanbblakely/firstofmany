@@ -3,6 +3,7 @@ import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 import { User } from './../../models/user';
+import { EqualValidatorDirective } from './../../_directives/equal-validator.directive';
 
 @Component({
   selector: 'app-account',
@@ -61,6 +62,7 @@ export class AccountComponent implements OnInit {
     this.userForm = this.fb.group({
       username: [this.user.username, [Validators.required]],
       password: [this.user.password, [Validators.required, Validators.minLength(8)]],
+      confirmPassword: ['', [Validators.required, Validators.minLength(8)]],
       name: [this.user.name, [Validators.required]],
       email: [this.user.email, [Validators.required, Validators.email]],
       birthdate: [this.user.birthdate, [Validators.required]],
