@@ -4,6 +4,7 @@ import { CategoriesComponent } from '../../experiences/categories/categories.com
 import { CategoryDetailComponent } from '../../experiences/category-detail/category-detail.component';
 import { MaterialModule } from '../../material/material.module';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import { Category } from '../../models/category';
 import { Observable, of, throwError } from 'rxjs';
 import { User } from '../../models/user';
@@ -99,6 +100,7 @@ describe('DashboardComponent', () => {
         { provide: UserService, useValue: mockUserService }
       ],
       imports: [
+        RouterTestingModule,
         HttpClientTestingModule,
         BrowserAnimationsModule,
         MaterialModule,

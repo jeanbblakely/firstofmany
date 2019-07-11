@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { MaterialModule } from '../../material/material.module';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { RouterTestingModule } from '@angular/router/testing';
 import { CategoryDetailComponent } from './category-detail.component';
 import { Category } from '../../models/category';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -16,6 +17,7 @@ describe('CategoryDetailComponent', () => {
         {provide: MAT_DIALOG_DATA, useValue:{}}
       ],
       imports: [
+        RouterTestingModule,
         MaterialModule,
         RouterTestingModule
       ],

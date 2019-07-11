@@ -20,6 +20,18 @@
           <mat-error *ngIf="hasError('password', 'required')">Please enter your password</mat-error>
           <mat-error *ngIf="hasError('password', 'minlength')">Password must be at least 8 characters</mat-error>
         </mat-form-field>
+        
+        <mat-form-field>
+          <input matInput type="condirmPassword" placeholder="Confirm Password" id="confirmPassword" formControlName="confirmPassword" required
+            minlength="8" [type]="hide ? 'password' : 'text'" appEqualValidator="password">
+          <mat-icon matSuffix (click)="hide = !hide">
+            {{hide ? 'visibility_off' : 'visibility'}}
+          </mat-icon>
+          <mat-hint align="end">Must be 8+ characters</mat-hint>
+          <mat-error *ngIf="hasError('confirmPassword', 'required')">Please re-enter your password</mat-error>
+          <mat-error *ngIf="hasError('confirmPassword', 'notEqual') && !hasError('confirmPassword', 'required')">Passwords do not match</mat-error>
+
+        </mat-form-field>
 
         <mat-form-field>
           <input matInput type="text" placeholder="Name" id="name" formControlName="name" required>
