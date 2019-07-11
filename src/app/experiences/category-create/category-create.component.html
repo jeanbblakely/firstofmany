@@ -23,14 +23,16 @@
               <input matInput type="text" placeholder="Experience {{ i + 1 }} Note" formControlName="note">
             </mat-form-field>
             <mat-form-field>
-               <input matInput type="text" placeholder="Experience {{ i + 1 }} Datestamp" formControlName="datestamp">
+               <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" placeholder="Experience {{ i + 1 }} Datestamp" formControlName="datestamp">
+               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
              </mat-form-field>
             <mat-form-field>
                <input matInput type="text" placeholder="Experience {{ i + 1 }} Favorite" formControlName="favorite">
             </mat-form-field>
           </div>
-          <button mat-icon-button matSuffix (click)="removeExperience(i)">
-                <mat-icon>close</mat-icon>
+          <button mat-raised-button color="accent" type="button" (click)="removeExperience(i)" [disabled]="!categoryForm.valid">
+            Remove Experience
           </button>
           <button mat-raised-button color="accent" type="button" (click)="addExperience()"
             [disabled]="!categoryForm.valid">
