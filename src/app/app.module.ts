@@ -29,6 +29,7 @@ import { AuthInterceptorService } from './services/authinterceptor.service';
 import { AngularFittextModule } from 'angular-fittext';
 import { SpacebreakPipe } from './_pipes/spacebreak.pipe';
 import { DisableControlDirective } from './_directives/disable-control.directive';
+import { EqualValidatorDirective } from './_directives/equal-validator.directive';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { DisableControlDirective } from './_directives/disable-control.directive
     CategoryDetailComponent,
     CategoryCreateComponent,
     SpacebreakPipe,
-    DisableControlDirective
+    DisableControlDirective,
+    EqualValidatorDirective
   ],
   imports: [
     BrowserModule,
