@@ -30,6 +30,7 @@ import { AngularFittextModule } from 'angular-fittext';
 import { SpacebreakPipe } from './_pipes/spacebreak.pipe';
 import { DisableControlDirective } from './_directives/disable-control.directive';
 import { EqualValidatorDirective } from './_directives/equal-validator.directive';
+import { ServerErrorInterceptor } from './interceptor/server-error.interceptor';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,11 @@ import { EqualValidatorDirective } from './_directives/equal-validator.directive
   providers: [
     UserService,
     CategoryService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ServerErrorInterceptor,
+      multi: true
+    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,
