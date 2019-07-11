@@ -115,9 +115,8 @@ export class UserService {
   /*
 	Registers a new user in the database
   */
-  register(user: User): boolean {
+  register(user: User) {
      this.sendUserRegistration(user);
-     return true;
   }
   
 

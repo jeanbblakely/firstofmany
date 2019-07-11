@@ -77,14 +77,7 @@ export class RegisterComponent implements OnInit {
   register() {
     if (this.userForm.valid) {
       const result: User = Object.assign({}, this.userForm.value);
-  //    console.log('after copy', result);
-      if (this.userService.register(result)) {
-        console.log('Successfully registered');
-        this.message = 'thanks for registering';
-        this.router.navigate(['login']);
-      } else {
-        this.message = 'error in registering';
-      }
+      this.userService.register(result);
     } else {
       this.message = 'your form has errors';
     }

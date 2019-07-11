@@ -74,14 +74,15 @@ import { ServerErrorInterceptor } from './interceptor/server-error.interceptor';
     CategoryService,
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: ServerErrorInterceptor,
+      useClass: AuthInterceptorService,
       multi: true
     },
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptorService,
+      useClass: ServerErrorInterceptor,
       multi: true
     }
+    
   ],
 
   bootstrap: [AppComponent],
