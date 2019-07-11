@@ -14,7 +14,7 @@ export class ServerErrorInterceptor implements HttpInterceptor {
       retry(1),
       catchError((error: HttpErrorResponse) => {
         console.log('Error Intercepted');
-        console.log(error.error[0], 'error');
+        console.log(error.error.message, 'error');
         return throwError(error);
       })
     );

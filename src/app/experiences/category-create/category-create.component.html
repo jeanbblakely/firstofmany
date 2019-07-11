@@ -17,12 +17,21 @@
         <div formArrayName="experiences">
           <div *ngFor="let experience of experiences.controls; let i = index" [formGroupName]="i" class="experiences">
             <mat-form-field>
-              <input #newExperience matInput placeholder="Experience {{ i + 1 }} Name" formControlName="name" autofocus autocomplete="off">
-              <button mat-icon-button matSuffix (click)="removeExperience(i)">
-                <mat-icon>close</mat-icon>
-              </button>
+              <input matInput type="text" placeholder="Experience {{ i + 1 }} Name" formControlName="name">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput type="text" placeholder="Experience {{ i + 1 }} Note" formControlName="note">
+            </mat-form-field>
+            <mat-form-field>
+               <input matInput type="text" placeholder="Experience {{ i + 1 }} Datestamp" formControlName="datestamp">
+             </mat-form-field>
+            <mat-form-field>
+               <input matInput type="text" placeholder="Experience {{ i + 1 }} Favorite" formControlName="favorite">
             </mat-form-field>
           </div>
+          <button mat-icon-button matSuffix (click)="removeExperience(i)">
+                <mat-icon>close</mat-icon>
+          </button>
           <button mat-raised-button color="accent" type="button" (click)="addExperience()"
             [disabled]="!categoryForm.valid">
             Add Experience
