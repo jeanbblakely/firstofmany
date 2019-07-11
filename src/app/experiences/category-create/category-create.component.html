@@ -28,7 +28,10 @@
             <mat-datepicker #picker></mat-datepicker>
              </mat-form-field>
             <mat-form-field>
-               <input matInput type="text" placeholder="Experience {{ i + 1 }} Favorite" formControlName="favorite">
+             <mat-label>Favorite</mat-label>
+               <mat-select name="favoriteSelect" formControlName="favorite">
+                <mat-option *ngFor="let favorite of favorites" [value]='favorite'>{{ favorite }}</mat-option>
+              </mat-select>
             </mat-form-field>
           </div>
           <button mat-raised-button color="accent" type="button" (click)="removeExperience(i)" [disabled]="!categoryForm.valid">

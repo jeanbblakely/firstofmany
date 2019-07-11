@@ -20,7 +20,7 @@ export class CategoryCreateComponent implements OnInit {
   currentUserCategory: Category;
   categories: Category[];
   user: User;
-  favorite = ['false', 'true'];
+  favorites = [false, true];
   disabled = true;
   minDate = new Date(1900,0,1);
   maxDate = new Date(Date.now() + 24 * 60 * 60 * 1000);
