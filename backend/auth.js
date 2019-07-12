@@ -22,7 +22,7 @@ router.post('/register', (req, res, next)=> {
       } else {
           console.log(err.errmsg);
           if (err.code == 11000) {
-            res.status(422).send(['Duplicate username or email']);
+            res.status(422).send({message: 'Duplicate username or email'});
           } else {
             return next(err);
           }
