@@ -4,7 +4,7 @@ import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/materia
 import { RouterTestingModule } from '@angular/router/testing';
 import { CategoryDetailComponent } from './category-detail.component';
 import { Category } from '../../models/category';
-import { RouterTestingModule } from '@angular/router/testing';
+
 
 describe('CategoryDetailComponent', () => {
   let component: CategoryDetailComponent;
@@ -18,8 +18,7 @@ describe('CategoryDetailComponent', () => {
       ],
       imports: [
         RouterTestingModule,
-        MaterialModule,
-        RouterTestingModule
+        MaterialModule
       ],
       
       declarations: [ CategoryDetailComponent ]
