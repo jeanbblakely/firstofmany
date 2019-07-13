@@ -3,9 +3,10 @@ import { Observable, of, throwError, Subject } from 'rxjs';
 import { User } from '../models/user';
 import { Category } from '../models/category';
 import { USERS } from '../mock-users';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from './../../environments/environment';
 import { Router } from '@angular/router';
+import { retry, catchError } from 'rxjs/operators';
 
 
 @Injectable({
@@ -114,10 +115,10 @@ export class UserService {
   /*
 	Registers a new user in the database
   */
-  register(user: User): boolean {
-    this.sendUserRegistration(user);
-    return true;
+  register(user: User) {
+     this.sendUserRegistration(user);
   }
+  
 
   /*
 	Checks to see if user is logged in (ie has id)

@@ -17,7 +17,7 @@ import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
 import { AngularFittextModule } from 'angular-fittext';
 import { SpacebreakPipe } from '../../_pipes/spacebreak.pipe';
-import { RouterTestingModule } from '@angular/router/testing';
+
 
 describe('CategoriesComponent', () => {
   class MockCategoryService {
@@ -47,7 +47,6 @@ describe('CategoriesComponent', () => {
         MaterialModule, 
         AngularFittextModule,
         HttpClientModule, 
-        RouterTestingModule,
         BrowserAnimationsModule 
        ],
        providers: [ 

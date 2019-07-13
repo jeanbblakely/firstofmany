@@ -12,7 +12,6 @@ import { AngularFittextModule } from 'angular-fittext';
 import { SpacebreakPipe } from '../../_pipes/spacebreak.pipe';
 
 import { DashboardComponent } from './dashboard.component';
-import { RouterTestingModule } from '@angular/router/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
@@ -104,8 +103,7 @@ describe('DashboardComponent', () => {
         HttpClientTestingModule,
         BrowserAnimationsModule,
         MaterialModule,
-        AngularFittextModule,
-        RouterTestingModule
+        AngularFittextModule
       ],
       declarations: [ 
         DashboardComponent, 
