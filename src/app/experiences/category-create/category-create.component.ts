@@ -96,7 +96,6 @@ export class CategoryCreateComponent implements OnInit {
       if (!this.searchCategory(this.categoryForm.get('name').value) && !this.searchUserCategory(this.categoryForm.get('name').value)) {
         console.log('no match');
         this.currentUserCategory = Object.assign({}, this.categoryForm.value);
-        console.log(this.currentUserCategory);
         this.stripExperiences();
         this.categoryService.createCategory(this.currentCategory);
         this.userService.addUserCategory(this.currentUserCategory);
