@@ -1,24 +1,38 @@
 <div class="dialog-box">
   <h2 mat-dialog-title class="mat-display-1">{{ category.name }}</h2>
   <mat-dialog-content>
-    <mat-action-list>
-      <button mat-list-item class="mat-body-strong" 
-        *ngFor="let experience of category.experiences"
-        (click)="favoriteThis(experience)">
-        <mat-icon matListIcon color="primary" aria-label="favorite icon">
-          {{getFavoriteIcon(experience['favorite'])}}
-        </mat-icon>
-        {{ experience.name }}
-      </button>
-    </mat-action-list>
     <div *ngIf="category.experiences.length == 0" class="no-experiences mat-h2">
       You haven't added any {{ category.name | lowercase }} yet. <br> Add your first now!
     </div>
+
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let experience of category.experiences">
+        <mat-expansion-panel-header>
+          <mat-panel-title class="mat-body-strong">
+            <mat-icon color="primary" aria-label="favorite icon">
+              {{getFavoriteIcon(experience['favorite'])}}
+            </mat-icon>
+            {{ experience.name }}
+          </mat-panel-title>
+          <mat-panel-description fxHide.lt-md fxLayoutAlign="end center"> {{ experience.datestamp | date:'fullDate' }} </mat-panel-description>
+          <mat-panel-description fxShow.sm fxHide fxLayoutAlign="end center"> {{ experience.datestamp | date:'mediumDate' }} </mat-panel-description>
+        </mat-expansion-panel-header>
+        <p>{{ experience.note }}</p>
+        <mat-action-row fxLayout="row" fxLayoutAlign="space-between center">
+          <button mat-flat-button color="warn" class="delete-button">
+            Delete
+          </button>
+          <button mat-flat-button color="primary" (click)="favoriteThis(experience)">
+            Favorite!
+          </button>
+        </mat-action-row>
+      </mat-expansion-panel>
+    </mat-accordion>
+
   </mat-dialog-content>
   <mat-dialog-actions>
-    <a mat-mini-fab color="accent" class="new-experience-button" 
-        [routerLink]="['/category-create']" [queryParams]="{name:category.name}"
-        (click)="close()">
+    <a mat-mini-fab color="accent" class="new-experience-button" [routerLink]="['/category-create']"
+      [queryParams]="{name:category.name}" (click)="close()">
       <mat-icon>add</mat-icon>
     </a>
   </mat-dialog-actions>
