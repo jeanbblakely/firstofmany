@@ -5,6 +5,8 @@ import { UserService } from '../../services/user.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { CategoryDetailComponent } from '../category-detail/category-detail.component';
 import { trigger, state, transition, style, animate } from '@angular/animations';
+import { User } from './../../models/user';
+import { Observable, of } from 'rxjs';
 
 
 @Component({
@@ -29,6 +31,7 @@ export class CategoriesComponent implements OnInit {
   categories: Category[];
   selectedCategory: Category;
   userCategories: Category[];
+  user: User;
   colors = [
     '#f24236', // cat-red: #f24236;
     '#f7844f', // cat-orange: #f7844f;
@@ -46,9 +49,20 @@ export class CategoriesComponent implements OnInit {
     if (!this.isDashBoard) {
       this.getUserCategoriesDeDup();
       this.getCategories();
+      this.getUser();
     } else {
       this.getUserCategories();
     }
+  }
+  
+  /*
+	Gets Observable User from service
+  */
+  getUser() {
+    this.userService.getUser().subscribe(data => {
+      this.user = data;
+    });
+
   }
 
   /*
@@ -109,7 +123,11 @@ export class CategoriesComponent implements OnInit {
       this.openDialog();
     } else {
       category['flippedState'] = category['flippedState'] === 'initial' ? 'final' : 'initial';
-      this.userService.addUserCategory(category);
+      if (!this.searchUserCategory(category.name)) {
+        this.userService.addUserCategory(category);
+        this.user.tracked_categories.push(category);
+      }
+      
     }
   }
 
@@ -130,5 +148,19 @@ export class CategoriesComponent implements OnInit {
     dialogConfig.panelClass = 'experiences-dialog';
     dialogConfig.data = this.selectedCategory;
     this.dialog.open(CategoryDetailComponent, dialogConfig);
+  }
+  
+  /*
+	Searches and returns existing Category
+  */
+  searchUserCategory(name: string): Observable<Category> {
+    var trimName = name.trim();
+    var i;
+    for (i = 0; i < this.user.tracked_categories.length; i++) {
+      if (this.user.tracked_categories[i].name.toUpperCase() === trimName.toUpperCase()) {
+        return of(this.user.tracked_categories[i]);
+      }
+   }
+    return null;
   }
 }

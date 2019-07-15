@@ -20,8 +20,10 @@ export class CategoryCreateComponent implements OnInit {
   currentUserCategory: Category;
   categories: Category[];
   user: User;
-  favorite = ['false', 'true'];
+  favorites = [false, true];
   disabled = true;
+  minDate = new Date(1900,0,1);
+  maxDate = new Date(Date.now() + 24 * 60 * 60 * 1000);
 
   constructor(private categoryService: CategoryService, private userService: UserService, private fb: FormBuilder,
     private router: Router, private _route: ActivatedRoute) { }
@@ -53,7 +55,7 @@ export class CategoryCreateComponent implements OnInit {
       name: ['', [Validators.required]],
       note: [null],
       img: [null],
-      datestamp: [null],
+      datestamp: [new Date(), [Validators.required]],
       favorite: [false]
     }));
   }
@@ -94,7 +96,6 @@ export class CategoryCreateComponent implements OnInit {
       if (!this.searchCategory(this.categoryForm.get('name').value) && !this.searchUserCategory(this.categoryForm.get('name').value)) {
         console.log('no match');
         this.currentUserCategory = Object.assign({}, this.categoryForm.value);
-        console.log(this.currentUserCategory);
         this.stripExperiences();
         this.categoryService.createCategory(this.currentCategory);
         this.userService.addUserCategory(this.currentUserCategory);
