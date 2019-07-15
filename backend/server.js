@@ -130,13 +130,13 @@ app.post('/addusercategory/:id', async(req, res)=> {
 
 app.post('/adduserexperience/:id/:tracked_category', async(req, res)=>{
   let experienceData = req.body;
-  console.log(experienceData);
   User.update({'tracked_categories.name': req.params.tracked_category},
               {'$push': {
                           'tracked_categories.$.experiences': experienceData
-                       }
+                        }
               }, function (err, user) {
                 if (err) return next(err);
+                console.log(experienceData);
                 res.send(req.body);
               });
 });
