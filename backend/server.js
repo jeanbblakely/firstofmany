@@ -128,6 +128,19 @@ app.post('/addusercategory/:id', async(req, res)=> {
   });
 });
 
+app.post('/adduserexperience/:id/:tracked_category', async(req, res)=>{
+  let experienceData = req.body;
+  console.log(experienceData);
+  User.update({'tracked_categories.name': req.params.tracked_category},
+              {'$push': {
+                          'tracked_categories.$.experiences': experienceData
+                       }
+              }, function (err, user) {
+                if (err) return next(err);
+                res.send(req.body);
+              });
+});
+
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 mongoose.connect('mongodb+srv://joeymarinelli:Katiemarie0629!@cluster0-yrzrs.mongodb.net/FirstOfManyDB?retryWrites=true&w=majority',

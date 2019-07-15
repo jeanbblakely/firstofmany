@@ -1,11 +1,6 @@
 import { Injectable } from '@angular/core';
-<<<<<<< HEAD
-import {
-=======
 import { MatSnackBar } from '@angular/material';
-
 import {
->>>>>>> f0aa8cfc63c8d2fa34319c43fa08b0901763e230
   HttpEvent, HttpRequest, HttpHandler,
   HttpInterceptor, HttpErrorResponse
   } from '@angular/common/http';
