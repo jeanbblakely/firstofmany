@@ -70,7 +70,7 @@
               fxLayout="column">
               <p class="experience-note">{{ experience.note }}</p>
               <mat-action-row fxLayout="row" fxLayoutAlign="space-between center">
-                <button mat-flat-button color="warn" class="delete-button">
+                <button mat-flat-button color="warn" class="delete-button" (click)="deleteExperience(experience)">
                   Delete
                 </button>
                 <button mat-flat-button color="primary" (click)="favoriteThis(experience)">

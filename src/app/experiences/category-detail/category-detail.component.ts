@@ -73,4 +73,12 @@ export class CategoryDetailComponent implements OnInit {
   close() {
     this.dialogRef.close();
   }
+
+  /**
+   * Deletes an experience from a category
+   * @param experience Experience to delete
+   */
+  deleteExperience(experience: Experience) {
+    console.log("Delete " + experience.name + ", please!");
+  }
 }
