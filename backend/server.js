@@ -148,6 +148,13 @@ app.post('/deleteuserexperience/:id/:tracked_category', async(req, res)=>{
               });
 });
 
+app.delete('/user/:id/delete', async(req, res)=> {
+  User.deleteOne({ _id: req.params.id }, function (err) {
+    if (err) return next(err);
+    res.send('User ' + req.params.id + ' has been successfully deleted');
+  });
+});
+
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 mongoose.connect('mongodb+srv://joeymarinelli:Katiemarie0629!@cluster0-yrzrs.mongodb.net/FirstOfManyDB?retryWrites=true&w=majority',
