@@ -9,7 +9,7 @@ export class AuthGuard implements CanActivate {
   
   canActivate(): boolean  {
     console.log('AuthGuard#canActivate called');
-    if (this.userService.isLoggedIn()) {
+    if (this.userService.isAuthenticated()) {
       return true;
     }
     console.log('AuthGuard#canActivate not authorized to access page');
