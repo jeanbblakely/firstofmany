@@ -135,6 +135,19 @@ app.post('/deleteusercategory/:id', async(req, res)=> {
   });
 });
 
+app.post('/deleteuserexperience/:id/:tracked_category', async(req, res)=>{
+  let experienceData = req.body;
+  User.updateOne({'tracked_categories.name': req.params.tracked_category},
+              {'$pull': {
+                          'tracked_categories.$.experiences': experienceData
+                        }
+              }, function (err, user) {
+                if (err) return next(err);
+                console.log(experienceData);
+                res.send(experienceData);
+              });
+});
+
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 mongoose.connect('mongodb+srv://joeymarinelli:Katiemarie0629!@cluster0-yrzrs.mongodb.net/FirstOfManyDB?retryWrites=true&w=majority',
