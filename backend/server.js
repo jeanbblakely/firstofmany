@@ -123,12 +123,15 @@ app.post('/addusercategory/:id', async(req, res)=> {
 
 app.post('/adduserexperience/:id/:tracked_category', async(req, res)=>{
   let experienceData = req.body;
-  User.updateOne({'tracked_categories.name': req.params.tracked_category},
-              {'$push': {
-                          'tracked_categories.$.experiences': experienceData
-                        }
+  let user = User.findById(req.params.id);
+  user.updateOne({'tracked_categories.name':req.params.tracked_category},
+              {'$push':
+                {'tracked_categories.$.experiences': experienceData}
               }, function (err, user) {
-                if (err) return next(err);
+                if (err){
+                  console.log(err.message);
+                  return next(err);
+                }
                 console.log(experienceData);
                 res.send(experienceData);
               });
@@ -147,10 +150,12 @@ app.post('/deleteusercategory/:id', async(req, res)=> {
 
 app.post('/deleteuserexperience/:id/:tracked_category', async(req, res)=>{
   let experienceData = req.body;
-  User.updateOne({'tracked_categories.name': req.params.tracked_category},
-              {'$pull': {
-                          'tracked_categories.$.experiences': experienceData
-                        }
+  let user = User.findById(req.params.id);
+  user.updateOne({'tracked_categories.name': req.params.tracked_category},
+              {'$pull':
+                {
+                  'tracked_categories.$.experiences': experienceData
+                }
               }, function (err, user) {
                 if (err) return next(err);
                 console.log(experienceData);
