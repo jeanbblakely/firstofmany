@@ -17,10 +17,10 @@
         <div formArrayName="experiences">
           <div *ngFor="let experience of experiences.controls; let i = index" [formGroupName]="i" class="experiences">
             <mat-form-field>
-              <input matInput type="text" placeholder="Experience {{ i + 1 }} Name" formControlName="name">
+              <input matInput type="text" placeholder="Experience {{ i + 1 }} Name" formControlName="name" autocomplete="off">
             </mat-form-field>
             <mat-form-field>
-              <input matInput type="text" placeholder="Experience {{ i + 1 }} Note" formControlName="note">
+              <input matInput type="text" placeholder="Experience {{ i + 1 }} Note" formControlName="note" autocomplete="off">
             </mat-form-field>
             <mat-form-field>
                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" placeholder="Experience {{ i + 1 }} Datestamp" formControlName="datestamp">

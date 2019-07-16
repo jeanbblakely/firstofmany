@@ -32,12 +32,25 @@
   text-align: center;
   white-space: pre-line;
   user-select: none;
-  color: white;
-  text-shadow:
-   -1px -1px 0 #000,  
-    1px -1px 0 #000,
-    -1px 1px 0 #000,
-     1px 1px 0 #000;
+}
+
+/* Colors the text of category cards */
+@supports 
+  ((-webkit-text-stroke-color: #000)
+  and
+  (-webkit-text-fill-color: white))
+  or
+  ((-moz-text-stroke-color: #000)
+  and
+  (-moz-text-fill-color: white)) {
+  .mat-card-content h2 {
+         -moz-text-fill-color: white;
+      -webkit-text-fill-color: white;
+       -moz-text-stroke-color: #000;
+    -webkit-text-stroke-color: #000;
+       -moz-text-stroke-width: 2px;  
+    -webkit-text-stroke-width: 2px;
+  }
 }
 
 /* hide back of pane during swap */

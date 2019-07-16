@@ -1,3 +1,80 @@
-<p>
-  experiences works!
-</p>
+<h2 mat-dialog-title class="mat-display-1">{{ category.name }}</h2>
+<mat-tab-group headerPosition="below" [dynamicHeight]="false" [selectedIndex]="selectedIndex"
+  (selectedIndexChange)="selectedIndex = $event">
+
+  <mat-tab label="Experiences">
+
+    <div *ngIf="category.experiences.length == 0; else experiencesTable" class="no-experiences mat-h2">
+      You haven't added any {{ category.name | lowercase }} yet. <br> Add your first now!
+    </div>
+    <div [ngClass]='category.experiences.length > 0 ? "visible" : "hidden"'>
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+      </mat-form-field>
+
+      <table mat-table [dataSource]="dataSource" multiTemplateDataRows matSort>
+
+        <ng-container matColumnDef="favorite">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            <mat-icon>favorite_border</mat-icon>
+          </th>
+          <td mat-cell *matCellDef="let experience">
+            <mat-icon color="primary" aria-label="favorite icon">
+              {{getFavoriteIcon(experience['favorite'])}}
+            </mat-icon>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+          <td mat-cell *matCellDef="let experience"> {{ experience.name }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="datestamp">
+          <th mat-header-cell *matHeaderCellDef fxHide.lt-sm mat-sort-header> Date </th>
+          <td mat-cell *matCellDef="let experience" fxHide.lt-sm> {{ experience.datestamp | date:'mediumDate' }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="expandedDetail">
+          <td mat-cell *matCellDef="let experience" [attr.colspan]="columnsToDisplay.length">
+            <div class="experience-detail" [@detailExpand]="experience == expandedExperience ? 'expanded' : 'collapsed'"
+              fxLayout="column">
+              <p class="experience-note">{{ experience.note }}</p>
+              <mat-action-row fxLayout="row" fxLayoutAlign="space-between center">
+                <button mat-flat-button color="warn" class="delete-button" (click)="deleteExperience(experience)">
+                  Delete
+                </button>
+                <button mat-flat-button color="primary" (click)="favoriteThis(experience)">
+                  Favorite!
+                </button>
+              </mat-action-row>
+
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+        <tr mat-row *matRowDef="let experience; columns: columnsToDisplay;" class="experience-row"
+          [class.expanded-row]="expandedExperience === experience"
+          (click)="expandedExperience = expandedExperience === experience ? null : experience"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 25]" [length]="category.experiences.length"
+        [ngClass]='category.experiences.length > 5 ? "visible" : "hidden"'></mat-paginator>
+    </div>
+
+  </mat-tab>
+  <mat-tab label="Add Experience">
+    <app-category-create></app-category-create>>
+  </mat-tab>
+
+  <mat-tab label="Delete Experience">
+    Delete an Experience
+  </mat-tab>
+</mat-tab-group>
+
+<a mat-mini-fab color="accent" class="new-experience-button" (click)="selectedIndex = 1"
+  [ngClass]="{'hidden': selectedIndex != 0}">
+  <mat-icon>add</mat-icon>
+</a>
