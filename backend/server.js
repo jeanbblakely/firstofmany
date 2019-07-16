@@ -116,7 +116,7 @@ app.post('/addusercategory/:id', async(req, res)=> {
 
 app.post('/adduserexperience/:id/:tracked_category', async(req, res)=>{
   let experienceData = req.body;
-  User.update({'tracked_categories.name': req.params.tracked_category},
+  User.updateOne({'tracked_categories.name': req.params.tracked_category},
               {'$push': {
                           'tracked_categories.$.experiences': experienceData
                         }
@@ -125,6 +125,34 @@ app.post('/adduserexperience/:id/:tracked_category', async(req, res)=>{
                 console.log(experienceData);
                 res.send(experienceData);
               });
+});
+
+app.post('/deleteusercategory/:id', async(req, res)=> {
+  let categoryData = {'name': req.body.name}
+  User.findByIdAndUpdate(req.params.id, {$pull: {tracked_categories: categoryData}}, function (err, user) {
+      if (err) return next(err);
+      res.send(req.body);
+  });
+});
+
+app.post('/deleteuserexperience/:id/:tracked_category', async(req, res)=>{
+  let experienceData = req.body;
+  User.updateOne({'tracked_categories.name': req.params.tracked_category},
+              {'$pull': {
+                          'tracked_categories.$.experiences': experienceData
+                        }
+              }, function (err, user) {
+                if (err) return next(err);
+                console.log(experienceData);
+                res.send(experienceData);
+              });
+});
+
+app.delete('/user/:id/delete', async(req, res)=> {
+  User.deleteOne({ _id: req.params.id }, function (err) {
+    if (err) return next(err);
+    res.send('User ' + req.params.id + ' has been successfully deleted');
+  });
 });
 
 mongoose.set('useFindAndModify', false);
