@@ -116,9 +116,15 @@ export class CategoryCreateComponent implements OnInit {
           console.log(this.currentCategory, 'current category');
           let experiences;
           experiences = Object.assign({}, this.experiences.value);
-          console.log(experiences);
-          console.log(experiences[0], 'experiences');
-          this.userService.addUserExperience(this.currentCategory.name, experiences[0]);
+          console.log(Object.keys(experiences).length, 'experiences length');
+          console.log(experiences, 'experiences');
+          var i;
+          for (i = 0; i < Object.keys(experiences).length; i++) {
+            this.userService.addUserExperience(this.currentCategory.name, experiences[i]);
+            console.log(experiences[i], 'experiences in loop');
+          }
+          this.router.navigate(['dashboard']);
+          
 
 
           //this.userService.addUserExperience(this.currentCategory.name, experiences[0]);
