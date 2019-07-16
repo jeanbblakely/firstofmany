@@ -82,6 +82,10 @@ app.post('/user/:id/update', async(req, res)=> {
       user.birthdate = req.body.birthdate;
       user.gender = req.body.gender;
       user.save();
+      if (err) return next(err);
+      if (!user) {
+        res.status(404).send('User not found')
+      }
       res.send('User updated.');
   });
 });
@@ -110,6 +114,9 @@ app.post('/addusercategory/:id', async(req, res)=> {
   let categoryData = {'name': req.body.name, 'experiences': req.body.experiences}
   User.findByIdAndUpdate(req.params.id, {$push: {tracked_categories: categoryData}}, function (err, user) {
       if (err) return next(err);
+      if (!user) {
+        res.status(404).send('User not found')
+      }
       res.send(req.body);
   });
 });
@@ -131,6 +138,9 @@ app.post('/deleteusercategory/:id', async(req, res)=> {
   let categoryData = {'name': req.body.name}
   User.findByIdAndUpdate(req.params.id, {$pull: {tracked_categories: categoryData}}, function (err, user) {
       if (err) return next(err);
+      if (!user) {
+        res.status(404).send('User not found')
+      }
       res.send(req.body);
   });
 });
