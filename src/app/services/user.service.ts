@@ -112,13 +112,19 @@ export class UserService {
     });
   }
 
+  addUserExperience(category, experienceData) {
+    this.httpClient.post<any>(this.path + '/adduserexperience/' + localStorage.getItem('userID') + '/' + category, experienceData).subscribe(res => {
+      console.log(res);
+    });
+  }
+
   /*
 	Registers a new user in the database
   */
   register(user: User) {
      this.sendUserRegistration(user);
   }
-  
+
 
   /*
 	Checks to see if user is logged in (ie has id)
