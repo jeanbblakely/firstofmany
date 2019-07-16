@@ -108,7 +108,21 @@ export class CategoryCreateComponent implements OnInit {
           this.userService.addUserCategory(this.currentUserCategory);
           this.router.navigate(['dashboard']);
         } else {
-          this.message = 'you are already tracking this category - update not yet implemented';
+          console.log('tracked_categories match - updating category with new experience');
+          console.log(this.categoryForm.getRawValue(), 'form');
+          this.currentUserCategory = Object.assign({}, this.categoryForm.getRawValue());
+          console.log(this.currentUserCategory, 'current user category');
+          this.stripExperiences();
+          console.log(this.currentCategory, 'current category');
+          let experiences;
+          experiences = Object.assign({}, this.experiences.value);
+          console.log(experiences);
+          console.log(experiences[0], 'experiences');
+          this.userService.addUserExperience(this.currentCategory.name, experiences[0]);
+
+
+          //this.userService.addUserExperience(this.currentCategory.name, experiences[0]);
+          //this.message = 'you are already tracking this category - update not yet implemented';
           //todo update User with extra Category info in UserService
         }
 
