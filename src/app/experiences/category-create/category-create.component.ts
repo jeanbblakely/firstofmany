@@ -59,11 +59,11 @@ export class CategoryCreateComponent implements OnInit {
       favorite: [false]
     }));
   }
-  
+
   public removeExperience(index: number) {
     this.experiences.removeAt(index);
   }
-  
+
   public hasError = (controlName: string, errorName: string) => {
     return this.categoryForm.controls[controlName].hasError(errorName);
   }
@@ -111,7 +111,7 @@ export class CategoryCreateComponent implements OnInit {
           this.message = 'you are already tracking this category - update not yet implemented';
           //todo update User with extra Category info in UserService
         }
-        
+
       }
     } else {
       this.message = 'the form has errors';
@@ -153,13 +153,13 @@ export class CategoryCreateComponent implements OnInit {
     console.log(this.user, 'user in copy');
 
   }
-  
+
    private stripExperiences(): void {
     this.currentCategory = {
       name: this.currentUserCategory.name,
       experiences: []
     };
     console.log(this.currentCategory, 'currentCategory stripped');
-  
+
   }
 }

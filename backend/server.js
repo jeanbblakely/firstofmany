@@ -14,11 +14,6 @@ var User = require('./models/user.js');
 var Experience = require('./models/experience.js');
 var Category = require('./models/category.js');
 
-var posts = [
-  { message: "test" },
-  { message: "test2" }
-]
-
 app.use(cors());
 app.use(bodyParser.json());
 
@@ -78,15 +73,6 @@ app.get('/usercategories/:id', async(req, res)=> {
   }
 });
 
-/*
-app.post('/user/:id/update', async(req, res)=> {
-  User.findByIdAndUpdate(req.params.id, {$set: req.body}, function (err, user) {
-      if (err) return next(err);
-      res.send('User updated.');
-  });
-});
-*/
-
 app.post('/user/:id/update', async(req, res)=> {
   User.findById(req.params.id, function (err, user) {
       user.username = req.body.username;
@@ -126,6 +112,19 @@ app.post('/addusercategory/:id', async(req, res)=> {
       if (err) return next(err);
       res.send(req.body);
   });
+});
+
+app.post('/adduserexperience/:id/:tracked_category', async(req, res)=>{
+  let experienceData = req.body;
+  User.update({'tracked_categories.name': req.params.tracked_category},
+              {'$push': {
+                          'tracked_categories.$.experiences': experienceData
+                        }
+              }, function (err, user) {
+                if (err) return next(err);
+                console.log(experienceData);
+                res.send(experienceData);
+              });
 });
 
 mongoose.set('useFindAndModify', false);

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
-
-import { 
+import {
   HttpEvent, HttpRequest, HttpHandler,
   HttpInterceptor, HttpErrorResponse
   } from '@angular/common/http';
@@ -12,8 +11,6 @@ import { retry, catchError } from 'rxjs/operators';
 
 export class ServerErrorInterceptor implements HttpInterceptor {
   constructor(private snackBar: MatSnackBar) {}
-
-
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
       retry(1),
