@@ -31,6 +31,7 @@ import { SpacebreakPipe } from './_pipes/spacebreak.pipe';
 import { DisableControlDirective } from './_directives/disable-control.directive';
 import { EqualValidatorDirective } from './_directives/equal-validator.directive';
 import { ServerErrorInterceptor } from './interceptor/server-error.interceptor';
+import { AuthGuard } from './guards/auth.guard';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { ServerErrorInterceptor } from './interceptor/server-error.interceptor';
   providers: [
     UserService,
     CategoryService,
+    AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,

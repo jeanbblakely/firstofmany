@@ -7,18 +7,17 @@ import { DashboardComponent } from './user/dashboard/dashboard.component';
 import { RegisterComponent } from './user/register/register.component';
 import { CategoriesComponent } from './experiences/categories/categories.component';
 import { CategoryCreateComponent } from './experiences/category-create/category-create.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'account', component: AccountComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'categories', component: CategoriesComponent },
-  { path: 'category-create', component: CategoryCreateComponent },
-  { path: 'account', component: AccountComponent },
-  { path: 'dashboard', component: DashboardComponent },
+  { path: 'account', component: AccountComponent, canActivate: [AuthGuard] },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'categories', component: CategoriesComponent, canActivate: [AuthGuard] },
+  { path: 'category-create', component: CategoryCreateComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: 'home' }
 ];
 
