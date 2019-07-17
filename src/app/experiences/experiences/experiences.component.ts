@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, SimpleChange } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { Experience } from 'src/app/models/experience';
 import { trigger, state, transition, style, animate } from '@angular/animations';
@@ -27,11 +27,12 @@ export class ExperiencesComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor() {
-    this.dataSource = new MatTableDataSource(this.category.experiences);
-  }
+  constructor() { }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  ngOnChanges() {
+    this.dataSource = new MatTableDataSource(this.category.experiences);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
