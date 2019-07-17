@@ -113,6 +113,7 @@ export class UserService {
   }
 
   addUserExperience(category, experienceData) {
+    console.log('user service');
     this.httpClient.post<any>(this.path + '/adduserexperience/' + localStorage.getItem('userID') + '/' + category, experienceData).subscribe(res => {
       console.log(res);
     });
