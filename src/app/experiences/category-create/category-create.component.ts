@@ -113,7 +113,7 @@ export class CategoryCreateComponent implements OnInit {
           this.currentUserCategory = Object.assign({}, this.categoryForm.getRawValue());
           console.log(this.currentUserCategory, 'current user category');
           this.stripExperiences();
-          console.log(this.currentCategory, 'current category');
+          console.log(this.currentCategory.name, 'current category');
           let experiences;
           experiences = Object.assign({}, this.experiences.value);
           console.log(Object.keys(experiences).length, 'experiences length');

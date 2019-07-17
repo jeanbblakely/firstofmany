@@ -99,11 +99,11 @@ export class CategoriesComponent implements OnInit {
   }
 
   /**
-   * Sets the background color of each card to a random from colors. Styles cards in userCategories.
+   * Sets the background color of each card to an alternating color. Styles cards in userCategories.
    */
   setCardStyle() {
+    let j = 0;
     for (let i = 0; i < this.categories.length; i++) {
-      this.categories[i]['color'] = this.colors[Math.floor(Math.random() * this.colors.length)];
       if (!this.isDashBoard) {
         if (this.userCategories.find(c => c.name == this.categories[i].name)) {
           this.categories[i]['display'] = 'none';
@@ -111,6 +111,12 @@ export class CategoriesComponent implements OnInit {
           this.categories[i]['flippedState'] = 'initial';
         }
       }
+      // this.categories[i]['color'] = this.colors[Math.floor(Math.random() * this.colors.length)];
+      if (!this.categories[i].hasOwnProperty('display')) {
+        this.categories[i]['color'] = j % 2 == 0 ? 'rgba(79, 195, 247, 0.5)' : 'rgba(253, 216, 53, 0.5)';
+        j++;
+      }
+           
     }
   }
 

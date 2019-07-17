@@ -14,7 +14,12 @@ import {
   MatNativeDateModule,
   MatSnackBarModule,
   MatDialogModule,
-  MatBadgeModule
+  MatBadgeModule,
+  MatExpansionModule,
+  MatTableModule,
+  MatPaginatorModule,
+  MatSortModule,
+  MatTabsModule
  } from '@angular/material';
 
 @NgModule({
@@ -32,7 +37,12 @@ import {
     MatNativeDateModule,
     MatSnackBarModule,
     MatDialogModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatExpansionModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatTabsModule
   ],
   exports: [
     MatToolbarModule,
@@ -48,7 +58,12 @@ import {
     MatNativeDateModule,
     MatSnackBarModule,
     MatDialogModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatExpansionModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatTabsModule
   ]
 })
 
