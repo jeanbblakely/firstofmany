@@ -27,15 +27,11 @@ export class ExperiencesComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor() { 
-   }
+  constructor() { }
 
-  ngOnInit() {
+  ngOnInit() { }
 
-  }
-
-  ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
-    console.log(changes);
+  ngOnChanges() {
     this.dataSource = new MatTableDataSource(this.category.experiences);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
