@@ -1,8 +1,7 @@
 var express = require('express');
 var cors = require('cors');
 var app = express();
-var jwt = require('jsonwebtoken');
-var secret = 'codeword';
+var jwt = require('jwt-simple');
 
 var User = require('./models/user.js');
 var Experience = require('./models/experience.js');
@@ -18,15 +17,16 @@ router.post('/register', (req, res, next)=> {
     user.name = req.body.name;
     user.birthdate = req.body.birthdate;
     user.gender = req.body.gender;
-    user.temporarytoken = jwt.sign({ username: user.username, email: user.email }, secret, { expiresIn: '24h' });
+    user.security_question = req.body.security_question;
+    user.security_answer = req.body.security_answer;
 
     user.save((err, newUser)=> {
       if(!err) {
         let userID = newUser._id;
         let payload = { sub: newUser._id};
-        let token = jwt.sign(payload, '123');
-        res.status(200).send({message: 'Please check your email for activation link'});
-    //    res.status(200).send({token, userID});
+        let token = jwt.encode(payload, '123');
+
+        res.status(200).send({token, userID});
       } else {
           console.log(err.errmsg);
           if (err.code == 11000) {
@@ -52,7 +52,7 @@ router.post('/login', async(req, res)=> {
       }
 
       let payload = { sub: user._id};
-      let token = jwt.sign(payload, '123');
+      let token = jwt.encode(payload, '123');
       let userID = user._id;
 
       res.status(200).send({token, userID });
