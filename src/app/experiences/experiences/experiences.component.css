@@ -1,0 +1,83 @@
+.dialog-box {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.mat-dialog-title {
+  margin: 0;
+}
+
+.new-experience-button {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  z-index: 999;
+}
+
+.no-experiences {
+  text-align: center;
+  /* line-height: 120%; */
+  padding: 20% 0;
+}
+
+.mat-accordion, table {
+  user-select: none;
+}
+
+.mat-action-row {
+  padding: 10px;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td, th {
+  width: 25%;
+}
+
+tr.detail-row {
+  height: 0;
+}
+
+tr.experience-row:not(.expanded-row):hover {
+  background: #f5f5f5;
+}
+
+tr.experience-row:not(.expanded-row):active {
+  background: #efefef;
+}
+
+.experience-row td {
+  border-bottom-width: 0;
+}
+
+.experience-detail {
+  overflow: hidden;
+  display: flex;
+}
+
+.experience-note {
+  padding: 16px;
+}
+
+.hidden { 
+  display: none;
+}
+
+/* ::ng-deep mat-tab-header {
+  height: 0;
+  display: none;
+}
+
+::ng-deep mat-tab-body {
+  height: 100%;
+  min-height: 300px;
+  overflow: hidden;
+} */

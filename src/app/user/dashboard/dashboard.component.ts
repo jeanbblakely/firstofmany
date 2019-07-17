@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, of, throwError } from 'rxjs';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
+import { Category } from 'src/app/models/category';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,7 +10,15 @@ import { User } from '../../models/user';
 })
 export class DashboardComponent implements OnInit {
   user: User;
-  constructor(private userService: UserService) { }
+  selectedIndex: number = 0;
+  selectedCategory: Category;
+
+  constructor(private userService: UserService) { 
+    let empty = new Category();
+    empty.name = 'empty';
+    empty.experiences = [];
+    this.selectedCategory = empty;
+  }
 
   ngOnInit() {
     this.getUser();
@@ -31,6 +39,15 @@ export class DashboardComponent implements OnInit {
   */
   isLoggedIn(): boolean {
     return this.userService.isAuthenticated();
+  }
+
+  /**
+   * Listens to the clickedCategory event and switches tabs.
+   * @param category The category clicked on
+   */
+  onClickedCategory(category: Category) {
+    this.selectedCategory = category;
+    this.selectedIndex = 1;
   }
 
 }

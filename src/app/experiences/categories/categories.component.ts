@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Category } from '../../models/category';
 import { CategoryService } from '../../services/category.service';
 import { UserService } from '../../services/user.service';
@@ -6,7 +6,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 import { CategoryDetailComponent } from '../category-detail/category-detail.component';
 import { trigger, state, transition, style, animate } from '@angular/animations';
 import { User } from './../../models/user';
-import { Observable, of } from 'rxjs';
+import { Observable, of, forkJoin } from 'rxjs';
 
 
 @Component({
@@ -28,95 +28,44 @@ import { Observable, of } from 'rxjs';
 })
 export class CategoriesComponent implements OnInit {
   @Input() isDashBoard = false;
+  @Output() clickedCategory = new EventEmitter<Category>();
   categories: Category[];
   selectedCategory: Category;
   userCategories: Category[];
   user: User;
-  colors = [
-    '#f24236', // cat-red: #f24236;
-    '#f7844f', // cat-orange: #f7844f;
-    '#ffcc49', // cat-yellow: #ffcc49;
-    '#c3f74f', // cat-green: #c3f74f;
-    '#4ff7d8', // cat-sea-green: #4ff7d8;
-    '#4f6ef7', // cat-blue: #4f6ef7;
-    '#844ff7', // cat-purple: #844ff7;
-    '#f74fc2', // cat-pink: #f74fc2;
-  ]
 
   constructor(private categoryService: CategoryService, private userService: UserService, private dialog: MatDialog) { }
 
+  /**
+   * Gets the user, userCategories, and categories at the same time. Then styles each.
+   * */
   ngOnInit() {
-    if (!this.isDashBoard) {
-      this.getUserCategoriesDeDup();
-      this.getCategories();
-      this.getUser();
-    } else {
-      this.getUserCategories();
-    }
-  }
-  
-  /*
-	Gets Observable User from service
-  */
-  getUser() {
-    this.userService.getUser().subscribe(data => {
-      this.user = data;
+    forkJoin(
+      this.userService.getUser(),
+      this.userService.getUserCategories(),
+      this.categoryService.getCategories(),
+    ).subscribe(([user, userCategories, categories]) => {
+      this.user = user;
+      this.userCategories = userCategories;
+      for (let i = 0; i < this.userCategories.length; i++) {
+        let category = this.userCategories[i];
+        categories = categories.filter(c => c.name != category.name);
+      }
+      this.categories = categories;
+      this.setCardStyle(this.categories);
+      this.setCardStyle(this.userCategories);
     });
-
-  }
-
-  /*
- Gets Observable Categories array from service
- */
-  getCategories(): void {
-    this.categoryService.getCategories()
-      .subscribe(categories => {
-        this.categories = categories;
-        this.setCardStyle();
-      });
-  }
-
-
-  /**
-  *  Gets Observable User Categories array from service
- */
-  getUserCategories(): void {
-    this.userService.getUserCategories()
-      .subscribe(categories => {
-        this.categories = categories;
-        this.setCardStyle();
-      });
-  }
-
-  /**
-   * Gets the user's categories to compare against
-   */
-  getUserCategoriesDeDup(): void {
-    this.userService.getUserCategories()
-      .subscribe(categories => {
-        this.userCategories = categories;
-      });
   }
 
   /**
    * Sets the background color of each card to an alternating color. Styles cards in userCategories.
    */
-  setCardStyle() {
-    let j = 0;
-    for (let i = 0; i < this.categories.length; i++) {
+  setCardStyle(categories: Category[]) {
+    for (let i = 0; i < categories.length; i++) {
       if (!this.isDashBoard) {
-        if (this.userCategories.find(c => c.name == this.categories[i].name)) {
-          this.categories[i]['display'] = 'none';
-        } else {
-          this.categories[i]['flippedState'] = 'initial';
-        }
+        categories[i]['flippedState'] = 'initial';
       }
-      // this.categories[i]['color'] = this.colors[Math.floor(Math.random() * this.colors.length)];
-      if (!this.categories[i].hasOwnProperty('display')) {
-        this.categories[i]['color'] = j % 2 == 0 ? 'rgba(79, 195, 247, 0.5)' : 'rgba(253, 216, 53, 0.5)';
-        j++;
-      }
-           
+      categories[i]['color'] = i % 2 == 0 ? 'rgba(79, 195, 247, 0.5)' : 'rgba(253, 216, 53, 0.5)';
     }
   }
 
@@ -126,14 +75,13 @@ export class CategoriesComponent implements OnInit {
   selectCategory(category: Category): void {
     if (this.isDashBoard) {
       this.selectedCategory = category;
-      this.openDialog();
+      this.clickedCategory.emit(category);
     } else {
       category['flippedState'] = category['flippedState'] === 'initial' ? 'final' : 'initial';
       if (!this.searchUserCategory(category.name)) {
         this.userService.addUserCategory(category);
         this.user.tracked_categories.push(category);
       }
-      
     }
   }
 
@@ -155,18 +103,17 @@ export class CategoriesComponent implements OnInit {
     dialogConfig.data = this.selectedCategory;
     this.dialog.open(CategoryDetailComponent, dialogConfig);
   }
-  
+
   /*
 	Searches and returns existing Category
   */
   searchUserCategory(name: string): Observable<Category> {
-    var trimName = name.trim();
-    var i;
-    for (i = 0; i < this.user.tracked_categories.length; i++) {
-      if (this.user.tracked_categories[i].name.toUpperCase() === trimName.toUpperCase()) {
-        return of(this.user.tracked_categories[i]);
+    let trimName = name.trim();
+    for (let i = 0; i < this.userCategories.length; i++) {
+      if (this.userCategories[i].name.toUpperCase() === trimName.toUpperCase()) {
+        return of(this.userCategories[i]);
       }
-   }
+    }
     return null;
   }
 }
