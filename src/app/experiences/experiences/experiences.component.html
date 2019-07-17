@@ -59,7 +59,16 @@
     [ngClass]='category.experiences.length > 5 ? "visible" : "hidden"'></mat-paginator>
 </div>
 
-<a mat-mini-fab color="accent" class="new-experience-button" (click)="selectedIndex = 1"
+ <!-- Add Experience Not Working So Commented Out - jb -->
+  
+<!-- <a mat-mini-fab color="accent" class="new-experience-button" (click)="selectedIndex = 1"
   [ngClass]="{'hidden': selectedIndex != 0}">
   <mat-icon>add</mat-icon>
-</a>
+</a> -->
+
+
+    <a mat-mini-fab color="accent" class="new-experience-button" [routerLink]="['/category-create']"
+      [queryParams]="{name:category.name}" (click)="close()">
+      <mat-icon>add</mat-icon>
+    </a>
+
