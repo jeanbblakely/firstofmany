@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Category } from '../../models/category';
 import { CategoryService } from '../../services/category.service';
 import { UserService } from '../../services/user.service';
@@ -28,6 +28,7 @@ import { Observable, of } from 'rxjs';
 })
 export class CategoriesComponent implements OnInit {
   @Input() isDashBoard = false;
+  @Output() clickedCategory = new EventEmitter<Category>();
   categories: Category[];
   selectedCategory: Category;
   userCategories: Category[];
@@ -126,7 +127,8 @@ export class CategoriesComponent implements OnInit {
   selectCategory(category: Category): void {
     if (this.isDashBoard) {
       this.selectedCategory = category;
-      this.openDialog();
+      // this.openDialog();
+      this.clickedCategory.emit(category);
     } else {
       category['flippedState'] = category['flippedState'] === 'initial' ? 'final' : 'initial';
       if (!this.searchUserCategory(category.name)) {
