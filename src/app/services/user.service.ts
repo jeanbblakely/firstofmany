@@ -49,6 +49,7 @@ export class UserService {
         localStorage.setItem(this.TOKEN_KEY, res.token);
         localStorage.setItem('userID', res.userID);
         console.log(res);
+        console.log(regData);
     });
     if (this.isAuthenticated()) {
       this.router.navigate(['dashboard/' + localStorage.getItem('userID')]);
