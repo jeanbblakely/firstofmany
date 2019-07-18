@@ -53,7 +53,14 @@ export class AddCategoriesComponent implements OnInit {
   }
 
   /**
-   * Closes the dialog
+   * Closes the dialog and returns selected categories
+   */
+  addCategories() {
+    this.dialogRef.close(this.selection.selected);
+  }
+
+  /**
+   * Closes the dialog and returns no data
    */
   close() {
     this.dialogRef.close();

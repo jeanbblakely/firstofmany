@@ -18,6 +18,7 @@ export class CategoriesComponent implements OnInit {
   newCategories: Category[];
   selectedCategory: Category;
   userCategories: Category[];
+  userCategoryNames: string[] = [];
   user: User;
 
   constructor(private categoryService: CategoryService, private userService: UserService, private dialog: MatDialog) { }
@@ -34,10 +35,13 @@ export class CategoriesComponent implements OnInit {
       this.userCategories = this.user.tracked_categories;
       for (let i = 0; i < this.userCategories.length; i++) {
         let category = this.userCategories[i];
+        this.userCategoryNames.push(category.name);
         category['color'] = i % 2 == 0 ? 'rgba(79, 195, 247, 0.5)' : 'rgba(253, 216, 53, 0.5)';
         allCategories = allCategories.filter(c => c.name != category.name);
       }
       this.newCategories = allCategories;
+      this.userCategoryNames.sort();
+      // console.log("User Categories: " + this.userCategoryNames);
     });
   }
 
@@ -50,7 +54,8 @@ export class CategoriesComponent implements OnInit {
   }
 
   /***
-   * Opens a dialog showing the category's experiences
+   * Opens a dialog showing all the category
+   * After closing, passes selected categories to addCategory
    */
   openDialog(): void {
     const dialogRef = this.dialog.open(AddCategoriesComponent, {
@@ -60,21 +65,28 @@ export class CategoriesComponent implements OnInit {
       autoFocus: true,
       restoreFocus: true,
       disableClose: false,
+      closeOnNavigation: true,
       panelClass: 'add-categories-dialog',
       data: this.newCategories
     });
+
+    dialogRef.afterClosed().subscribe(data => {
+      if (data != undefined) {
+        data.forEach((c: Category) => this.addCategory(c));
+      }
+    });
   }
 
-  /*
-	Searches and returns existing Category
-  */
-  searchUserCategory(name: string): Observable<Category> {
-    let trimName = name.trim();
-    for (let i = 0; i < this.userCategories.length; i++) {
-      if (this.userCategories[i].name.toUpperCase() === trimName.toUpperCase()) {
-        return of(this.userCategories[i]);
-      }
+  /**
+   * Adds a category to the user, if it isn't there already.
+   * @param category Category to add to the user
+   */
+  addCategory(category: Category) {
+    if (this.userCategoryNames.includes(category.name)) {
+      console.error("Sorry. Can't add " + category.name);
+    } else {
+      this.userService.addUserCategory(category);
+      // console.log('Adding ' + category.name + ' to the user!');
     }
-    return null;
   }
 }

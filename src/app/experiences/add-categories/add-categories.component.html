@@ -32,7 +32,7 @@
     </table>
   </mat-dialog-content>
   <mat-dialog-actions fxLayoutAlign="space-between center">
-    <a mat-raised-button color="accent" routerLink="/category-create">Create a category</a>
-    <button mat-raised-button color="primary" (click)="close()">Add {{ selection.selected.length | i18nPlural: categoryMapping }}</button>
+    <a mat-raised-button color="accent" routerLink="/category-create" (click)="close()">Create a category</a>
+    <button mat-raised-button color="primary" (click)="addCategories()">Add {{ selection.selected.length | i18nPlural: categoryMapping }}</button>
   </mat-dialog-actions>
 </div>
