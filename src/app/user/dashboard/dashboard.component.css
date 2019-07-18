@@ -1,3 +1,7 @@
+.dashboard-tabs {
+  min-height: 600px;
+}
+
 .add-categories-button {
   position: fixed;
   bottom: 5%;

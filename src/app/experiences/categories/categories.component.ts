@@ -27,9 +27,9 @@ import { Observable, of, forkJoin } from 'rxjs';
   ]
 })
 export class CategoriesComponent implements OnInit {
-  @Input() isDashBoard = false;
+  // @Input() isDashBoard = false;
   @Output() clickedCategory = new EventEmitter<Category>();
-  categories: Category[];
+  newCategories: Category[];
   selectedCategory: Category;
   userCategories: Category[];
   user: User;
@@ -42,47 +42,46 @@ export class CategoriesComponent implements OnInit {
   ngOnInit() {
     forkJoin(
       this.userService.getUser(),
-      this.userService.getUserCategories(),
       this.categoryService.getCategories(),
-    ).subscribe(([user, userCategories, categories]) => {
+    ).subscribe(([user, allCategories]) => {
       this.user = user;
-      this.userCategories = userCategories;
+      this.userCategories = this.user.tracked_categories;
       for (let i = 0; i < this.userCategories.length; i++) {
         let category = this.userCategories[i];
-        categories = categories.filter(c => c.name != category.name);
+        category['color'] = i % 2 == 0 ? 'rgba(79, 195, 247, 0.5)' : 'rgba(253, 216, 53, 0.5)';
+        allCategories = allCategories.filter(c => c.name != category.name);
       }
-      this.categories = categories;
-      this.setCardStyle(this.categories);
-      this.setCardStyle(this.userCategories);
+      this.newCategories = allCategories;
+      // this.setCardStyle(this.userCategories);
     });
   }
 
   /**
    * Sets the background color of each card to an alternating color. Styles cards in userCategories.
    */
-  setCardStyle(categories: Category[]) {
-    for (let i = 0; i < categories.length; i++) {
-      if (!this.isDashBoard) {
-        categories[i]['flippedState'] = 'initial';
-      }
-      categories[i]['color'] = i % 2 == 0 ? 'rgba(79, 195, 247, 0.5)' : 'rgba(253, 216, 53, 0.5)';
-    }
-  }
+  // setCardStyle(categories: Category[]) {
+  //   for (let i = 0; i < categories.length; i++) {
+  //     if (!this.isDashBoard) {
+  //       categories[i]['flippedState'] = 'initial';
+  //     }
+  //     categories[i]['color'] = i % 2 == 0 ? 'rgba(79, 195, 247, 0.5)' : 'rgba(253, 216, 53, 0.5)';
+  //   }
+  // }
 
   /**
    * 	Select click method for single Category objects
   */
   selectCategory(category: Category): void {
-    if (this.isDashBoard) {
+    // if (this.isDashBoard) {
       this.selectedCategory = category;
       this.clickedCategory.emit(category);
-    } else {
-      category['flippedState'] = category['flippedState'] === 'initial' ? 'final' : 'initial';
-      if (!this.searchUserCategory(category.name)) {
-        this.userService.addUserCategory(category);
-        this.user.tracked_categories.push(category);
-      }
-    }
+    // } else {
+    //   category['flippedState'] = category['flippedState'] === 'initial' ? 'final' : 'initial';
+    //   if (!this.searchUserCategory(category.name)) {
+    //     this.userService.addUserCategory(category);
+        // this.user.tracked_categories.push(category);
+    //   }
+    // }
   }
 
   /***

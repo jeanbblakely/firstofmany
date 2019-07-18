@@ -1,16 +1,11 @@
-<h1 class="mat-display-1">
-    <span *ngIf="isDashBoard">My </span>
-    <span *ngIf="!isDashBoard">All </span>
-    Categories</h1>
+<h1 class="mat-display-1">My Categories</h1>
 <div class="categories" fxLayout="row wrap" fxflexfill fxLayoutGap="3%">
-  <mat-card *ngFor="let category of (isDashBoard ? userCategories : categories)" 
+  <mat-card *ngFor="let category of userCategories" 
             (click)="selectCategory(category)"  
             fxFlex="30" fxFlex.xs="45" 
-            [ngStyle]="{'background-color': category.color, 'display': category.display }"
-            [@flipCard]=category.flippedState>
+            [ngStyle]="{'background-color': category.color}">
     <mat-card-content fxflexfill>
       <h2 fittext [maxFontSize]=70 [minFontSize]=20 class="card-face-front" [innerHTML]="category.name | spacebreak:11 "></h2>
-      <h2 fittext [maxFontSize]=70 [minFontSize]=20 class="card-face-back" [innerHTML]="category.name + ' Added!' | spacebreak:11 "></h2>
     </mat-card-content>
   </mat-card>
 </div>

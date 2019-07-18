@@ -1,22 +1,24 @@
-<div *ngIf="isLoggedIn()">
+<div *ngIf="isLoggedIn()" class="dashboard-tabs">
   <h2>Welcome {{ user?.name }}</h2>
   <mat-tab-group dynamicHeight [selectedIndex]="selectedIndex" (selectedIndexChange)="selectedIndex = $event">
+    
     <mat-tab label="Dashboard">
-      <app-categories [isDashBoard]=true (clickedCategory)="onClickedCategory($event)"></app-categories>
-      <a mat-mini-fab class="add-categories-button" color="primary" (click)="selectedIndex = 1"> <!-- routerLink="/categories"> -->
-        <mat-icon>add</mat-icon>
-        <span class="add-categories-button-text">Add Categories to Track</span>
-      </a>
+      <ng-template matTabContent>
+        <app-categories (clickedCategory)="onClickedCategory($event)"></app-categories>
+        <a mat-mini-fab class="add-categories-button" color="primary" routerLink="/category-create">
+          <mat-icon>add</mat-icon>
+          <span class="add-categories-button-text">Add Categories to Track</span>
+        </a>
+      </ng-template>
     </mat-tab>
 
-    <mat-tab label="Add Categories">
-      <app-categories></app-categories>
-    </mat-tab>
     <mat-tab label="Experiences">
-      <app-experiences [category]="selectedCategory"></app-experiences>>
+      <app-experiences [category]="selectedCategory"></app-experiences>
     </mat-tab>
+
     <mat-tab label="Delete">
       Delete experiences
     </mat-tab>
+    
   </mat-tab-group>
 </div>
