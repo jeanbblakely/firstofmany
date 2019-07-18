@@ -68,7 +68,7 @@ router.post('/login', async(req, res)=> {
     }
   });
 
-  router.get('/resetpassword', async(req, res)=> {
+  router.post('/resetpassword', async(req, res)=> {
     let userData = req.body;
     let user = await User.findOne({username: userData.username});
     if (!user) {
@@ -78,8 +78,9 @@ router.post('/login', async(req, res)=> {
       if(!isMatch) {
         return res.status(401).send({message:"That answer is incorrect. Please try again."});
       }
-        let userID = user._id
-        return res.status(200).send({message: "That answer is correct. Proceed to changing your password", userID});
+      user.password = userData.password;
+      user.save();
+      return res.status(200).send({message: "Your password has successfully been updated"});
     });
 
 
