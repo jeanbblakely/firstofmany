@@ -3,6 +3,8 @@ import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { Experience } from 'src/app/models/experience';
 import { trigger, state, transition, style, animate } from '@angular/animations';
 import { Category } from 'src/app/models/category';
+import { UserService } from '../../services/user.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-experiences',
@@ -27,7 +29,7 @@ export class ExperiencesComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor() { }
+  constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit() { }
 
@@ -74,6 +76,8 @@ export class ExperiencesComponent implements OnInit {
      */
   deleteExperience(experience: Experience) {
     this.selectedIndex = 2;
+    this.userService.deleteUserExperience(this.category.name, experience);
+    this.router.navigate(['dashboard']);
     console.log("Delete " + experience.name + ", please!");
   }
 }

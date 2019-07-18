@@ -8,11 +8,13 @@ import { RegisterComponent } from './user/register/register.component';
 import { CategoriesComponent } from './experiences/categories/categories.component';
 import { CategoryCreateComponent } from './experiences/category-create/category-create.component';
 import { AuthGuard } from './guards/auth.guard';
+import { PasswordResetComponent } from './user/password-reset/password-reset.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'password-reset', component: PasswordResetComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'account', component: AccountComponent, canActivate: [AuthGuard] },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },

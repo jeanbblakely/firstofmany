@@ -38,6 +38,8 @@ export class RegisterComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       birthdate: [new Date(), [Validators.required]],
       gender: [this.genders[0], [Validators.required, Validators.pattern('((?!--).)*')]],
+      security_question: ['', [Validators.required]],
+      security_answer: ['', [Validators.required]]
     });
   }
 
@@ -78,6 +80,8 @@ export class RegisterComponent implements OnInit {
     if (this.userForm.valid) {
       const result: User = Object.assign({}, this.userForm.value);
       this.userService.register(result);
+      console.log(result, 'result');
+      this.router.navigate(['login']);
     } else {
       this.message = 'your form has errors';
     }

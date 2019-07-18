@@ -23,6 +23,7 @@
         <mat-error *ngIf="hasError('password', 'required')">Please enter your password</mat-error>
         <mat-error *ngIf="hasError('password', 'minlength')">Password must be at least 8 characters</mat-error>
       </mat-form-field>
+      Forgot Password?  <a routerLink="/password-reset">Reset Now.</a><br>
       <button mat-fab type="submit" [disabled]="!loginData.valid">Login</button>
     </form>
   </div>
