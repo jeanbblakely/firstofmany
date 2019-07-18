@@ -10,6 +10,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 })
 export class AddCategoriesComponent implements OnInit {
   categories: Category[];
+  categoryMapping: {[k: string]: string} = {'=1': '# category', 'other': ' # categories'};
   displayedColumns: string[] = ['select', 'name'];
   dataSource: MatTableDataSource<Category>;
   selection = new SelectionModel<Category>(true, []);

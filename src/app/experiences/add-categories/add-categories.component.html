@@ -1,20 +1,22 @@
 <div class="dialog">
   <h2 mat-dialog-title>Add Categories</h2>
   <mat-dialog-content>
-      <mat-form-field>
-          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter" autocomplete="off">
-        </mat-form-field>
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter" autocomplete="off">
+    </mat-form-field>
     <table mat-table [dataSource]="dataSource" matSort matSortActive="name" matSortDisableClear matSortDirection="asc">
       <!-- Checkbox Column -->
       <ng-container matColumnDef="select">
         <th mat-header-cell *matHeaderCellDef>
-          <mat-checkbox color="primary" (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
+          <mat-checkbox color="primary" (change)="$event ? masterToggle() : null"
+            [checked]="selection.hasValue() && isAllSelected()"
             [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
           </mat-checkbox>
         </th>
         <td mat-cell *matCellDef="let row">
-          <mat-checkbox color="primary" (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
-            [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+          <mat-checkbox color="primary" (click)="$event.stopPropagation()"
+            (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)"
+            [aria-label]="checkboxLabel(row)">
           </mat-checkbox>
         </td>
       </ng-container>
@@ -29,9 +31,8 @@
       </tr>
     </table>
   </mat-dialog-content>
-  <mat-dialog-actions>
-    <a mat-mini-fab color="accent" class="new-experience-button" [routerLink]="['/category-create']" (click)="close()">
-      <mat-icon>add</mat-icon>
-    </a>
+  <mat-dialog-actions fxLayoutAlign="space-between center">
+    <a mat-raised-button color="accent" routerLink="/category-create">Create a category</a>
+    <button mat-raised-button color="primary" (click)="close()">Add {{ selection.selected.length | i18nPlural: categoryMapping }}</button>
   </mat-dialog-actions>
 </div>
