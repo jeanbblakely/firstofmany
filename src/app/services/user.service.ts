@@ -173,4 +173,9 @@ export class UserService {
     return localStorage.getItem(this.TOKEN_KEY);
   }
 
+
+  getSecurityQuestion() {
+    return this.httpClient.get<any>(this.authpath + '/getsecurityquestion');
+  }
+
 }
