@@ -32,6 +32,7 @@ import { DisableControlDirective } from './_directives/disable-control.directive
 import { EqualValidatorDirective } from './_directives/equal-validator.directive';
 import { ServerErrorInterceptor } from './interceptor/server-error.interceptor';
 import { AuthGuard } from './guards/auth.guard';
+import { AddCategoriesComponent } from './experiences/add-categories/add-categories.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { AuthGuard } from './guards/auth.guard';
     CategoryCreateComponent,
     SpacebreakPipe,
     DisableControlDirective,
-    EqualValidatorDirective
+    EqualValidatorDirective,
+    AddCategoriesComponent
   ],
   imports: [
     BrowserModule,
@@ -88,6 +90,6 @@ import { AuthGuard } from './guards/auth.guard';
   ],
 
   bootstrap: [AppComponent],
-  entryComponents: [CategoryDetailComponent]
+  entryComponents: [AddCategoriesComponent]
 })
 export class AppModule { }

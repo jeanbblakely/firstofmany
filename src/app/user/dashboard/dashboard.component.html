@@ -5,10 +5,6 @@
     <mat-tab label="Dashboard">
       <ng-template matTabContent>
         <app-categories (clickedCategory)="onClickedCategory($event)"></app-categories>
-        <a mat-mini-fab class="add-categories-button" color="primary" routerLink="/category-create">
-          <mat-icon>add</mat-icon>
-          <span class="add-categories-button-text">Add Categories to Track</span>
-        </a>
       </ng-template>
     </mat-tab>
 

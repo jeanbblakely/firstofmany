@@ -32,6 +32,7 @@
   text-align: center;
   white-space: pre-line;
   user-select: none;
+	transform: translate(-50%, -50%);
 }
 
 /* Colors the text of category cards */
@@ -53,19 +54,32 @@
   }
 }
 
-/* hide back of pane during swap */
-.card-face-front, .card-face-back {
-	backface-visibility: hidden;
+.add-categories-button {
+  position: fixed;
+  bottom: 5%;
+  right: 10%;
+  z-index: 999;
 }
 
-/* front pane, placed above back */
-.card-face-front {
-	z-index: 2;
-	/* for firefox 31 */
-	transform: rotateY(0deg) translate(-50%, -50%);
+.add-categories-button-text {
+  display: none;
 }
 
-/* back, initially hidden pane */
-.card-face-back {
-	transform: rotateY(180deg) translate(50%, -50%);
+@media only screen and (min-width: 601px) {
+  .add-categories-button {
+    width: unset;
+    padding: 0 26px;
+    border-radius: 29px;
+  }
+  
+  mat-icon {
+    margin-right: 10px;
+  }
+  
+  .add-categories-button-text {
+    display: inline;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
 }
