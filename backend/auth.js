@@ -10,8 +10,8 @@ var bcrypt = require('bcrypt-nodejs');
 var router = express.Router();
 
 router.post('/register', (req, res, next)=> {
-    let userData = req.body;
-    var user = new User(userData);
+    let regData = req.body;
+    let user = new User(regData);
     user.save((err, newUser)=> {
       if(!err) {
         let userID = newUser._id;
@@ -19,6 +19,7 @@ router.post('/register', (req, res, next)=> {
         let token = jwt.encode(payload, '123');
 
         res.status(200).send({token, userID});
+        console.log(newUser.security_question + " " + newUser.security_answer);
       } else {
           console.log(err.errmsg);
           if (err.code == 11000) {

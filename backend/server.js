@@ -25,7 +25,7 @@ app.all('/', function(req, res, next) {
 
   app.get('/users', async(req, res)=> {
     try {
-      let users = await User.find({}, '-password -__v');
+      let users = await User.find({}, '-password -security_question -security_answer -__v');
       res.send(users);
     } catch (error){
       console.log(error);
