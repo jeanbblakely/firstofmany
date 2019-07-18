@@ -10,8 +10,16 @@ var bcrypt = require('bcrypt-nodejs');
 var router = express.Router();
 
 router.post('/register', (req, res, next)=> {
-    let userData = req.body;
-    var user = new User(userData);
+    var user = new User();
+    user.username = req.body.username;
+    user.password = req.body.password;
+    user.email = req.body.email;
+    user.name = req.body.name;
+    user.birthdate = req.body.birthdate;
+    user.gender = req.body.gender;
+    user.security_question = req.body.security_question;
+    user.security_answer = req.body.security_answer;
+
     user.save((err, newUser)=> {
       if(!err) {
         let userID = newUser._id;

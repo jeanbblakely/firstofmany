@@ -10,7 +10,10 @@ var userSchema = new mongoose.Schema({
   birthdate: Date,
   gender: String,
   tracked_categories: ['Category'],
-  favorites: Array
+  favorites: Array,
+  security_question: {type: String, required: 'security question is required'},
+  security_answer: {type: String, required: 'security answer is required'},
+  new_user: {type: Boolean, required: true, default: true}
 })
 
 userSchema.pre('save', function(next){
@@ -25,6 +28,16 @@ userSchema.pre('save', function(next){
       user.password = hash
       next()
     })
+
+    if(!user.isModified('security_answer'))
+      return next()
+
+      bcrypt.hash(user.security_answer, null, null, (err, hash)=> {
+        if(err) return next(err)
+
+        user.security_answer = hash
+        next()
+      })
 })
 
 module.exports = mongoose.model('User', userSchema)

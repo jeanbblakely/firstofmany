@@ -112,9 +112,22 @@ export class UserService {
     });
   }
 
+  deleteUserCategory(categoryData) {
+    this.httpClient.post<any>(this.path + '/deleteusercategory/' + localStorage.getItem('userID'), categoryData).subscribe(res => {
+      console.log(res);
+    });
+  }
+
   addUserExperience(category, experienceData) {
     console.log('user service');
     this.httpClient.post<any>(this.path + '/adduserexperience/' + localStorage.getItem('userID') + '/' + category, experienceData).subscribe(res => {
+      console.log(res);
+    });
+  }
+
+  deleteUserExperience(category, experienceData) {
+    console.log('user service');
+    this.httpClient.post<any>(this.path + '/deleteuserexperience/' + localStorage.getItem('userID') + '/' + category, experienceData).subscribe(res => {
       console.log(res);
     });
   }
