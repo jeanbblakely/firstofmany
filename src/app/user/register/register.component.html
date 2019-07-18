@@ -61,6 +61,14 @@
             <mat-error *ngIf="hasError('gender', 'pattern')">That's not a valid selection</mat-error>
           </mat-form-field>
         </div>
+        <mat-form-field>
+          <input matInput type="text" placeholder="Security Question" id="question" formControlName="security_question" required>
+          <mat-error *ngIf="hasError('security_question', 'required')">Enter a security question (for password reset)</mat-error>
+        </mat-form-field>
+         <mat-form-field>
+          <input matInput type="text" placeholder="Security Answer" id="answer" formControlName="security_answer" required>
+          <mat-error *ngIf="hasError('security_answer', 'required')">Enter a security answer</mat-error>
+        </mat-form-field>
       </mat-card-content>
 
       <mat-card-actions>
