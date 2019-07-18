@@ -49,8 +49,8 @@ export class CategoriesComponent implements OnInit {
    * 	Select click method for single Category objects
   */
   selectCategory(category: Category): void {
-      this.selectedCategory = category;
-      this.clickedCategory.emit(category);
+    this.selectedCategory = category;
+    this.clickedCategory.emit(category);
   }
 
   /***
@@ -72,7 +72,9 @@ export class CategoriesComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(data => {
       if (data != undefined) {
-        data.forEach((c: Category) => this.addCategory(c));
+        if (data.length < 5 || confirm("That's a lot of categories at once!\nAre you sure you want to add all " + data.length + " of them?")) {
+          data.forEach((c: Category) => this.addCategory(c));
+        }
       }
     });
   }
