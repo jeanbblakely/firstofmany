@@ -12,7 +12,8 @@ var userSchema = new mongoose.Schema({
   tracked_categories: ['Category'],
   favorites: Array,
   security_question: {type: String, required: 'security question is required'},
-  security_answer: {type: String, required: 'security answer is required'}
+  security_answer: {type: String, required: 'security answer is required'},
+  new_user: {type: Boolean, required: true, default: true}
 })
 
 userSchema.pre('save', function(next){
