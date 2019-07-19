@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
+import { User } from './../../models/user';
 
 @Component({
   selector: 'app-password-reset',
@@ -10,8 +11,9 @@ import { Router } from '@angular/router';
 })
 export class PasswordResetComponent {
   public username = '';
-  public security_question = 'this';
+  public security_question = '';
   public resetData: FormGroup;
+  public hide = true;
 
   public message: string = '';
   constructor(private userService: UserService,
@@ -33,7 +35,30 @@ export class PasswordResetComponent {
     this.resetData = this.fb.group({
       username: [null, [Validators.required]],
       security_answer: [null, [Validators.required]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      confirmPassword: ['', [Validators.required, Validators.minLength(8)]],
     });
+  }
+  
+     /*
+	Gets security question based on username
+  */
+  getSecurityQuestion() {
+    this.security_question = "I am a security question";
+  }
+  
+    /*
+	Resets user password if security answer matches
+  */
+  reset() {
+    if (this.resetData.valid) {
+      const result: User = Object.assign({}, this.resetData.value);
+      console.log('after copy', result);
+      this.userService.resetPassword(result);
+      this.router.navigate(['dashboard']);
+    } else {
+      this.message = 'your form has errors';
+    }
   }
 
 }
