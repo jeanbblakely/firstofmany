@@ -23,7 +23,7 @@ export class CategoryDetailComponent implements OnInit {
    */
   deleteCategory() {
     console.log("Delete " + this.category.name + ", please!");
-    this.userService.deleteUserCategory(this.category.name);
+    this.userService.deleteUserCategory(this.category);
     this.backClicked.emit();
   }
 }
