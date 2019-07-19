@@ -205,28 +205,6 @@ app.delete('/user/:id/delete', async(req, res)=> {
   }
 });
 
-app.post('/updateuserexperience/:id/:tracked_category/:experience', async(req, res)=> {
-  try {
-//    let experienceData = req.body;
-    let user = User.findById(req.params.id);
-    user.updateOne({'tracked_categories.name':req.params.tracked_category,
-                    'tracked_categories.experiences.name':req.params.experience},
-                    {'$set':
-                      {'tracked_categories[0].experiences[0].$.favorite': true}
-                    }, function (err, user) {
-                      if (err){
-                        console.log(err.message);
-                        return next(err);
-                      }
-            //          console.log(experienceData);
-                      res.status(200).send('favorited');
-                    });
-    } catch (error){
-      console.log(error);
-      res.sendStatus(500);
-    }
-});
-
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 mongoose.connect('mongodb+srv://joeymarinelli:Katiemarie0629!@cluster0-yrzrs.mongodb.net/FirstOfManyDB?retryWrites=true&w=majority',
