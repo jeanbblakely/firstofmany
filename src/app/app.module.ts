@@ -32,6 +32,7 @@ import { DisableControlDirective } from './_directives/disable-control.directive
 import { EqualValidatorDirective } from './_directives/equal-validator.directive';
 import { ServerErrorInterceptor } from './interceptor/server-error.interceptor';
 import { AuthGuard } from './guards/auth.guard';
+import { PasswordResetComponent } from './user/password-reset/password-reset.component';
 import { AddCategoriesComponent } from './experiences/add-categories/add-categories.component';
 import { ExperienceDetailComponent } from './experiences/experience-detail/experience-detail.component';
 
@@ -54,6 +55,7 @@ import { ExperienceDetailComponent } from './experiences/experience-detail/exper
     SpacebreakPipe,
     DisableControlDirective,
     EqualValidatorDirective,
+    PasswordResetComponent,
     AddCategoriesComponent,
     ExperienceDetailComponent
   ],

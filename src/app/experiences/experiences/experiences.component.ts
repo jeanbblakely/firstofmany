@@ -2,8 +2,9 @@ import { Component, OnInit, ViewChild, Input, EventEmitter, Output } from '@angu
 import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
 import { Experience } from 'src/app/models/experience';
 import { Category } from 'src/app/models/category';
-import { ExperienceDetailComponent } from '../experience-detail/experience-detail.component';
 import { UserService } from 'src/app/services/user.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ExperienceDetailComponent } from '../experience-detail/experience-detail.component';
 
 @Component({
   selector: 'app-experiences',
@@ -20,7 +21,7 @@ export class ExperiencesComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private userService: UserService, private dialog: MatDialog) { }
+  constructor(private userService: UserService, private router: Router, private dialog: MatDialog) { }
 
   ngOnInit() { }
 
