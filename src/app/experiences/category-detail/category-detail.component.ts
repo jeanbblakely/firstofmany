@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { Category } from '../../models/category';
 import { UserService } from 'src/app/services/user.service';
 
@@ -7,16 +7,11 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './category-detail.component.html',
   styleUrls: ['./category-detail.component.css'],
 })
-export class CategoryDetailComponent implements OnInit {
+export class CategoryDetailComponent  {
   @Input() category: Category;
   @Output() backClicked = new EventEmitter<number>();
 
-  constructor(private userService: UserService) {
-  }
-
-  ngOnInit() {
-  }
-
+  constructor(private userService: UserService) { }
 
   /**
    * Deletes the category

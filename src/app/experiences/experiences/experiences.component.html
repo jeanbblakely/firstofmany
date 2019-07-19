@@ -2,13 +2,22 @@
   You haven't added any {{ category.name | lowercase }} yet. <br> Add your first now!
 </div>
 <div [ngClass]='category.experiences.length > 0 ? "visible" : "hidden"'>
-  <mat-form-field>
-    <mat-icon matPrefix>search</mat-icon>
-    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
-
-  </mat-form-field>
-
-  <table mat-table [dataSource]="dataSource" matSort matSortActive="datestamp" matSortDisableClear matSortDirection="desc">
+  <div class="table-top">
+    <mat-form-field>
+      <mat-icon matPrefix>search</mat-icon>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+      <span matSuffix>
+          <button mat-icon-button (click)="paginator.previousPage()" [disabled]="!paginator.hasPreviousPage()">
+              <mat-icon>navigate_before</mat-icon>
+            </button>
+        <button mat-icon-button (click)="paginator.nextPage()" [disabled]="!paginator.hasNextPage()">
+          <mat-icon>navigate_next</mat-icon>
+        </button>
+      </span>
+    </mat-form-field>
+  </div>
+  <table mat-table [dataSource]="dataSource" matSort matSortActive="datestamp" matSortDisableClear
+    matSortDirection="desc">
 
     <ng-container matColumnDef="favorite">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>
@@ -28,13 +37,15 @@
 
     <ng-container matColumnDef="datestamp">
       <th mat-header-cell *matHeaderCellDef fxHide.lt-sm mat-sort-header> Date </th>
-      <td mat-cell *matCellDef="let experience" fxHide.lt-sm (click)="openExperienceDialog(experience)"> {{ experience.datestamp | date:'mediumDate' }}
+      <td mat-cell *matCellDef="let experience" fxHide.lt-sm (click)="openExperienceDialog(experience)">
+        {{ experience.datestamp | date:'mediumDate' }}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="note">
       <th mat-header-cell *matHeaderCellDef fxHide.lt-sm> Note </th>
-      <td mat-cell *matCellDef="let experience" fxHide.lt-sm (click)="openExperienceDialog(experience)"> {{ experience.note }}
+      <td mat-cell *matCellDef="let experience" fxHide.lt-sm (click)="openExperienceDialog(experience)">
+        {{ experience.note }}
       </td>
     </ng-container>
 
@@ -42,7 +53,7 @@
     <tr mat-row *matRowDef="let experience; columns: columnsToDisplay;" class="experience-row"></tr>
   </table>
   <mat-paginator [pageSizeOptions]="[5, 10, 25]" [length]="category.experiences.length"
-    [ngClass]='category.experiences.length > 5 ? "visible" : "hidden"'></mat-paginator>
+      [ngClass]='category.experiences.length > 5 ? "visible" : "hidden"'></mat-paginator>
 </div>
 
 <a mat-fab color="primary" class="floating-action-button fab-right" (click)="openExperienceDialog()">
