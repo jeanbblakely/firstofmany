@@ -54,29 +54,30 @@
   }
 }
 
-.add-categories-button {
+.floating-action-button {
   position: fixed;
-  bottom: 5%;
+  bottom: 15%;
   right: 10%;
   z-index: 999;
 }
 
-.add-categories-button-text {
+.floating-action-button-text {
   display: none;
 }
 
 @media only screen and (min-width: 601px) {
-  .add-categories-button {
+  .floating-action-button {
     width: unset;
     padding: 0 26px;
     border-radius: 29px;
+    bottom: 5%;
   }
   
   mat-icon {
     margin-right: 10px;
   }
   
-  .add-categories-button-text {
+  .floating-action-button-text {
     display: inline;
     font-weight: 300;
     letter-spacing: 0.1em;
