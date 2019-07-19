@@ -1,10 +1,9 @@
 <div *ngIf="isLoggedIn()" class="dashboard-tabs">
   <h2>Welcome {{ user?.name }}</h2>
   <mat-tab-group dynamicHeight [selectedIndex]="selectedIndex" (selectedIndexChange)="selectedIndex = $event">
-    
     <mat-tab label="Dashboard">
       <ng-template matTabContent>
-        <app-categories (clickedCategory)="onClickedCategory($event)"></app-categories>
+        <app-categories #categoriesComponent (clickedCategory)="onClickedCategory($event)"></app-categories>
       </ng-template>
     </mat-tab>
 

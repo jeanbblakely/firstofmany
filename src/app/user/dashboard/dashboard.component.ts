@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
 import { Category } from 'src/app/models/category';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,7 +14,7 @@ export class DashboardComponent implements OnInit {
   selectedIndex: number = 0;
   selectedCategory: Category;
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private router: Router) {
     this.selectedCategory = new Category('empty', []);
   }
 
@@ -50,5 +51,9 @@ export class DashboardComponent implements OnInit {
    */
   onBackClicked() {
     this.selectedIndex -= 1;
+    setTimeout(() => {
+      this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() =>
+        this.router.navigate(["dashboard"]));
+    }, 500);
   }
 }

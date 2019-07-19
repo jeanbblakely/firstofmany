@@ -23,10 +23,14 @@ export class CategoriesComponent implements OnInit {
 
   constructor(private categoryService: CategoryService, private userService: UserService, private dialog: MatDialog) { }
 
-  /**
-   * Gets the user, userCategories, and categories at the same time. Then styles each.
-   */
   ngOnInit() {
+    this.getCategories();
+  }
+
+  /**
+    * Gets the user, userCategories, and categories at the same time. Then styles each.
+    */
+  getCategories() {
     forkJoin(
       this.userService.getUser(),
       this.categoryService.getCategories(),
@@ -41,7 +45,6 @@ export class CategoriesComponent implements OnInit {
       }
       this.newCategories = allCategories;
       this.userCategoryNames.sort();
-      // console.log("User Categories: " + this.userCategoryNames);
     });
   }
 
@@ -68,14 +71,15 @@ export class CategoriesComponent implements OnInit {
       closeOnNavigation: true,
       panelClass: 'add-categories-dialog',
       data: this.newCategories
-    });
-
-    dialogRef.afterClosed().subscribe(data => {
+    }).afterClosed().subscribe(data => {
       if (data != undefined) {
         if (data.length < 5 || confirm("That's a lot of categories at once!\nAre you sure you want to add all " + data.length + " of them?")) {
           data.forEach((c: Category) => this.addCategory(c));
         }
       }
+      setTimeout(() => {
+        this.getCategories();
+      }, 500);
     });
   }
 
