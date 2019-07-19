@@ -1,20 +1,14 @@
 <div *ngIf="isLoggedIn()" class="dashboard-tabs">
   <h2>Welcome {{ user?.name }}</h2>
   <mat-tab-group dynamicHeight [selectedIndex]="selectedIndex" (selectedIndexChange)="selectedIndex = $event">
-    
     <mat-tab label="Dashboard">
       <ng-template matTabContent>
-        <app-categories (clickedCategory)="onClickedCategory($event)"></app-categories>
+        <app-categories #categoriesComponent (clickedCategory)="onClickedCategory($event)"></app-categories>
       </ng-template>
     </mat-tab>
 
-    <mat-tab label="Experiences">
-      <app-experiences [category]="selectedCategory" (backClicked)="onBackClicked()"></app-experiences>
+    <mat-tab label="Category Details">
+      <app-category-detail [category]="selectedCategory" (backClicked)="onBackClicked()"></app-category-detail>
     </mat-tab>
-
-    <mat-tab label="Delete">
-      Delete experiences
-    </mat-tab>
-    
   </mat-tab-group>
 </div>
