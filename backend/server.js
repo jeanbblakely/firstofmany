@@ -157,25 +157,9 @@ app.post('/adduserexperience/:id/:tracked_category', async(req, res)=>{
     }
 });
 
-app.post('/deleteusercategory/:id', async(req, res)=> {
-  try{
-    let categoryData = {'name': req.body.name}
-    User.findByIdAndUpdate(req.params.id, {$pull: {tracked_categories: categoryData}}, function (err, user) {
-        if (err) return next(err);
-        if (!user) {
-          res.status(404).send('User not found')
-        }
-        res.send(req.body);
-    });
-  } catch (error){
-  console.log(error);
-  res.sendStatus(500);
-}
-});
-
 app.post('/deleteuserexperience/:id/:tracked_category', async(req, res)=>{
   try{
-    let experienceData = req.body;
+    let experienceData = {'name': req.body.name};
     let user = User.findById(req.params.id);
     user.updateOne({'tracked_categories.name': req.params.tracked_category},
                 {'$pull':
@@ -191,6 +175,22 @@ app.post('/deleteuserexperience/:id/:tracked_category', async(req, res)=>{
       console.log(error);
       res.sendStatus(500);
     }
+});
+
+app.post('/deleteusercategory/:id', async(req, res)=> {
+  try{
+    let categoryData = {'name': req.body.name}
+    User.findByIdAndUpdate(req.params.id, {$pull: {tracked_categories: categoryData}}, function (err, user) {
+        if (err) return next(err);
+        if (!user) {
+          res.status(404).send('User not found')
+        }
+        res.send(req.body);
+    });
+  } catch (error){
+  console.log(error);
+  res.sendStatus(500);
+}
 });
 
 app.delete('/user/:id/delete', async(req, res)=> {
