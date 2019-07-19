@@ -48,7 +48,8 @@ export class PasswordResetComponent {
     const result: User = Object.assign({}, this.resetData.value);
     console.log('after copy', result);
     console.log(this.resetData.get('username').value);
-    this.security_question = this.userService.getSecurityQuestion(result);
+    //this.security_question = this.userService.getSecurityQuestion(result);
+    this.security_question = this.userService.getSecurityQuestion(this.resetData.get('username').value);
   }
   
     /*
