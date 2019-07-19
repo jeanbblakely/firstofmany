@@ -8,11 +8,11 @@
       </ng-template>
     </mat-tab>
 
-    <mat-tab label="Experiences">
-      <app-experiences [category]="selectedCategory" (backClicked)="onBackClicked()"></app-experiences>
+    <mat-tab label="Category Details">
+      <app-category-detail [category]="selectedCategory" (backClicked)="onBackClicked()"></app-category-detail>
     </mat-tab>
 
-    <mat-tab label="Delete">
+    <mat-tab label="Delete Category">
       Delete experiences
     </mat-tab>
     

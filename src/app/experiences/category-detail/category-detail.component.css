@@ -1,83 +1,41 @@
-.dialog-box {
-  height: 100%;
-  width: 100%;
-  position: relative;
+.title {
+  margin-bottom: 0;
 }
 
-.mat-dialog-title {
-  margin: 0;
-}
-
-.new-experience-button {
-  position: absolute;
-  bottom: 5px;
-  right: 5px;
+.floating-action-button {
+  position: fixed;
+  bottom: 15%;
   z-index: 999;
 }
 
-.no-experiences {
-  text-align: center;
-  /* line-height: 120%; */
-  padding: 20% 0;
+.fab-right {
+  right: 10%;
 }
 
-.mat-accordion, table {
-  user-select: none;
+.fab-left {
+  left: 10%;
 }
 
-.mat-action-row {
-  padding: 10px;
-}
-
-table {
-  width: 100%;
-}
-
-.mat-form-field {
-  font-size: 14px;
-  width: 100%;
-}
-
-td, th {
-  width: 25%;
-}
-
-tr.detail-row {
-  height: 0;
-}
-
-tr.experience-row:not(.expanded-row):hover {
-  background: #f5f5f5;
-}
-
-tr.experience-row:not(.expanded-row):active {
-  background: #efefef;
-}
-
-.experience-row td {
-  border-bottom-width: 0;
-}
-
-.experience-detail {
-  overflow: hidden;
-  display: flex;
-}
-
-.experience-note {
-  padding: 16px;
-}
-
-.hidden { 
+.floating-action-button-text {
   display: none;
 }
 
-::ng-deep mat-tab-header {
-  height: 0;
-  display: none;
-}
-
-::ng-deep mat-tab-body {
-  height: 100%;
-  min-height: 300px;
-  overflow: hidden;
+@media only screen and (min-width: 670px) {
+  .floating-action-button {
+    width: unset;
+    padding: 0 26px;
+    border-radius: 29px;
+    bottom: 5%;
+  }
+  
+  mat-icon {
+    margin-right: 10px;
+  }
+  
+  .floating-action-button-text {
+    display: inline;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
 }

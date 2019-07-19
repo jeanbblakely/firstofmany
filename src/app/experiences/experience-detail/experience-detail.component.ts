@@ -73,7 +73,7 @@ export class ExperienceDetailComponent implements OnInit {
       this.experience.datestamp = form.controls['datestamp'].value;
       this.experience.note = form.controls['note'].value;
       if (this.isAdd) {
-        this.userService.addUserExperience(this.category, this.experience);
+        this.userService.addUserExperience(this.category.name, this.experience);
       } else {
         // this.userService.addUserExperience(this.category, this.experience);
         console.log('Experience updated');
@@ -86,7 +86,7 @@ export class ExperienceDetailComponent implements OnInit {
    * Deletes an experience from the user's category
    */
   deleteExperience() {
-    this.userService.deleteUserExperience(this.category, this.experience);
+    this.userService.deleteUserExperience(this.category.name, this.experience);
     console.log(this.experience.name + " deleted");
     this.dialogRef.close({action: 'delete' , experience: this.experience});
   }

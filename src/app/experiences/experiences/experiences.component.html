@@ -1,4 +1,3 @@
-<h2 mat-dialog-title class="mat-display-1">{{ category.name }}</h2>
 <div *ngIf="category.experiences.length == 0" class="no-experiences mat-h2">
   You haven't added any {{ category.name | lowercase }} yet. <br> Add your first now!
 </div>
@@ -9,7 +8,7 @@
 
   </mat-form-field>
 
-  <table mat-table [dataSource]="dataSource" matSort matSortActive="datestamp" matSortDisableClear matSortDirection="asc">
+  <table mat-table [dataSource]="dataSource" matSort matSortActive="datestamp" matSortDisableClear matSortDirection="desc">
 
     <ng-container matColumnDef="favorite">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>
@@ -45,11 +44,6 @@
   <mat-paginator [pageSizeOptions]="[5, 10, 25]" [length]="category.experiences.length"
     [ngClass]='category.experiences.length > 5 ? "visible" : "hidden"'></mat-paginator>
 </div>
-
-<button mat-fab class="floating-action-button fab-left" (click)="backClicked.emit()">
-  <mat-icon>arrow_back</mat-icon>
-  <span class="floating-action-button-text">Back to categories</span>
-</button>
 
 <a mat-fab color="primary" class="floating-action-button fab-right" (click)="openExperienceDialog()">
   <mat-icon>add</mat-icon>

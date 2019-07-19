@@ -1,9 +1,8 @@
-import { Component, OnInit, ViewChild, Input, EventEmitter, Output } from '@angular/core';
+import { Component, ViewChild, Input } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
 import { Experience } from 'src/app/models/experience';
 import { Category } from 'src/app/models/category';
 import { UserService } from 'src/app/services/user.service';
-import { Router, ActivatedRoute } from '@angular/router';
 import { ExperienceDetailComponent } from '../experience-detail/experience-detail.component';
 
 @Component({
@@ -11,9 +10,8 @@ import { ExperienceDetailComponent } from '../experience-detail/experience-detai
   templateUrl: './experiences.component.html',
   styleUrls: ['./experiences.component.css'],
 })
-export class ExperiencesComponent implements OnInit {
+export class ExperiencesComponent {
   @Input() category: Category;
-  @Output() backClicked = new EventEmitter<number>();
   dataSource: MatTableDataSource<Experience>;
   columnsToDisplay: string[] = ['favorite', 'name', 'datestamp', 'note'];
   selectedIndex: number = 0;
@@ -21,14 +19,10 @@ export class ExperiencesComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private userService: UserService, private router: Router, private dialog: MatDialog) { }
-
-  ngOnInit() { }
+  constructor(private userService: UserService, private dialog: MatDialog) { }
 
   ngOnChanges() {
-    this.dataSource = new MatTableDataSource(this.category.experiences);
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    this.updateTable();
   }
 
   /**
@@ -63,17 +57,6 @@ export class ExperiencesComponent implements OnInit {
   }
 
   /**
-     * Deletes an experience from a category
-     * @param experience Experience to delete
-     */
-  deleteExperience(experience: Experience) {
-    this.selectedIndex = 2;
-    this.userService.deleteUserExperience(this.category.name, experience);
-    this.router.navigate(['dashboard']);
-    console.log("Delete " + experience.name + ", please!");
-  }
-
-  /**
    * Opens a dialog to add, update, or delete an experience
    * @param experience The experience to update or undefined
    */
@@ -94,12 +77,21 @@ export class ExperiencesComponent implements OnInit {
           for (let i = 0; i < categories.length; i++) {
             if (categories[i].name == this.category.name) {
               this.category = categories[i];
+              this.updateTable();
             }
           }
         });
-        this.dataSource = new MatTableDataSource<Experience>(this.category.experiences);
       }
     });
+  }
+
+  /**
+   * Updates the table when data changes
+   */
+  private updateTable() {
+    this.dataSource = new MatTableDataSource<Experience>(this.category.experiences);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
 }
