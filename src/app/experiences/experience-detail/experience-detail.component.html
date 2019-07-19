@@ -1,3 +1,48 @@
-<p>
-  experience-detail works!
-</p>
+<div class="dialog">
+  <div fxLayoutAlign="space-between center">
+    <h2 mat-dialog-title>{{ isAdd ? "Add" : "Update" }} Experience</h2>
+    <button mat-icon-button color="primary" (click)="toggleFavorite()">
+      <mat-icon aria-label="favorite icon">
+        {{getFavoriteIcon(experience['favorite'])}}
+      </mat-icon>
+    </button>
+  </div>
+  <mat-dialog-content>
+    <form [formGroup]="form" (ngSubmit)="update()" autocomplete="off" novalidate>
+
+      <mat-form-field>
+        <input matInput placeholder="Name" value="{{experience.name}}" formControlName="name">
+        <mat-error *ngIf="hasError('name', 'required')">Experience name is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput [max]="maxDate" [matDatepicker]="picker" placeholder="Date" value="{{experience.datestamp}}"
+        formControlName="datestamp">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="hasError('datestamp', 'required')">Experience date is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <textarea matInput placeholder="Notes" value="{{experience.note}}" formControlName="note"></textarea>
+      </mat-form-field>
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions fxLayoutAlign="space-between center">
+
+    <a mat-raised-button color="warn" fxFlex.xs="45" [disabled]="isAdd"
+      (click)="deleteExperience()">
+      Delete
+    </a>
+
+    <button mat-raised-button color="primary" *ngIf="isAdd" fxFlex.xs="45" (click)="submit(form)">
+      Add
+    </button>
+
+    <button mat-raised-button color="primary" *ngIf="isUpdate" fxFlex.xs="45" (click)="submit(form)">
+      Update
+    </button>
+
+  </mat-dialog-actions>
+</div>

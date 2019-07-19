@@ -51,8 +51,7 @@
   <span class="floating-action-button-text">Back to categories</span>
 </button>
 
-<a mat-fab color="primary" class="floating-action-button fab-right" [routerLink]="['/category-create']"
-  [queryParams]="{name:category.name}">
+<a mat-fab color="primary" class="floating-action-button fab-right" (click)="openExperienceDialog()">
   <mat-icon>add</mat-icon>
   <span class="floating-action-button-text">Add a new experience</span>
 </a>

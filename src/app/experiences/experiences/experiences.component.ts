@@ -80,7 +80,7 @@ export class ExperiencesComponent implements OnInit {
       disableClose: false,
       closeOnNavigation: true,
       panelClass: 'experiences-dialog',
-      data: experience
+      data: { category: this.category, experience: experience || new Experience }
     });
   }
 }
