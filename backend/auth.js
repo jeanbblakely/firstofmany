@@ -54,4 +54,36 @@ router.post('/login', async(req, res)=> {
 
   });
 
+  router.get('/getsecurityquestion', async(req, res)=> {
+    try {
+      let userData = req.body;
+      let user = await User.findOne({username: userData.username});
+      if (!user) {
+        return res.status(404).send({message: "That username in not in our system"});
+      }
+      res.status(200).send(user.security_question);
+    } catch (error){
+      console.log(error);
+      res.sendStatus(500);
+    }
+  });
+
+  router.post('/resetpassword', async(req, res)=> {
+    let userData = req.body;
+    let user = await User.findOne({username: userData.username});
+    if (!user) {
+      return res.status(404).send({message: "User not found"})
+    }
+    bcrypt.compare(userData.security_answer, user.security_answer, (err, isMatch)=> {
+      if(!isMatch) {
+        return res.status(401).send({message:"That answer is incorrect. Please try again."});
+      }
+      user.password = userData.password;
+      user.save();
+      return res.status(200).send({message: "Your password has successfully been updated"});
+    });
+
+
+  });
+
   module.exports = router;
