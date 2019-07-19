@@ -1,4 +1,4 @@
-import { Component, ViewChild, Input } from '@angular/core';
+import { Component, ViewChild, Input, ChangeDetectorRef, AfterContentChecked } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
 import { Experience } from 'src/app/models/experience';
 import { Category } from 'src/app/models/category';
@@ -10,7 +10,7 @@ import { ExperienceDetailComponent } from '../experience-detail/experience-detai
   templateUrl: './experiences.component.html',
   styleUrls: ['./experiences.component.css'],
 })
-export class ExperiencesComponent {
+export class ExperiencesComponent implements AfterContentChecked {
   @Input() category: Category;
   dataSource: MatTableDataSource<Experience>;
   columnsToDisplay: string[] = ['favorite', 'name', 'datestamp', 'note'];
@@ -19,10 +19,14 @@ export class ExperiencesComponent {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private userService: UserService, private dialog: MatDialog) { }
+  constructor(private userService: UserService, private dialog: MatDialog, private cd: ChangeDetectorRef) { }
 
   ngOnChanges() {
     this.updateTable();
+  }
+
+  ngAfterContentChecked(): void {
+    this.cd.detectChanges();
   }
 
   /**

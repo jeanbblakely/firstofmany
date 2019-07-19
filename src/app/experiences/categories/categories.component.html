@@ -5,7 +5,7 @@
             fxFlex="240px" fxFlex.lt-sm="45" fxFlex.sm="30"
             [ngStyle]="{'background-color': category.color}">
     <mat-card-content fxflexfill>
-      <h2 fittext [maxFontSize]=70 [minFontSize]=20 class="card-face-front" [innerHTML]="category.name | spacebreak:11 "></h2>
+      <h2 fittext [maxFontSize]=70 [minFontSize]=20 [delay]=0 class="card-face-front" [innerHTML]="category.name | spacebreak:11 "></h2>
     </mat-card-content>
   </mat-card>
 </div>
