@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewChild, Input, SimpleChange, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, EventEmitter, Output } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
 import { Experience } from 'src/app/models/experience';
 import { Category } from 'src/app/models/category';
-import { CategoryDetailComponent } from '../category-detail/category-detail.component';
 import { ExperienceDetailComponent } from '../experience-detail/experience-detail.component';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-experiences',
@@ -20,7 +20,7 @@ export class ExperiencesComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private dialog: MatDialog) { }
+  constructor(private userService: UserService, private dialog: MatDialog) { }
 
   ngOnInit() { }
 
@@ -70,6 +70,10 @@ export class ExperiencesComponent implements OnInit {
     console.log("Delete " + experience.name + ", please!");
   }
 
+  /**
+   * Opens a dialog to add, update, or delete an experience
+   * @param experience The experience to update or undefined
+   */
   openExperienceDialog(experience: Experience) {
     const dialogRef = this.dialog.open(ExperienceDetailComponent, {
       width: '70%',
@@ -81,6 +85,18 @@ export class ExperiencesComponent implements OnInit {
       closeOnNavigation: true,
       panelClass: 'experiences-dialog',
       data: { category: this.category, experience: experience || new Experience }
+    }).afterClosed().subscribe(result => {
+      if (result != undefined) {
+        this.userService.getUserCategories().subscribe(categories => {
+          for (let i = 0; i < categories.length; i++) {
+            if (categories[i].name == this.category.name) {
+              this.category = categories[i];
+            }
+          }
+        });
+        this.dataSource = new MatTableDataSource<Experience>(this.category.experiences);
+      }
     });
   }
+
 }

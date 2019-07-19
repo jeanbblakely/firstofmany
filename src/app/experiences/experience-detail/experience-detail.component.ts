@@ -78,7 +78,7 @@ export class ExperienceDetailComponent implements OnInit {
         // this.userService.addUserExperience(this.category, this.experience);
         console.log('Experience updated');
       }
-      this.dialogRef.close(this.experience);
+      this.dialogRef.close({action: this.isAdd ? 'add': 'update' , experience: this.experience});
     }
   }
 
@@ -88,6 +88,6 @@ export class ExperienceDetailComponent implements OnInit {
   deleteExperience() {
     this.userService.deleteUserExperience(this.category, this.experience);
     console.log(this.experience.name + " deleted");
-    this.dialogRef.close(this.experience);
+    this.dialogRef.close({action: 'delete' , experience: this.experience});
   }
 }
