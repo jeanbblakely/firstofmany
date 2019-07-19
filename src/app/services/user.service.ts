@@ -49,6 +49,7 @@ export class UserService {
         localStorage.setItem(this.TOKEN_KEY, res.token);
         localStorage.setItem('userID', res.userID);
         console.log(res);
+        console.log(regData);
     });
     if (this.isAuthenticated()) {
       this.router.navigate(['dashboard/' + localStorage.getItem('userID')]);
@@ -170,6 +171,17 @@ export class UserService {
 
   getToken() {
     return localStorage.getItem(this.TOKEN_KEY);
+  }
+
+
+  getSecurityQuestion() {
+    return this.httpClient.get<any>(this.authpath + '/getsecurityquestion');
+  }
+
+  resetPassword(userData) {
+    this.httpClient.post<any>(this.authpath + '/resetpassword', userData).subscribe(res => {
+      console.log(res);
+    });
   }
 
 }

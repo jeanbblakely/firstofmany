@@ -68,6 +68,8 @@ export class ExperiencesComponent implements OnInit {
      */
   deleteExperience(experience: Experience) {
     this.selectedIndex = 2;
+    this.userService.deleteUserExperience(this.category.name, experience);
+    this.router.navigate(['dashboard']);
     console.log("Delete " + experience.name + ", please!");
   }
 

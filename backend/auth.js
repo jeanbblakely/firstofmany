@@ -10,16 +10,8 @@ var bcrypt = require('bcrypt-nodejs');
 var router = express.Router();
 
 router.post('/register', (req, res, next)=> {
-    var user = new User();
-    user.username = req.body.username;
-    user.password = req.body.password;
-    user.email = req.body.email;
-    user.name = req.body.name;
-    user.birthdate = req.body.birthdate;
-    user.gender = req.body.gender;
-    user.security_question = req.body.security_question;
-    user.security_answer = req.body.security_answer;
-
+    let regData = req.body;
+    let user = new User(regData);
     user.save((err, newUser)=> {
       if(!err) {
         let userID = newUser._id;
@@ -27,6 +19,7 @@ router.post('/register', (req, res, next)=> {
         let token = jwt.encode(payload, '123');
 
         res.status(200).send({token, userID});
+        console.log(newUser.security_question + " " + newUser.security_answer);
       } else {
           console.log(err.errmsg);
           if (err.code == 11000) {
@@ -58,6 +51,38 @@ router.post('/login', async(req, res)=> {
       res.status(200).send({token, userID });
       console.log("User ID: " + user._id + "\nUsername: " + user.username);
     })
+
+  });
+
+  router.get('/getsecurityquestion', async(req, res)=> {
+    try {
+      let userData = req.body;
+      let user = await User.findOne({username: userData.username});
+      if (!user) {
+        return res.status(404).send({message: "That username in not in our system"});
+      }
+      res.status(200).send(user.security_question);
+    } catch (error){
+      console.log(error);
+      res.sendStatus(500);
+    }
+  });
+
+  router.post('/resetpassword', async(req, res)=> {
+    let userData = req.body;
+    let user = await User.findOne({username: userData.username});
+    if (!user) {
+      return res.status(404).send({message: "User not found"})
+    }
+    bcrypt.compare(userData.security_answer, user.security_answer, (err, isMatch)=> {
+      if(!isMatch) {
+        return res.status(401).send({message:"That answer is incorrect. Please try again."});
+      }
+      user.password = userData.password;
+      user.save();
+      return res.status(200).send({message: "Your password has successfully been updated"});
+    });
+
 
   });
 
