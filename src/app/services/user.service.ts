@@ -174,8 +174,10 @@ export class UserService {
   }
 
 
-  getSecurityQuestion() {
-    return this.httpClient.get<any>(this.authpath + '/getsecurityquestion');
+  getSecurityQuestion(username) {
+    return this.httpClient.get<any>(this.authpath + '/getsecurityquestion/' + username).subscribe(res => {
+      console.log(res);
+    });
   }
 
   resetPassword(userData) {

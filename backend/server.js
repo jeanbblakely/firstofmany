@@ -74,100 +74,135 @@ app.get('/usercategories/:id', async(req, res)=> {
 });
 
 app.post('/user/:id/update', async(req, res)=> {
-  User.findById(req.params.id, function (err, user) {
-      user.username = req.body.username;
-      user.password = req.body.password;
-      user.email = req.body.email;
-      user.name = req.body.name;
-      user.birthdate = req.body.birthdate;
-      user.gender = req.body.gender;
-      user.save();
-      if (err) return next(err);
-      if (!user) {
-        res.status(404).send('User not found')
-      }
-      res.send('User updated.');
-  });
+  try {
+    User.findById(req.params.id, function (err, user) {
+        user.username = req.body.username;
+        user.password = req.body.password;
+        user.email = req.body.email;
+        user.name = req.body.name;
+        user.birthdate = req.body.birthdate;
+        user.gender = req.body.gender;
+        user.save();
+        if (err) return next(err);
+        if (!user) {
+          res.status(404).send('User not found')
+        }
+        res.send('User updated.');
+    });
+} catch (error){
+  console.log(error);
+  res.sendStatus(500);
+}
 });
 
 app.post('/addcategory', (req, res)=> {
-  let categoryData = req.body;
-  let category = new Category(categoryData);
+  try {
+    let categoryData = req.body;
+    let category = new Category(categoryData);
 
-  category.save((err, result)=> {
-    if(!err) {
-      console.log(category);
-      res.status(200).send({'name': category.name, 'experiences': category.experiences});
+    category.save((err, result)=> {
+      if(!err) {
+        console.log(category);
+        res.status(200).send({'name': category.name, 'experiences': category.experiences});
 
-    } else {
-      console.log(err.errmsg);
-      if (err.code == 11000) {
-        res.status(422).send(['That category already exists']);
-        console.log('Category exists');
       } else {
-        return next(err);
-      }    }
-  })
+        console.log(err.errmsg);
+        if (err.code == 11000) {
+          res.status(422).send(['That category already exists']);
+          console.log('Category exists');
+        } else {
+          return next(err);
+        }    }
+    })
+} catch (error){
+  console.log(error);
+  res.sendStatus(500);
+}
 });
 
 app.post('/addusercategory/:id', async(req, res)=> {
-  let categoryData = {'name': req.body.name, 'experiences': req.body.experiences}
-  User.findByIdAndUpdate(req.params.id, {$push: {tracked_categories: categoryData}}, function (err, user) {
-      if (err) return next(err);
-      if (!user) {
-        res.status(404).send('User not found')
-      }
-      res.send(req.body);
-  });
+  try{
+    let categoryData = {'name': req.body.name, 'experiences': req.body.experiences}
+    User.findByIdAndUpdate(req.params.id, {$push: {tracked_categories: categoryData}}, function (err, user) {
+        if (err) return next(err);
+        if (!user) {
+          res.status(404).send('User not found')
+        }
+        res.send(req.body);
+    });
+  } catch (error){
+    console.log(error);
+    res.sendStatus(500);
+}
 });
 
 app.post('/adduserexperience/:id/:tracked_category', async(req, res)=>{
-  let experienceData = req.body;
-  let user = User.findById(req.params.id);
-  user.updateOne({'tracked_categories.name':req.params.tracked_category},
-              {'$push':
-                {'tracked_categories.$.experiences': experienceData}
-              }, function (err, user) {
-                if (err){
-                  console.log(err.message);
-                  return next(err);
-                }
-                console.log(experienceData);
-                res.send(experienceData);
-              });
-});
-
-app.post('/deleteusercategory/:id', async(req, res)=> {
-  let categoryData = {'name': req.body.name}
-  User.findByIdAndUpdate(req.params.id, {$pull: {tracked_categories: categoryData}}, function (err, user) {
-      if (err) return next(err);
-      if (!user) {
-        res.status(404).send('User not found')
-      }
-      res.send(req.body);
-  });
+  try {
+    let experienceData = req.body;
+    let user = User.findById(req.params.id);
+    user.updateOne({'tracked_categories.name':req.params.tracked_category},
+                    {'$push':
+                      {'tracked_categories.$.experiences': experienceData}
+                    }, function (err, user) {
+                      if (err){
+                        console.log(err.message);
+                        return next(err);
+                      }
+                      console.log(experienceData);
+                      res.send(experienceData);
+                    });
+    } catch (error){
+      console.log(error);
+      res.sendStatus(500);
+    }
 });
 
 app.post('/deleteuserexperience/:id/:tracked_category', async(req, res)=>{
-  let experienceData = req.body;
-  let user = User.findById(req.params.id);
-  user.updateOne({'tracked_categories.name': req.params.tracked_category},
-              {'$pull':
-                {
-                  'tracked_categories.$.experiences': experienceData
-                }
-              }, function (err, user) {
-                if (err) return next(err);
-                console.log(experienceData);
-                res.send(experienceData);
-              });
+  try{
+    let experienceData = {'name': req.body.name};
+    let user = User.findById(req.params.id);
+    user.updateOne({'tracked_categories.name': req.params.tracked_category},
+                {'$pull':
+                  {
+                    'tracked_categories.$.experiences': experienceData
+                  }
+                }, function (err, user) {
+                  if (err) return next(err);
+                  console.log(experienceData);
+                  res.send(experienceData);
+                });
+    } catch (error){
+      console.log(error);
+      res.sendStatus(500);
+    }
+});
+
+app.post('/deleteusercategory/:id', async(req, res)=> {
+  try{
+    let categoryData = {'name': req.body.name}
+    User.findByIdAndUpdate(req.params.id, {$pull: {tracked_categories: categoryData}}, function (err, user) {
+        if (err) return next(err);
+        if (!user) {
+          res.status(404).send('User not found')
+        }
+        res.send(req.body);
+    });
+  } catch (error){
+  console.log(error);
+  res.sendStatus(500);
+}
 });
 
 app.delete('/user/:id/delete', async(req, res)=> {
-  User.deleteOne({ _id: req.params.id }, function (err) {
-    if (err) return next(err);
-    res.send('User ' + req.params.id + ' has been successfully deleted');
-  });
+  try{
+    User.deleteOne({ _id: req.params.id }, function (err) {
+      if (err) return next(err);
+      res.send('User ' + req.params.id + ' has been successfully deleted');
+    });
+  } catch (error){
+    console.log(error);
+    res.sendStatus(500);
+  }
 });
 
 mongoose.set('useFindAndModify', false);

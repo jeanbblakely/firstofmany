@@ -75,7 +75,8 @@ export class ExperienceDetailComponent implements OnInit {
       if (this.isAdd) {
         this.userService.addUserExperience(this.category.name, this.experience);
       } else {
-        // this.userService.addUserExperience(this.category, this.experience);
+        this.userService.deleteUserExperience(this.category.name, this.experience);
+        this.userService.addUserExperience(this.category.name, this.experience);
         console.log('Experience updated');
       }
       this.dialogRef.close({action: this.isAdd ? 'add': 'update' , experience: this.experience});
