@@ -4,16 +4,18 @@
 </div>
 <div [ngClass]='category.experiences.length > 0 ? "visible" : "hidden"'>
   <mat-form-field>
-    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    <mat-icon matPrefix>search</mat-icon>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+
   </mat-form-field>
 
-  <table mat-table [dataSource]="dataSource" multiTemplateDataRows matSort>
+  <table mat-table [dataSource]="dataSource" matSort matSortActive="datestamp" matSortDisableClear matSortDirection="asc">
 
     <ng-container matColumnDef="favorite">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>
         <mat-icon>favorite_border</mat-icon>
       </th>
-      <td mat-cell *matCellDef="let experience">
+      <td mat-cell *matCellDef="let experience" (click)="favoriteThis(experience)" class="favorite-cell">
         <mat-icon color="primary" aria-label="favorite icon">
           {{getFavoriteIcon(experience['favorite'])}}
         </mat-icon>
@@ -22,53 +24,34 @@
 
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-      <td mat-cell *matCellDef="let experience"> {{ experience.name }}</td>
+      <td mat-cell *matCellDef="let experience" (click)="openExperienceDialog(experience)"> {{ experience.name }}</td>
     </ng-container>
 
     <ng-container matColumnDef="datestamp">
       <th mat-header-cell *matHeaderCellDef fxHide.lt-sm mat-sort-header> Date </th>
-      <td mat-cell *matCellDef="let experience" fxHide.lt-sm> {{ experience.datestamp | date:'mediumDate' }}
+      <td mat-cell *matCellDef="let experience" fxHide.lt-sm (click)="openExperienceDialog(experience)"> {{ experience.datestamp | date:'mediumDate' }}
       </td>
     </ng-container>
 
-    <ng-container matColumnDef="expandedDetail">
-      <td mat-cell *matCellDef="let experience" [attr.colspan]="columnsToDisplay.length">
-        <div class="experience-detail" [@detailExpand]="experience == expandedExperience ? 'expanded' : 'collapsed'"
-          fxLayout="column">
-          <p class="experience-note">{{ experience.note }}</p>
-          <mat-action-row fxLayout="row" fxLayoutAlign="space-between center">
-            <button mat-flat-button color="warn" class="delete-button" (click)="deleteExperience(experience)">
-              Delete
-            </button>
-            <button mat-flat-button color="primary" (click)="favoriteThis(experience)">
-              Favorite!
-            </button>
-          </mat-action-row>
-
-        </div>
+    <ng-container matColumnDef="note">
+      <th mat-header-cell *matHeaderCellDef fxHide.lt-sm> Note </th>
+      <td mat-cell *matCellDef="let experience" fxHide.lt-sm (click)="openExperienceDialog(experience)"> {{ experience.note }}
       </td>
     </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-    <tr mat-row *matRowDef="let experience; columns: columnsToDisplay;" class="experience-row"
-      [class.expanded-row]="expandedExperience === experience"
-      (click)="expandedExperience = expandedExperience === experience ? null : experience"></tr>
-    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay; sticky: true"></tr>
+    <tr mat-row *matRowDef="let experience; columns: columnsToDisplay;" class="experience-row"></tr>
   </table>
   <mat-paginator [pageSizeOptions]="[5, 10, 25]" [length]="category.experiences.length"
     [ngClass]='category.experiences.length > 5 ? "visible" : "hidden"'></mat-paginator>
 </div>
 
- <!-- Add Experience Not Working So Commented Out - jb -->
-  
-<!-- <a mat-mini-fab color="accent" class="new-experience-button" (click)="selectedIndex = 1"
-  [ngClass]="{'hidden': selectedIndex != 0}">
+<button mat-fab class="floating-action-button fab-left" (click)="backClicked.emit()">
+  <mat-icon>arrow_back</mat-icon>
+  <span class="floating-action-button-text">Back to categories</span>
+</button>
+
+<a mat-fab color="primary" class="floating-action-button fab-right" (click)="openExperienceDialog()">
   <mat-icon>add</mat-icon>
-</a> -->
-
-
-    <a mat-mini-fab color="accent" class="new-experience-button" [routerLink]="['/category-create']"
-      [queryParams]="{name:category.name}" (click)="close()">
-      <mat-icon>add</mat-icon>
-    </a>
-
+  <span class="floating-action-button-text">Add a new experience</span>
+</a>

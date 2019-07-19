@@ -13,30 +13,26 @@ export class DashboardComponent implements OnInit {
   selectedIndex: number = 0;
   selectedCategory: Category;
 
-  constructor(private userService: UserService) { 
-    let empty = new Category();
-    empty.name = 'empty';
-    empty.experiences = [];
-    this.selectedCategory = empty;
+  constructor(private userService: UserService) {
+    this.selectedCategory = new Category('empty', []);
   }
 
   ngOnInit() {
     this.getUser();
   }
 
-  /*
-	Gets Observable User from service
-  */
+  /**
+   * Gets Observable User from service
+   */
   getUser() {
-    //let id = this.route.snapshot.params.id;
     this.userService.getUser().subscribe(data => {
       this.user = data
     });
   }
 
-    /*
-	Checks to see if User is signed in (ie instantiated user.id)
-  */
+  /**
+   * Checks to see if User is signed in (ie instantiated user.id)
+   */
   isLoggedIn(): boolean {
     return this.userService.isAuthenticated();
   }
@@ -49,5 +45,10 @@ export class DashboardComponent implements OnInit {
     this.selectedCategory = category;
     this.selectedIndex = 1;
   }
-
+  /**
+   * Moves back one tab
+   */
+  onBackClicked() {
+    this.selectedIndex -= 1;
+  }
 }
