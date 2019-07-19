@@ -174,8 +174,8 @@ export class UserService {
   }
 
 
-  getSecurityQuestion(userData) {
-    return this.httpClient.get<any>(this.authpath + '/getsecurityquestion', userData).subscribe(res => {
+  getSecurityQuestion(username) {
+    return this.httpClient.get<any>(this.authpath + '/getsecurityquestion/' + username).subscribe(res => {
       console.log(res);
     });
   }

@@ -54,10 +54,9 @@ router.post('/login', async(req, res)=> {
 
   });
 
-  router.get('/getsecurityquestion', async(req, res)=> {
+  router.get('/getsecurityquestion/:username', async(req, res)=> {
     try {
-      let userData = req.body;
-      let user = await User.findOne({username: userData.username});
+      let user = await User.findOne({username: req.params.username});
       if (!user) {
         return res.status(404).send({message: "That username in not in our system"});
       }
