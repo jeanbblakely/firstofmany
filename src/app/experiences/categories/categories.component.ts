@@ -1,119 +1,98 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Category } from '../../models/category';
 import { CategoryService } from '../../services/category.service';
 import { UserService } from '../../services/user.service';
-import { MatDialog, MatDialogConfig } from '@angular/material';
-import { CategoryDetailComponent } from '../category-detail/category-detail.component';
-import { trigger, state, transition, style, animate } from '@angular/animations';
+import { MatDialog } from '@angular/material';
 import { User } from './../../models/user';
-import { Observable, of, forkJoin } from 'rxjs';
+import { forkJoin } from 'rxjs';
+import { AddCategoriesComponent } from '../add-categories/add-categories.component';
 
 
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.component.html',
-  styleUrls: ['./categories.component.css'],
-  animations: [
-    trigger('flipCard', [
-      state('initial', style({
-      })),
-      state('final', style({
-        transformStyle: 'preserve-3d',
-        transform: 'rotateY(180deg)',
-        pointerEvents: 'none'
-      })),
-      transition('initial=>final', animate('500ms'))
-    ]),
-  ]
+  styleUrls: ['./categories.component.css']
 })
 export class CategoriesComponent implements OnInit {
-  @Input() isDashBoard = false;
   @Output() clickedCategory = new EventEmitter<Category>();
-  categories: Category[];
+  newCategories: Category[];
   selectedCategory: Category;
   userCategories: Category[];
+  userCategoryNames: string[] = [];
   user: User;
 
   constructor(private categoryService: CategoryService, private userService: UserService, private dialog: MatDialog) { }
 
-  /**
-   * Gets the user, userCategories, and categories at the same time. Then styles each.
-   * */
   ngOnInit() {
+    this.getCategories();
+  }
+
+  /**
+    * Gets the user, userCategories, and categories at the same time. Then styles each.
+    */
+  getCategories() {
     forkJoin(
       this.userService.getUser(),
-      this.userService.getUserCategories(),
       this.categoryService.getCategories(),
-    ).subscribe(([user, userCategories, categories]) => {
+    ).subscribe(([user, allCategories]) => {
       this.user = user;
-      this.userCategories = userCategories;
+      this.userCategories = this.user.tracked_categories;
       for (let i = 0; i < this.userCategories.length; i++) {
         let category = this.userCategories[i];
-        categories = categories.filter(c => c.name != category.name);
+        this.userCategoryNames.push(category.name);
+        category['color'] = i % 2 == 0 ? 'rgba(79, 195, 247, 0.5)' : 'rgba(253, 216, 53, 0.5)';
+        allCategories = allCategories.filter(c => c.name != category.name);
       }
-      this.categories = categories;
-      this.setCardStyle(this.categories);
-      this.setCardStyle(this.userCategories);
+      this.newCategories = allCategories;
+      this.userCategoryNames.sort();
     });
   }
 
   /**
-   * Sets the background color of each card to an alternating color. Styles cards in userCategories.
-   */
-  setCardStyle(categories: Category[]) {
-    for (let i = 0; i < categories.length; i++) {
-      if (!this.isDashBoard) {
-        categories[i]['flippedState'] = 'initial';
-      }
-      categories[i]['color'] = i % 2 == 0 ? 'rgba(79, 195, 247, 0.5)' : 'rgba(253, 216, 53, 0.5)';
-    }
-  }
-
-  /**
    * 	Select click method for single Category objects
-  */
+   */
   selectCategory(category: Category): void {
-    if (this.isDashBoard) {
-      this.selectedCategory = category;
-      this.clickedCategory.emit(category);
-    } else {
-      category['flippedState'] = category['flippedState'] === 'initial' ? 'final' : 'initial';
-      if (!this.searchUserCategory(category.name)) {
-        this.userService.addUserCategory(category);
-        this.user.tracked_categories.push(category);
-      }
-    }
+    this.selectedCategory = category;
+    this.clickedCategory.emit(category);
   }
 
   /***
-   * Opens a dialog showing the category's experiences
+   * Opens a dialog showing all the category
+   * After closing, passes selected categories to addCategory
    */
   openDialog(): void {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = false;
-    dialogConfig.autoFocus = true;
-    dialogConfig.height = '50%';
-    dialogConfig.width = '70%';
-    dialogConfig.minWidth = 250;
-    dialogConfig.minHeight = 300;
-    dialogConfig.maxWidth = 500;
-    dialogConfig.maxHeight = 500;
-    dialogConfig.restoreFocus = true;
-    dialogConfig.panelClass = 'experiences-dialog';
-    dialogConfig.data = this.selectedCategory;
-    this.dialog.open(CategoryDetailComponent, dialogConfig);
+    const dialogRef = this.dialog.open(AddCategoriesComponent, {
+      width: '70%',
+      minWidth: 250,
+      maxWidth: 500,
+      autoFocus: true,
+      restoreFocus: true,
+      disableClose: false,
+      closeOnNavigation: true,
+      panelClass: 'add-categories-dialog',
+      data: this.newCategories
+    }).afterClosed().subscribe(data => {
+      if (data != undefined) {
+        if (data.length < 5 || confirm("That's a lot of categories at once!\nAre you sure you want to add all " + data.length + " of them?")) {
+          data.forEach((c: Category) => this.addCategory(c));
+        }
+      }
+      setTimeout(() => {
+        this.getCategories();
+      }, 500);
+    });
   }
 
-  /*
-	Searches and returns existing Category
-  */
-  searchUserCategory(name: string): Observable<Category> {
-    let trimName = name.trim();
-    for (let i = 0; i < this.userCategories.length; i++) {
-      if (this.userCategories[i].name.toUpperCase() === trimName.toUpperCase()) {
-        return of(this.userCategories[i]);
-      }
+  /**
+   * Adds a category to the user, if it isn't there already.
+   * @param category Category to add to the user
+   */
+  addCategory(category: Category) {
+    if (this.userCategoryNames.includes(category.name)) {
+      console.error("Sorry. Can't add " + category.name);
+    } else {
+      this.userService.addUserCategory(category);
+      // console.log('Adding ' + category.name + ' to the user!');
     }
-    return null;
   }
 }

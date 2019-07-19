@@ -33,6 +33,8 @@ import { EqualValidatorDirective } from './_directives/equal-validator.directive
 import { ServerErrorInterceptor } from './interceptor/server-error.interceptor';
 import { AuthGuard } from './guards/auth.guard';
 import { PasswordResetComponent } from './user/password-reset/password-reset.component';
+import { AddCategoriesComponent } from './experiences/add-categories/add-categories.component';
+import { ExperienceDetailComponent } from './experiences/experience-detail/experience-detail.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,9 @@ import { PasswordResetComponent } from './user/password-reset/password-reset.com
     SpacebreakPipe,
     DisableControlDirective,
     EqualValidatorDirective,
-    PasswordResetComponent
+    PasswordResetComponent,
+    AddCategoriesComponent,
+    ExperienceDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -90,6 +94,6 @@ import { PasswordResetComponent } from './user/password-reset/password-reset.com
   ],
 
   bootstrap: [AppComponent],
-  entryComponents: [CategoryDetailComponent]
+  entryComponents: [AddCategoriesComponent, ExperienceDetailComponent]
 })
 export class AppModule { }

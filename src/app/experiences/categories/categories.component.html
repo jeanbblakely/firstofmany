@@ -1,22 +1,16 @@
-<h1 class="mat-display-1">
-    <span *ngIf="isDashBoard">My </span>
-    <span *ngIf="!isDashBoard">All </span>
-    Categories</h1>
+<h1 class="mat-display-1">My Categories</h1>
 <div class="categories" fxLayout="row wrap" fxflexfill fxLayoutGap="3%">
-  <mat-card *ngFor="let category of (isDashBoard ? userCategories : categories)" 
+  <mat-card *ngFor="let category of userCategories" 
             (click)="selectCategory(category)"  
-            fxFlex="30" fxFlex.xs="45" 
-            [ngStyle]="{'background-color': category.color, 'display': category.display }"
-            [@flipCard]=category.flippedState>
+            fxFlex="240px" fxFlex.lt-sm="45" fxFlex.sm="30"
+            [ngStyle]="{'background-color': category.color}">
     <mat-card-content fxflexfill>
-      <h2 fittext [maxFontSize]=70 [minFontSize]=20 class="card-face-front" [innerHTML]="category.name | spacebreak:11 "></h2>
-      <h2 fittext [maxFontSize]=70 [minFontSize]=20 class="card-face-back" [innerHTML]="category.name + ' Added!' | spacebreak:11 "></h2>
+      <h2 fittext [maxFontSize]=70 [minFontSize]=20 [delay]=0 class="card-face-front" [innerHTML]="category.name | spacebreak:11 "></h2>
     </mat-card-content>
   </mat-card>
 </div>
 
-<div *ngIf="!isDashBoard" fxLayoutAlign="end center">
-  <span>Don't see what you're looking for?
-    <a mat-raised-button color="accent" routerLink="/category-create">Add New Category</a>
-  </span>
-</div>
+<a mat-fab class="floating-action-button" color="primary" (click)="openDialog()">
+  <mat-icon>add</mat-icon>
+  <span class="floating-action-button-text">Add Categories to Track</span>
+</a>

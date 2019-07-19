@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
 import { Category } from 'src/app/models/category';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,30 +14,26 @@ export class DashboardComponent implements OnInit {
   selectedIndex: number = 0;
   selectedCategory: Category;
 
-  constructor(private userService: UserService) { 
-    let empty = new Category();
-    empty.name = 'empty';
-    empty.experiences = [];
-    this.selectedCategory = empty;
+  constructor(private userService: UserService, private router: Router) {
+    this.selectedCategory = new Category('empty', []);
   }
 
   ngOnInit() {
     this.getUser();
   }
 
-  /*
-	Gets Observable User from service
-  */
+  /**
+   * Gets Observable User from service
+   */
   getUser() {
-    //let id = this.route.snapshot.params.id;
     this.userService.getUser().subscribe(data => {
       this.user = data
     });
   }
 
-    /*
-	Checks to see if User is signed in (ie instantiated user.id)
-  */
+  /**
+   * Checks to see if User is signed in (ie instantiated user.id)
+   */
   isLoggedIn(): boolean {
     return this.userService.isAuthenticated();
   }
@@ -49,5 +46,14 @@ export class DashboardComponent implements OnInit {
     this.selectedCategory = category;
     this.selectedIndex = 1;
   }
-
+  /**
+   * Moves back one tab
+   */
+  onBackClicked() {
+    this.selectedIndex -= 1;
+    setTimeout(() => {
+      this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() =>
+        this.router.navigate(["dashboard"]));
+    }, 500);
+  }
 }
