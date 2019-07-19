@@ -9,7 +9,7 @@
     </mat-tab>
 
     <mat-tab label="Experiences">
-      <app-experiences [category]="selectedCategory"></app-experiences>
+      <app-experiences [category]="selectedCategory" (backClicked)="onBackClicked()"></app-experiences>
     </mat-tab>
 
     <mat-tab label="Delete">

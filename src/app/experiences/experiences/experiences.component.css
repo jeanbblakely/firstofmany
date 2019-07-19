@@ -108,14 +108,3 @@ tr.experience-row:not(.expanded-row):active {
     text-transform: uppercase;
   }
 }
-
-/* ::ng-deep mat-tab-header {
-  height: 0;
-  display: none;
-}
-
-::ng-deep mat-tab-body {
-  height: 100%;
-  min-height: 300px;
-  overflow: hidden;
-} */

@@ -1,3 +1,14 @@
 .dashboard-tabs {
   min-height: 600px;
 }
+
+::ng-deep mat-tab-header {
+  height: 0;
+  display: none;
+}
+
+::ng-deep mat-tab-body {
+  height: 100%;
+  min-height: 300px;
+  overflow: hidden;
+}

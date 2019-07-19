@@ -2,9 +2,9 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Category } from '../../models/category';
 import { CategoryService } from '../../services/category.service';
 import { UserService } from '../../services/user.service';
-import { MatDialog, MatDialogConfig } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { User } from './../../models/user';
-import { Observable, of, forkJoin } from 'rxjs';
+import { forkJoin } from 'rxjs';
 import { AddCategoriesComponent } from '../add-categories/add-categories.component';
 
 
@@ -25,7 +25,7 @@ export class CategoriesComponent implements OnInit {
 
   /**
    * Gets the user, userCategories, and categories at the same time. Then styles each.
-   * */
+   */
   ngOnInit() {
     forkJoin(
       this.userService.getUser(),
@@ -47,7 +47,7 @@ export class CategoriesComponent implements OnInit {
 
   /**
    * 	Select click method for single Category objects
-  */
+   */
   selectCategory(category: Category): void {
     this.selectedCategory = category;
     this.clickedCategory.emit(category);

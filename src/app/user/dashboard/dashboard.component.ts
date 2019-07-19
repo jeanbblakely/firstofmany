@@ -45,4 +45,10 @@ export class DashboardComponent implements OnInit {
     this.selectedCategory = category;
     this.selectedIndex = 1;
   }
+  /**
+   * Moves back one tab
+   */
+  onBackClicked() {
+    this.selectedIndex -= 1;
+  }
 }

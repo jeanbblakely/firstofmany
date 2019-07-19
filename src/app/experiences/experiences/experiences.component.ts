@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input, SimpleChange } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, SimpleChange, EventEmitter, Output } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { Experience } from 'src/app/models/experience';
 import { trigger, state, transition, style, animate } from '@angular/animations';
@@ -19,6 +19,7 @@ import { Category } from 'src/app/models/category';
 })
 export class ExperiencesComponent implements OnInit {
   @Input() category: Category;
+  @Output() backClicked = new EventEmitter<number>();
   dataSource: MatTableDataSource<Experience>;
   columnsToDisplay: string[] = ['favorite', 'name', 'datestamp'];
   expandedElement: Experience | null;

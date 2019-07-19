@@ -2,7 +2,7 @@
 <div class="categories" fxLayout="row wrap" fxflexfill fxLayoutGap="3%">
   <mat-card *ngFor="let category of userCategories" 
             (click)="selectCategory(category)"  
-            fxFlex="30" fxFlex.xs="45" 
+            fxFlex="240px" fxFlex.lt-sm="45" fxFlex.sm="30"
             [ngStyle]="{'background-color': category.color}">
     <mat-card-content fxflexfill>
       <h2 fittext [maxFontSize]=70 [minFontSize]=20 class="card-face-front" [innerHTML]="category.name | spacebreak:11 "></h2>
