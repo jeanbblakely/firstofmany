@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild, Input, SimpleChange, EventEmitter, Output } from '@angular/core';
-import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
 import { Experience } from 'src/app/models/experience';
 import { Category } from 'src/app/models/category';
+import { CategoryDetailComponent } from '../category-detail/category-detail.component';
+import { ExperienceDetailComponent } from '../experience-detail/experience-detail.component';
 
 @Component({
   selector: 'app-experiences',
@@ -18,7 +20,7 @@ export class ExperiencesComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor() { }
+  constructor(private dialog: MatDialog) { }
 
   ngOnInit() { }
 
@@ -66,5 +68,19 @@ export class ExperiencesComponent implements OnInit {
   deleteExperience(experience: Experience) {
     this.selectedIndex = 2;
     console.log("Delete " + experience.name + ", please!");
+  }
+
+  openExperienceDialog(experience: Experience) {
+    const dialogRef = this.dialog.open(ExperienceDetailComponent, {
+      width: '70%',
+      minWidth: 250,
+      maxWidth: 500,
+      autoFocus: true,
+      restoreFocus: true,
+      disableClose: false,
+      closeOnNavigation: true,
+      panelClass: 'experiences-dialog',
+      data: experience
+    });
   }
 }
