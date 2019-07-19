@@ -1,28 +1,18 @@
 import { Component, OnInit, ViewChild, Input, SimpleChange, EventEmitter, Output } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { Experience } from 'src/app/models/experience';
-import { trigger, state, transition, style, animate } from '@angular/animations';
 import { Category } from 'src/app/models/category';
 
 @Component({
   selector: 'app-experiences',
   templateUrl: './experiences.component.html',
   styleUrls: ['./experiences.component.css'],
-  animations: [
-    trigger('detailExpand', [
-      state('collapsed, void', style({height: '0px'})),
-      state('expanded', style({height: '*'})),
-      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
-      transition('expanded <=> void', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)'))
-    ]),
-  ],
 })
 export class ExperiencesComponent implements OnInit {
   @Input() category: Category;
   @Output() backClicked = new EventEmitter<number>();
   dataSource: MatTableDataSource<Experience>;
-  columnsToDisplay: string[] = ['favorite', 'name', 'datestamp'];
-  expandedElement: Experience | null;
+  columnsToDisplay: string[] = ['favorite', 'name', 'datestamp', 'note'];
   selectedIndex: number = 0;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;

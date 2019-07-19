@@ -8,29 +8,16 @@
   margin: 0;
 }
 
-.new-experience-button {
-  position: absolute;
-  bottom: 5px;
-  right: 5px;
-  z-index: 999;
-}
-
 .no-experiences {
   text-align: center;
   /* line-height: 120%; */
   padding: 20% 0;
 }
 
-.mat-accordion, table {
-  user-select: none;
-}
-
-.mat-action-row {
-  padding: 10px;
-}
 
 table {
   width: 100%;
+  user-select: none;
 }
 
 .mat-form-field {
@@ -38,8 +25,8 @@ table {
   width: 100%;
 }
 
-td, th {
-  width: 25%;
+td.favorite-cell {
+  width: 30px;
 }
 
 tr.detail-row {
@@ -89,7 +76,7 @@ tr.experience-row:not(.expanded-row):active {
   display: none;
 }
 
-@media only screen and (min-width: 601px) {
+@media only screen and (min-width: 670px) {
   .floating-action-button {
     width: unset;
     padding: 0 26px;
