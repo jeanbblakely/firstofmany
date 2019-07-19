@@ -60,7 +60,7 @@ router.post('/login', async(req, res)=> {
       if (!user) {
         return res.status(404).send({message: "That username in not in our system"});
       }
-      return res.status(200).send({message: user.security_question});
+      return res.status(200).send({question:user.security_question});
     } catch (error){
       console.log(error);
       res.sendStatus(500);

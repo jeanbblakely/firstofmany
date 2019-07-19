@@ -39,20 +39,20 @@ export class PasswordResetComponent {
       confirmPassword: ['', [Validators.required, Validators.minLength(8)]],
     });
   }
-  
+
      /*
 	Gets security question based on username
   */
-  getSecurityQuestion() {
+  getSecurityQuestion(): void {
     this.security_question = "I am a security question";
     const result: User = Object.assign({}, this.resetData.value);
     console.log('after copy', result);
     console.log(this.resetData.get('username').value, 'username');
-    const securityResult = this.userService.getSecurityQuestion(this.resetData.get('username').value);
-    //this.security_question = this.userService.getSecurityQuestion(result);
-    this.security_question = JSON.stringify(this.userService.getSecurityQuestion(this.resetData.get('username').value));
+    this.userService.getSecurityQuestion(this.resetData.get('username').value).subscribe(res => {
+      this.security_question = res.question;
+    });
   }
-  
+
     /*
 	Resets user password if security answer matches
   */
