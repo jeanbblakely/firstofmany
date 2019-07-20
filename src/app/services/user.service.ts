@@ -175,10 +175,8 @@ export class UserService {
   }
 
 
-  getSecurityQuestion(username: string) {
-    return this.httpClient.get<any>(this.authpath + '/getsecurityquestion/' + username).subscribe(res => {
-      console.log(res);
-    });
+  getSecurityQuestion(username): Observable<String> {
+   return this.httpClient.get<any>(this.authpath + '/getsecurityquestion/' + username);
   }
 
   resetPassword(userData: any) {

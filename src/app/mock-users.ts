@@ -10,6 +10,9 @@ export const USERS: User[] = [
       name: "Beth Berry",
       birthdate: "1990-01-01",
       gender: "Female",
+      new_user: true,
+      security_question: "Favorite food?",
+      security_answer: "Eggplant parmesan",
       tracked_categories: [
         {
         name: "Thrills",
@@ -62,6 +65,9 @@ export const USERS: User[] = [
       name: "Jeannie Blakely",
       birthdate: "1969-04-28",
       gender: "Female",
+      new_user: true,
+      security_question: "Mothers maiden name?",
+      security_answer: "Lesslie",
       tracked_categories: [
         {
         name: "Concerts",
@@ -114,6 +120,9 @@ export const USERS: User[] = [
       name: "Daphne Cat",
       birthdate: "2015-04-29",
       gender: "Female",
+      new_user: true,
+      security_question: "How many litters have you had?",
+      security_answer: "Nine",
       tracked_categories: [
         {
         name: "Cat Treats",
