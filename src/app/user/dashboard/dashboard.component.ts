@@ -1,25 +1,39 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
 import { Category } from 'src/app/models/category';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
   user: User;
   selectedIndex: number = 0;
   selectedCategory: Category;
+  routeQueryParams$: Subscription;
 
-  constructor(private userService: UserService, private router: Router) {
+  constructor(private userService: UserService, private route: ActivatedRoute, private router: Router) {
     this.selectedCategory = new Category('empty', []);
+    this.routeQueryParams$ = this.route.queryParams.subscribe(params => {
+      if (params['category-details']) {
+        this.selectedCategory = this.user.tracked_categories[0];
+        this.selectedIndex = 1;
+      } else if (params['all-categories']) {
+        this.selectedIndex = 0;
+      }
+    });
   }
 
   ngOnInit() {
     this.getUser();
+  }
+
+  ngOnDestroy() {
+    this.routeQueryParams$.unsubscribe();
   }
 
   /**

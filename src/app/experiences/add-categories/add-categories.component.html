@@ -1,7 +1,7 @@
 <div class="dialog">
-  <h2 mat-dialog-title>Add Categories</h2>
+  <h2 mat-dialog-title tourAnchor="add-categories-start">Add Categories</h2>
   <mat-dialog-content>
-    <mat-form-field>
+    <mat-form-field tourAnchor="add-categories-search">
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter" autocomplete="off">
     </mat-form-field>
     <table mat-table [dataSource]="dataSource" matSort matSortActive="name" matSortDisableClear matSortDirection="asc">
@@ -34,11 +34,11 @@
 
   <mat-dialog-actions fxLayoutAlign="space-between center">
 
-    <a mat-raised-button color="accent" routerLink="/category-create" (click)="close()" fxFlex.xs="45">
+    <a mat-raised-button color="accent" tourAnchor="add-categories-create" routerLink="/category-create" (click)="close()" fxFlex.xs="45">
       Create a category
     </a>
 
-    <button mat-raised-button color="primary" (click)="addCategories()" [disabled]="selection.selected.length == 0" fxFlex.xs="45">
+    <button mat-raised-button color="primary" tourAnchor="add-categories-add" (click)="addCategories()" [disabled]="selection.selected.length == 0" fxFlex.xs="45">
       Add {{ selection.selected.length | i18nPlural: categoryMapping }}
     </button>
 

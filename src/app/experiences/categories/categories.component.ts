@@ -1,11 +1,12 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { Category } from '../../models/category';
 import { CategoryService } from '../../services/category.service';
 import { UserService } from '../../services/user.service';
 import { MatDialog } from '@angular/material';
 import { User } from './../../models/user';
-import { forkJoin } from 'rxjs';
+import { forkJoin, Subscription } from 'rxjs';
 import { AddCategoriesComponent } from '../add-categories/add-categories.component';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -13,18 +14,37 @@ import { AddCategoriesComponent } from '../add-categories/add-categories.compone
   templateUrl: './categories.component.html',
   styleUrls: ['./categories.component.css']
 })
-export class CategoriesComponent implements OnInit {
+export class CategoriesComponent implements OnInit, OnDestroy {
   @Output() clickedCategory = new EventEmitter<Category>();
   newCategories: Category[];
   selectedCategory: Category;
   userCategories: Category[];
   userCategoryNames: string[] = [];
   user: User;
+  routeQueryParams$: Subscription;
 
-  constructor(private categoryService: CategoryService, private userService: UserService, private dialog: MatDialog) { }
+  constructor(
+    private categoryService: CategoryService, 
+    private userService: UserService, 
+    private dialog: MatDialog,
+    private route: ActivatedRoute,
+    private router: Router) { 
+      this.routeQueryParams$ = this.route.queryParams.subscribe(params => {
+        if (params['categories']) {
+          this.openDialog();
+        }
+        if (!params['categories']) {
+          this.dialog.closeAll();
+        }
+      });
+    }
 
   ngOnInit() {
     this.getCategories();
+  }
+
+  ngOnDestroy() {
+    this.routeQueryParams$.unsubscribe();
   }
 
   /**
@@ -80,6 +100,7 @@ export class CategoriesComponent implements OnInit {
       setTimeout(() => {
         this.getCategories();
       }, 500);
+      this.router.navigate(['.'], { relativeTo: this.route });
     });
   }
 
