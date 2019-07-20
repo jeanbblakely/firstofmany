@@ -10,11 +10,19 @@ import { TourService, IStepOption } from 'ngx-tour-md-menu';
 })
 export class AppComponent {
   title = 'the First of Many';
-  paused: boolean = false;
 
   constructor(private userService: UserService, private snackBar: MatSnackBar, public tourService: TourService) {
     this.userService.logout$.subscribe(() => {
       this.snackBar.open('You are logged out', 'Okay', { duration: 2000 });
+    });
+    this.userService.newUser$.subscribe((tourStart) => {
+      if (tourStart) {
+        this.tourService.start();
+      }
+    });
+    
+    this.tourService.start$.subscribe(() => {
+      console.log('Tour started');
     });
     this.tourService.stepShow$.subscribe((step: IStepOption) => {
       if (step.stepId == 'categories-added') {
@@ -26,6 +34,7 @@ export class AppComponent {
     this.tourService.end$.subscribe(() => {
       console.log("Thanks for taking the tour. You can take it again by going to your My Account page.");
     });
+
     this.tourService.initialize([
       {
         anchorId: 'start-tour',
@@ -90,7 +99,6 @@ export class AppComponent {
         route: '/dashboard',
         preventScrolling: true,
       });
-    this.tourService.start();
   }
 
   ngOnInit() { }

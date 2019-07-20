@@ -4,6 +4,7 @@ import { User } from '../../models/user';
 import { Category } from 'src/app/models/category';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Experience } from 'src/app/models/experience';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,10 +18,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
   routeQueryParams$: Subscription;
 
   constructor(private userService: UserService, private route: ActivatedRoute, private router: Router) {
-    this.selectedCategory = new Category('empty', []);
+    let sampleCategory = new Category('Sample Fruit', [
+      new Experience('Banana', "Yellow and sweet!", new Date().toISOString(), false),
+      new Experience('Starfruit', "My favorite weird fruit! Tastes like a sour apple.", new Date().toISOString(), true),
+      new Experience('Dragonfruit', "Great name, not great taste", new Date().toISOString(), false),
+    ]);
+    this.selectedCategory = sampleCategory;
     this.routeQueryParams$ = this.route.queryParams.subscribe(params => {
       if (params['category-details']) {
-        this.selectedCategory = this.user.tracked_categories[0];
         this.selectedIndex = 1;
       } else if (params['all-categories']) {
         this.selectedIndex = 0;
