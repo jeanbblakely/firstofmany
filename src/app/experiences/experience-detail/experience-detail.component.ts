@@ -4,6 +4,7 @@ import { Experience } from 'src/app/models/experience';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
 import { Category } from 'src/app/models/category';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-experience-detail',
@@ -21,12 +22,12 @@ export class ExperienceDetailComponent implements OnInit {
   constructor(private userService: UserService,
     private dialogRef: MatDialogRef<ExperienceDetailComponent>,
     @Inject(MAT_DIALOG_DATA) data, private fb: FormBuilder) {
-      this.category = data.category;
-      if (data.experience.name == undefined) {
-        this.isAdd = true;
-      }
-      this.isUpdate = !this.isAdd;
-      this.experience = data.experience;
+    this.category = data.category;
+    if (data.experience.name == undefined) {
+      this.isAdd = true;
+    }
+    this.isUpdate = !this.isAdd;
+    this.experience = data.experience;
   }
 
   ngOnInit() {
@@ -75,12 +76,14 @@ export class ExperienceDetailComponent implements OnInit {
       this.experience.datestamp = form.controls['datestamp'].value;
       this.experience.note = form.controls['note'].value;
       if (this.isAdd) {
-        this.userService.addUserExperience(this.category.name, this.experience);
+        this.userService.addUserExperience(this.category.name, this.experience).subscribe();
       } else {
-        this.userService.deleteUserExperience(this.category.name, previous);
-        this.userService.addUserExperience(this.category.name, this.experience);
+        this.userService.deleteUserExperience(this.category.name, previous).subscribe(res => {
+          this.userService.addUserExperience(this.category.name, this.experience).subscribe();
+        });
+
       }
-      this.dialogRef.close({action: this.isAdd ? 'add': 'update' , experience: this.experience});
+      this.dialogRef.close({ action: this.isAdd ? 'add' : 'update', experience: this.experience });
       // Snackbar ?
     }
   }
@@ -91,6 +94,6 @@ export class ExperienceDetailComponent implements OnInit {
   deleteExperience() {
     this.userService.deleteUserExperience(this.category.name, this.experience);
     // Snackbar ?
-    this.dialogRef.close({action: 'delete' , experience: this.experience});
+    this.dialogRef.close({ action: 'delete', experience: this.experience });
   }
 }

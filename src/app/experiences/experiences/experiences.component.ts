@@ -41,18 +41,6 @@ export class ExperiencesComponent implements AfterContentChecked {
   }
 
   /**
-   * Favorites an experiences
-   */
-  favoriteThis(experience: {}) {
-    if (experience.hasOwnProperty('favorite')) {
-      experience['favorite'] = !experience['favorite'];
-    } else {
-      experience['favorite'] = false;
-    };
-    // Joey, could you offer some guidance here about updating the database?
-  }
-
-  /**
    * Gets the appropriate favorite icon
    * @param favorited if experience has been favorited
    */
