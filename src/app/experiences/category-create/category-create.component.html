@@ -7,41 +7,9 @@
       <mat-card-content>
 
         <mat-form-field>
-          <input matInput type="text" placeholder="Category Name" id="category-name" formControlName="name" required [appDisableControl]="disabled">
-          <button mat-icon-button matSuffix (click)="disabled = false">
-            <mat-icon>edit</mat-icon>
-          </button>
+          <input matInput type="text" placeholder="Category Name" id="category-name" formControlName="name" required>
           <mat-error *ngIf="hasError('name', 'required')">Please enter a category name</mat-error>
         </mat-form-field>
-
-        <div formArrayName="experiences">
-          <div *ngFor="let experience of experiences.controls; let i = index" [formGroupName]="i" class="experiences">
-            <mat-form-field>
-              <input matInput type="text" placeholder="Experience {{ i + 1 }} Name" formControlName="name" autocomplete="off">
-            </mat-form-field>
-            <mat-form-field>
-              <input matInput type="text" placeholder="Experience {{ i + 1 }} Note" formControlName="note" autocomplete="off">
-            </mat-form-field>
-            <mat-form-field>
-               <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" placeholder="Experience {{ i + 1 }} Datestamp" formControlName="datestamp">
-               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-             </mat-form-field>
-            <mat-form-field>
-             <mat-label>Favorite</mat-label>
-               <mat-select name="favoriteSelect" formControlName="favorite">
-                <mat-option *ngFor="let favorite of favorites" [value]='favorite'>{{ favorite }}</mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-          <button mat-raised-button color="accent" type="button" (click)="removeExperience(i)" [disabled]="!categoryForm.valid">
-            Remove Experience
-          </button>
-          <button mat-raised-button color="accent" type="button" (click)="addExperience()"
-            [disabled]="!categoryForm.valid">
-            Add Experience
-          </button>
-        </div>
       </mat-card-content>
 
       <mat-card-actions>
@@ -57,7 +25,4 @@
       <h3>{{message}}</h3>
     </mat-card-footer>
   </mat-card>
-
-  <p>Form Control values: {{ categoryForm.value | json }}</p>
-  <p>Form Control status: {{ categoryForm.status | json }}</p>
 </section>

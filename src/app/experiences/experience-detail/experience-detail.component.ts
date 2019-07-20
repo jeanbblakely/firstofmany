@@ -21,12 +21,12 @@ export class ExperienceDetailComponent implements OnInit {
   constructor(private userService: UserService,
     private dialogRef: MatDialogRef<ExperienceDetailComponent>,
     @Inject(MAT_DIALOG_DATA) data, private fb: FormBuilder) {
-      this.category = data.category;
-      if (data.experience.name == undefined) {
-        this.isAdd = true;
-      }
-      this.isUpdate = !this.isAdd;
-      this.experience = data.experience;
+    this.category = data.category;
+    if (data.experience.name == undefined) {
+      this.isAdd = true;
+    }
+    this.isUpdate = !this.isAdd;
+    this.experience = data.experience;
   }
 
   ngOnInit() {
@@ -69,17 +69,21 @@ export class ExperienceDetailComponent implements OnInit {
    */
   submit(form: FormGroup) {
     if (this.form.valid) {
+      let previous = new Experience();
+      previous.name = this.experience.name;
       this.experience.name = form.controls['name'].value;
       this.experience.datestamp = form.controls['datestamp'].value;
       this.experience.note = form.controls['note'].value;
       if (this.isAdd) {
-        this.userService.addUserExperience(this.category.name, this.experience);
+        this.userService.addUserExperience(this.category.name, this.experience).subscribe();
       } else {
-        this.userService.deleteUserExperience(this.category.name, this.experience);
-        this.userService.addUserExperience(this.category.name, this.experience);
-        console.log('Experience updated');
+        this.userService.deleteUserExperience(this.category.name, previous).subscribe(res => {
+          this.userService.addUserExperience(this.category.name, this.experience).subscribe();
+        });
+
       }
-      this.dialogRef.close({action: this.isAdd ? 'add': 'update' , experience: this.experience});
+      this.dialogRef.close({ action: this.isAdd ? 'add' : 'update', experience: this.experience });
+      // Snackbar ?
     }
   }
 
@@ -87,8 +91,8 @@ export class ExperienceDetailComponent implements OnInit {
    * Deletes an experience from the user's category
    */
   deleteExperience() {
-    this.userService.deleteUserExperience(this.category.name, this.experience);
-    console.log(this.experience.name + " deleted");
-    this.dialogRef.close({action: 'delete' , experience: this.experience});
+    this.userService.deleteUserExperience(this.category.name, this.experience).subscribe();
+    // Snackbar ?
+    this.dialogRef.close({ action: 'delete', experience: this.experience });
   }
 }
