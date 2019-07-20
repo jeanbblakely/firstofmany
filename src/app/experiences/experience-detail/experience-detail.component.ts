@@ -4,7 +4,6 @@ import { Experience } from 'src/app/models/experience';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
 import { Category } from 'src/app/models/category';
-import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-experience-detail',
@@ -92,7 +91,7 @@ export class ExperienceDetailComponent implements OnInit {
    * Deletes an experience from the user's category
    */
   deleteExperience() {
-    this.userService.deleteUserExperience(this.category.name, this.experience);
+    this.userService.deleteUserExperience(this.category.name, this.experience).subscribe();
     // Snackbar ?
     this.dialogRef.close({ action: 'delete', experience: this.experience });
   }
