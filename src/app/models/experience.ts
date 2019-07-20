@@ -5,7 +5,7 @@ export class Experience {
   datestamp: any;
   favorite: boolean = false; 
 
-  constructor(name: string, note: string = '', datestamp: string = '', favorite: boolean = false) {
+  constructor(name: string = '', note: string = '', datestamp: string = '', favorite: boolean = false) {
     this.name = name;
     this.note = note;
     this.datestamp = datestamp;
