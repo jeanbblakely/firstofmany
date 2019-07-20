@@ -20,8 +20,8 @@ export class UserService {
 
   private logoutSource = new Subject<string>();
   logout$ = this.logoutSource.asObservable();
-  private newUserSource = new Subject<boolean>();
-  newUser$ = this.newUserSource.asObservable();
+  public tourStartSource = new Subject<boolean>();
+  tourStart$ = this.tourStartSource.asObservable();
 
   constructor(private httpClient: HttpClient, private router: Router) { }
 
@@ -53,7 +53,7 @@ export class UserService {
       console.log(regData);
       if (this.isAuthenticated()) {
         this.router.navigate(['/dashboard' + localStorage.getItem('userID')]);
-        this.newUserSource.next(true);
+        this.tourStartSource.next(true);
       }
     });
 

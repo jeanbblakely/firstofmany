@@ -15,7 +15,7 @@ export class AppComponent {
     this.userService.logout$.subscribe(() => {
       this.snackBar.open('You are logged out', 'Okay', { duration: 2000 });
     });
-    this.userService.newUser$.subscribe((tourStart) => {
+    this.userService.tourStart$.subscribe((tourStart) => {
       if (tourStart) {
         this.tourService.start();
       }
