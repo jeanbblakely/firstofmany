@@ -4,7 +4,7 @@
 </div>
 <app-experiences [category]="category" (backClicked)="onBackClicked()"></app-experiences>
 
-<button mat-fab class="floating-action-button fab-left" (click)="backClicked.emit()">
+<button mat-fab class="floating-action-button fab-left" (click)="backClicked.emit()" tourAnchor="add-experiences">
   <mat-icon>arrow_back</mat-icon>
   <span class="floating-action-button-text">Back to categories</span>
 </button>

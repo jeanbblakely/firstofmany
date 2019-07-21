@@ -20,6 +20,8 @@ export class UserService {
 
   private logoutSource = new Subject<string>();
   logout$ = this.logoutSource.asObservable();
+  public tourStartSource = new Subject<boolean>();
+  tourStart$ = this.tourStartSource.asObservable();
 
   constructor(private httpClient: HttpClient, private router: Router) { }
 
@@ -36,23 +38,25 @@ export class UserService {
         this.id = i;
         return true;
       }
-   }
-   return false;
+    }
+    return false;
   }
 
   /*
 	Database call for registration
   */
   sendUserRegistration(regData: User) {
-    this.httpClient.post<any>(this.authpath + '/register', regData).subscribe(res =>{
-        localStorage.setItem(this.TOKEN_KEY, res.token);
-        localStorage.setItem('userID', res.userID);
-        console.log(res);
-        console.log(regData);
+    this.httpClient.post<any>(this.authpath + '/register', regData).subscribe(res => {
+      localStorage.setItem(this.TOKEN_KEY, res.token);
+      localStorage.setItem('userID', res.userID);
+      console.log(res);
+      console.log(regData);
+      if (this.isAuthenticated()) {
+        this.router.navigate(['/dashboard' + localStorage.getItem('userID')]);
+        this.tourStartSource.next(true);
+      }
     });
-    if (this.isAuthenticated()) {
-      this.router.navigate(['dashboard/' + localStorage.getItem('userID')]);
-    }
+
   }
 
   //Database call to update user profile
@@ -68,14 +72,14 @@ export class UserService {
 	Database call for login
   */
   loginUser(loginData) {
-    return this.httpClient.post<any>(this.authpath + '/login', loginData).subscribe(res =>{
-        localStorage.setItem('token', res.token);
-        if (this.isAuthenticated()) {
-          this.id = res['userID'];
-          localStorage.setItem('userID', this.id);
-      //    this.isLoggedIn();
-          this.router.navigate(['dashboard']);
-        }
+    return this.httpClient.post<any>(this.authpath + '/login', loginData).subscribe(res => {
+      localStorage.setItem('token', res.token);
+      if (this.isAuthenticated()) {
+        this.id = res['userID'];
+        localStorage.setItem('userID', this.id);
+        //    this.isLoggedIn();
+        this.router.navigate(['dashboard']);
+      }
     });
   }
 
@@ -91,9 +95,9 @@ export class UserService {
     return of(USERS[this.id]);
   }
 
-   /*
-	Gets user based on id instantiated at login
-  */
+  /*
+ Gets user based on id instantiated at login
+ */
   getUser(): Observable<User> {
     return this.httpClient.get<User>(this.path + '/user/' + localStorage.getItem('userID'));
   }
@@ -138,7 +142,7 @@ export class UserService {
 	Registers a new user in the database
   */
   register(user: User) {
-     this.sendUserRegistration(user);
+    this.sendUserRegistration(user);
   }
 
 
@@ -153,9 +157,9 @@ export class UserService {
     }
   }
 
-   /*
-	Logs user out; resets, sets token to null
-  */
+  /*
+ Logs user out; resets, sets token to null
+ */
   logout(): void {
     this.id = null;
     localStorage.removeItem('token');
@@ -163,9 +167,9 @@ export class UserService {
     this.logoutSource.next();
   }
 
-   /*
-	Checks to see if user has token from server (ie is logged in)
-  */
+  /*
+ Checks to see if user has token from server (ie is logged in)
+ */
   isAuthenticated(): boolean {
     return !!localStorage.getItem(this.TOKEN_KEY);
   }
@@ -173,7 +177,6 @@ export class UserService {
   getToken() {
     return localStorage.getItem(this.TOKEN_KEY);
   }
-
 
   getSecurityQuestion(username): Observable<any> {
    return this.httpClient.get<any>(this.authpath + '/getsecurityquestion/' + username);

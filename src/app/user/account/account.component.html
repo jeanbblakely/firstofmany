@@ -1,9 +1,10 @@
 <section>
   <mat-card>
-    <mat-card-header>
+    <mat-card-header fxLayoutAlign="space-between center">
       <mat-card-title>
         <h2>{{user?.name}}'s Account</h2>
       </mat-card-title>
+      <button mat-flat-button color="primary" (click)="startTour()">Take a tour</button>
     </mat-card-header>
     <form *ngIf="user" [formGroup]="userForm" (ngSubmit)="update()" autocomplete="off" novalidate>
       <mat-card-content>
@@ -75,7 +76,4 @@
       <h3>{{message}}</h3>
     </mat-card-footer>
   </mat-card>
-
-  <p>Form Control values: {{ userForm?.value | json }}</p>
-  <p>Form Control status: {{ userForm?.status | json }}</p>
 </section>

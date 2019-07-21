@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 import { User } from './../../models/user';
-import { EqualValidatorDirective } from './../../_directives/equal-validator.directive';
 
 @Component({
   selector: 'app-register',
@@ -19,8 +18,7 @@ export class RegisterComponent implements OnInit {
   hide = true;
 
   constructor(private userService: UserService, private fb: FormBuilder,
-    private router: Router) {
-    }
+    private router: Router) { }
 
   ngOnInit() {
     this.createForm();
@@ -47,32 +45,6 @@ export class RegisterComponent implements OnInit {
     return this.userForm.controls[controlName].hasError(errorName);
   }
 
-  // Great guide at https://code-maze.com/angular-material-form-validation/ which we may want to follow
-  // public createUser = (userFormValue) => {
-  //   if (this.userForm.valid) {
-  //     this.executeUserCreation(userFormValue);
-  //   }
-  // }
-
-  // private executeUserCreation = (userFormValue) => {
-  //   let user: NewUser = {
-  //     username: userFormValue.username,
-  //     password: userFormValue.password,
-  //     name: userFormValue.name,
-  //     email: userFormValue.email,
-  //     birthdate: userFormValue.birthdate,
-  //     gender: userFormValue.gender
-  //   }
-  //   this.userService.register(user)
-  //     .subscribe(res => {
-  //       this.message = 'thanks for registering';
-  //       this.router.navigate(['login']);
-  //     },
-  //     (error => {
-  //       this.message = 'error in registering';
-  //     }))
-  // }
-
   /*
 	Registers user in the system. Routes to Login page
   */
@@ -80,12 +52,10 @@ export class RegisterComponent implements OnInit {
     if (this.userForm.valid) {
       const result: User = Object.assign({}, this.userForm.value);
       this.userService.register(result);
-      console.log(result, 'result');
       this.router.navigate(['login']);
     } else {
       this.message = 'your form has errors';
     }
-
   }
 
 }

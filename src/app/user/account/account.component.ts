@@ -86,4 +86,10 @@ export class AccountComponent implements OnInit {
     }
   }
 
+  /**
+   * Starts the new user tour of the app
+   */
+  startTour() {
+    this.userService.tourStartSource.next(true);
+  }
 }
