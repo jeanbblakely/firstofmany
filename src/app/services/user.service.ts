@@ -175,7 +175,7 @@ export class UserService {
   }
 
 
-  getSecurityQuestion(username): Observable<String> {
+  getSecurityQuestion(username): Observable<any> {
    return this.httpClient.get<any>(this.authpath + '/getsecurityquestion/' + username);
   }
 
