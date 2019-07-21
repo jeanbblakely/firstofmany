@@ -49,7 +49,7 @@ export class PasswordResetComponent {
     console.log('after copy', result);
     console.log(this.resetData.get('username').value, 'username');
     this.userService.getSecurityQuestion(this.resetData.get('username').value).subscribe(res => {
-      this.security_question = res.question;
+      this.security_question = res['question'];
     });
   }
 

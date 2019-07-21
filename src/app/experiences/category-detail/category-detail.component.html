@@ -2,7 +2,7 @@
   <h2 class="title mat-display-1">{{ category.name }}</h2>
   <button mat-raised-button color="warn" (click)="deleteCategory()">Delete Category</button>
 </div>
-<app-experiences [category]="category" (backClicked)="onBackClicked()"></app-experiences>
+<app-experiences [category]="category"></app-experiences>
 
 <button mat-fab class="floating-action-button fab-left" (click)="backClicked.emit()" tourAnchor="add-experiences">
   <mat-icon>arrow_back</mat-icon>
