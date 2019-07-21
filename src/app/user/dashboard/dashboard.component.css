@@ -1,6 +1,6 @@
-.dashboard-tabs {
+/* .dashboard-tabs {
   min-height: 600px;
-}
+} */
 
 ::ng-deep mat-tab-header {
   height: 0;
