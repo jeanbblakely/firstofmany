@@ -10,7 +10,7 @@
   </mat-card>
 </div>
 
-<a mat-fab class="floating-action-button" color="primary" (click)="openDialog()">
+<button mat-fab tourAnchor="add-categories" class="floating-action-button" color="primary" routerLink="/dashboard" [queryParams]="{categories: true}">
   <mat-icon>add</mat-icon>
   <span class="floating-action-button-text">Add Categories to Track</span>
-</a>
+</button>

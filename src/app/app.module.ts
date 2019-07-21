@@ -35,6 +35,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { PasswordResetComponent } from './user/password-reset/password-reset.component';
 import { AddCategoriesComponent } from './experiences/add-categories/add-categories.component';
 import { ExperienceDetailComponent } from './experiences/experience-detail/experience-detail.component';
+import { TourMatMenuModule } from 'ngx-tour-md-menu';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import { ExperienceDetailComponent } from './experiences/experience-detail/exper
     MatListModule,
     FlexLayoutModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    AngularFittextModule
+    AngularFittextModule,
+    TourMatMenuModule.forRoot()
   ],
   providers: [
     UserService,

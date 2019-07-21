@@ -5,7 +5,6 @@ import { LoginComponent } from './user/login/login.component';
 import { AccountComponent } from './user/account/account.component';
 import { DashboardComponent } from './user/dashboard/dashboard.component';
 import { RegisterComponent } from './user/register/register.component';
-import { CategoriesComponent } from './experiences/categories/categories.component';
 import { CategoryCreateComponent } from './experiences/category-create/category-create.component';
 import { AuthGuard } from './guards/auth.guard';
 import { PasswordResetComponent } from './user/password-reset/password-reset.component';
@@ -17,8 +16,7 @@ const appRoutes: Routes = [
   { path: 'password-reset', component: PasswordResetComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'account', component: AccountComponent, canActivate: [AuthGuard] },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-  { path: 'categories', component: CategoriesComponent, canActivate: [AuthGuard] },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
   { path: 'category-create', component: CategoryCreateComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: 'home' }
 ];
