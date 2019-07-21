@@ -56,7 +56,7 @@
       [ngClass]='category.experiences.length > 5 ? "visible" : "hidden"'></mat-paginator>
 </div>
 
-<a mat-fab color="primary" class="floating-action-button fab-right" (click)="openExperienceDialog()">
+<a mat-fab color="primary" class="floating-action-button fab-right" (click)="openExperienceDialog(null)">
   <mat-icon>add</mat-icon>
   <span class="floating-action-button-text">Add a new experience</span>
 </a>
