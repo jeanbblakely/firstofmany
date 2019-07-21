@@ -44,10 +44,7 @@ export class PasswordResetComponent {
 	Gets security question based on username
   */
   getSecurityQuestion(): void {
-    this.security_question = "I am a security question";
     const result: User = Object.assign({}, this.resetData.value);
-    console.log('after copy', result);
-    console.log(this.resetData.get('username').value, 'username');
     this.userService.getSecurityQuestion(this.resetData.get('username').value).subscribe(res => {
       this.security_question = res.question;
     });
@@ -59,11 +56,10 @@ export class PasswordResetComponent {
   reset() {
     if (this.resetData.valid) {
       const result: User = Object.assign({}, this.resetData.value);
-      console.log('after copy', result);
       this.userService.resetPassword(result);
       this.router.navigate(['dashboard']);
     } else {
-      this.message = 'your form has errors';
+      this.message = 'please fill in all fields';
     }
   }
 
