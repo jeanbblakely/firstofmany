@@ -52,7 +52,8 @@ export class UserService {
       localStorage.setItem(this.TOKEN_KEY, res.token);
       localStorage.setItem('userID', res.userID);
       console.log(res);
-      console.log(regData);
+      let message = res['userID'];
+      this.snackBar.open('userID ' + message + ' added', 'Okay', {duration: 3000});
       if (this.isAuthenticated()) {
         this.router.navigate(['/dashboard' + localStorage.getItem('userID')]);
         this.tourStartSource.next(true);
@@ -63,10 +64,8 @@ export class UserService {
 
   //Database call to update user profile
   updateUser(profileData: User) {
-    console.log(profileData, 'profileData inside update');
     this.httpClient.post(this.path + '/user/' + localStorage.getItem('userID') + '/update', profileData).subscribe(res => {
       console.log(res);
-      console.log('after http call');
     });
   }
 
@@ -114,18 +113,19 @@ export class UserService {
 
   addUserCategory(categoryData: Category) {
     this.httpClient.post<any>(this.path + '/addusercategory/' + localStorage.getItem('userID'), categoryData).subscribe(res => {
-      console.log(res);
+      let message = res['name'];
+      this.snackBar.open(message + ' added', 'Okay', {duration: 3000});
     });
   }
 
   deleteUserCategory(categoryData: Category) {
     this.httpClient.post<any>(this.path + '/deleteusercategory/' + localStorage.getItem('userID'), categoryData).subscribe(res => {
-      console.log(res);
+      let message = res['name'];
+      this.snackBar.open(message + ' deleted', 'Okay', {duration: 3000});
     });
   }
 
   addUserExperience(category: string, experienceData: Experience) {
-    console.log('user service');
     return this.httpClient.post<any>(this.path + '/adduserexperience/' + localStorage.getItem('userID') + '/' + category, experienceData);
     // .subscribe(res => {
     //   console.log(res);
@@ -133,7 +133,6 @@ export class UserService {
   }
 
   deleteUserExperience(category: string, experienceData: Experience) {
-    console.log('user service');
     return this.httpClient.post<any>(this.path + '/deleteuserexperience/' + localStorage.getItem('userID') + '/' + category, experienceData);
     //   .subscribe(res => {
     //   console.log(res);
