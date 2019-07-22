@@ -46,7 +46,7 @@ export class PasswordResetComponent {
   getSecurityQuestion(): void {
     const result: User = Object.assign({}, this.resetData.value);
     this.userService.getSecurityQuestion(this.resetData.get('username').value).subscribe(res => {
-      this.security_question = res.question;
+      this.security_question = res['question'];
     });
   }
 

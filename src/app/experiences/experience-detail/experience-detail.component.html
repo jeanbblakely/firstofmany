@@ -8,7 +8,7 @@
     </button>
   </div>
   <mat-dialog-content>
-    <form [formGroup]="form" (ngSubmit)="update()" autocomplete="off" novalidate>
+    <form [formGroup]="form" autocomplete="off" novalidate>
 
       <mat-form-field>
         <input matInput placeholder="Name" value="{{experience.name}}" formControlName="name">
