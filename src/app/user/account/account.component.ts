@@ -76,7 +76,6 @@ export class AccountComponent implements OnInit {
   update() {
     if (this.userForm.valid) {
       const result: User = Object.assign({}, this.userForm.value);
-      console.log('after copy', result);
       this.userService.updateUser(result);
       this.message = 'successfully updated';
       //this.router.navigate(['dashboard/' + this.userService.getUserID()]);
