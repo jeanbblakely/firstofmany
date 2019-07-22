@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 import { User } from './../../models/user';
-import { EqualValidatorDirective } from './../../_directives/equal-validator.directive';
 
 @Component({
   selector: 'app-account',

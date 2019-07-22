@@ -1,5 +1,4 @@
 import { Category } from './category';
-import { Experience } from './experience';
 
 
 export class User {
