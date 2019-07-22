@@ -57,7 +57,7 @@ export class PasswordResetComponent {
     if (this.resetData.valid) {
       const result: User = Object.assign({}, this.resetData.value);
       this.userService.resetPassword(result);
-      this.router.navigate(['dashboard']);
+      this.router.navigate(['login']);
     } else {
       this.message = 'please fill in all fields';
     }

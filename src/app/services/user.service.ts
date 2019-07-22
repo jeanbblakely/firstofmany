@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from './../../environments/environment';
 import { Router } from '@angular/router';
 import { Experience } from '../models/experience';
+import { MatSnackBar } from '@angular/material';
 
 
 @Injectable({
@@ -23,7 +24,8 @@ export class UserService {
   public tourStartSource = new Subject<boolean>();
   tourStart$ = this.tourStartSource.asObservable();
 
-  constructor(private httpClient: HttpClient, private router: Router) { }
+  constructor(private httpClient: HttpClient, private router: Router,
+    private snackBar: MatSnackBar) { }
 
   TOKEN_KEY = 'token';
   /*
@@ -185,7 +187,8 @@ export class UserService {
 
   resetPassword(userData: any) {
     this.httpClient.post<any>(this.authpath + '/resetpassword', userData).subscribe(res => {
-      console.log(res);
+        let message = res['message'];
+        this.snackBar.open(message, 'Okay', {duration: 3000});
     });
   }
 
