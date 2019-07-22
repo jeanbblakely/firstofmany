@@ -1,10 +1,7 @@
 <div fxLayout="column" fxLayoutAlign="space-around center" class="container">
   <img src="/assets/logo/logo_circle_text.svg" class="logo">
-  <em>Login with:<br>
-    username: user, password: password; <br>
-    username: jblakely, password: blackcat; <br>
-    username: fancycat, password: pickle12<br>
-  </em>
+  <h2>Login 
+  </h2>
 
   <div class="form-group">
     <form [formGroup]="loginData" (ngSubmit)="login()" autocomplete="off">
@@ -23,7 +20,7 @@
         <mat-error *ngIf="hasError('password', 'required')">Please enter your password</mat-error>
         <mat-error *ngIf="hasError('password', 'minlength')">Password must be at least 8 characters</mat-error>
       </mat-form-field>
-      Forgot Password?  <a routerLink="/password-reset">Reset Now.</a><br>
+        <a routerLink="/password-reset">Forgot Password?</a><br>
       <button mat-fab type="submit" [disabled]="!loginData.valid">Login</button>
     </form>
   </div>
