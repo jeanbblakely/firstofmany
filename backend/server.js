@@ -17,12 +17,14 @@ var Category = require('./models/category.js');
 app.use(cors());
 app.use(bodyParser.json());
 
+// allows cross origin responses
 app.all('/', function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
     next()
   });
 
+//gets the list of users from the database
   app.get('/users', async(req, res)=> {
     try {
       let users = await User.find({}, '-password -security_question -security_answer -__v');
@@ -33,6 +35,7 @@ app.all('/', function(req, res, next) {
     }
   });
 
+ //gets all of the categories from the database
   app.get('/categories', async(req, res)=> {
     try {
       let categories = await Category.find({});
@@ -53,6 +56,7 @@ app.all('/', function(req, res, next) {
     }
   });
 
+//gets a user from their ID
 app.get('/user/:id', async(req, res)=> {
   try {
     let user = await User.findById(req.params.id, '-password -__v');
@@ -63,6 +67,8 @@ app.get('/user/:id', async(req, res)=> {
   }
 });
 
+
+//gets the user's categories from their ID
 app.get('/usercategories/:id', async(req, res)=> {
   try {
     let user = await User.findById(req.params.id, '-password -__v');
@@ -73,6 +79,7 @@ app.get('/usercategories/:id', async(req, res)=> {
   }
 });
 
+//updates a user's information in the database
 app.post('/user/:id/update', async(req, res)=> {
   try {
     User.findById(req.params.id, function (err, user) {
@@ -95,6 +102,7 @@ app.post('/user/:id/update', async(req, res)=> {
 }
 });
 
+//add a category document to the database
 app.post('/addcategory', (req, res)=> {
   try {
     let categoryData = req.body;
@@ -120,6 +128,7 @@ app.post('/addcategory', (req, res)=> {
 }
 });
 
+//add a category to the array of categories stored by the user in the database
 app.post('/addusercategory/:id', async(req, res)=> {
   try{
     let categoryData = {'name': req.body.name, 'experiences': req.body.experiences}
@@ -136,6 +145,7 @@ app.post('/addusercategory/:id', async(req, res)=> {
 }
 });
 
+//add an experience to an already tracked category
 app.post('/adduserexperience/:id/:tracked_category', async(req, res)=>{
   try {
     let experienceData = req.body;
@@ -157,6 +167,7 @@ app.post('/adduserexperience/:id/:tracked_category', async(req, res)=>{
     }
 });
 
+//delete an experience from a tracked category
 app.post('/deleteuserexperience/:id/:tracked_category', async(req, res)=>{
   try{
     let experienceData = {'name': req.body.name};
@@ -177,6 +188,7 @@ app.post('/deleteuserexperience/:id/:tracked_category', async(req, res)=>{
     }
 });
 
+//delete a category from the user's tracked_categories array
 app.post('/deleteusercategory/:id', async(req, res)=> {
   try{
     let categoryData = {'name': req.body.name}
@@ -193,6 +205,7 @@ app.post('/deleteusercategory/:id', async(req, res)=> {
 }
 });
 
+//delete a user from the database
 app.delete('/user/:id/delete', async(req, res)=> {
   try{
     User.deleteOne({ _id: req.params.id }, function (err) {

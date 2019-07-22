@@ -9,6 +9,7 @@ var Category = require('./models/category.js');
 var bcrypt = require('bcrypt-nodejs');
 var router = express.Router();
 
+//Registers a user and gives a json web token
 router.post('/register', (req, res, next)=> {
     let regData = req.body;
     let user = new User(regData);
@@ -31,6 +32,7 @@ router.post('/register', (req, res, next)=> {
     })
   });
 
+//Verifeis user credentials and logs into the system
 router.post('/login', async(req, res)=> {
     let userData = req.body;
     let user = await User.findOne({username:userData.username});
@@ -54,6 +56,7 @@ router.post('/login', async(req, res)=> {
 
   });
 
+// Gives the security question that the user chose when they registered
   router.get('/getsecurityquestion/:username', async(req, res)=> {
     try {
       let user = await User.findOne({username: req.params.username});
@@ -67,6 +70,7 @@ router.post('/login', async(req, res)=> {
     }
   });
 
+  // Verifies the user's security answer and resets the password
   router.post('/resetpassword', async(req, res)=> {
     try{
       let userData = req.body;

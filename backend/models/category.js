@@ -7,5 +7,3 @@ var categorySchema = new mongoose.Schema({
 })
 
 module.exports = mongoose.model('Category', categorySchema);
-
-//[{ type: Schema.Types.ObjectId, ref: 'Experience' }]
