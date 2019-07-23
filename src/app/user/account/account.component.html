@@ -25,7 +25,7 @@
         </mat-form-field>
         
         <mat-form-field>
-          <input matInput type="condirmPassword" placeholder="Confirm Password" id="confirmPassword" formControlName="confirmPassword" required
+          <input matInput type="password" placeholder="Confirm Password" id="confirmPassword" formControlName="confirmPassword" required
             minlength="8" [type]="hide ? 'password' : 'text'" appEqualValidator="password">
           <mat-icon matSuffix (click)="hide = !hide">
             {{hide ? 'visibility_off' : 'visibility'}}

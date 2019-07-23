@@ -1,6 +1,4 @@
 import { User } from './user';
-import { Experience } from './experience';
-import { Category } from './category';
 
 describe('User', () => {
   it('should create an instance', () => {
@@ -16,6 +14,9 @@ describe('User', () => {
       name: "Boo Berry",
       birthdate: "1/1/1990",
       gender: "female",
+      security_question: "Who are you?",
+      security_answer: "me",
+      new_user: true,
       tracked_categories: [
         {
         name: "Thrills",
@@ -71,6 +72,9 @@ describe('User', () => {
       name: "Boo Berry",
       birthdate: "1/1/1990",
       gender: "female",
+      security_question: "Who are you?",
+      security_answer: "me",
+      new_user: true,
       tracked_categories: [
         {
         name: "Thrills",
@@ -127,6 +131,9 @@ describe('User', () => {
       name: "Boo Berry",
       birthdate: "1/1/1990",
       gender: "female",
+      security_question: "Who are you?",
+      security_answer: "me",
+      new_user: true,
       tracked_categories: [
         {
         name: "Thrills",
@@ -187,6 +194,9 @@ describe('User', () => {
       name: "Boo Berry",
       birthdate: "1/1/1990",
       gender: "female",
+      security_question: "Who are you?",
+      security_answer: "me",
+      new_user: true,
       tracked_categories: [
         {
         name: "Thrills",

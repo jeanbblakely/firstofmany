@@ -5,14 +5,15 @@ import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { MaterialModule } from './../../material/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ApiService } from './../../api.service';
+import { FormsModule } from '@angular/forms';
 import { UserService } from '../../services/user.service';
-import { Observable, of, throwError } from 'rxjs';
+import { of } from 'rxjs';
 import { User } from '../../models/user';
+import { DashboardComponent } from 'src/app/user/dashboard/dashboard.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('HeaderComponent', () => {
-   class MockUserService {
+  class MockUserService {
     user: User = {
       id: "5d045ecaece2003576f60b8e",
       username: "user",
@@ -21,29 +22,32 @@ describe('HeaderComponent', () => {
       name: "Boo Berry",
       birthdate: "1/1/1990",
       gender: "female",
+      security_question: "Who are you?",
+      security_answer: "me",
+      new_user: true,
       tracked_categories: [
         {
-        name: "Thrills",
-        experiences: [
-          {
-            name: "Sky Diving",
-            note: "So fun",
-            img: "img.jpg",
-            datestamp: "1/1/2019",
-            favorite: false
-          },
-          {
-            name: "Bungee Jumping",
-            note: "Disappointing",
-            img: "img.jpg",
-            datestamp: "1/10/2019",
-            favorite: false
+          name: "Thrills",
+          experiences: [
+            {
+              name: "Sky Diving",
+              note: "So fun",
+              img: "img.jpg",
+              datestamp: "1/1/2019",
+              favorite: false
+            },
+            {
+              name: "Bungee Jumping",
+              note: "Disappointing",
+              img: "img.jpg",
+              datestamp: "1/10/2019",
+              favorite: false
 
-          }
-         ]
+            }
+          ]
         },
         {
-        name: "Vegetables",
+          name: "Vegetables",
           experiences: [
             {
               name: "Eggplant",
@@ -65,12 +69,16 @@ describe('HeaderComponent', () => {
       ]
     };
 
-  login(username: string, password: string): boolean {
-     return username == this.user.username && password == this.user.password;
-  }
+    login(username: string, password: string): boolean {
+      return username == this.user.username && password == this.user.password;
+    }
 
     getUser() {
       return of(this.user);
+    }
+
+    isAuthenticated() {
+      return true;
     }
   }
 
@@ -92,21 +100,24 @@ describe('HeaderComponent', () => {
 
   beforeEach(async(() => {
     mockUserService = new MockUserService();
-    const routerSpy = jasmine.createSpyObj('Router', ['navigate']);
+    // const routerSpy = jasmine.createSpyObj('Router', ['navigate']);
     TestBed.configureTestingModule({
       imports: [
         FormsModule,
-        RouterTestingModule,
+        RouterTestingModule.withRoutes(
+          [{path: 'dashboard', component: DashboardComponent }]
+        ),
         BrowserAnimationsModule,
         MaterialModule
       ],
       providers: [
-        { provide: Router, useValue: routerSpy },
+        { provide: RouterTestingModule, useClass: class { navigate = jasmine.createSpy("navigate"); } },
         { provide: UserService, useValue: mockUserService }
       ],
-      declarations: [ HeaderComponent ]
+      declarations: [HeaderComponent, DashboardComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -122,7 +133,7 @@ describe('HeaderComponent', () => {
 
   });
 
-  xit('should create', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 

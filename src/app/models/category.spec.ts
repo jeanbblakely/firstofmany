@@ -3,7 +3,7 @@ import { Experience } from './experience';
 
 describe('Category', () => {
   it('should create an instance', () => {
-    expect(new Category()).toBeTruthy();
+    expect(new Category('test', [])).toBeTruthy();
   });
   
   it('should return a name', () => {

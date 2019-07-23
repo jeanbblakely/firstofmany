@@ -1,10 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatFormFieldModule, MatInputModule, MatIconModule, MatCardModule } from '@angular/material';
-import { HttpClientModule } from '@angular/common/http';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { FooterComponent } from './footer.component';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
+import { MaterialModule } from 'src/app/material/material.module';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('FooterComponent', () => {
   let component: FooterComponent;
@@ -13,9 +13,9 @@ describe('FooterComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        MatIconModule,
-        MatCardModule,
-        HttpClientModule
+        MaterialModule,
+        HttpClientTestingModule,
+        RouterTestingModule
       ],
       declarations: [ FooterComponent ]
     })
@@ -28,14 +28,14 @@ describe('FooterComponent', () => {
     fixture.detectChanges();
   });
 
-  xit('should create', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  xit('should have the copyright', () => {
+  it('should have the copyright', () => {
     const footerDe: DebugElement = fixture.debugElement;
-    const paragraphDe = footerDe.query(By.css('p'));
-    const p: HTMLElement = paragraphDe.nativeElement;
-    expect(p.textContent).toContain('Copyright © 2019');
+    const smallDe = footerDe.query(By.css('small'));
+    const small: HTMLElement = smallDe.nativeElement;
+    expect(small.textContent).toContain('Copyright © 2019 First of Many');
   })
 });

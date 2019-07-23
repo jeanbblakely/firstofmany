@@ -1,19 +1,16 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MaterialModule } from './../../material/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Router } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CategoryCreateComponent } from './category-create.component';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
 import { Category } from '../../models/category';
 import { CATEGORIES } from '../../mock-categories';
 import { USERS } from '../../mock-users';
-import { Observable, of, throwError, Subject } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { CategoryService } from '../../services/category.service';
 
 describe('CategoryCreateComponent', () => {
@@ -55,7 +52,7 @@ describe('CategoryCreateComponent', () => {
       providers: [
         { provide: CategoryService, useValue: mockCategoryService },
         { provide: UserService, useValue: mockUserService },
-        { provide: Router, useClass: class { navigate = jasmine.createSpy("navigate"); } }
+        { provide: RouterTestingModule, useClass: class { navigate = jasmine.createSpy("navigate"); } }
       ],
       declarations: [ CategoryCreateComponent ]
     })

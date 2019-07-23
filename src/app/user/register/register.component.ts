@@ -52,6 +52,7 @@ export class RegisterComponent implements OnInit {
     if (this.userForm.valid) {
       const result: User = Object.assign({}, this.userForm.value);
       this.userService.register(result);
+      this.message = 'thanks for registering';
       this.router.navigate(['login']);
     } else {
       this.message = 'your form has errors';
