@@ -3,7 +3,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CategoryService } from '../../services/category.service';
 import { UserService } from '../../services/user.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Observable, of } from 'rxjs';
 import { Category } from './../../models/category';
 import { User } from './../../models/user';
 

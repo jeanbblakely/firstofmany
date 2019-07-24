@@ -1,6 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ExperiencesComponent } from './experiences.component';
+import { MaterialModule } from 'src/app/material/material.module';
+import { Category } from 'src/app/models/category';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('ExperiencesComponent', () => {
   let component: ExperiencesComponent;
@@ -8,7 +13,13 @@ describe('ExperiencesComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ExperiencesComponent ]
+      declarations: [ ExperiencesComponent ],
+      imports: [
+        MaterialModule,
+        BrowserAnimationsModule,
+        HttpClientTestingModule,
+        RouterTestingModule
+      ]
     })
     .compileComponents();
   }));
@@ -16,6 +27,7 @@ describe('ExperiencesComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ExperiencesComponent);
     component = fixture.componentInstance;
+    component.category = new Category('mock', []);
     fixture.detectChanges();
   });
 

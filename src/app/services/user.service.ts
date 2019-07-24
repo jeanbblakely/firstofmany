@@ -51,7 +51,7 @@ export class UserService {
     this.httpClient.post<any>(this.authpath + '/register', regData).subscribe(res => {
       localStorage.setItem(this.TOKEN_KEY, res.token);
       localStorage.setItem('userID', res.userID);
-      console.log(res);
+      // console.log(res);
       let message = res['userID'];
       this.snackBar.open('userID ' + message + ' added', 'Okay', {duration: 3000});
       if (this.isAuthenticated()) {
@@ -65,7 +65,7 @@ export class UserService {
   //Database call to update user profile
   updateUser(profileData: User) {
     this.httpClient.post(this.path + '/user/' + localStorage.getItem('userID') + '/update', profileData).subscribe(res => {
-      console.log(res);
+      // console.log(res);
     });
   }
 
@@ -92,7 +92,7 @@ export class UserService {
 	Gets user based on number assigned in login
   */
   getMockUser(): Observable<User> {
-    console.log(this.id, 'from getUser');
+    // console.log(this.id, 'from getUser');
     return of(USERS[this.id]);
   }
 

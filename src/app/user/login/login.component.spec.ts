@@ -1,15 +1,16 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { LoginComponent } from './login.component';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { MaterialModule } from './../../material/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
-import { Observable, of, throwError } from 'rxjs';
+import { of } from 'rxjs';
 import { User } from '../../models/user';
+import { DashboardComponent } from '../dashboard/dashboard.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+// import { Router } from '@angular/router';
 
 describe('LoginComponent', () => {
    class MockUserService {
@@ -21,6 +22,9 @@ describe('LoginComponent', () => {
       name: "Boo Berry",
       birthdate: "1/1/1990",
       gender: "female",
+      security_question: "Who are you?",
+      security_answer: "me",
+      new_user: true,
       tracked_categories: [
         {
         name: "Thrills",
@@ -77,14 +81,14 @@ describe('LoginComponent', () => {
   class Page {
     navSpy: jasmine.Spy;
     constructor() {
-      const routerSpy = fixture.debugElement.injector.get(Router);
-      this.navSpy = routerSpy.navigate as jasmine.Spy;
+      // const routerSpy = fixture.debugElement.injector.get(Router);
+      // this.navSpy = routerSpy.navigate as jasmine.Spy;
     }
   }
 
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
-  let router: Router;
+  // let router: Router;
   let location: Location;
   let mockUserService: MockUserService;
   //let userService: UserService;
@@ -92,29 +96,32 @@ describe('LoginComponent', () => {
 
   beforeEach(async(() => {
     mockUserService = new MockUserService();
-    const routerSpy = jasmine.createSpyObj('Router', ['navigate']);
+    // const routerSpy = jasmine.createSpyObj('Router', ['navigate']);
     TestBed.configureTestingModule({
       imports: [
         FormsModule,
-        RouterTestingModule,
+        RouterTestingModule.withRoutes(
+          [{path: 'dashboard', component: DashboardComponent }]
+        ),
         BrowserAnimationsModule,
         ReactiveFormsModule,
         MaterialModule
       ],
       providers: [
-        { provide: Router, useValue: routerSpy },
+        { provide: RouterTestingModule, useClass: class { navigate = jasmine.createSpy("navigate"); } },
         { provide: UserService, useValue: mockUserService }
       ],
-      declarations: [ LoginComponent ]
+      declarations: [ LoginComponent, DashboardComponent ],
+      schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    router = TestBed.get(Router);
+    // router = TestBed.get(Router);
     location = TestBed.get(Location);
     fixture = TestBed.createComponent(LoginComponent);
-    router.initialNavigation;
+    // router.initialNavigation();
     component = fixture.componentInstance;
     fixture.detectChanges();
     //const routerSpy = fixture.debugElement.injector.get(Router);

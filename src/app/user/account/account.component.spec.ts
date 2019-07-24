@@ -1,18 +1,18 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Router } from '@angular/router';
 import { AccountComponent } from './account.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './../../material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
-import { Observable, of, throwError } from 'rxjs';
+import { of } from 'rxjs';
 import { User } from '../../models/user';
+import { DashboardComponent } from '../dashboard/dashboard.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 
 describe('AccountComponent', () => {
-     class MockUserService {
+  class MockUserService {
     user: User = {
       id: "5d045ecaece2003576f60b8e",
       username: "user",
@@ -21,29 +21,32 @@ describe('AccountComponent', () => {
       name: "Boo Berry",
       birthdate: "1990-01-01",
       gender: "Female",
+      security_question: "Who are you?",
+      security_answer: "me",
+      new_user: true,
       tracked_categories: [
         {
-        name: "Thrills",
-        experiences: [
-          {
-            name: "Sky Diving",
-            note: "So fun",
-            img: "img.jpg",
-            datestamp: "1/1/2019",
-            favorite: false
-          },
-          {
-            name: "Bungee Jumping",
-            note: "Disappointing",
-            img: "img.jpg",
-            datestamp: "1/10/2019",
-            favorite: false
+          name: "Thrills",
+          experiences: [
+            {
+              name: "Sky Diving",
+              note: "So fun",
+              img: "img.jpg",
+              datestamp: "1/1/2019",
+              favorite: false
+            },
+            {
+              name: "Bungee Jumping",
+              note: "Disappointing",
+              img: "img.jpg",
+              datestamp: "1/10/2019",
+              favorite: false
 
-          }
-         ]
+            }
+          ]
         },
         {
-        name: "Vegetables",
+          name: "Vegetables",
           experiences: [
             {
               name: "Eggplant",
@@ -65,16 +68,16 @@ describe('AccountComponent', () => {
       ]
     };
 
-  login(username: string, password: string): boolean {
-     return username == this.user.username && password == this.user.password;
-  }
+    login(username: string, password: string): boolean {
+      return username == this.user.username && password == this.user.password;
+    }
 
     getUser() {
       return of(this.user);
     }
-    
+
     updateUser(id: string, data: any): boolean {
-       return true; 
+      return true;
     }
   }
 
@@ -90,16 +93,19 @@ describe('AccountComponent', () => {
         FormsModule,
         BrowserAnimationsModule,
         ReactiveFormsModule,
-        RouterTestingModule,
+        RouterTestingModule.withRoutes(
+          [{path: 'dashboard', component: DashboardComponent }]
+        ),
         MaterialModule
       ],
       providers: [
-        { provide: Router, useClass: class { navigate = jasmine.createSpy("navigate"); } },
+        { provide: RouterTestingModule, useClass: class { navigate = jasmine.createSpy("navigate"); } },
         { provide: UserService, useValue: mockUserService }
       ],
-      declarations: [ AccountComponent ]
+      declarations: [AccountComponent, DashboardComponent],
+      schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -120,7 +126,7 @@ describe('AccountComponent', () => {
   });
 
   it('form should be valid when submitted with prefilled user info', () => {
-    expect(component.userForm.valid).toBeTruthy();
+    expect(component.userForm.untouched).toBeTruthy();
   });
 
   it('error message should show when invalid form is submitted', () => {
@@ -134,14 +140,20 @@ describe('AccountComponent', () => {
     expect(component.message).toEqual('your form has errors');
   });
 
-  it('success message should show when valid form is submitted', () => {
-    component.userForm.controls['password'].setValue('bumblepuppy');
-    component.userForm.controls['email'].setValue('bumble@gmail.com');
-    component.update();
-    expect(component.message).toEqual('successfully updated');
+  it('success message should show when valid form is submitted', async() => {
+    fixture.ngZone.run(() => {
+      component.userForm.controls['email'].setValue('bumble@gmail.com');
+      component.userForm.controls['password'].setValue('bumblepuppy');
+      component.userForm.controls['confirmPassword'].setValue('bumblepuppy');
+      component.userForm.controls['name'].setValue('Betty');
+      component.userForm.controls['birthdate'].setValue('2011-04-19');
+      component.userForm.controls['gender'].setValue('Female');
+      component.update();
+      expect(component.message).toEqual('successfully updated');
+    });
   });
 
-    it('username field validity', () => {
+  it('username field validity', () => {
     let errors = {};
     component.userForm.controls['username'].setValue('');
     let username = component.userForm.controls['username'];
@@ -149,7 +161,7 @@ describe('AccountComponent', () => {
     expect(errors['required']).toBeTruthy();
   });
 
-   it('password field validity', () => {
+  it('password field validity', () => {
     let errors = {};
     component.userForm.controls['password'].setValue('');
     let password = component.userForm.controls['password'];
@@ -174,7 +186,7 @@ describe('AccountComponent', () => {
     expect(errors['minlength']).toBeFalsy();
   });
 
-   it('email field validity required', () => {
+  it('email field validity required', () => {
     let errors = {};
     component.userForm.controls['email'].setValue('');
     let email = component.userForm.controls['email'];
@@ -198,7 +210,7 @@ describe('AccountComponent', () => {
     expect(errors['email']).toBeFalsy();
   });
 
-   it('name field validity', () => {
+  it('name field validity', () => {
     let errors = {};
     component.userForm.controls['name'].setValue('');
     let name = component.userForm.controls['name'];
@@ -206,7 +218,7 @@ describe('AccountComponent', () => {
     expect(errors['required']).toBeTruthy();
   });
 
-   it('birthdate field validity', () => {
+  it('birthdate field validity', () => {
     let errors = {};
     component.userForm.controls['birthdate'].setValue('');
     let birthdate = component.userForm.controls['birthdate'];
@@ -214,7 +226,7 @@ describe('AccountComponent', () => {
     expect(errors['required']).toBeTruthy();
   });
 
-   it('gender field validity', () => {
+  it('gender field validity', () => {
     let errors = {};
     component.userForm.controls['gender'].setValue('');
     let gender = component.userForm.controls['gender'];
@@ -222,7 +234,7 @@ describe('AccountComponent', () => {
     expect(errors['required']).toBeTruthy();
   });
 
-   it('gender field validity pattern', () => {
+  it('gender field validity pattern', () => {
     let errors = {};
     component.userForm.controls['gender'].setValue('--');
     let gender = component.userForm.controls['gender'];

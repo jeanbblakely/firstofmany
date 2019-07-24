@@ -8,15 +8,15 @@ import { CATEGORIES } from '../../mock-categories';
 import { USERS } from '../../mock-users';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
-import { Observable, of, throwError, Subject } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { CategoryService } from '../../services/category.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { UserService } from '../../services/user.service';
-import { User } from '../../models/user';
 import { AngularFittextModule } from 'angular-fittext';
 import { SpacebreakPipe } from '../../_pipes/spacebreak.pipe';
+import { ExperiencesComponent } from '../experiences/experiences.component';
 
 
 describe('CategoriesComponent', () => {
@@ -31,6 +31,9 @@ describe('CategoriesComponent', () => {
      user = USERS[0];
      getUserCategories(): Observable<Category[]> {
         return of(this.user.tracked_categories);
+     }
+     getUser() {
+       return of(this.user);
      }
   };
   let component: CategoriesComponent;
@@ -53,7 +56,7 @@ describe('CategoriesComponent', () => {
         { provide: CategoryService, useValue: mockCategoryService },
         { provide: UserService, useValue: mockUserService }
       ],
-      declarations: [ CategoriesComponent, CategoryDetailComponent, SpacebreakPipe ],
+      declarations: [ CategoriesComponent, CategoryDetailComponent, SpacebreakPipe, ExperiencesComponent ],
     })
     .overrideModule(BrowserDynamicTestingModule, { set: { entryComponents: [CategoryDetailComponent] } })
     .compileComponents();
@@ -69,12 +72,6 @@ describe('CategoriesComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should get random color for a category', () => {
-    let vegetables = component.categories[1];
-    expect(vegetables.name).toBe('Vegetables');
-    expect(component.colors.includes(vegetables['color'])).toBeTruthy();
-  });
-
   it('should display a mat-card for each category', () => {
     const categoryDe: DebugElement = fixture.debugElement;
     const cardDe = categoryDe.query(By.css('mat-card'));
@@ -84,26 +81,14 @@ describe('CategoriesComponent', () => {
   
    it('should call getCategories but not getUserCategories on default if isDashboard is false', () => {
     spyOn(component, 'getCategories');
-    spyOn(component, 'getUserCategories');
     component.ngOnInit();
     expect(component.getCategories).toHaveBeenCalled();
     expect(component.getCategories).toHaveBeenCalledTimes(1);
-    expect(component.getUserCategories).not.toHaveBeenCalled();
   });
   
-   it('should call getUserCategories but not getCategories if isDashboard is true', () => {
-    spyOn(component, 'getUserCategories');
-    spyOn(component, 'getCategories');
-    component.isDashBoard = true;
-    component.ngOnInit();
-    expect(component.getUserCategories).toHaveBeenCalled();
-    expect(component.getUserCategories).toHaveBeenCalledTimes(1);
-    expect(component.getCategories).not.toHaveBeenCalled();
-  });
-  
-   xit('should set selectedCategory to Category passed in selectCategory', () => {
-    let categories = mockCategoryService.getCategories();
-    component.selectCategory(categories[0]);
-    expect(component.selectedCategory).toBe(categories[0]);
-  });
+  //  xit('should set selectedCategory to Category passed in selectCategory', () => {
+  //   let categories = mockCategoryService.getCategories();
+  //   component.selectCategory(categories[0]);
+  //   expect(component.selectedCategory).toBe(categories[0]);
+  // });
 });

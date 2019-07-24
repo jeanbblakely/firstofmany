@@ -3,18 +3,17 @@ import { UserService } from '../../services/user.service';
 import { CategoriesComponent } from '../../experiences/categories/categories.component';
 import { CategoryDetailComponent } from '../../experiences/category-detail/category-detail.component';
 import { MaterialModule } from '../../material/material.module';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Category } from '../../models/category';
-import { Observable, of, throwError } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { User } from '../../models/user';
 import { AngularFittextModule } from 'angular-fittext';
 import { SpacebreakPipe } from '../../_pipes/spacebreak.pipe';
 
 import { DashboardComponent } from './dashboard.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DebugElement } from '@angular/core';
-import { By } from '@angular/platform-browser';
+import { ExperiencesComponent } from 'src/app/experiences/experiences/experiences.component';
 
 describe('DashboardComponent', () => {
   class MockUserService {
@@ -26,6 +25,9 @@ describe('DashboardComponent', () => {
       name: "Boo Berry",
       birthdate: "1/1/1990",
       gender: "female",
+      security_question: "Who are you?",
+      security_answer: "me",
+      new_user: true,
       tracked_categories: [
         {
         name: "Thrills",
@@ -109,7 +111,8 @@ describe('DashboardComponent', () => {
         DashboardComponent, 
         CategoriesComponent, 
         CategoryDetailComponent, 
-        SpacebreakPipe
+        SpacebreakPipe,
+        ExperiencesComponent
       ]
     })
     .compileComponents();
@@ -132,13 +135,4 @@ describe('DashboardComponent', () => {
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('h2').textContent).toContain('Welcome Boo Berry');
   });
-
-  it(`should have user categories with mock service`, () => {
-    const fixture = TestBed.createComponent(DashboardComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelectorAll('mat-card').length).toBe(2);
-    expect(compiled.querySelector('mat-card').innerText).toContain('Thrills');
-  });
-
 });
