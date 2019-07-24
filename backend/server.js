@@ -158,7 +158,7 @@ app.post('/adduserexperience/:id/:tracked_category', async(req, res)=>{
                         console.log(err.message);
                         return next(err);
                       }
-                      console.log(experienceData);
+                      // console.log(experienceData);
                       res.send(experienceData);
                     });
     } catch (error){
@@ -179,7 +179,7 @@ app.post('/deleteuserexperience/:id/:tracked_category', async(req, res)=>{
                   }
                 }, function (err, user) {
                   if (err) return next(err);
-                  console.log(experienceData);
+                  // console.log(experienceData);
                   res.send(experienceData);
                 });
     } catch (error){

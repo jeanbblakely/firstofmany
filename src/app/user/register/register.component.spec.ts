@@ -4,9 +4,8 @@ import { Router } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './../../material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
-import { Observable, of, throwError } from 'rxjs';
+import { of } from 'rxjs';
 import { User } from '../../models/user';
 
 import { RegisterComponent } from './register.component';
@@ -21,6 +20,9 @@ describe('RegisterComponent', () => {
       name: "Boo Berry",
       birthdate: "1990-01-01",
       gender: "Female",
+      security_question: "Who are you?",
+      security_answer: "me",
+      new_user: true,
       tracked_categories: [
         {
         name: "Thrills",
@@ -122,10 +124,13 @@ describe('RegisterComponent', () => {
   it('success message should show when valid form is submitted', () => {
     component.userForm.controls['username'].setValue('jblakely');
     component.userForm.controls['password'].setValue('password');
+    component.userForm.controls['confirmPassword'].setValue('password');
     component.userForm.controls['email'].setValue('jblakely@highlands.edu');
     component.userForm.controls['name'].setValue('jeannie blakely');
     component.userForm.controls['birthdate'].setValue(new Date('4/28/69'));
     component.userForm.controls['gender'].setValue('Female');
+    component.userForm.controls['security_question'].setValue('Yes?');
+    component.userForm.controls['security_answer'].setValue('yes');
     component.register();
     expect(component.message).toEqual('thanks for registering');
   });

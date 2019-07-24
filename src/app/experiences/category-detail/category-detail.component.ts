@@ -17,7 +17,7 @@ export class CategoryDetailComponent  {
    * Deletes the category
    */
   deleteCategory() {
-    console.log("Delete " + this.category.name + ", please!");
+    // console.log("Delete " + this.category.name + ", please!");
     this.userService.deleteUserCategory(this.category);
     this.backClicked.emit();
   }

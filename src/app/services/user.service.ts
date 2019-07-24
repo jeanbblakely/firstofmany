@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from './../../environments/environment';
 import { Router } from '@angular/router';
 import { Experience } from '../models/experience';
+import { MatSnackBar } from '@angular/material';
 
 
 @Injectable({
@@ -23,7 +24,8 @@ export class UserService {
   public tourStartSource = new Subject<boolean>();
   tourStart$ = this.tourStartSource.asObservable();
 
-  constructor(private httpClient: HttpClient, private router: Router) { }
+  constructor(private httpClient: HttpClient, private router: Router,
+    private snackBar: MatSnackBar) { }
 
   TOKEN_KEY = 'token';
   /*
@@ -49,8 +51,9 @@ export class UserService {
     this.httpClient.post<any>(this.authpath + '/register', regData).subscribe(res => {
       localStorage.setItem(this.TOKEN_KEY, res.token);
       localStorage.setItem('userID', res.userID);
-      console.log(res);
-      console.log(regData);
+      // console.log(res);
+      let message = res['userID'];
+      this.snackBar.open('userID ' + message + ' added', 'Okay', {duration: 3000});
       if (this.isAuthenticated()) {
         this.router.navigate(['/dashboard' + localStorage.getItem('userID')]);
         this.tourStartSource.next(true);
@@ -61,10 +64,8 @@ export class UserService {
 
   //Database call to update user profile
   updateUser(profileData: User) {
-    console.log(profileData, 'profileData inside update');
     this.httpClient.post(this.path + '/user/' + localStorage.getItem('userID') + '/update', profileData).subscribe(res => {
-      console.log(res);
-      console.log('after http call');
+      // console.log(res);
     });
   }
 
@@ -91,7 +92,7 @@ export class UserService {
 	Gets user based on number assigned in login
   */
   getMockUser(): Observable<User> {
-    console.log(this.id, 'from getUser');
+    // console.log(this.id, 'from getUser');
     return of(USERS[this.id]);
   }
 
@@ -112,18 +113,19 @@ export class UserService {
 
   addUserCategory(categoryData: Category) {
     this.httpClient.post<any>(this.path + '/addusercategory/' + localStorage.getItem('userID'), categoryData).subscribe(res => {
-      console.log(res);
+      let message = res['name'];
+      this.snackBar.open(message + ' added', 'Okay', {duration: 3000});
     });
   }
 
   deleteUserCategory(categoryData: Category) {
     this.httpClient.post<any>(this.path + '/deleteusercategory/' + localStorage.getItem('userID'), categoryData).subscribe(res => {
-      console.log(res);
+      let message = res['name'];
+      this.snackBar.open(message + ' deleted', 'Okay', {duration: 3000});
     });
   }
 
   addUserExperience(category: string, experienceData: Experience) {
-    console.log('user service');
     return this.httpClient.post<any>(this.path + '/adduserexperience/' + localStorage.getItem('userID') + '/' + category, experienceData);
     // .subscribe(res => {
     //   console.log(res);
@@ -131,7 +133,6 @@ export class UserService {
   }
 
   deleteUserExperience(category: string, experienceData: Experience) {
-    console.log('user service');
     return this.httpClient.post<any>(this.path + '/deleteuserexperience/' + localStorage.getItem('userID') + '/' + category, experienceData);
     //   .subscribe(res => {
     //   console.log(res);
@@ -184,7 +185,8 @@ export class UserService {
 
   resetPassword(userData: any) {
     this.httpClient.post<any>(this.authpath + '/resetpassword', userData).subscribe(res => {
-      console.log(res);
+        let message = res['message'];
+        this.snackBar.open(message, 'Okay', {duration: 3000});
     });
   }
 

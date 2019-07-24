@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 import { User } from './../../models/user';
@@ -57,7 +57,7 @@ export class PasswordResetComponent {
     if (this.resetData.valid) {
       const result: User = Object.assign({}, this.resetData.value);
       this.userService.resetPassword(result);
-      this.router.navigate(['dashboard']);
+      this.router.navigate(['login']);
     } else {
       this.message = 'please fill in all fields';
     }

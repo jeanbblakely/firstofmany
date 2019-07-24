@@ -1,6 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PasswordResetComponent } from './password-reset.component';
+import { MaterialModule } from 'src/app/material/material.module';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('PasswordResetComponent', () => {
   let component: PasswordResetComponent;
@@ -8,7 +13,14 @@ describe('PasswordResetComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PasswordResetComponent ]
+      declarations: [ PasswordResetComponent ],
+      imports: [ 
+        MaterialModule,
+        BrowserAnimationsModule,
+        HttpClientTestingModule,
+        RouterTestingModule,
+        ReactiveFormsModule
+       ]
     })
     .compileComponents();
   }));
