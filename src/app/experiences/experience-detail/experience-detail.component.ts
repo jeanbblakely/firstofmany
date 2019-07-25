@@ -22,7 +22,8 @@ export class ExperienceDetailComponent implements OnInit {
     private dialogRef: MatDialogRef<ExperienceDetailComponent>,
     @Inject(MAT_DIALOG_DATA) data, private fb: FormBuilder) {
     this.category = data.category;
-    if (data.experience.name == undefined) {
+    if (data.experience.name == undefined || data.experience.name == '') {
+      
       this.isAdd = true;
     }
     this.isUpdate = !this.isAdd;
@@ -91,8 +92,11 @@ export class ExperienceDetailComponent implements OnInit {
    * Deletes an experience from the user's category
    */
   deleteExperience() {
-    this.userService.deleteUserExperience(this.category.name, this.experience).subscribe();
-    // Snackbar ?
-    this.dialogRef.close({ action: 'delete', experience: this.experience });
+    if (confirm("Are you sure you want to delete this experience?")) {
+      this.userService.deleteUserExperience(this.category.name, this.experience).subscribe();
+      // Snackbar ?
+      this.dialogRef.close({ action: 'delete', experience: this.experience });
+    }
+    
   }
 }

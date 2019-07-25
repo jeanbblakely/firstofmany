@@ -18,7 +18,10 @@ export class CategoryDetailComponent  {
    */
   deleteCategory() {
     // console.log("Delete " + this.category.name + ", please!");
-    this.userService.deleteUserCategory(this.category);
-    this.backClicked.emit();
+    if (confirm("Are you sure you want to delete " + this.category.name + "?")) {
+      this.userService.deleteUserCategory(this.category);
+      this.backClicked.emit();
+    }
+    
   }
 }
