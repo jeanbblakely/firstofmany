@@ -69,7 +69,10 @@ export class ExperiencesComponent implements AfterContentChecked {
           for (let i = 0; i < categories.length; i++) {
             if (categories[i].name == this.category.name) {
               this.category = categories[i];
-              this.updateTable();
+              setTimeout(() => {
+                this.updateTable();
+              }, 500);
+              break;
             }
           }
         });
