@@ -91,8 +91,11 @@ export class ExperienceDetailComponent implements OnInit {
    * Deletes an experience from the user's category
    */
   deleteExperience() {
-    this.userService.deleteUserExperience(this.category.name, this.experience).subscribe();
-    // Snackbar ?
-    this.dialogRef.close({ action: 'delete', experience: this.experience });
+    if (confirm("Are you sure you want to delete this experience?")) {
+      this.userService.deleteUserExperience(this.category.name, this.experience).subscribe();
+      // Snackbar ?
+      this.dialogRef.close({ action: 'delete', experience: this.experience });
+    }
+    
   }
 }
