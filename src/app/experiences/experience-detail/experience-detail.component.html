@@ -31,9 +31,8 @@
 
   <mat-dialog-actions fxLayoutAlign="space-between center">
 
-    <a mat-raised-button color="warn" fxFlex.xs="45" [disabled]="isAdd"
-      (click)="deleteExperience()">
-      Delete
+    <a mat-raised-button color="warn" fxFlex.xs="45" (click)="isAdd ? dialogRef.close() : deleteExperience()">
+      {{ isAdd ? "Cancel": "Delete" }}
     </a>
 
     <button mat-raised-button color="primary" *ngIf="isAdd" fxFlex.xs="45" (click)="submit(form)">
