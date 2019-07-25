@@ -22,7 +22,9 @@ export class ExperienceDetailComponent implements OnInit {
     private dialogRef: MatDialogRef<ExperienceDetailComponent>,
     @Inject(MAT_DIALOG_DATA) data, private fb: FormBuilder) {
     this.category = data.category;
-    if (data.experience.name == undefined) {
+    console.log(data.experience.name, 'experience');
+    if (data.experience.name == undefined || data.experience.name == '') {
+      
       this.isAdd = true;
     }
     this.isUpdate = !this.isAdd;
