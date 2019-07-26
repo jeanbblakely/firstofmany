@@ -54,7 +54,7 @@ tr.experience-row:not(.expanded-row):active {
   padding: 16px;
 }
 
-.hidden { 
+.hidden {
   display: none;
 }
 
@@ -83,11 +83,11 @@ tr.experience-row:not(.expanded-row):active {
     border-radius: 29px;
     bottom: 5%;
   }
-  
+
   mat-icon {
     margin-right: 10px;
   }
-  
+
   .floating-action-button-text {
     display: inline;
     font-weight: 300;

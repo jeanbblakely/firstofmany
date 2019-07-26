@@ -179,9 +179,8 @@ export class UserService {
     return localStorage.getItem(this.TOKEN_KEY);
   }
 
-
-  getSecurityQuestion(username): Observable<string> {
-    return this.httpClient.get<any>(this.authpath + '/getsecurityquestion/' + username);
+  getSecurityQuestion(username): Observable<any> {
+   return this.httpClient.get<any>(this.authpath + '/getsecurityquestion/' + username);
   }
 
   resetPassword(userData: any) {

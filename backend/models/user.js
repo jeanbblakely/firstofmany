@@ -40,6 +40,3 @@ userSchema.pre('save', function(next){
 })
 
 module.exports = mongoose.model('User', userSchema)
-
-
-//[{ type: Schema.Types.ObjectId, ref: 'Category' }]

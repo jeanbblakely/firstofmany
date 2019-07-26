@@ -19,11 +19,11 @@ export class ExperienceDetailComponent implements OnInit {
   maxDate = new Date(Date.now() + 24 * 60 * 60 * 1000);
 
   constructor(private userService: UserService,
-    private dialogRef: MatDialogRef<ExperienceDetailComponent>,
+    public dialogRef: MatDialogRef<ExperienceDetailComponent>,
     @Inject(MAT_DIALOG_DATA) data, private fb: FormBuilder) {
     this.category = data.category;
     if (data.experience.name == undefined || data.experience.name == '') {
-      
+
       this.isAdd = true;
     }
     this.isUpdate = !this.isAdd;
@@ -97,6 +97,6 @@ export class ExperienceDetailComponent implements OnInit {
       // Snackbar ?
       this.dialogRef.close({ action: 'delete', experience: this.experience });
     }
-    
+
   }
 }
