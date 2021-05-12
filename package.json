@@ -31,7 +31,7 @@
     "jsonwebtoken": "^8.5.1",
     "ngx-tour-core": "^4.0.1",
     "ngx-tour-md-menu": "^4.0.1",
-    "nodemailer": "^6.2.1",
+    "nodemailer": "^6.4.16",
     "rxjs": "~6.3.3",
     "tslib": "^1.10.0",
     "zone.js": "~0.8.26"
